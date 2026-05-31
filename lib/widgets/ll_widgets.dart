@@ -1,0 +1,483 @@
+import 'dart:math' as math;
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../app_theme.dart';
+
+// ── Brand typography helpers ─────────────────────────────────
+TextStyle llSerif({double size = 16, FontWeight weight = FontWeight.w400, Color color = llInk, double height = 1.3}) =>
+    GoogleFonts.cormorantGaramond(fontSize: size, fontWeight: weight, color: color, height: height);
+
+TextStyle llSerifItalic({double size = 14, Color color = llMuted, double height = 1.5}) =>
+    GoogleFonts.cormorantGaramond(fontSize: size, fontStyle: FontStyle.italic, color: color, height: height);
+
+TextStyle llUi({double size = 13, Color color = llInk, FontWeight weight = FontWeight.w400, double letterSpacing = 0}) =>
+    GoogleFonts.inter(fontSize: size, fontWeight: weight, color: color, letterSpacing: letterSpacing);
+
+// ── SmallCaps label ──────────────────────────────────────────
+class LLSmallCaps extends StatelessWidget {
+  const LLSmallCaps(this.text, {super.key, this.size = 11, this.color = llGold, this.letterSpacing = 2.0});
+  final String text;
+  final double size;
+  final Color color;
+  final double letterSpacing;
+
+  @override
+  Widget build(BuildContext context) => Text(
+    text.toUpperCase(),
+    style: GoogleFonts.inter(
+      fontSize: size,
+      fontWeight: FontWeight.w600,
+      color: color,
+      letterSpacing: letterSpacing,
+    ),
+  );
+}
+
+// ── Gold hairline ────────────────────────────────────────────
+class LLHairline extends StatelessWidget {
+  const LLHairline({super.key, this.width = 48});
+  final double width;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    width: width,
+    height: 1,
+    color: llGold,
+  );
+}
+
+// ── Primary CTA button ───────────────────────────────────────
+class LLCTA extends StatelessWidget {
+  const LLCTA({super.key, required this.label, this.onTap, this.enabled = true, this.variant = 'primary'});
+  final String label;
+  final VoidCallback? onTap;
+  final bool enabled;
+  final String variant;
+
+  @override
+  Widget build(BuildContext context) {
+    final isPrimary = variant == 'primary';
+    return GestureDetector(
+      onTap: enabled ? onTap : null,
+      child: AnimatedOpacity(
+        opacity: enabled ? 1.0 : 0.4,
+        duration: const Duration(milliseconds: 200),
+        child: Container(
+          width: double.infinity,
+          height: 52,
+          decoration: BoxDecoration(
+            color: isPrimary ? llGold : Colors.transparent,
+            borderRadius: BorderRadius.circular(12),
+            border: isPrimary ? null : Border.all(color: llGold),
+            boxShadow: isPrimary && enabled
+                ? const [BoxShadow(color: Color(0x59C8A96E), blurRadius: 14, offset: Offset(0, 4))]
+                : null,
+          ),
+          child: Center(
+            child: Text(
+              label,
+              style: GoogleFonts.inter(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: isPrimary ? Colors.white : llGold,
+                letterSpacing: 0.3,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Back arrow ───────────────────────────────────────────────
+class LLBackArrow extends StatelessWidget {
+  const LLBackArrow({super.key, this.onTap, this.top = 80, this.left = 18});
+  final VoidCallback? onTap;
+  final double top;
+  final double left;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: top,
+      left: left,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          width: 44,
+          height: 44,
+          color: Colors.transparent,
+          child: const Center(
+            child: Icon(Icons.chevron_left_rounded, color: llMuted, size: 24),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Help button "?" ──────────────────────────────────────────
+class LLHelpBtn extends StatelessWidget {
+  const LLHelpBtn({super.key, this.onTap, this.top = 84, this.right, this.left, this.showLabel = false});
+  final VoidCallback? onTap;
+  final double top;
+  final double? right;
+  final double? left;
+  final bool showLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    final pos = <String, double>{};
+    if (right != null) pos['right'] = right!;
+    if (left != null) pos['left'] = left!;
+
+    Widget btn = GestureDetector(
+      onTap: onTap,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (showLabel) ...[
+            Text('See example', style: llUi(size: 12, color: llGold, letterSpacing: 0.5)),
+            const SizedBox(width: 6),
+          ],
+          Container(
+            width: 26,
+            height: 26,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: llGold, width: 1),
+            ),
+            child: Center(
+              child: Text('?', style: llSerifItalic(size: 14, color: llGold)),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    return Positioned(
+      top: top,
+      right: right,
+      left: left,
+      child: btn,
+    );
+  }
+}
+
+// ── Wish strip (persistent reminder) ────────────────────────
+class WishStrip extends StatelessWidget {
+  const WishStrip({super.key, required this.wish});
+  final String wish;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 60,
+      left: 0,
+      right: 0,
+      child: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 300),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+          decoration: BoxDecoration(
+            color: const Color(0xC8FFFFF8),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: const Color(0x33C8A96E)),
+          ),
+          child: Text(
+            '"$wish"',
+            style: GoogleFonts.cormorantGaramond(
+              fontStyle: FontStyle.italic,
+              fontSize: 11.5,
+              color: llGoldDark,
+              letterSpacing: 0.2,
+              height: 1.3,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Dice widget (d8: 1-8 pips) ───────────────────────────────
+class LLDice extends StatefulWidget {
+  const LLDice({super.key, required this.pips, this.size = 120, this.glow = false, this.highlight = false, this.tumbling = false});
+  final int pips;
+  final double size;
+  final bool glow;
+  final bool highlight;
+  final bool tumbling;
+
+  @override
+  State<LLDice> createState() => _LLDiceState();
+}
+
+class _LLDiceState extends State<LLDice> with SingleTickerProviderStateMixin {
+  late AnimationController _ctrl;
+  late Animation<double> _rot;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 600))
+      ..repeat();
+    _rot = Tween<double>(begin: -0.08, end: 0.08).animate(
+      CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Widget dice = CustomPaint(
+      painter: _DicePainter(
+        pips: widget.pips.clamp(1, 8),
+        size: widget.size,
+        color: llGold,
+        fill: widget.highlight ? const Color(0xFFFBF4E8) : llCardBg,
+        highlight: widget.highlight,
+      ),
+      size: Size(widget.size, widget.size),
+    );
+
+    if (widget.tumbling) {
+      dice = AnimatedBuilder(
+        animation: _rot,
+        builder: (_, child) => Transform.rotate(angle: _rot.value, child: child),
+        child: dice,
+      );
+    }
+
+    if (widget.glow) {
+      return Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            width: widget.size * 1.4,
+            height: widget.size * 1.4,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                colors: [llGold.withAlpha(85), Colors.transparent],
+                stops: const [0, 0.65],
+              ),
+            ),
+          ),
+          dice,
+        ],
+      );
+    }
+
+    return dice;
+  }
+}
+
+class _DicePainter extends CustomPainter {
+  const _DicePainter({required this.pips, required this.size, required this.color, required this.fill, required this.highlight});
+  final int pips;
+  final double size;
+  final Color color;
+  final Color fill;
+  final bool highlight;
+
+  static const _layouts = {
+    1: [[0.5, 0.5]],
+    2: [[0.3, 0.3], [0.7, 0.7]],
+    3: [[0.27, 0.27], [0.5, 0.5], [0.73, 0.73]],
+    4: [[0.3, 0.3], [0.7, 0.3], [0.3, 0.7], [0.7, 0.7]],
+    5: [[0.3, 0.3], [0.7, 0.3], [0.5, 0.5], [0.3, 0.7], [0.7, 0.7]],
+    6: [[0.28, 0.25], [0.72, 0.25], [0.28, 0.5], [0.72, 0.5], [0.28, 0.75], [0.72, 0.75]],
+    7: [[0.28, 0.25], [0.72, 0.25], [0.28, 0.5], [0.5, 0.5], [0.72, 0.5], [0.28, 0.75], [0.72, 0.75]],
+    8: [[0.28, 0.22], [0.72, 0.22], [0.28, 0.42], [0.72, 0.42], [0.28, 0.62], [0.72, 0.62], [0.28, 0.82], [0.72, 0.82]],
+  };
+
+  @override
+  void paint(Canvas canvas, Size sz) {
+    final r = size * 0.18;
+    final rect = RRect.fromRectAndRadius(
+      Rect.fromLTWH(1, 1, size - 2, size - 2),
+      Radius.circular(r),
+    );
+    canvas.drawRRect(rect, Paint()..color = fill);
+    canvas.drawRRect(rect, Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = size * 0.012);
+
+    final pipColor = highlight ? llGold : llInk;
+    final pipR = size * 0.075;
+    for (final pos in _layouts[pips.clamp(1, 8)] ?? _layouts[1]!) {
+      canvas.drawCircle(Offset(pos[0] * size, pos[1] * size), pipR, Paint()..color = pipColor);
+    }
+  }
+
+  @override
+  bool shouldRepaint(_DicePainter old) =>
+      old.pips != pips || old.highlight != highlight;
+}
+
+// ── Field glyph (diamond + rays) ────────────────────────────
+class FieldGlyph extends StatelessWidget {
+  const FieldGlyph({super.key, required this.color, this.size = 96});
+  final Color color;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) => CustomPaint(
+    painter: _GlyphPainter(color: color),
+    size: Size(size, size),
+  );
+}
+
+class _GlyphPainter extends CustomPainter {
+  const _GlyphPainter({required this.color});
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.1;
+    final s = size.width;
+    final c = Offset(s / 2, s / 2);
+
+    // outer diamond
+    final diamond = Path()
+      ..moveTo(s * 0.5, s * 0.06)
+      ..lineTo(s * 0.896, s * 0.5)
+      ..lineTo(s * 0.5, s * 0.94)
+      ..lineTo(s * 0.104, s * 0.5)
+      ..close();
+    canvas.drawPath(diamond, paint);
+
+    // inner circle
+    canvas.drawCircle(c, s * 0.146, paint);
+
+    // rays
+    const angles = [0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0];
+    for (final a in angles) {
+      final rad = a * math.pi / 180;
+      final r1 = s * 0.188, r2 = s * 0.271;
+      canvas.drawLine(
+        Offset(c.dx + math.cos(rad) * r1, c.dy + math.sin(rad) * r1),
+        Offset(c.dx + math.cos(rad) * r2, c.dy + math.sin(rad) * r2),
+        paint,
+      );
+    }
+
+    // center dot
+    canvas.drawCircle(c, s * 0.026, Paint()..color = color);
+  }
+
+  @override
+  bool shouldRepaint(_GlyphPainter old) => old.color != color;
+}
+
+// ── Logo watermark placeholder ───────────────────────────────
+class LLWatermark extends StatelessWidget {
+  const LLWatermark({super.key, this.size = 200, this.opacity = 0.06});
+  final double size;
+  final double opacity;
+
+  @override
+  Widget build(BuildContext context) => Opacity(
+    opacity: opacity,
+    child: Center(
+      child: SizedBox(
+        width: size,
+        height: size,
+        child: CustomPaint(painter: _LogoPainter(color: llInk)),
+      ),
+    ),
+  );
+}
+
+class _LogoPainter extends CustomPainter {
+  const _LogoPainter({required this.color});
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.0;
+    final s = size.width;
+    final c = Offset(s / 2, s / 2);
+    // four-pointed star
+    for (var i = 0; i < 4; i++) {
+      final a = i * math.pi / 2;
+      canvas.drawLine(
+        c,
+        Offset(c.dx + math.cos(a) * s * 0.45, c.dy + math.sin(a) * s * 0.45),
+        paint,
+      );
+    }
+    canvas.drawCircle(c, s * 0.15, paint);
+  }
+
+  @override
+  bool shouldRepaint(_LogoPainter old) => old.color != color;
+}
+
+// ── Logo mark (four-pointed star) ───────────────────────────
+class LLLogo extends StatelessWidget {
+  const LLLogo({super.key, this.size = 48, this.color = llGold});
+  final double size;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+    width: size,
+    height: size,
+    child: CustomPaint(painter: _StarLogoPainter(color: color)),
+  );
+}
+
+class _StarLogoPainter extends CustomPainter {
+  const _StarLogoPainter({required this.color});
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size sz) {
+    final s = sz.width;
+    final c = Offset(s / 2, s / 2);
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    // Four-pointed star
+    final path = Path();
+    for (var i = 0; i < 4; i++) {
+      final a = i * math.pi / 2 - math.pi / 2;
+      final tipR = s * 0.48;
+      final sideR = s * 0.13;
+      final tipX = c.dx + math.cos(a) * tipR;
+      final tipY = c.dy + math.sin(a) * tipR;
+      final a1 = a + math.pi / 4;
+      final a2 = a - math.pi / 4;
+      if (i == 0) {
+        path.moveTo(tipX, tipY);
+      } else {
+        path.lineTo(tipX, tipY);
+      }
+      path.lineTo(c.dx + math.cos(a2) * sideR, c.dy + math.sin(a2) * sideR);
+      path.lineTo(c.dx + math.cos(a1) * sideR, c.dy + math.sin(a1) * sideR);
+    }
+    path.close();
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(_StarLogoPainter old) => old.color != color;
+}
