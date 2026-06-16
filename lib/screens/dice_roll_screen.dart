@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../app_theme.dart';
 import '../widgets/ll_widgets.dart';
 import 'awakened_screen.dart';
@@ -12,13 +13,33 @@ class DiceRollScreen extends StatefulWidget {
   State<DiceRollScreen> createState() => _DiceRollScreenState();
 }
 
-class _DiceRollScreenState extends State<DiceRollScreen> {
+class _DiceRollScreenState extends State<DiceRollScreen> with SingleTickerProviderStateMixin {
   int? _result;
   bool _rolling = false;
   int _rollCount = 0;
 
+  late final AnimationController _idleCtrl;
+  late final Animation<double> _idleScale;
+
+  @override
+  void initState() {
+    super.initState();
+    _idleCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 2500))
+      ..repeat(reverse: true);
+    _idleScale = Tween<double>(begin: 1.0, end: 1.03).animate(
+      CurvedAnimation(parent: _idleCtrl, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _idleCtrl.dispose();
+    super.dispose();
+  }
+
   void _roll() {
     if (_rolling) return;
+    HapticFeedback.lightImpact();
     setState(() { _rolling = true; _result = null; });
     Future.delayed(const Duration(milliseconds: 1200), () {
       if (!mounted) return;
@@ -73,13 +94,20 @@ class _DiceRollScreenState extends State<DiceRollScreen> {
                   ),
                 ),
                 const SizedBox(height: 28),
-                // Dice
-                LLDice(
-                  pips: _result ?? 1,
-                  size: 140,
-                  glow: isOne && showResult,
-                  highlight: isOne && showResult,
-                  tumbling: _rolling,
+                // Dice — idle pulse when waiting for first roll
+                AnimatedBuilder(
+                  animation: _idleScale,
+                  builder: (_, child) => Transform.scale(
+                    scale: (_result == null && !_rolling) ? _idleScale.value : 1.0,
+                    child: child,
+                  ),
+                  child: LLDice(
+                    pips: _result ?? 1,
+                    size: 140,
+                    glow: isOne && showResult,
+                    highlight: isOne && showResult,
+                    tumbling: _rolling,
+                  ),
                 ),
                 const SizedBox(height: 24),
                 // Result message

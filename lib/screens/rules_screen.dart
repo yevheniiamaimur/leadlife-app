@@ -43,7 +43,9 @@ class _RulesScreenState extends State<RulesScreen> {
                 const SizedBox(height: 36),
                 // Hero dice
                 LLDice(pips: 1, size: 150, glow: true, highlight: true),
-                const SizedBox(height: 36),
+                const SizedBox(height: 16),
+                Center(child: Container(width: 1, height: 40, color: llHair)),
+                const SizedBox(height: 16),
                 // Poetic statement
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),

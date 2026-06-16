@@ -16,7 +16,9 @@ class AwakenedScreen extends StatelessWidget {
           SafeArea(
             child: Column(
               children: [
-                const SizedBox(height: 80),
+                const SizedBox(height: 28),
+                const LLSmallCaps('Step 3 of 3', color: llMuted),
+                const SizedBox(height: 28),
                 // Glow ring + logo
                 Stack(
                   alignment: Alignment.center,
