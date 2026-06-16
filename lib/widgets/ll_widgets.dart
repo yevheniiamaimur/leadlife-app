@@ -57,6 +57,7 @@ class LLCTA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isPrimary = variant == 'primary';
+    final isDark = variant == 'dark';
     return GestureDetector(
       onTap: enabled ? onTap : null,
       child: AnimatedOpacity(
@@ -66,11 +67,15 @@ class LLCTA extends StatelessWidget {
           width: double.infinity,
           height: 52,
           decoration: BoxDecoration(
-            color: isPrimary ? llGold : Colors.transparent,
+            color: isDark ? const Color(0xFF111111) : (isPrimary ? llGold : Colors.transparent),
             borderRadius: BorderRadius.circular(12),
-            border: isPrimary ? null : Border.all(color: llGold),
-            boxShadow: isPrimary && enabled
-                ? const [BoxShadow(color: Color(0x59C8A96E), blurRadius: 14, offset: Offset(0, 4))]
+            border: (!isPrimary && !isDark) ? Border.all(color: llGold) : null,
+            boxShadow: (isPrimary || isDark) && enabled
+                ? [BoxShadow(
+                    color: isDark ? const Color(0x40000000) : const Color(0x59C8A96E),
+                    blurRadius: 14,
+                    offset: const Offset(0, 4),
+                  )]
                 : null,
           ),
           child: Center(
@@ -79,7 +84,7 @@ class LLCTA extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
-                color: isPrimary ? Colors.white : llGold,
+                color: (isPrimary || isDark) ? Colors.white : llGold,
                 letterSpacing: 0.3,
               ),
             ),

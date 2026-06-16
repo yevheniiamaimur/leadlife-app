@@ -117,7 +117,7 @@ class _DiceRollScreenState extends State<DiceRollScreen> {
                     ) : const SizedBox.shrink(),
                   ),
                 ),
-                const Spacer(),
+                const SizedBox(height: 32),
                 // CTAs
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -128,6 +128,7 @@ class _DiceRollScreenState extends State<DiceRollScreen> {
                           label: _rolling ? 'Rolling…' : (_rollCount == 0 ? 'Roll' : 'Roll Again'),
                           enabled: !_rolling,
                           onTap: _roll,
+                          variant: 'dark',
                         ),
                       if (showResult && isOne)
                         LLCTA(
@@ -137,7 +138,7 @@ class _DiceRollScreenState extends State<DiceRollScreen> {
                           )),
                         ),
                       if (showResult && !isOne) ...[
-                        LLCTA(label: 'Roll Again', onTap: _roll),
+                        LLCTA(label: 'Roll Again', onTap: _roll, variant: 'dark'),
                         const SizedBox(height: 10),
                         GestureDetector(
                           onTap: () => Navigator.of(context).maybePop(),
@@ -151,7 +152,8 @@ class _DiceRollScreenState extends State<DiceRollScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 40),
+                const Spacer(),
+                const SizedBox(height: 24),
               ],
             ),
           ),

@@ -101,9 +101,7 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                 ),
                 const SizedBox(height: 28),
                 // Result preview
-                SizedBox(
-                  height: 130,
-                  child: AnimatedSwitcher(
+                AnimatedSwitcher(
                     duration: const Duration(milliseconds: 400),
                     child: _showResult && _newField != null
                         ? Column(
@@ -140,9 +138,8 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                                 style: llSerifItalic(size: 13, color: llMutedSoft),
                               )
                             : const SizedBox.shrink(),
-                  ),
                 ),
-                const Spacer(),
+                const SizedBox(height: 32),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
@@ -152,6 +149,7 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                           label: _rolling ? 'Rolling…' : (_isFinal ? 'Roll the Final Dice' : 'Roll the Dice'),
                           enabled: !_rolling,
                           onTap: _roll,
+                          variant: 'dark',
                         ),
                       if (_showResult && _newField != null)
                         LLCTA(
@@ -163,7 +161,8 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 40),
+                const Spacer(),
+                const SizedBox(height: 24),
               ],
             ),
           ),
