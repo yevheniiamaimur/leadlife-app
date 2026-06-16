@@ -34,7 +34,7 @@ class _RulesScreenState extends State<RulesScreen> {
                       style: GoogleFonts.inter(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
-                        color: llGold,
+                        color: llInk,
                         letterSpacing: 2.5,
                       ),
                     ),
@@ -47,46 +47,20 @@ class _RulesScreenState extends State<RulesScreen> {
                 // Poetic statement
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
-                  child: Column(
-                    children: [
-                      Text(
-                        'The path awakens\nwith a single One.',
-                        textAlign: TextAlign.center,
-                        style: llSerif(size: 26, height: 1.2),
-                      ),
-                      const SizedBox(height: 14),
-                      const LLHairline(width: 40),
-                      const SizedBox(height: 14),
-                      Text(
-                        'Name your desire. Roll until the universe answers.\nIf not, refine your wish — and roll again.',
-                        textAlign: TextAlign.center,
-                        style: llSerifItalic(size: 14, height: 1.7),
-                      ),
-                    ],
+                  child: Text(
+                    'The path awakens\nwith a single One.',
+                    textAlign: TextAlign.center,
+                    style: llSerif(size: 26, height: 1.2),
                   ),
                 ),
                 const Spacer(),
-                // Rule strip
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
-                    decoration: BoxDecoration(
-                      color: llCardBg,
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: const [BoxShadow(color: Color(0x0FB4A078), blurRadius: 20, offset: Offset(0, 4))],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        _RuleChip(n: '1', label: 'Name'),
-                        _RuleChip(n: '2', label: 'Roll'),
-                        _RuleChip(n: '3', label: 'Refine'),
-                      ],
-                    ),
-                  ),
+                LLSmallCaps(
+                  'Name · Roll · Refine',
+                  size: 10,
+                  color: llMuted,
+                  letterSpacing: 2.0,
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 16),
                 // CTA
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -115,26 +89,6 @@ class _RulesScreenState extends State<RulesScreen> {
   }
 }
 
-class _RuleChip extends StatelessWidget {
-  const _RuleChip({required this.n, required this.label});
-  final String n;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) => Row(
-    children: [
-      Container(
-        width: 18, height: 18,
-        decoration: const BoxDecoration(shape: BoxShape.circle, color: llGold),
-        child: Center(
-          child: Text(n, style: llSerif(size: 10, color: Colors.white, weight: FontWeight.w600)),
-        ),
-      ),
-      const SizedBox(width: 6),
-      Text(label, style: llUi(size: 12, letterSpacing: 0.3)),
-    ],
-  );
-}
 
 PageRouteBuilder<T> _fadeRoute<T>(Widget page) => PageRouteBuilder(
   pageBuilder: (_, _, _) => page,

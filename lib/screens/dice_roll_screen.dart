@@ -43,16 +43,9 @@ class _DiceRollScreenState extends State<DiceRollScreen> {
             child: Column(
               children: [
                 const SizedBox(height: 28),
-                const LLSmallCaps('Step 2 of 3 · Awakening'),
-                const SizedBox(height: 18),
-                const LLLogo(size: 28, color: llGold),
-                const SizedBox(height: 14),
+                const LLSmallCaps('Step 2 of 3', color: llMuted),
+                const SizedBox(height: 24),
                 Text('Awakening the Path', style: llSerif(size: 26, height: 1.15)),
-                const SizedBox(height: 8),
-                Text(
-                  'Roll until the universe answers with One.',
-                  style: llSerifItalic(size: 14, height: 1.5),
-                ),
                 const SizedBox(height: 18),
                 // Wish echo
                 Padding(
