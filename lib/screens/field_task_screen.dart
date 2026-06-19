@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../models/field.dart';
+import '../services/progress_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'answer_saved_screen.dart';
 
@@ -140,6 +141,13 @@ class _FieldTaskScreenState extends State<FieldTaskScreen> {
     final newAnswers = Map<int, String>.from(widget.answers)..[widget.field.n] = newAnswer;
     final newCompleted = List<int>.from(widget.completedFields);
     if (!newCompleted.contains(widget.field.n)) newCompleted.add(widget.field.n);
+
+    ProgressService.save(
+      wish: widget.wish,
+      currentFieldNum: widget.field.n,
+      completedFields: newCompleted,
+      answers: newAnswers,
+    ).ignore();
 
     Navigator.of(context).push(_fadeRoute(AnswerSavedScreen(
       field: widget.field,
