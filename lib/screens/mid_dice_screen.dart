@@ -65,24 +65,54 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
           SafeArea(
             child: Column(
               children: [
-                const SizedBox(height: 28),
+                const SizedBox(height: 32),
                 LLSmallCaps(
                   _isFinal ? 'The final turn' : 'The path continues',
                   size: 10,
                   color: llMuted,
                   letterSpacing: 2.5,
                 ),
+                const SizedBox(height: 20),
+
+                // Wish — always visible, readable
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+                    decoration: BoxDecoration(
+                      color: llCardBg,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0x40C8A96E)),
+                    ),
+                    child: Column(
+                      children: [
+                        LLSmallCaps('Your desire', size: 9, color: llMuted, letterSpacing: 2),
+                        const SizedBox(height: 6),
+                        Text(
+                          '"${widget.wish}"',
+                          textAlign: TextAlign.center,
+                          style: llSerifItalic(size: 15, color: llGoldDark, height: 1.45, weight: FontWeight.w500),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
                 const SizedBox(height: 28),
+
                 // Instruction text
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  padding: const EdgeInsets.symmetric(horizontal: 36),
                   child: Text(
                     _showResult
                         ? (_isFinal
                             ? 'Your current area of action:'
                             : (_overshoot
                                 ? 'You have reached the final path.'
-                                : 'You rolled $_result — moving to'))
+                                : 'You are now on'))
                         : (_isFinal
                             ? 'You have walked all 32 paths. One final turn — to know where you stand now.'
                             : 'You are on Field ${widget.currentFieldNum.toString().padLeft(2, '0')}. Where will the path lead?'),
@@ -90,7 +120,9 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                     style: llSerifItalic(size: 14, color: llMuted, height: 1.55),
                   ),
                 ),
-                const SizedBox(height: 32),
+
+                const SizedBox(height: 36),
+
                 // Dice
                 LLDice(
                   pips: _result ?? 1,
@@ -99,47 +131,45 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                   highlight: _showResult,
                   tumbling: _rolling,
                 ),
-                const SizedBox(height: 28),
-                // Result preview
-                AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 400),
-                    child: _showResult && _newField != null
-                        ? Column(
-                            key: ValueKey(_result),
-                            children: [
-                              if (!_isFinal) ...[
-                                Text(
-                                  '$_result',
-                                  style: llSerif(size: 44, color: llGold, height: 1),
-                                ),
-                                const SizedBox(height: 14),
-                              ],
-                              const Center(child: LLHairline(width: 36)),
-                              const SizedBox(height: 16),
-                              LLSmallCaps(
-                                _isFinal ? 'From this place' : 'Arriving · Field ${(_newFieldNum ?? 0).toString().padLeft(2, '0')}',
-                                size: 10,
-                                letterSpacing: 2,
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                _newField!.name,
-                                textAlign: TextAlign.center,
-                                style: llSerif(size: 26, height: 1.1).copyWith(letterSpacing: 2),
-                              ),
-                              const SizedBox(height: 6),
-                              Text(_newField!.subtitle,
-                                style: llSerifItalic(size: 13, color: llMuted)),
-                            ],
-                          )
-                        : _rolling
-                            ? Text(
-                                _isFinal ? 'The wheel turns once more…' : 'The path turns…',
-                                style: llSerifItalic(size: 13, color: llMutedSoft),
-                              )
-                            : const SizedBox.shrink(),
-                ),
+
                 const SizedBox(height: 32),
+
+                // Result — no big number, just field info
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 400),
+                  child: _showResult && _newField != null
+                      ? Column(
+                          key: ValueKey(_result),
+                          children: [
+                            const Center(child: LLHairline(width: 36)),
+                            const SizedBox(height: 16),
+                            LLSmallCaps(
+                              _isFinal ? 'From this place' : 'Arriving · Field ${(_newFieldNum ?? 0).toString().padLeft(2, '0')}',
+                              size: 10,
+                              letterSpacing: 2,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              _newField!.name,
+                              textAlign: TextAlign.center,
+                              style: llSerif(size: 26, height: 1.1, weight: FontWeight.w600).copyWith(letterSpacing: 2),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(_newField!.subtitle,
+                              style: llSerifItalic(size: 13, color: llMuted)),
+                          ],
+                        )
+                      : _rolling
+                          ? Text(
+                              _isFinal ? 'The wheel turns once more…' : 'The path turns…',
+                              style: llSerifItalic(size: 13, color: llMutedSoft),
+                            )
+                          : const SizedBox.shrink(),
+                ),
+
+                const Spacer(),
+
+                // CTA — pinned to bottom
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
@@ -149,7 +179,7 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                           label: _rolling ? 'Rolling…' : (_isFinal ? 'Roll the Final Dice' : 'Roll the Dice'),
                           enabled: !_rolling,
                           onTap: _roll,
-                          variant: 'dark',
+                          variant: 'primary',
                         ),
                       if (_showResult && _newField != null)
                         LLCTA(
@@ -161,8 +191,7 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                     ],
                   ),
                 ),
-                const Spacer(),
-                const SizedBox(height: 24),
+                const SizedBox(height: 40),
               ],
             ),
           ),
@@ -177,7 +206,6 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
               (_) => false,
             ),
           ),
-          WishStrip(wish: widget.wish),
         ],
       ),
     );

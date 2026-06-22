@@ -70,7 +70,7 @@ class _FieldTaskScreenState extends State<FieldTaskScreen> {
                         Text(
                           widget.field.task,
                           textAlign: TextAlign.center,
-                          style: llSerif(size: 22, height: 1.3),
+                          style: llSerif(size: 22, height: 1.3, weight: FontWeight.w600),
                         ),
                         const SizedBox(height: 10),
                         const Center(child: LLHairline(width: 28)),

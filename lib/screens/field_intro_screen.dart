@@ -20,62 +20,30 @@ class FieldIntroScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final accent = field.color;
+    final bg = field.color;
+    final isDark = bg.computeLuminance() < 0.4;
+    final onBg = isDark ? Colors.white : llInk;
+    final onBgSoft = isDark ? Colors.white.withAlpha(160) : llMuted;
 
     return Scaffold(
-      backgroundColor: llBg,
+      backgroundColor: bg,
       body: Stack(
         children: [
-          // Tinted wash from top
-          Positioned(
-            top: 0, left: 0, right: 0,
-            height: MediaQuery.of(context).size.height * 0.6,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [accent.withAlpha(32), Colors.transparent],
-                ),
-              ),
-            ),
-          ),
           SafeArea(
             child: Column(
               children: [
                 const SizedBox(height: 56),
-                // Glyph area
-                Expanded(
-                  flex: 5,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      // Radial background
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: RadialGradient(
-                            colors: [accent.withAlpha(48), Colors.transparent],
-                            radius: 0.7,
-                          ),
-                        ),
-                      ),
-                      LLWatermark(size: 200, opacity: 0.04),
-                      FieldGlyph(color: accent, size: 140),
-                    ],
-                  ),
-                ),
+                const Spacer(),
                 // Field number badge
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
                   decoration: BoxDecoration(
-                    color: llCardBg,
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: accent, width: 1),
+                    border: Border.all(color: onBg.withAlpha(100), width: 1),
                   ),
                   child: Text(
                     'FIELD ${field.paddedNumber}',
-                    style: llUi(size: 10, color: accent, letterSpacing: 2.0, weight: FontWeight.w600),
+                    style: llUi(size: 10, color: onBg, letterSpacing: 2.0, weight: FontWeight.w600),
                   ),
                 ),
                 const SizedBox(height: 18),
@@ -83,21 +51,23 @@ class FieldIntroScreen extends StatelessWidget {
                 Text(
                   field.name,
                   textAlign: TextAlign.center,
-                  style: llSerif(size: 30, height: 1.1).copyWith(letterSpacing: 2.5),
+                  style: llSerif(size: 30, height: 1.1, color: onBg, weight: FontWeight.w600).copyWith(letterSpacing: 2.5),
                 ),
                 const SizedBox(height: 6),
                 Text(
                   field.subtitle,
-                  style: llSerifItalic(size: 13.5, color: llMuted, height: 1.4),
+                  style: llSerifItalic(size: 13.5, color: onBgSoft, height: 1.4, weight: FontWeight.w500),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 28),
+                Container(width: 36, height: 1, color: onBg.withAlpha(60)),
+                const SizedBox(height: 28),
                 // Intro text
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Text(
                     field.intro,
                     textAlign: TextAlign.center,
-                    style: llSerifItalic(size: 15, color: llInk, height: 1.75),
+                    style: llSerifItalic(size: 15, color: onBg, height: 1.75, weight: FontWeight.w500),
                   ),
                 ),
                 const Spacer(),
@@ -105,6 +75,7 @@ class FieldIntroScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: LLCTA(
                     label: 'Receive My Task  →',
+                    variant: 'primary',
                     onTap: () => Navigator.of(context).push(_fadeRoute(FieldTaskScreen(
                       field: field,
                       wish: wish,
@@ -118,7 +89,21 @@ class FieldIntroScreen extends StatelessWidget {
               ],
             ),
           ),
-          LLBackArrow(onTap: () => Navigator.of(context).maybePop()),
+          // Adaptive back arrow
+          Positioned(
+            top: 80,
+            left: 18,
+            child: GestureDetector(
+              onTap: () => Navigator.of(context).maybePop(),
+              child: SizedBox(
+                width: 44,
+                height: 44,
+                child: Center(
+                  child: Icon(Icons.chevron_left_rounded, color: onBgSoft, size: 24),
+                ),
+              ),
+            ),
+          ),
           WishStrip(wish: wish),
         ],
       ),

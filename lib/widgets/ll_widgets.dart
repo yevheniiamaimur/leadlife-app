@@ -4,14 +4,19 @@ import 'package:google_fonts/google_fonts.dart';
 import '../app_theme.dart';
 
 // ── Brand typography helpers ─────────────────────────────────
-TextStyle llSerif({double size = 16, FontWeight weight = FontWeight.w400, Color color = llInk, double height = 1.3}) =>
-    GoogleFonts.cormorantGaramond(fontSize: size, fontWeight: weight, color: color, height: height);
+const _cyrillicFallback = ['Helvetica Neue', 'Arial'];
 
-TextStyle llSerifItalic({double size = 14, Color color = llMuted, double height = 1.5}) =>
-    GoogleFonts.cormorantGaramond(fontSize: size, fontStyle: FontStyle.italic, color: color, height: height);
+TextStyle llSerif({double size = 16, FontWeight weight = FontWeight.w400, Color color = llInk, double height = 1.3}) =>
+    GoogleFonts.cormorantGaramond(fontSize: size, fontWeight: weight, color: color, height: height)
+      .copyWith(fontFamilyFallback: _cyrillicFallback);
+
+TextStyle llSerifItalic({double size = 14, Color color = llMuted, double height = 1.5, FontWeight weight = FontWeight.w400}) =>
+    GoogleFonts.lora(fontSize: size, fontStyle: FontStyle.italic, fontWeight: weight, color: color, height: height)
+      .copyWith(fontFamilyFallback: _cyrillicFallback);
 
 TextStyle llUi({double size = 13, Color color = llInk, FontWeight weight = FontWeight.w400, double letterSpacing = 0}) =>
-    GoogleFonts.inter(fontSize: size, fontWeight: weight, color: color, letterSpacing: letterSpacing);
+    GoogleFonts.inter(fontSize: size, fontWeight: weight, color: color, letterSpacing: letterSpacing)
+      .copyWith(fontFamilyFallback: _cyrillicFallback);
 
 // ── SmallCaps label ──────────────────────────────────────────
 class LLSmallCaps extends StatelessWidget {
@@ -29,7 +34,7 @@ class LLSmallCaps extends StatelessWidget {
       fontWeight: FontWeight.w600,
       color: color,
       letterSpacing: letterSpacing,
-    ),
+    ).copyWith(fontFamilyFallback: _cyrillicFallback),
   );
 }
 
@@ -86,7 +91,7 @@ class LLCTA extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 color: (isPrimary || isDark) ? Colors.white : llGold,
                 letterSpacing: 0.3,
-              ),
+              ).copyWith(fontFamilyFallback: _cyrillicFallback),
             ),
           ),
         ),
@@ -192,13 +197,13 @@ class WishStrip extends StatelessWidget {
           ),
           child: Text(
             '"$wish"',
-            style: GoogleFonts.cormorantGaramond(
+            style: GoogleFonts.lora(
               fontStyle: FontStyle.italic,
               fontSize: 11.5,
               color: llGoldDark,
               letterSpacing: 0.2,
               height: 1.3,
-            ),
+            ).copyWith(fontFamilyFallback: _cyrillicFallback),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -318,7 +323,7 @@ class _DicePainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = size * 0.012);
 
-    final pipColor = highlight ? llGold : llInk;
+    final pipColor = llGold;
     final pipR = size * 0.075;
     for (final pos in _layouts[pips.clamp(1, 8)] ?? _layouts[1]!) {
       canvas.drawCircle(Offset(pos[0] * size, pos[1] * size), pipR, Paint()..color = pipColor);

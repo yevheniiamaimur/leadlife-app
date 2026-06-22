@@ -42,11 +42,31 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
   }
 
   Future<Uint8List> _buildPdf() async {
-    final gold  = PdfColor.fromHex('C8A96E');
-    final ink   = PdfColor.fromHex('2C2C2C');
-    final muted = PdfColor.fromHex('8A7E70');
-    final hair  = PdfColor.fromHex('E0D8CC');
+    final gold   = PdfColor.fromHex('C8A96E');
+    final ink    = PdfColor.fromHex('2C2C2C');
+    final muted  = PdfColor.fromHex('8A7E70');
+    final hair   = PdfColor.fromHex('E0D8CC');
     final cardBg = PdfColor.fromHex('FFFFF8');
+
+    // Noto fonts — full Cyrillic + Latin support
+    final fontSerif       = await PdfGoogleFonts.notoSerifRegular();
+    final fontSerifItalic = await PdfGoogleFonts.notoSerifItalic();
+    final fontSerifBold   = await PdfGoogleFonts.notoSerifBold();
+    final fontSans        = await PdfGoogleFonts.notoSansRegular();
+    final fontSansBold    = await PdfGoogleFonts.notoSansBold();
+
+    pw.TextStyle serif(double size, {PdfColor? color, double lineSpacing = 0, double letterSpacing = 0}) =>
+        pw.TextStyle(font: fontSerif, fontSize: size, color: color ?? ink,
+            lineSpacing: lineSpacing, letterSpacing: letterSpacing);
+
+    pw.TextStyle serifItalic(double size, {PdfColor? color, double lineSpacing = 0}) =>
+        pw.TextStyle(font: fontSerifItalic, fontSize: size, color: color ?? ink, lineSpacing: lineSpacing);
+
+    pw.TextStyle label(double size, {PdfColor? color, double letterSpacing = 0}) =>
+        pw.TextStyle(font: fontSansBold, fontSize: size, color: color ?? muted, letterSpacing: letterSpacing);
+
+    pw.TextStyle sans(double size, {PdfColor? color}) =>
+        pw.TextStyle(font: fontSans, fontSize: size, color: color ?? muted);
 
     final entries = _entries;
     final doc = pw.Document();
@@ -63,19 +83,8 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
-                  pw.Text('LEAD LIFE',
-                    style: pw.TextStyle(
-                      font: pw.Font.helveticaBold(),
-                      fontSize: 8,
-                      color: gold,
-                      letterSpacing: 3,
-                    )),
-                  pw.Text('Your Journey Report',
-                    style: pw.TextStyle(
-                      font: pw.Font.timesItalic(),
-                      fontSize: 9,
-                      color: muted,
-                    )),
+                  pw.Text('LEAD LIFE', style: label(8, color: gold, letterSpacing: 3)),
+                  pw.Text('Your Journey Report', style: serifItalic(9, color: muted)),
                 ],
               ),
               pw.SizedBox(height: 6),
@@ -88,19 +97,16 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
           child: pw.Row(
             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
             children: [
-              pw.Text('Lead Life',
-                style: pw.TextStyle(font: pw.Font.timesItalic(), fontSize: 8, color: muted)),
-              pw.Text('${ctx.pageNumber} / ${ctx.pagesCount}',
-                style: pw.TextStyle(font: pw.Font.helvetica(), fontSize: 8, color: muted)),
+              pw.Text('Lead Life', style: serifItalic(8, color: muted)),
+              pw.Text('${ctx.pageNumber} / ${ctx.pagesCount}', style: sans(8)),
             ],
           ),
         ),
         build: (_) => [
           pw.Text('Your Journey\nIs Complete',
-            style: pw.TextStyle(font: pw.Font.times(), fontSize: 28, color: ink, lineSpacing: 8)),
+            style: pw.TextStyle(font: fontSerifBold, fontSize: 28, color: ink, lineSpacing: 8)),
           pw.SizedBox(height: 6),
-          pw.Text('You have walked all 32 paths.',
-            style: pw.TextStyle(font: pw.Font.timesItalic(), fontSize: 13, color: muted)),
+          pw.Text('You have walked all 32 paths.', style: serifItalic(13, color: muted)),
           pw.SizedBox(height: 26),
 
           // Desire card
@@ -115,36 +121,29 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
             child: pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
-                pw.Text('YOUR DESIRE',
-                  style: pw.TextStyle(font: pw.Font.helveticaBold(), fontSize: 7.5, color: gold, letterSpacing: 2)),
+                pw.Text('YOUR DESIRE', style: label(7.5, color: gold, letterSpacing: 2)),
                 pw.SizedBox(height: 8),
-                pw.Text('"${widget.wish}"',
-                  style: pw.TextStyle(font: pw.Font.timesItalic(), fontSize: 14, color: ink, lineSpacing: 4)),
+                pw.Text('"${widget.wish}"', style: serifItalic(14, lineSpacing: 4)),
               ],
             ),
           ),
           pw.SizedBox(height: 20),
 
           // Area of action
-          pw.Text('YOUR CURRENT AREA OF ACTION',
-            style: pw.TextStyle(font: pw.Font.helveticaBold(), fontSize: 7.5, color: muted, letterSpacing: 2)),
+          pw.Text('YOUR CURRENT AREA OF ACTION', style: label(7.5, letterSpacing: 2)),
           pw.SizedBox(height: 6),
-          pw.Text(widget.currentAreaField.name,
-            style: pw.TextStyle(font: pw.Font.times(), fontSize: 22, color: ink, letterSpacing: 2)),
+          pw.Text(widget.currentAreaField.name, style: serif(22, letterSpacing: 2)),
           pw.SizedBox(height: 2),
-          pw.Text(widget.currentAreaField.subtitle,
-            style: pw.TextStyle(font: pw.Font.timesItalic(), fontSize: 11, color: muted)),
+          pw.Text(widget.currentAreaField.subtitle, style: serifItalic(11, color: muted)),
           pw.SizedBox(height: 28),
 
           pw.Container(height: 0.5, color: hair),
           pw.SizedBox(height: 22),
-          pw.Text('WHAT YOU HAVE DISCOVERED',
-            style: pw.TextStyle(font: pw.Font.helveticaBold(), fontSize: 7.5, color: muted, letterSpacing: 2)),
+          pw.Text('WHAT YOU HAVE DISCOVERED', style: label(7.5, letterSpacing: 2)),
           pw.SizedBox(height: 16),
 
           if (entries.isEmpty)
-            pw.Text('No answers recorded.',
-              style: pw.TextStyle(font: pw.Font.timesItalic(), fontSize: 12, color: muted)),
+            pw.Text('No answers recorded.', style: serifItalic(12, color: muted)),
 
           ...entries.map((e) {
             final field = kFields.firstWhere((f) => f.n == e.key);
@@ -158,14 +157,10 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                 child: pw.Column(
                   crossAxisAlignment: pw.CrossAxisAlignment.start,
                   children: [
-                    pw.Text(
-                      '${field.paddedNumber} · ${field.name.toUpperCase()}',
-                      style: pw.TextStyle(
-                        font: pw.Font.helveticaBold(), fontSize: 7.5, color: muted, letterSpacing: 1.5)),
+                    pw.Text('${field.paddedNumber} · ${field.name.toUpperCase()}',
+                      style: label(7.5, letterSpacing: 1.5)),
                     pw.SizedBox(height: 3),
-                    pw.Text('"${e.value}"',
-                      style: pw.TextStyle(
-                        font: pw.Font.timesItalic(), fontSize: 13, color: ink, lineSpacing: 3)),
+                    pw.Text('"${e.value}"', style: serifItalic(13, lineSpacing: 3)),
                   ],
                 ),
               ),
@@ -177,7 +172,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
           pw.SizedBox(height: 14),
           pw.Text(
             'The golden fish is already on its way.\nYour work is to believe — and to act.',
-            style: pw.TextStyle(font: pw.Font.timesItalic(), fontSize: 13, color: gold, lineSpacing: 5),
+            style: serifItalic(13, color: gold, lineSpacing: 5),
             textAlign: pw.TextAlign.center,
           ),
         ],

@@ -149,7 +149,7 @@ class _DiceRollScreenState extends State<DiceRollScreen> with SingleTickerProvid
                           label: _rolling ? 'Rolling…' : (_rollCount == 0 ? 'Roll' : 'Roll Again'),
                           enabled: !_rolling,
                           onTap: _roll,
-                          variant: 'dark',
+                          variant: 'primary',
                         ),
                       if (showResult && isOne)
                         LLCTA(

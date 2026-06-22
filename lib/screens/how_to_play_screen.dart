@@ -590,7 +590,7 @@ class _PaperBackground extends StatelessWidget {
           gradient: RadialGradient(
             center: const Alignment(-0.8, -0.9),
             radius: 1.4,
-            colors: [const Color(0xFFF7E2CF), _paper.withAlpha(0)],
+            colors: [const Color(0xFFF7E2CF), _paper.withOpacity(0)],
           ),
         ),
       ),
