@@ -32,67 +32,72 @@ class _RulesScreenState extends State<RulesScreen> {
                   style: llSerif(size: 20, weight: FontWeight.w600),
                 ),
                 const SizedBox(height: 28),
-                // Glowing menu panel
+                // Wish preview card — taps straight through to the wish screen
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 28),
-                  child: AspectRatio(
-                    aspectRatio: 1,
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context).push(_fadeRoute(const WishEntryScreen())),
                     child: Container(
-                      padding: const EdgeInsets.all(16),
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 26),
                       decoration: BoxDecoration(
                         color: llCardBg,
-                        borderRadius: BorderRadius.circular(28),
+                        borderRadius: BorderRadius.circular(24),
                         border: Border.all(color: llGold.withAlpha(46)),
                         boxShadow: [
-                          BoxShadow(color: llGold.withAlpha(64), blurRadius: 44, offset: const Offset(0, 16)),
-                          BoxShadow(color: llGold.withAlpha(36), blurRadius: 10, offset: const Offset(0, 2)),
+                          BoxShadow(color: llGold.withAlpha(56), blurRadius: 36, offset: const Offset(0, 14)),
+                          BoxShadow(color: llGold.withAlpha(30), blurRadius: 8, offset: const Offset(0, 2)),
                         ],
                       ),
                       child: Column(
                         children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: _MenuTile(
-                                    label: 'Check My Wish',
-                                    icon: Icons.auto_awesome_outlined,
-                                    color: const Color(0xFF06578C),
-                                    onTap: () => Navigator.of(context).push(_fadeRoute(const WishEntryScreen())),
-                                  ),
-                                ),
-                                const SizedBox(width: 14),
-                                Expanded(
-                                  child: _MenuTile(
-                                    label: 'Build Success Code',
-                                    icon: Icons.workspace_premium_outlined,
-                                    color: const Color(0xFF15B263),
-                                    onTap: () => Navigator.of(context).push(_fadeRoute(const WishEntryScreen())),
-                                  ),
-                                ),
-                              ],
-                            ),
+                          Text(
+                            "What's your wish?",
+                            textAlign: TextAlign.center,
+                            style: llSerif(size: 22, height: 1.2, weight: FontWeight.w600),
                           ),
-                          const SizedBox(height: 14),
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: _MenuTile(
-                                    label: 'How It Works',
-                                    icon: Icons.menu_book_outlined,
-                                    color: llGold,
-                                    onTap: () => Navigator.of(context).push(_fadeRoute(const HowToPlayScreen())),
-                                  ),
-                                ),
-                                const SizedBox(width: 14),
-                                const Expanded(child: SizedBox()),
-                              ],
+                          const SizedBox(height: 10),
+                          Text(
+                            'Write in the present perfect tense — as if it has already come true.',
+                            textAlign: TextAlign.center,
+                            style: llSerifItalic(size: 13, height: 1.5),
+                          ),
+                          const SizedBox(height: 20),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.only(bottom: 8),
+                            decoration: BoxDecoration(border: Border(bottom: BorderSide(color: llHair))),
+                            child: Text(
+                              'Type it here…',
+                              textAlign: TextAlign.center,
+                              style: llUi(size: 13, color: llMutedSoft),
                             ),
                           ),
                         ],
                       ),
                     ),
+                  ),
+                ),
+                const SizedBox(height: 14),
+                // Two separate nav buttons
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 28),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: _NavButton(
+                          label: 'How It Works',
+                          onTap: () => Navigator.of(context).push(_fadeRoute(const HowToPlayScreen())),
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: _NavButton(
+                          label: 'Build Success Code',
+                          onTap: () => Navigator.of(context).push(_fadeRoute(const WishEntryScreen())),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 32),
@@ -115,40 +120,30 @@ class _RulesScreenState extends State<RulesScreen> {
   }
 }
 
-class _MenuTile extends StatelessWidget {
-  const _MenuTile({required this.label, required this.icon, required this.color, required this.onTap});
+class _NavButton extends StatelessWidget {
+  const _NavButton({required this.label, required this.onTap});
   final String label;
-  final IconData icon;
-  final Color color;
   final VoidCallback onTap;
 
   @override
-  Widget build(BuildContext context) {
-    final accent = llReadableAccent(color);
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Color.alphaBlend(color.withAlpha(28), llBg),
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: color.withAlpha(70)),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: accent, size: 26),
-            const SizedBox(height: 8),
-            Text(
-              label,
-              textAlign: TextAlign.center,
-              style: llUi(size: 12, color: accent, weight: FontWeight.w600, letterSpacing: 0.2),
-            ),
-          ],
-        ),
+  Widget build(BuildContext context) => GestureDetector(
+    onTap: onTap,
+    child: Container(
+      height: 56,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: llGold,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [BoxShadow(color: llGold.withAlpha(70), blurRadius: 14, offset: const Offset(0, 4))],
       ),
-    );
-  }
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Text(
+        label,
+        textAlign: TextAlign.center,
+        style: llUi(size: 12, color: Colors.white, weight: FontWeight.w600, letterSpacing: 0.2),
+      ),
+    ),
+  );
 }
 
 PageRouteBuilder<T> _fadeRoute<T>(Widget page) => PageRouteBuilder(
