@@ -131,8 +131,6 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
             right: 22,
             onTap: () => setState(() => _showHelp = true),
           ),
-          // Watermark
-          const Positioned.fill(child: IgnorePointer(child: Center(child: LLWatermark(size: 220, opacity: 0.05)))),
           if (_showHelp)
             HelpModal(onClose: () => setState(() => _showHelp = false)),
         ],

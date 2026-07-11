@@ -53,16 +53,20 @@ class LLHairline extends StatelessWidget {
 
 // ── Primary CTA button ───────────────────────────────────────
 class LLCTA extends StatelessWidget {
-  const LLCTA({super.key, required this.label, this.onTap, this.enabled = true, this.variant = 'primary'});
+  const LLCTA({super.key, required this.label, this.onTap, this.enabled = true, this.variant = 'primary', this.color});
   final String label;
   final VoidCallback? onTap;
   final bool enabled;
   final String variant;
+  // Overrides the primary fill color (e.g. a game field's own color).
+  // Falls back to llGold automatically if too light to read white text on.
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     final isPrimary = variant == 'primary';
     final isDark = variant == 'dark';
+    final fill = llReadableAccent(color ?? llGold);
     return GestureDetector(
       onTap: enabled ? onTap : null,
       child: AnimatedOpacity(
@@ -72,12 +76,12 @@ class LLCTA extends StatelessWidget {
           width: double.infinity,
           height: 52,
           decoration: BoxDecoration(
-            color: isDark ? const Color(0xFF111111) : (isPrimary ? llGold : Colors.transparent),
+            color: isDark ? const Color(0xFF111111) : (isPrimary ? fill : Colors.transparent),
             borderRadius: BorderRadius.circular(12),
-            border: (!isPrimary && !isDark) ? Border.all(color: llGold) : null,
+            border: (!isPrimary && !isDark) ? Border.all(color: fill) : null,
             boxShadow: (isPrimary || isDark) && enabled
                 ? [BoxShadow(
-                    color: isDark ? const Color(0x40000000) : const Color(0x59C8A96E),
+                    color: isDark ? const Color(0x40000000) : fill.withAlpha(89),
                     blurRadius: 14,
                     offset: const Offset(0, 4),
                   )]
@@ -89,7 +93,7 @@ class LLCTA extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
-                color: (isPrimary || isDark) ? Colors.white : llGold,
+                color: (isPrimary || isDark) ? Colors.white : fill,
                 letterSpacing: 0.3,
               ).copyWith(fontFamilyFallback: _cyrillicFallback),
             ),
@@ -393,101 +397,20 @@ class _GlyphPainter extends CustomPainter {
   bool shouldRepaint(_GlyphPainter old) => old.color != color;
 }
 
-// ── Logo watermark placeholder ───────────────────────────────
-class LLWatermark extends StatelessWidget {
-  const LLWatermark({super.key, this.size = 200, this.opacity = 0.06});
-  final double size;
-  final double opacity;
-
-  @override
-  Widget build(BuildContext context) => Opacity(
-    opacity: opacity,
-    child: Center(
-      child: SizedBox(
-        width: size,
-        height: size,
-        child: CustomPaint(painter: _LogoPainter(color: llInk)),
-      ),
-    ),
-  );
-}
-
-class _LogoPainter extends CustomPainter {
-  const _LogoPainter({required this.color});
-  final Color color;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.0;
-    final s = size.width;
-    final c = Offset(s / 2, s / 2);
-    // four-pointed star
-    for (var i = 0; i < 4; i++) {
-      final a = i * math.pi / 2;
-      canvas.drawLine(
-        c,
-        Offset(c.dx + math.cos(a) * s * 0.45, c.dy + math.sin(a) * s * 0.45),
-        paint,
-      );
-    }
-    canvas.drawCircle(c, s * 0.15, paint);
-  }
-
-  @override
-  bool shouldRepaint(_LogoPainter old) => old.color != color;
-}
-
-// ── Logo mark (four-pointed star) ───────────────────────────
+// ── Logo mark ────────────────────────────────────────────────
 class LLLogo extends StatelessWidget {
   const LLLogo({super.key, this.size = 48, this.color = llGold});
   final double size;
   final Color color;
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-    width: size,
-    height: size,
-    child: CustomPaint(painter: _StarLogoPainter(color: color)),
+  Widget build(BuildContext context) => ColorFiltered(
+    colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+    child: Image.asset(
+      'assets/logo/logo_mark.png',
+      width: size,
+      height: size,
+    ),
   );
 }
 
-class _StarLogoPainter extends CustomPainter {
-  const _StarLogoPainter({required this.color});
-  final Color color;
-
-  @override
-  void paint(Canvas canvas, Size sz) {
-    final s = sz.width;
-    final c = Offset(s / 2, s / 2);
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-
-    // Four-pointed star
-    final path = Path();
-    for (var i = 0; i < 4; i++) {
-      final a = i * math.pi / 2 - math.pi / 2;
-      final tipR = s * 0.48;
-      final sideR = s * 0.13;
-      final tipX = c.dx + math.cos(a) * tipR;
-      final tipY = c.dy + math.sin(a) * tipR;
-      final a1 = a + math.pi / 4;
-      final a2 = a - math.pi / 4;
-      if (i == 0) {
-        path.moveTo(tipX, tipY);
-      } else {
-        path.lineTo(tipX, tipY);
-      }
-      path.lineTo(c.dx + math.cos(a2) * sideR, c.dy + math.sin(a2) * sideR);
-      path.lineTo(c.dx + math.cos(a1) * sideR, c.dy + math.sin(a1) * sideR);
-    }
-    path.close();
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(_StarLogoPainter old) => old.color != color;
-}
