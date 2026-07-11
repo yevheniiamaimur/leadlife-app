@@ -5,6 +5,8 @@ import '../services/progress_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'answer_saved_screen.dart';
 
+const _blank = '__________';
+
 class FieldTaskScreen extends StatefulWidget {
   const FieldTaskScreen({
     super.key,
@@ -27,16 +29,26 @@ class FieldTaskScreen extends StatefulWidget {
 
 class _FieldTaskScreenState extends State<FieldTaskScreen> {
   late final TextEditingController _ctrl;
+  late final List<TextEditingController> _blankCtrls;
+
+  List<String> get _paragraphs => widget.field.task.split('\n\n');
+  List<String> get _questionParas => _paragraphs.where((p) => !p.contains(_blank)).toList();
+  List<String> get _taskParas => _paragraphs.where((p) => p.contains(_blank)).toList();
+  int get _blankCount => _taskParas.fold(0, (sum, p) => sum + p.split(_blank).length - 1);
 
   @override
   void initState() {
     super.initState();
     _ctrl = TextEditingController(text: widget.initialAnswer);
+    _blankCtrls = List.generate(_blankCount, (_) => TextEditingController());
   }
 
   @override
   void dispose() {
     _ctrl.dispose();
+    for (final c in _blankCtrls) {
+      c.dispose();
+    }
     super.dispose();
   }
 
@@ -44,49 +56,69 @@ class _FieldTaskScreenState extends State<FieldTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bg = widget.field.color;
+    final isDark = bg.computeLuminance() < 0.4;
+    final onBg = isDark ? Colors.white : llInk;
+    final onBgSoft = isDark ? Colors.white.withAlpha(160) : llMuted;
+    // Input fields stay light regardless of the page background, so their
+    // own text reads dark rather than following onBg.
+    final cardColor = Colors.white.withAlpha(235);
+    final cardAccent = llReadableAccent(bg);
+    final cardBorder = cardAccent.withAlpha(90);
+    final cardShadow = [BoxShadow(color: Colors.black.withAlpha(isDark ? 60 : 20), blurRadius: 24, offset: const Offset(0, 4))];
+
     return Scaffold(
-      backgroundColor: llBg,
+      backgroundColor: bg,
       resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
           SafeArea(
             child: Padding(
               padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: Column(
-                children: [
-                  const SizedBox(height: 56),
-                  LLSmallCaps(
-                    'FIELD ${widget.field.paddedNumber} · ${widget.field.name}',
-                    size: 10,
-                    color: llReadableAccent(widget.field.color),
-                    letterSpacing: 2.5,
-                  ),
-                  const SizedBox(height: 22),
-                  // Task instruction
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 32),
-                    child: Column(
-                      children: [
-                        Text(
-                          widget.field.task,
-                          textAlign: TextAlign.center,
-                          style: llSerif(size: 22, height: 1.3, weight: FontWeight.w600),
-                        ),
-                        const SizedBox(height: 10),
-                        const Center(child: LLHairline(width: 28)),
-                      ],
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(top: 56, bottom: 40),
+                child: Column(
+                  children: [
+                    LLSmallCaps(
+                      'FIELD ${widget.field.paddedNumber} · ${widget.field.name}',
+                      size: 10,
+                      color: onBg,
+                      letterSpacing: 2.5,
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  // Answer textarea
-                  Expanded(
-                    child: Padding(
+                    const SizedBox(height: 22),
+                    Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 26),
                         decoration: BoxDecoration(
-                          color: const Color(0x8CFFFFF8),
+                          color: llGold,
+                          borderRadius: BorderRadius.circular(18),
+                          boxShadow: [BoxShadow(color: llGold.withAlpha(90), blurRadius: 20, offset: const Offset(0, 8))],
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              _questionParas.join('\n\n'),
+                              textAlign: TextAlign.center,
+                              style: llSerif(size: 22, height: 1.3, weight: FontWeight.w600, color: Colors.white),
+                            ),
+                            const SizedBox(height: 10),
+                            const Center(child: LLHairline(width: 28, color: Colors.white)),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Container(
+                        height: 150,
+                        decoration: BoxDecoration(
+                          color: cardColor,
                           borderRadius: BorderRadius.circular(14),
-                          boxShadow: const [BoxShadow(color: Color(0x0FB4A078), blurRadius: 24, offset: Offset(0, 4))],
+                          border: Border.all(color: cardBorder, width: 1),
+                          boxShadow: cardShadow,
                         ),
                         padding: const EdgeInsets.all(18),
                         child: ValueListenableBuilder<TextEditingValue>(
@@ -99,45 +131,105 @@ class _FieldTaskScreenState extends State<FieldTaskScreen> {
                             textAlignVertical: TextAlignVertical.top,
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: '…write your answer here',
-                              hintStyle: llUi(size: 16, color: llHair),
+                              hintText: 'Your answer…',
+                              hintStyle: llUi(size: 16, color: llMutedSoft),
                             ),
                             style: llUi(size: 16, color: llInk, letterSpacing: 0),
-                            cursorColor: llReadableAccent(widget.field.color),
+                            cursorColor: cardAccent,
                             cursorWidth: 1.5,
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: ValueListenableBuilder<TextEditingValue>(
-                      valueListenable: _ctrl,
-                      builder: (_, _, _) => LLCTA(
-                        label: 'Save My Answer',
-                        enabled: _canSave,
-                        onTap: _canSave ? _save : null,
-                        color: widget.field.color,
+                    if (_taskParas.isNotEmpty) ...[
+                      const SizedBox(height: 26),
+                      LLSmallCaps('Task', size: 10, color: onBg, letterSpacing: 2.5),
+                      const SizedBox(height: 14),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: cardColor,
+                            borderRadius: BorderRadius.circular(14),
+                            border: Border.all(color: cardBorder, width: 1),
+                            boxShadow: cardShadow,
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+                          child: Column(
+                            children: _buildBlankSentences(cardAccent),
+                          ),
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: 24),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: ValueListenableBuilder<TextEditingValue>(
+                        valueListenable: _ctrl,
+                        builder: (_, _, _) => LLCTA(
+                          label: 'Save My Answer',
+                          enabled: _canSave,
+                          onTap: _canSave ? _save : null,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 40),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-          LLBackArrow(onTap: () => Navigator.of(context).maybePop()),
+          LLBackArrow(onTap: () => Navigator.of(context).maybePop(), color: onBgSoft),
           WishStrip(wish: widget.wish),
         ],
       ),
     );
   }
 
+  List<Widget> _buildBlankSentences(Color accent) {
+    final widgets = <Widget>[];
+    var index = 0;
+    for (var i = 0; i < _taskParas.length; i++) {
+      final parts = _taskParas[i].split(_blank);
+      final spans = <InlineSpan>[];
+      for (var p = 0; p < parts.length; p++) {
+        if (parts[p].isNotEmpty) spans.add(TextSpan(text: parts[p]));
+        if (p < parts.length - 1) {
+          final ctrl = _blankCtrls[index++];
+          spans.add(WidgetSpan(
+            alignment: PlaceholderAlignment.middle,
+            child: Container(
+              width: 100,
+              margin: const EdgeInsets.symmetric(horizontal: 3),
+              decoration: BoxDecoration(border: Border(bottom: BorderSide(color: accent, width: 1.4))),
+              child: TextField(
+                controller: ctrl,
+                textAlign: TextAlign.center,
+                style: llUi(size: 15, color: llInk),
+                cursorColor: accent,
+                decoration: const InputDecoration(
+                  isDense: true,
+                  isCollapsed: true,
+                  contentPadding: EdgeInsets.symmetric(vertical: 4),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ));
+        }
+      }
+      widgets.add(Text.rich(
+        TextSpan(style: llSerif(size: 16, height: 1.8, color: llInk), children: spans),
+        textAlign: TextAlign.center,
+      ));
+      if (i < _taskParas.length - 1) widgets.add(const SizedBox(height: 16));
+    }
+    return widgets;
+  }
+
   void _save() {
     FocusScope.of(context).unfocus();
-    final newAnswer = _ctrl.text.trim();
+    final openText = _ctrl.text.trim();
+    final newAnswer = _taskParas.isEmpty ? openText : '$openText\n\n${_reconstructedTask()}';
     final newAnswers = Map<int, String>.from(widget.answers)..[widget.field.n] = newAnswer;
     final newCompleted = List<int>.from(widget.completedFields);
     if (!newCompleted.contains(widget.field.n)) newCompleted.add(widget.field.n);
@@ -155,6 +247,24 @@ class _FieldTaskScreenState extends State<FieldTaskScreen> {
       completedFields: newCompleted,
       answers: newAnswers,
     )));
+  }
+
+  String _reconstructedTask() {
+    var index = 0;
+    final lines = <String>[];
+    for (final para in _taskParas) {
+      final parts = para.split(_blank);
+      final buffer = StringBuffer();
+      for (var p = 0; p < parts.length; p++) {
+        buffer.write(parts[p]);
+        if (p < parts.length - 1) {
+          final value = _blankCtrls[index++].text.trim();
+          buffer.write(value.isEmpty ? _blank : value);
+        }
+      }
+      lines.add(buffer.toString());
+    }
+    return lines.join('\n');
   }
 }
 

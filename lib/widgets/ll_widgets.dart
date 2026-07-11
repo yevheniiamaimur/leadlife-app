@@ -40,14 +40,15 @@ class LLSmallCaps extends StatelessWidget {
 
 // ── Gold hairline ────────────────────────────────────────────
 class LLHairline extends StatelessWidget {
-  const LLHairline({super.key, this.width = 48});
+  const LLHairline({super.key, this.width = 48, this.color = llGold});
   final double width;
+  final Color color;
 
   @override
   Widget build(BuildContext context) => Container(
     width: width,
     height: 1,
-    color: llGold,
+    color: color,
   );
 }
 
@@ -106,10 +107,11 @@ class LLCTA extends StatelessWidget {
 
 // ── Back arrow ───────────────────────────────────────────────
 class LLBackArrow extends StatelessWidget {
-  const LLBackArrow({super.key, this.onTap, this.top = 80, this.left = 18});
+  const LLBackArrow({super.key, this.onTap, this.top = 80, this.left = 18, this.color = llMuted});
   final VoidCallback? onTap;
   final double top;
   final double left;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -122,8 +124,8 @@ class LLBackArrow extends StatelessWidget {
           width: 44,
           height: 44,
           color: Colors.transparent,
-          child: const Center(
-            child: Icon(Icons.chevron_left_rounded, color: llMuted, size: 24),
+          child: Center(
+            child: Icon(Icons.chevron_left_rounded, color: color, size: 24),
           ),
         ),
       ),
