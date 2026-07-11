@@ -38,6 +38,67 @@ class LLSmallCaps extends StatelessWidget {
   );
 }
 
+// ── Marquee ticker ───────────────────────────────────────────
+class LLMarquee extends StatefulWidget {
+  const LLMarquee({super.key, required this.text, this.color = llGold, this.size = 13, this.height = 22, this.duration = const Duration(seconds: 9), this.uppercase = true});
+  final String text;
+  final Color color;
+  final double size;
+  final double height;
+  final Duration duration;
+  final bool uppercase;
+
+  @override
+  State<LLMarquee> createState() => _LLMarqueeState();
+}
+
+class _LLMarqueeState extends State<LLMarquee> with SingleTickerProviderStateMixin {
+  late final AnimationController _ctrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(vsync: this, duration: widget.duration)..repeat();
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final style = GoogleFonts.inter(
+      fontSize: widget.size,
+      fontWeight: FontWeight.w700,
+      color: widget.color,
+      letterSpacing: 4,
+    ).copyWith(fontFamilyFallback: _cyrillicFallback);
+    final unit = '${widget.uppercase ? widget.text.toUpperCase() : widget.text}    ';
+    final painter = TextPainter(text: TextSpan(text: unit, style: style), textDirection: TextDirection.ltr)..layout();
+    final unitWidth = painter.width;
+
+    return ClipRect(
+      child: SizedBox(
+        height: widget.height,
+        child: AnimatedBuilder(
+          animation: _ctrl,
+          builder: (context, _) {
+            final dx = -_ctrl.value * unitWidth;
+            return Stack(
+              children: [
+                for (var i = 0; i < 24; i++)
+                  Positioned(left: dx + i * unitWidth, top: 0, child: Text(unit, style: style)),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
 // ── Gold hairline ────────────────────────────────────────────
 class LLHairline extends StatelessWidget {
   const LLHairline({super.key, this.width = 48, this.color = llGold});
