@@ -18,12 +18,19 @@ class _RulesScreenState extends State<RulesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: llBg,
-      body: IndexedStack(
-        index: _tabIndex,
-        children: const [
-          _HomeTab(),
-          _PlaceholderTab(label: 'Journal'),
-          _PlaceholderTab(label: 'Diary'),
+      body: Column(
+        children: [
+          const _TopBar(),
+          Expanded(
+            child: IndexedStack(
+              index: _tabIndex,
+              children: const [
+                _HomeTab(),
+                _PlaceholderTab(label: 'Journal'),
+                _PlaceholderTab(label: 'Diary'),
+              ],
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: _BottomBar(
@@ -32,6 +39,35 @@ class _RulesScreenState extends State<RulesScreen> {
       ),
     );
   }
+}
+
+class _TopBar extends StatelessWidget {
+  const _TopBar();
+
+  @override
+  Widget build(BuildContext context) => Container(
+    decoration: BoxDecoration(
+      color: llCardBg,
+      border: Border(bottom: BorderSide(color: llHair)),
+    ),
+    child: SafeArea(
+      bottom: false,
+      child: SizedBox(
+        height: 76,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 22),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () {},
+              child: const Icon(Icons.menu_rounded, size: 34, color: llInk),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
 }
 
 class _HomeTab extends StatefulWidget {
@@ -48,9 +84,10 @@ class _HomeTabState extends State<_HomeTab> {
     return Stack(
       children: [
         SafeArea(
+          top: false,
           child: Column(
             children: [
-              const SizedBox(height: 64),
+              const SizedBox(height: 28),
               const LLLogo(size: 88, color: llGold),
               const SizedBox(height: 20),
               Text(
