@@ -31,7 +31,7 @@ class _GameBoardScreenState extends State<GameBoardScreen> {
     super.initState();
     _scroll = ScrollController();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final y = 60.0 + (widget.currentFieldNum - 1) * 70;
+      final y = 60.0 + (widget.currentFieldNum - 1) * 84;
       _scroll.animateTo(
         math.max(0, y - 220),
         duration: const Duration(milliseconds: 300),
@@ -48,15 +48,15 @@ class _GameBoardScreenState extends State<GameBoardScreen> {
 
   double _xAt(int i) {
     const center = 195.0;
-    const amp = 80.0;
+    const amp = 96.0;
     return center + math.sin(i * 0.55) * amp;
   }
 
-  double _yAt(int i) => 60.0 + i * 70;
+  double _yAt(int i) => 60.0 + i * 84;
 
   @override
   Widget build(BuildContext context) {
-    final trackH = 60.0 + kFields.length * 70 + 80;
+    final trackH = 60.0 + kFields.length * 84 + 80;
     final currentField = kFields.firstWhere((f) => f.n == widget.currentFieldNum);
 
     return Scaffold(
@@ -134,7 +134,7 @@ class _GameBoardScreenState extends State<GameBoardScreen> {
                       final isCurrent = f.n == widget.currentFieldNum;
                       final isDone = widget.completedFields.contains(f.n);
                       final isFuture = !isCurrent && !isDone;
-                      final r = isCurrent ? 22.0 : 16.0;
+                      final r = isCurrent ? 26.0 : 19.0;
 
                       return Positioned(
                         left: x - r,
@@ -168,7 +168,7 @@ class _GameBoardScreenState extends State<GameBoardScreen> {
                                     child: Text(
                                       '${f.n}',
                                       style: llSerif(
-                                        size: isCurrent ? 13 : 10,
+                                        size: isCurrent ? 15 : 12,
                                         color: isFuture ? f.color : Colors.white,
                                         weight: FontWeight.w500,
                                       ),
@@ -184,7 +184,7 @@ class _GameBoardScreenState extends State<GameBoardScreen> {
                                     f.name,
                                     textAlign: TextAlign.center,
                                     style: llUi(
-                                      size: isCurrent ? 10 : 9,
+                                      size: isCurrent ? 11 : 10,
                                       color: isFuture ? llMutedSoft : llInk,
                                       weight: isCurrent ? FontWeight.w600 : FontWeight.w400,
                                       letterSpacing: 0.4,

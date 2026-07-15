@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../models/field.dart';
 import '../widgets/ll_widgets.dart';
-import 'field_intro_screen.dart';
 import 'success_code_screen.dart';
 import 'game_board_screen.dart';
 
@@ -224,9 +223,9 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
       );
     } else {
       Navigator.of(context).pushAndRemoveUntil(
-        _fadeRoute(FieldIntroScreen(
-          field: _newField!,
+        _fadeRoute(GameBoardScreen(
           wish: widget.wish,
+          currentFieldNum: _newField!.n,
           completedFields: widget.completedFields,
           answers: widget.answers,
         )),
