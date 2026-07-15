@@ -4,6 +4,7 @@ import '../widgets/ll_widgets.dart';
 import 'wish_entry_screen.dart';
 import 'how_it_works_screen.dart';
 import 'help_modal.dart';
+import 'diary_tab.dart';
 
 class RulesScreen extends StatefulWidget {
   const RulesScreen({super.key});
@@ -27,7 +28,7 @@ class _RulesScreenState extends State<RulesScreen> {
               children: const [
                 _HomeTab(),
                 _PlaceholderTab(label: 'Journal'),
-                _PlaceholderTab(label: 'Diary'),
+                DiaryTab(),
               ],
             ),
           ),

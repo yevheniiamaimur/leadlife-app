@@ -7,15 +7,15 @@ import '../app_theme.dart';
 const _cyrillicFallback = ['Helvetica Neue', 'Arial'];
 
 TextStyle llSerif({double size = 16, FontWeight weight = FontWeight.w400, Color color = llInk, double height = 1.3}) =>
-    GoogleFonts.cormorantGaramond(fontSize: size, fontWeight: weight, color: color, height: height)
+    GoogleFonts.playfairDisplay(fontSize: size, fontWeight: weight, color: color, height: height)
       .copyWith(fontFamilyFallback: _cyrillicFallback);
 
 TextStyle llSerifItalic({double size = 14, Color color = llMuted, double height = 1.5, FontWeight weight = FontWeight.w400}) =>
-    GoogleFonts.lora(fontSize: size, fontStyle: FontStyle.italic, fontWeight: weight, color: color, height: height)
+    GoogleFonts.workSans(fontSize: size, fontStyle: FontStyle.italic, fontWeight: weight, color: color, height: height)
       .copyWith(fontFamilyFallback: _cyrillicFallback);
 
 TextStyle llUi({double size = 13, Color color = llInk, FontWeight weight = FontWeight.w400, double letterSpacing = 0}) =>
-    GoogleFonts.inter(fontSize: size, fontWeight: weight, color: color, letterSpacing: letterSpacing)
+    GoogleFonts.workSans(fontSize: size, fontWeight: weight, color: color, letterSpacing: letterSpacing)
       .copyWith(fontFamilyFallback: _cyrillicFallback);
 
 // ── SmallCaps label ──────────────────────────────────────────
@@ -29,7 +29,7 @@ class LLSmallCaps extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     text.toUpperCase(),
-    style: GoogleFonts.inter(
+    style: GoogleFonts.workSans(
       fontSize: size,
       fontWeight: FontWeight.w600,
       color: color,
@@ -69,7 +69,7 @@ class _LLMarqueeState extends State<LLMarquee> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    final style = GoogleFonts.inter(
+    final style = GoogleFonts.workSans(
       fontSize: widget.size,
       fontWeight: FontWeight.w700,
       color: widget.color,
@@ -152,7 +152,7 @@ class LLCTA extends StatelessWidget {
           child: Center(
             child: Text(
               label,
-              style: GoogleFonts.inter(
+              style: GoogleFonts.workSans(
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
                 color: (isPrimary || isDark) ? Colors.white : fill,
@@ -264,7 +264,7 @@ class WishStrip extends StatelessWidget {
           ),
           child: Text(
             '"$wish"',
-            style: GoogleFonts.lora(
+            style: GoogleFonts.workSans(
               fontStyle: FontStyle.italic,
               fontSize: 11.5,
               color: llGoldDark,

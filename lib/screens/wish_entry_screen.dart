@@ -5,13 +5,14 @@ import 'help_modal.dart';
 import 'paywall_screen.dart';
 
 class WishEntryScreen extends StatefulWidget {
-  const WishEntryScreen({super.key});
+  const WishEntryScreen({super.key, this.initialText});
+  final String? initialText;
   @override
   State<WishEntryScreen> createState() => _WishEntryScreenState();
 }
 
 class _WishEntryScreenState extends State<WishEntryScreen> {
-  final _ctrl = TextEditingController();
+  late final _ctrl = TextEditingController(text: widget.initialText ?? '');
   bool _showHelp = false;
 
   @override
