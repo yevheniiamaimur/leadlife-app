@@ -5,6 +5,10 @@ import 'wish_entry_screen.dart';
 import 'how_it_works_screen.dart';
 import 'help_modal.dart';
 import 'diary_tab.dart';
+import 'profile_screen.dart';
+import 'help_screen.dart';
+import 'about_screen.dart';
+import '../widgets/app_drawer.dart';
 
 class RulesScreen extends StatefulWidget {
   const RulesScreen({super.key});
@@ -14,14 +18,34 @@ class RulesScreen extends StatefulWidget {
 
 class _RulesScreenState extends State<RulesScreen> {
   int _tabIndex = 0;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _selectTab(int i) {
+    _scaffoldKey.currentState?.closeDrawer();
+    setState(() => _tabIndex = i);
+  }
+
+  void _openScreen(Widget screen) {
+    _scaffoldKey.currentState?.closeDrawer();
+    Navigator.of(context).push(_fadeRoute(screen));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: llBg,
+      drawer: AppDrawer(
+        onHome: () => _selectTab(0),
+        onJournal: () => _selectTab(1),
+        onHistory: () => _selectTab(2),
+        onProfile: () => _openScreen(const ProfileScreen()),
+        onHelp: () => _openScreen(const HelpScreen()),
+        onAbout: () => _openScreen(const AboutScreen()),
+      ),
       body: Column(
         children: [
-          const _TopBar(),
+          _TopBar(onMenuTap: () => _scaffoldKey.currentState?.openDrawer()),
           Expanded(
             child: IndexedStack(
               index: _tabIndex,
@@ -43,7 +67,8 @@ class _RulesScreenState extends State<RulesScreen> {
 }
 
 class _TopBar extends StatelessWidget {
-  const _TopBar();
+  const _TopBar({required this.onMenuTap});
+  final VoidCallback onMenuTap;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -61,7 +86,7 @@ class _TopBar extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
-              onTap: () {},
+              onTap: onMenuTap,
               child: const Icon(Icons.menu_rounded, size: 34, color: llInk),
             ),
           ),

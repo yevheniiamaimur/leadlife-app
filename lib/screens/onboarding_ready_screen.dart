@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../services/onboarding_service.dart';
+import '../services/profile_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'rules_screen.dart';
 
@@ -18,7 +19,10 @@ class OnboardingReadyScreen extends StatelessWidget {
   final String focus;
 
   Future<void> _start(BuildContext context) async {
-    await OnboardingService.markDone();
+    await Future.wait([
+      OnboardingService.markDone(),
+      ProfileService.save(name: name, birthday: birthday, email: email, focus: focus),
+    ]);
     if (!context.mounted) return;
     Navigator.of(context).pushAndRemoveUntil(
       _fadeRoute(const RulesScreen()),
