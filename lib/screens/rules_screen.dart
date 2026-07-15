@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../widgets/ll_widgets.dart';
 import 'wish_entry_screen.dart';
-import 'how_to_play_screen.dart';
+import 'how_it_works_screen.dart';
 import 'help_modal.dart';
 
 class RulesScreen extends StatefulWidget {
@@ -151,7 +151,7 @@ class _HomeTabState extends State<_HomeTab> {
                     Expanded(
                       child: _NavButton(
                         label: 'How It Works',
-                        onTap: () => Navigator.of(context).push(_fadeRoute(const HowToPlayScreen())),
+                        onTap: () => Navigator.of(context).push(_fadeRoute(const HowItWorksScreen())),
                       ),
                     ),
                     const SizedBox(width: 14),
