@@ -5,6 +5,7 @@ import 'wish_entry_screen.dart';
 import 'how_it_works_screen.dart';
 import 'help_modal.dart';
 import 'diary_tab.dart';
+import 'journal_tab.dart';
 import 'profile_screen.dart';
 import 'help_screen.dart';
 import 'about_screen.dart';
@@ -51,7 +52,7 @@ class _RulesScreenState extends State<RulesScreen> {
               index: _tabIndex,
               children: const [
                 _HomeTab(),
-                _PlaceholderTab(label: 'Journal'),
+                JournalTab(),
                 DiaryTab(),
               ],
             ),
@@ -191,7 +192,7 @@ class _HomeTabState extends State<_HomeTab> {
                 ),
               ),
               const SizedBox(height: 32),
-              const LLMarquee(text: 'lead life   lead life', uppercase: false),
+              const LLMarquee(text: 'leadlife   leadlife', uppercase: false),
               const Spacer(),
             ],
           ),
@@ -207,18 +208,6 @@ class _HomeTabState extends State<_HomeTab> {
       ],
     );
   }
-}
-
-class _PlaceholderTab extends StatelessWidget {
-  const _PlaceholderTab({required this.label});
-  final String label;
-
-  @override
-  Widget build(BuildContext context) => SafeArea(
-    child: Center(
-      child: LLSmallCaps(label, size: 12, color: llMuted, letterSpacing: 2.5),
-    ),
-  );
 }
 
 class _BottomBar extends StatelessWidget {

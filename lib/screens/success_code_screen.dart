@@ -5,6 +5,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import '../app_theme.dart';
 import '../models/field.dart';
+import '../services/game_history_service.dart';
 import '../services/progress_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'rules_screen.dart';
@@ -30,6 +31,16 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
 
   List<MapEntry<int, String>> get _entries =>
       widget.answers.entries.toList()..sort((a, b) => a.key.compareTo(b.key));
+
+  @override
+  void initState() {
+    super.initState();
+    GameHistoryService.markCompleted(
+      widget.wish,
+      completedFieldsCount: widget.answers.length,
+      successCode: GameHistoryService.buildSuccessCode(widget.answers.keys.toList()),
+    ).ignore();
+  }
 
   Future<void> _savePdf() async {
     setState(() => _generatingPdf = true);
@@ -83,7 +94,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
-                  pw.Text('LEAD LIFE', style: label(8, color: gold, letterSpacing: 3)),
+                  pw.Text('leadlife', style: label(8, color: gold, letterSpacing: 3)),
                   pw.Text('Your Journey Report', style: serifItalic(9, color: muted)),
                 ],
               ),
@@ -97,7 +108,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
           child: pw.Row(
             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
             children: [
-              pw.Text('Lead Life', style: serifItalic(8, color: muted)),
+              pw.Text('leadlife', style: serifItalic(8, color: muted)),
               pw.Text('${ctx.pageNumber} / ${ctx.pagesCount}', style: sans(8)),
             ],
           ),
@@ -215,7 +226,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                         const LLLogo(size: 56, color: llGold),
                         const SizedBox(height: 14),
                         Text(
-                          'LEAD LIFE',
+                          'leadlife',
                           style: llSerif(size: 13, color: llGold).copyWith(
                             letterSpacing: 4,
                             fontWeight: FontWeight.w600,

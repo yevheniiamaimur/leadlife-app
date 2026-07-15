@@ -7,7 +7,7 @@ class HelpScreen extends StatelessWidget {
 
   static const _items = [
     (
-      q: 'What is Lead Life?',
+      q: 'What is leadlife?',
       a: 'A guided journey built around one intention you set — helping you clarify what you want, shift your inner state, and find your direction.',
     ),
     (

@@ -31,7 +31,7 @@ class AppDrawer extends StatelessWidget {
             const SizedBox(height: 32),
             const LLLogo(size: 48, color: llGold),
             const SizedBox(height: 14),
-            Text('Lead Life', style: llSerif(size: 19, weight: FontWeight.w600)),
+            Text('leadlife', style: llSerif(size: 19, weight: FontWeight.w600)),
             const SizedBox(height: 24),
             const LLHairline(width: 44),
             const SizedBox(height: 8),

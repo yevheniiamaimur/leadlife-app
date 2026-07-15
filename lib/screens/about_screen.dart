@@ -23,7 +23,7 @@ class AboutScreen extends StatelessWidget {
                   const LLHairline(width: 48),
                   const SizedBox(height: 24),
                   Text(
-                    'Lead Life is built around 32 fields, arranged in one continuous path.',
+                    'leadlife is built around 32 fields, arranged in one continuous path.',
                     textAlign: TextAlign.center,
                     style: llSerifItalic(size: 15.5, height: 1.6),
                   ),

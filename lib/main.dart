@@ -34,7 +34,7 @@ class LeadLifeApp extends StatelessWidget {
             : const RulesScreen();
 
     return MaterialApp(
-      title: 'Lead Life',
+      title: 'leadlife',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: llGold, surface: llBg),

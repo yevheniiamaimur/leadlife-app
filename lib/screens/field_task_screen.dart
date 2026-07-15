@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../models/field.dart';
+import '../services/game_history_service.dart';
 import '../services/progress_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'answer_saved_screen.dart';
@@ -240,6 +241,7 @@ class _FieldTaskScreenState extends State<FieldTaskScreen> {
       completedFields: newCompleted,
       answers: newAnswers,
     ).ignore();
+    GameHistoryService.updateProgress(widget.wish, newCompleted.length).ignore();
 
     Navigator.of(context).push(_fadeRoute(AnswerSavedScreen(
       field: widget.field,

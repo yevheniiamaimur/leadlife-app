@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../services/game_history_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'help_modal.dart';
 import 'paywall_screen.dart';
@@ -115,8 +116,10 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
                         enabled: _canSubmit,
                         onTap: _canSubmit ? () {
                           FocusScope.of(context).unfocus();
+                          final wish = _ctrl.text.trim();
+                          GameHistoryService.recordStart(wish).ignore();
                           Navigator.of(context).push(_fadeRoute(
-                            PaywallScreen(wish: _ctrl.text.trim()),
+                            PaywallScreen(wish: wish),
                           ));
                         } : null,
                       ),
