@@ -37,6 +37,17 @@ class _DiceRollScreenState extends State<DiceRollScreen> with SingleTickerProvid
     super.dispose();
   }
 
+  static const _clues = {
+    1: (title: 'Yes', text: 'Your desire is ready. The path can begin.'),
+    2: (title: 'Connections', text: 'Who is connected to this desire? Trust your intuition. Is there a person, relationship, or collaboration that belongs here? Add what feels right.'),
+    3: (title: 'Clarity', text: "Make your desire more specific. Add details so it's clear exactly what you want."),
+    4: (title: 'Expansion', text: 'Think bigger. Expand your horizon. How could this desire become even more meaningful or inspiring?'),
+    5: (title: 'Freedom', text: 'Does your desire contain any hidden limitations? Rephrase it so it gives you freedom, possibilities, and strength instead of restrictions.'),
+    6: (title: 'Meaning', text: 'What makes this desire truly important to you? Add your personal values and deeper meaning.'),
+    7: (title: 'Feelings', text: 'How do you want to feel when this desire becomes reality? Add those emotions to your desire—they matter.'),
+    8: (title: 'Expression', text: 'Rewrite your desire. Choose words that feel lighter, clearer, and more natural. Sometimes a different wording changes everything.'),
+  };
+
   void _roll() {
     if (_rolling) return;
     HapticFeedback.lightImpact();
@@ -111,25 +122,42 @@ class _DiceRollScreenState extends State<DiceRollScreen> with SingleTickerProvid
                 ),
                 const SizedBox(height: 24),
                 // Result message
-                SizedBox(
-                  height: 70,
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 300),
+                  alignment: Alignment.topCenter,
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 300),
                     child: showResult ? Column(
                       key: ValueKey(_result),
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           '$_result',
                           style: llSerif(size: 44, color: isOne ? llGold : llInk, height: 1),
                         ),
-                        const SizedBox(height: 6),
-                        Text(
-                          isOne
-                            ? 'The path awakens. Your journey begins.'
-                            : 'Not yet · roll $_rollCount',
-                          style: isOne
-                            ? llSerif(size: 15, color: llGold)
-                            : llSerifItalic(size: 13, color: llMuted),
+                        const SizedBox(height: 14),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 28),
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+                            decoration: BoxDecoration(
+                              color: llCardBg,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: isOne ? llGold : llHair),
+                            ),
+                            child: Column(
+                              children: [
+                                LLSmallCaps(_clues[_result]!.title, size: 10, color: llGold),
+                                const SizedBox(height: 6),
+                                Text(
+                                  _clues[_result]!.text,
+                                  textAlign: TextAlign.center,
+                                  style: llSerifItalic(size: 14, color: llInk, height: 1.4),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ) : _rolling ? Text(
