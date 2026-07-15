@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../services/game_history_service.dart';
 import '../widgets/ll_widgets.dart';
+import 'dice_roll_screen.dart';
 import 'help_modal.dart';
-import 'paywall_screen.dart';
 
 class WishEntryScreen extends StatefulWidget {
   const WishEntryScreen({super.key, this.initialText});
@@ -119,7 +119,7 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
                           final wish = _ctrl.text.trim();
                           GameHistoryService.recordStart(wish).ignore();
                           Navigator.of(context).push(_fadeRoute(
-                            PaywallScreen(wish: wish),
+                            DiceRollScreen(wish: wish),
                           ));
                         } : null,
                       ),

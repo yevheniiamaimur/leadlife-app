@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../widgets/ll_widgets.dart';
-import 'dice_roll_screen.dart';
+import 'awakened_screen.dart';
 
 class PaywallTariff {
   const PaywallTariff({
     required this.title,
     required this.tagline,
     required this.price,
+    this.period,
     required this.features,
   });
   final String title;
   final String tagline;
   final String price;
+  // e.g. '/month' for recurring plans — null for one-time purchases.
+  final String? period;
   final List<String> features;
 }
 
@@ -31,6 +34,7 @@ const _leadLifePass = PaywallTariff(
   title: 'leadlife Pass',
   tagline: 'Go deeper anytime',
   price: '€14.90',
+  period: '/month',
   features: [
     'Unlimited journeys',
     'Full journey history',
@@ -131,7 +135,17 @@ class PaywallTariffCard extends StatelessWidget {
             const SizedBox(height: 4),
             Text(tariff.tagline, style: llSerifItalic(size: 13)),
             const SizedBox(height: 14),
-            Text(tariff.price, style: llUi(size: 22, weight: FontWeight.w600, color: llGold)),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                Text(tariff.price, style: llUi(size: 22, weight: FontWeight.w600, color: llGold)),
+                if (tariff.period != null) ...[
+                  const SizedBox(width: 3),
+                  Text(tariff.period!, style: llUi(size: 13, color: llMuted)),
+                ],
+              ],
+            ),
             const SizedBox(height: 14),
             for (final f in tariff.features.take(2)) ...[
               Padding(
@@ -184,7 +198,17 @@ class TariffDetailScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(tariff.tagline, style: llSerifItalic(size: 15, height: 1.4)),
                   const SizedBox(height: 20),
-                  Text(tariff.price, style: llUi(size: 32, weight: FontWeight.w600, color: llGold)),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(tariff.price, style: llUi(size: 32, weight: FontWeight.w600, color: llGold)),
+                      if (tariff.period != null) ...[
+                        const SizedBox(width: 4),
+                        Text(tariff.period!, style: llUi(size: 15, color: llMuted)),
+                      ],
+                    ],
+                  ),
                   const SizedBox(height: 28),
                   Expanded(
                     child: SingleChildScrollView(
@@ -212,7 +236,7 @@ class TariffDetailScreen extends StatelessWidget {
                   LLCTA(
                     label: 'Choose This Path',
                     onTap: () => Navigator.of(context).push(_fadeRoute(
-                      DiceRollScreen(wish: wish),
+                      AwakenedScreen(wish: wish),
                     )),
                   ),
                   const SizedBox(height: 40),

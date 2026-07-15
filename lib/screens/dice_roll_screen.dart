@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../app_theme.dart';
 import '../widgets/ll_widgets.dart';
-import 'awakened_screen.dart';
+import 'paywall_screen.dart';
 
 class DiceRollScreen extends StatefulWidget {
   const DiceRollScreen({super.key, required this.wish});
@@ -155,7 +155,7 @@ class _DiceRollScreenState extends State<DiceRollScreen> with SingleTickerProvid
                         LLCTA(
                           label: 'Enter the First Field  →',
                           onTap: () => Navigator.of(context).push(_fadeRoute(
-                            AwakenedScreen(wish: widget.wish),
+                            PaywallScreen(wish: widget.wish),
                           )),
                         ),
                       if (showResult && !isOne) ...[
