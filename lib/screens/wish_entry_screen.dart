@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../widgets/ll_widgets.dart';
-import 'dice_roll_screen.dart';
 import 'help_modal.dart';
+import 'paywall_screen.dart';
 
 class WishEntryScreen extends StatefulWidget {
   const WishEntryScreen({super.key});
@@ -115,7 +115,7 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
                         onTap: _canSubmit ? () {
                           FocusScope.of(context).unfocus();
                           Navigator.of(context).push(_fadeRoute(
-                            DiceRollScreen(wish: _ctrl.text.trim()),
+                            PaywallScreen(wish: _ctrl.text.trim()),
                           ));
                         } : null,
                       ),
