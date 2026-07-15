@@ -3,7 +3,7 @@ import 'package:leadlife_app/main.dart';
 
 void main() {
   testWidgets('App launches smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(const LeadLifeApp());
+    await tester.pumpWidget(const LeadLifeApp(onboardingDone: true));
     expect(find.text('I\'m Ready'), findsOneWidget);
   });
 }
