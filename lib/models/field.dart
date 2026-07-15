@@ -205,13 +205,13 @@ const List<GameField> kFields = [
   ),
   GameField(
     n: 31, name: 'Awakening', subtitle: 'Action', superpower: 'Action',
-    color: Color(0xFF3E1E5F),
+    color: Color(0xFFA71E2F),
     intro: 'You already know enough.\n\nThe question is no longer what you want. The question is whether you are ready to act.',
     task: 'What action can you no longer postpone?\n\nWhat action do you know you need to take?\n\nI am ready to take action and __________.\n\nI wake up and take action by __________.',
   ),
   GameField(
     n: 32, name: 'Wholeness', subtitle: 'Bravery', superpower: 'Bravery',
-    color: Color(0xFFA71E2F),
+    color: Color(0xFF3E1E5F),
     intro: 'Wholeness begins when you gather all parts of yourself.\n\nYou may still feel fear, but you are ready to take the next step.',
     task: 'What fears still stand between you and your next step?\n\nI acknowledge these fears, and I choose to move toward __________ anyway.',
   ),
