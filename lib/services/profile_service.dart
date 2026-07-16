@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'safe_write.dart';
 
 class ProfileService {
   static const _kName     = 'profileName';
@@ -6,12 +7,12 @@ class ProfileService {
   static const _kEmail    = 'profileEmail';
   static const _kFocus    = 'profileFocus';
 
-  static Future<void> save({
+  static Future<bool> save({
     required String name,
     required DateTime birthday,
     required String email,
     required String focus,
-  }) async {
+  }) => safeWrite('ProfileService.save', () async {
     final prefs = await SharedPreferences.getInstance();
     await Future.wait([
       prefs.setString(_kName, name),
@@ -19,7 +20,7 @@ class ProfileService {
       prefs.setString(_kEmail, email),
       prefs.setString(_kFocus, focus),
     ]);
-  }
+  });
 
   static Future<Profile?> load() async {
     final prefs = await SharedPreferences.getInstance();

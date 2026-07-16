@@ -35,10 +35,19 @@ class _DiaryTabState extends State<DiaryTab> {
   Future<void> _save() async {
     final text = _ctrl.text.trim();
     if (text.isEmpty) return;
-    await DiaryService.insert(DiaryEntry(date: DateTime.now(), text: text));
-    final entries = await DiaryService.load();
+    final saved = await DiaryService.insert(DiaryEntry(date: DateTime.now(), text: text));
     if (!mounted) return;
     FocusScope.of(context).unfocus();
+
+    if (!saved) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Couldn't save — check your device storage."),
+      ));
+      return;
+    }
+
+    final entries = await DiaryService.load();
+    if (!mounted) return;
     setState(() {
       _entries = entries;
       _ctrl.clear();

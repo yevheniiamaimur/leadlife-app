@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'safe_write.dart';
 
 class ProgressService {
   static const _kWish         = 'wish';
@@ -7,12 +8,12 @@ class ProgressService {
   static const _kCompleted    = 'completedFields';
   static const _kAnswers      = 'answers';
 
-  static Future<void> save({
+  static Future<bool> save({
     required String wish,
     required int currentFieldNum,
     required List<int> completedFields,
     required Map<int, String> answers,
-  }) async {
+  }) => safeWrite('ProgressService.save', () async {
     final prefs = await SharedPreferences.getInstance();
     await Future.wait([
       prefs.setString(_kWish, wish),
@@ -22,7 +23,7 @@ class ProgressService {
         answers.map((k, v) => MapEntry(k.toString(), v)),
       )),
     ]);
-  }
+  });
 
   static Future<SavedProgress?> load() async {
     final prefs = await SharedPreferences.getInstance();
@@ -49,7 +50,7 @@ class ProgressService {
     );
   }
 
-  static Future<void> clear() async {
+  static Future<bool> clear() => safeWrite('ProgressService.clear', () async {
     final prefs = await SharedPreferences.getInstance();
     await Future.wait([
       prefs.remove(_kWish),
@@ -57,7 +58,7 @@ class ProgressService {
       prefs.remove(_kCompleted),
       prefs.remove(_kAnswers),
     ]);
-  }
+  });
 }
 
 class SavedProgress {

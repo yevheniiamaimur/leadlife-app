@@ -1,5 +1,6 @@
 import '../models/diary_entry.dart';
 import 'app_database.dart';
+import 'safe_write.dart';
 
 class DiaryService {
   static Future<List<DiaryEntry>> load() async {
@@ -8,8 +9,8 @@ class DiaryService {
     return rows.map(DiaryEntry.fromMap).toList();
   }
 
-  static Future<void> insert(DiaryEntry entry) async {
+  static Future<bool> insert(DiaryEntry entry) => safeWrite('DiaryService.insert', () async {
     final db = await AppDatabase.instance.database;
     await db.insert('diary_entries', entry.toMap());
-  }
+  });
 }

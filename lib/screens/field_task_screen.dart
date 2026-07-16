@@ -227,7 +227,7 @@ class _FieldTaskScreenState extends State<FieldTaskScreen> {
     return widgets;
   }
 
-  void _save() {
+  Future<void> _save() async {
     FocusScope.of(context).unfocus();
     final openText = _ctrl.text.trim();
     final newAnswer = _taskParas.isEmpty ? openText : '$openText\n\n${_reconstructedTask()}';
@@ -235,13 +235,20 @@ class _FieldTaskScreenState extends State<FieldTaskScreen> {
     final newCompleted = List<int>.from(widget.completedFields);
     if (!newCompleted.contains(widget.field.n)) newCompleted.add(widget.field.n);
 
-    ProgressService.save(
+    final saved = await ProgressService.save(
       wish: widget.wish,
       currentFieldNum: widget.field.n,
       completedFields: newCompleted,
       answers: newAnswers,
-    ).ignore();
+    );
     GameHistoryService.updateProgress(widget.wish, newCompleted.length).ignore();
+
+    if (!mounted) return;
+    if (!saved) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Couldn't save your progress — check your device storage."),
+      ));
+    }
 
     Navigator.of(context).push(_fadeRoute(AnswerSavedScreen(
       field: widget.field,

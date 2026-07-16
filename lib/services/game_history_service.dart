@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import '../models/game_history_entry.dart';
 import 'app_database.dart';
+import 'safe_write.dart';
 
 class GameHistoryService {
   static const totalFields = 32;
@@ -13,7 +14,7 @@ class GameHistoryService {
 
   // Records the start of a new wish/journey — unless the most recent
   // entry is already an in-progress attempt at the same wish.
-  static Future<void> recordStart(String wish) async {
+  static Future<bool> recordStart(String wish) => safeWrite('GameHistoryService.recordStart', () async {
     final db = await AppDatabase.instance.database;
     final last = await db.query('game_history', orderBy: 'id DESC', limit: 1);
     if (last.isNotEmpty && last.first['completedAt'] == null && last.first['wish'] == wish) {
@@ -24,9 +25,10 @@ class GameHistoryService {
       startedAt: DateTime.now(),
       completedFieldsCount: 0,
     ).toMap());
-  }
+  });
 
-  static Future<void> updateProgress(String wish, int completedFieldsCount) async {
+  static Future<bool> updateProgress(String wish, int completedFieldsCount) =>
+      safeWrite('GameHistoryService.updateProgress', () async {
     final db = await AppDatabase.instance.database;
     final id = await _openEntryId(db, wish);
     if (id == null) return;
@@ -36,13 +38,13 @@ class GameHistoryService {
       where: 'id = ?',
       whereArgs: [id],
     );
-  }
+  });
 
-  static Future<void> markCompleted(
+  static Future<bool> markCompleted(
     String wish, {
     required int completedFieldsCount,
     required String successCode,
-  }) async {
+  }) => safeWrite('GameHistoryService.markCompleted', () async {
     final db = await AppDatabase.instance.database;
     final id = await _openEntryId(db, wish);
     final now = DateTime.now().toIso8601String();
@@ -66,7 +68,7 @@ class GameHistoryService {
         whereArgs: [id],
       );
     }
-  }
+  });
 
   // The most recent not-yet-completed entry for this wish, if any.
   static Future<int?> _openEntryId(Database db, String wish) async {
