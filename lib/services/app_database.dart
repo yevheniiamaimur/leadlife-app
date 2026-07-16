@@ -17,6 +17,14 @@ class AppDatabase {
 
   Future<Database> get database async => _db ??= await _open();
 
+  // Closes and forgets the cached connection — used by tests to get a
+  // fresh database between cases; not needed in normal app operation.
+  Future<void> close() async {
+    final db = _db;
+    _db = null;
+    await db?.close();
+  }
+
   Future<Database> _open() async {
     final path = join(await getDatabasesPath(), 'leadlife.db');
     return openDatabase(
