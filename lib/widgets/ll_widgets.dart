@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 
 // ── Brand typography helpers ─────────────────────────────────
 // Fonts are bundled as local assets (see pubspec.yaml) rather than fetched
@@ -220,7 +221,7 @@ class LLHelpBtn extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (showLabel) ...[
-            Text('See example', style: llUi(size: 12, color: llGold, letterSpacing: 0.5)),
+            Text(AppLocalizations.of(context).seeExample, style: llUi(size: 12, color: llGold, letterSpacing: 0.5)),
             const SizedBox(width: 6),
           ],
           Container(

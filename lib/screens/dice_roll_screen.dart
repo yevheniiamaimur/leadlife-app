@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../widgets/ll_widgets.dart';
 import 'paywall_screen.dart';
 
@@ -37,16 +38,19 @@ class _DiceRollScreenState extends State<DiceRollScreen> with SingleTickerProvid
     super.dispose();
   }
 
-  static const _clues = {
-    1: (title: 'Yes', text: 'Your desire is ready. The path can begin.'),
-    2: (title: 'Connections', text: 'Who is connected to this desire? Trust your intuition. Is there a person, relationship, or collaboration that belongs here? Add what feels right.'),
-    3: (title: 'Clarity', text: "Make your desire more specific. Add details so it's clear exactly what you want."),
-    4: (title: 'Expansion', text: 'Think bigger. Expand your horizon. How could this desire become even more meaningful or inspiring?'),
-    5: (title: 'Freedom', text: 'Does your desire contain any hidden limitations? Rephrase it so it gives you freedom, possibilities, and strength instead of restrictions.'),
-    6: (title: 'Meaning', text: 'What makes this desire truly important to you? Add your personal values and deeper meaning.'),
-    7: (title: 'Feelings', text: 'How do you want to feel when this desire becomes reality? Add those emotions to your desire—they matter.'),
-    8: (title: 'Expression', text: 'Rewrite your desire. Choose words that feel lighter, clearer, and more natural. Sometimes a different wording changes everything.'),
-  };
+  Map<int, ({String title, String text})> _clues(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return {
+      1: (title: l10n.diceClueYesTitle, text: l10n.diceClueYesText),
+      2: (title: l10n.diceClueConnectionsTitle, text: l10n.diceClueConnectionsText),
+      3: (title: l10n.diceClueClarityTitle, text: l10n.diceClueClarityText),
+      4: (title: l10n.diceClueExpansionTitle, text: l10n.diceClueExpansionText),
+      5: (title: l10n.diceClueFreedomTitle, text: l10n.diceClueFreedomText),
+      6: (title: l10n.diceClueMeaningTitle, text: l10n.diceClueMeaningText),
+      7: (title: l10n.diceClueFeelingsTitle, text: l10n.diceClueFeelingsText),
+      8: (title: l10n.diceClueExpressionTitle, text: l10n.diceClueExpressionText),
+    };
+  }
 
   void _roll() {
     if (_rolling) return;
@@ -64,6 +68,8 @@ class _DiceRollScreenState extends State<DiceRollScreen> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final clues = _clues(context);
     final isOne = _result == 1;
     final showResult = _result != null && !_rolling;
 
@@ -75,9 +81,9 @@ class _DiceRollScreenState extends State<DiceRollScreen> with SingleTickerProvid
             child: Column(
               children: [
                 const SizedBox(height: 28),
-                const LLSmallCaps('Step 2 of 3', color: llMuted),
+                LLSmallCaps(l10n.diceStepTwoOfThree, color: llMuted),
                 const SizedBox(height: 24),
-                Text('Awakening the Path', style: llSerif(size: 26, height: 1.15)),
+                Text(l10n.diceScreenTitle, style: llSerif(size: 26, height: 1.15)),
                 const SizedBox(height: 18),
                 // Wish echo
                 Padding(
@@ -91,7 +97,7 @@ class _DiceRollScreenState extends State<DiceRollScreen> with SingleTickerProvid
                     ),
                     child: Column(
                       children: [
-                        const LLSmallCaps('Your intention', size: 9, color: llGold),
+                        LLSmallCaps(l10n.diceYourIntentionLabel, size: 9, color: llGold),
                         const SizedBox(height: 4),
                         Text(
                           '"${widget.wish}"',
@@ -148,10 +154,10 @@ class _DiceRollScreenState extends State<DiceRollScreen> with SingleTickerProvid
                             ),
                             child: Column(
                               children: [
-                                LLSmallCaps(_clues[_result]!.title, size: 10, color: llGold),
+                                LLSmallCaps(clues[_result]!.title, size: 10, color: llGold),
                                 const SizedBox(height: 6),
                                 Text(
-                                  _clues[_result]!.text,
+                                  clues[_result]!.text,
                                   textAlign: TextAlign.center,
                                   style: llSerifItalic(size: 14, color: llInk, height: 1.4),
                                 ),
@@ -161,7 +167,7 @@ class _DiceRollScreenState extends State<DiceRollScreen> with SingleTickerProvid
                         ),
                       ],
                     ) : _rolling ? Text(
-                      'The universe listens…',
+                      l10n.diceUniverseListens,
                       style: llSerifItalic(size: 13, color: llMutedSoft),
                     ) : const SizedBox.shrink(),
                   ),
@@ -174,26 +180,26 @@ class _DiceRollScreenState extends State<DiceRollScreen> with SingleTickerProvid
                     children: [
                       if (!showResult)
                         LLCTA(
-                          label: _rolling ? 'Rolling…' : (_rollCount == 0 ? 'Roll' : 'Roll Again'),
+                          label: _rolling ? l10n.diceRollingLabel : (_rollCount == 0 ? l10n.diceRollLabel : l10n.diceRollAgainLabel),
                           enabled: !_rolling,
                           onTap: _roll,
                           variant: 'primary',
                         ),
                       if (showResult && isOne)
                         LLCTA(
-                          label: 'Enter the First Field  →',
+                          label: l10n.diceEnterFirstFieldCta,
                           onTap: () => Navigator.of(context).push(_fadeRoute(
                             PaywallScreen(wish: widget.wish),
                           )),
                         ),
                       if (showResult && !isOne) ...[
-                        LLCTA(label: 'Roll Again', onTap: _roll, variant: 'dark'),
+                        LLCTA(label: l10n.diceRollAgainLabel, onTap: _roll, variant: 'dark'),
                         const SizedBox(height: 10),
                         GestureDetector(
                           onTap: () => Navigator.of(context).maybePop(),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 6),
-                            child: Text('Refine my desire',
+                            child: Text(l10n.diceRefineMyDesire,
                               style: llUi(size: 13, color: llGold, letterSpacing: 0.3)),
                           ),
                         ),

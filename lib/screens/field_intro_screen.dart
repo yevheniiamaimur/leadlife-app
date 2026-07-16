@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../models/field.dart';
 import '../widgets/ll_widgets.dart';
 import 'field_task_screen.dart';
@@ -42,7 +43,7 @@ class FieldIntroScreen extends StatelessWidget {
                     border: Border.all(color: onBg.withAlpha(100), width: 1),
                   ),
                   child: Text(
-                    'FIELD ${field.paddedNumber}',
+                    AppLocalizations.of(context).fieldBadgeNumber(field.paddedNumber),
                     style: llUi(size: 10, color: onBg, letterSpacing: 2.0, weight: FontWeight.w600),
                   ),
                 ),
@@ -74,7 +75,7 @@ class FieldIntroScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: LLCTA(
-                    label: 'Receive My Task  →',
+                    label: AppLocalizations.of(context).receiveMyTaskCta,
                     variant: 'primary',
                     onTap: () => Navigator.of(context).push(_fadeRoute(FieldTaskScreen(
                       field: field,

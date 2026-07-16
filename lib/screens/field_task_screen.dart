@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../models/field.dart';
 import '../services/game_history_service.dart';
 import '../services/progress_service.dart';
@@ -81,7 +82,10 @@ class _FieldTaskScreenState extends State<FieldTaskScreen> {
                 child: Column(
                   children: [
                     LLSmallCaps(
-                      'FIELD ${widget.field.paddedNumber} · ${widget.field.name}',
+                      AppLocalizations.of(context).fieldNumberAndName(
+                        widget.field.paddedNumber,
+                        widget.field.name,
+                      ),
                       size: 10,
                       color: onBg,
                       letterSpacing: 2.5,
@@ -132,7 +136,7 @@ class _FieldTaskScreenState extends State<FieldTaskScreen> {
                             textAlignVertical: TextAlignVertical.top,
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: 'Your answer…',
+                              hintText: AppLocalizations.of(context).yourAnswerHint,
                               hintStyle: llUi(size: 16, color: llMutedSoft),
                             ),
                             style: llUi(size: 16, color: llInk, letterSpacing: 0),
@@ -144,7 +148,7 @@ class _FieldTaskScreenState extends State<FieldTaskScreen> {
                     ),
                     if (_taskParas.isNotEmpty) ...[
                       const SizedBox(height: 26),
-                      LLSmallCaps('Task', size: 10, color: onBg, letterSpacing: 2.5),
+                      LLSmallCaps(AppLocalizations.of(context).taskLabel, size: 10, color: onBg, letterSpacing: 2.5),
                       const SizedBox(height: 14),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -168,7 +172,7 @@ class _FieldTaskScreenState extends State<FieldTaskScreen> {
                       child: ValueListenableBuilder<TextEditingValue>(
                         valueListenable: _ctrl,
                         builder: (_, _, _) => LLCTA(
-                          label: 'Save My Answer',
+                          label: AppLocalizations.of(context).saveMyAnswerCta,
                           enabled: _canSave,
                           onTap: _canSave ? _save : null,
                         ),
@@ -245,8 +249,8 @@ class _FieldTaskScreenState extends State<FieldTaskScreen> {
 
     if (!mounted) return;
     if (!saved) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Couldn't save your progress — check your device storage."),
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(AppLocalizations.of(context).saveProgressError),
       ));
     }
 

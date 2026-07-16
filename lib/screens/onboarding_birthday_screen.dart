@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../widgets/ll_widgets.dart';
 import 'onboarding_contact_screen.dart';
 
@@ -51,17 +52,17 @@ class _OnboardingBirthdayScreenState extends State<OnboardingBirthdayScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 28),
-                Center(child: LLSmallCaps('Step 2 of 5', color: llGold)),
+                Center(child: LLSmallCaps(AppLocalizations.of(context).onboardingStepOfFive(2), color: llGold)),
                 const SizedBox(height: 28),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('When were you born, ${widget.name}?', style: llSerif(size: 26, height: 1.2)),
+                      Text(AppLocalizations.of(context).onboardingBirthdayQuestion(widget.name), style: llSerif(size: 26, height: 1.2)),
                       const SizedBox(height: 10),
                       Text(
-                        'This helps us shape your journey around you.',
+                        AppLocalizations.of(context).onboardingBirthdaySubtitle,
                         style: llSerifItalic(size: 14, height: 1.5),
                       ),
                     ],
@@ -80,7 +81,7 @@ class _OnboardingBirthdayScreenState extends State<OnboardingBirthdayScreen> {
                           Icon(Icons.calendar_today_rounded, size: 18, color: llGold),
                           const SizedBox(width: 12),
                           Text(
-                            birthday != null ? _format(birthday) : 'Select your birthday',
+                            birthday != null ? _format(birthday) : AppLocalizations.of(context).selectYourBirthday,
                             style: birthday != null
                                 ? llSerif(size: 17)
                                 : llSerifItalic(size: 17, color: llHair),
@@ -94,7 +95,7 @@ class _OnboardingBirthdayScreenState extends State<OnboardingBirthdayScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: LLCTA(
-                    label: 'Continue',
+                    label: AppLocalizations.of(context).continueButton,
                     enabled: birthday != null,
                     onTap: birthday != null
                         ? () => Navigator.of(context).push(_fadeRoute(

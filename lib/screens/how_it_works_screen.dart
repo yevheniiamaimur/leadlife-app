@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../widgets/ll_widgets.dart';
 import 'wish_entry_screen.dart';
 
@@ -45,6 +46,7 @@ class _HowItWorksScreenState extends State<HowItWorksScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: llBg,
       body: SafeArea(
@@ -53,7 +55,7 @@ class _HowItWorksScreenState extends State<HowItWorksScreen> {
             Column(
               children: [
                 const SizedBox(height: 28),
-                Center(child: LLSmallCaps('Step ${_page + 1} of $_totalSlides', color: llGold)),
+                Center(child: LLSmallCaps(l10n.howItWorksStepOfTotal(_page + 1, _totalSlides), color: llGold)),
                 const SizedBox(height: 12),
                 Expanded(
                   child: PageView(
@@ -73,7 +75,7 @@ class _HowItWorksScreenState extends State<HowItWorksScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: LLCTA(
-                    label: _page == _totalSlides - 1 ? 'Begin your journey' : 'Continue',
+                    label: _page == _totalSlides - 1 ? l10n.howItWorksBeginJourneyCta : l10n.howItWorksContinueCta,
                     onTap: _next,
                   ),
                 ),
@@ -157,122 +159,134 @@ Widget _lineGroup(List<String> lines) => Padding(
 class _Slide1 extends StatelessWidget {
   const _Slide1();
   @override
-  Widget build(BuildContext context) => _SlideBody(
-    title: 'What is the leadlife journey?',
-    children: [
-      _para(
-        'A guided journey designed to help you clarify what you truly want, '
-        'shift your inner state, and find your direction.',
-      ),
-    ],
-  );
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return _SlideBody(
+      title: l10n.howItWorksSlide1Title,
+      children: [
+        _para(l10n.howItWorksSlide1Para),
+      ],
+    );
+  }
 }
 
 // ── Slide 2 ───────────────────────────────────────────────────
 class _Slide2 extends StatelessWidget {
   const _Slide2();
   @override
-  Widget build(BuildContext context) => _SlideBody(
-    title: 'Start with one desire',
-    children: [
-      _lineGroup(['Write down what you want as if it is already true.', 'Focus on it.', 'Then roll the dice.']),
-      _para(
-        'In leadlife, your journey begins by clarifying the intention '
-        'you are ready to work with right now.',
-      ),
-    ],
-  );
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return _SlideBody(
+      title: l10n.howItWorksSlide2Title,
+      children: [
+        _lineGroup([l10n.howItWorksSlide2Line1, l10n.howItWorksSlide2Line2, l10n.howItWorksSlide2Line3]),
+        _para(l10n.howItWorksSlide2Para),
+      ],
+    );
+  }
 }
 
 // ── Slide 3 ───────────────────────────────────────────────────
 class _Slide3 extends StatelessWidget {
   const _Slide3();
   @override
-  Widget build(BuildContext context) => _SlideBody(
-    title: 'Let the dice guide you',
-    children: [
-      _lineGroup(['If you roll 1, your desire is ready.', 'Your journey begins.']),
-      _para(
-        'If another number appears, you’ll receive a clue to help you '
-        'clarify, rewrite, or reconsider your desire.',
-      ),
-      _para('You can refine it — or choose a completely different one.'),
-    ],
-  );
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return _SlideBody(
+      title: l10n.howItWorksSlide3Title,
+      children: [
+        _lineGroup([l10n.howItWorksSlide3Line1, l10n.howItWorksSlide3Line2]),
+        _para(l10n.howItWorksSlide3Para1),
+        _para(l10n.howItWorksSlide3Para2),
+      ],
+    );
+  }
 }
 
 // ── Slide 4 ───────────────────────────────────────────────────
 class _Slide4 extends StatelessWidget {
   const _Slide4();
   @override
-  Widget build(BuildContext context) => _SlideBody(
-    title: 'Then your journey begins',
-    children: [
-      _para('Choose how you want to interact with leadlife and start moving through your unique path.'),
-      _line('The system is built around 32 fields:'),
-      const SizedBox(height: 4),
-      _lineGroup(['10 levels of reality.', '22 life strategies.']),
-      _para('Your path through them is uniquely yours.'),
-    ],
-  );
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return _SlideBody(
+      title: l10n.howItWorksSlide4Title,
+      children: [
+        _para(l10n.howItWorksSlide4Para1),
+        _line(l10n.howItWorksSlide4Line),
+        const SizedBox(height: 4),
+        _lineGroup([l10n.howItWorksSlide4Line1, l10n.howItWorksSlide4Line2]),
+        _para(l10n.howItWorksSlide4Para2),
+      ],
+    );
+  }
 }
 
 // ── Slide 5 ───────────────────────────────────────────────────
 class _Slide5 extends StatelessWidget {
   const _Slide5();
   @override
-  Widget build(BuildContext context) => _SlideBody(
-    title: 'Move through your path',
-    children: [
-      _lineGroup(['Roll the dice.', 'Enter a field.', 'Answer one question or complete one simple task.']),
-      _para('Most interactions take less than a minute.'),
-      _para('Each field shifts your focus and helps you explore your desire from a different perspective.'),
-    ],
-  );
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return _SlideBody(
+      title: l10n.howItWorksSlide5Title,
+      children: [
+        _lineGroup([l10n.howItWorksSlide5Line1, l10n.howItWorksSlide5Line2, l10n.howItWorksSlide5Line3]),
+        _para(l10n.howItWorksSlide5Para1),
+        _para(l10n.howItWorksSlide5Para2),
+      ],
+    );
+  }
 }
 
 // ── Slide 6 ───────────────────────────────────────────────────
 class _Slide6 extends StatelessWidget {
   const _Slide6();
   @override
-  Widget build(BuildContext context) => _SlideBody(
-    title: '22 strategies. Different ways of moving.',
-    children: [
-      _para('You move through different life strategies — ways of thinking, choosing, feeling and acting.'),
-      _para('You don’t need to study the system. Just follow your path.'),
-      Text.rich(
-        textAlign: TextAlign.center,
-        TextSpan(
-          style: llSerifItalic(size: 15.5, height: 1.6),
-          children: [
-            const TextSpan(text: 'Want to understand the structure behind it? Explore '),
-            WidgetSpan(
-              alignment: PlaceholderAlignment.middle,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                child: Icon(Icons.menu_rounded, size: 17, color: llGold),
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return _SlideBody(
+      title: l10n.howItWorksSlide6Title,
+      children: [
+        _para(l10n.howItWorksSlide6Para1),
+        _para(l10n.howItWorksSlide6Para2),
+        Text.rich(
+          textAlign: TextAlign.center,
+          TextSpan(
+            style: llSerifItalic(size: 15.5, height: 1.6),
+            children: [
+              TextSpan(text: l10n.howItWorksSlide6RichTextBefore),
+              WidgetSpan(
+                alignment: PlaceholderAlignment.middle,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  child: Icon(Icons.menu_rounded, size: 17, color: llGold),
+                ),
               ),
-            ),
-            const TextSpan(text: ' About the system in the menu.'),
-          ],
+              TextSpan(text: l10n.howItWorksSlide6RichTextAfter),
+            ],
+          ),
         ),
-      ),
-    ],
-  );
+      ],
+    );
+  }
 }
 
 // ── Slide 7 ───────────────────────────────────────────────────
 class _Slide7 extends StatelessWidget {
   const _Slide7();
   @override
-  Widget build(BuildContext context) => _SlideBody(
-    title: 'Your success code',
-    children: [
-      _para('At the end of your journey, your answers come together.'),
-      _lineGroup(['Your decisions.', 'Your insights.', 'Your direction.']),
-      _para('leadlife turns them into your personal success code — a map back to your desire.'),
-      _para('Not a universal answer.'),
-      _para('Your path, built from your own answers.'),
-    ],
-  );
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return _SlideBody(
+      title: l10n.howItWorksSlide7Title,
+      children: [
+        _para(l10n.howItWorksSlide7Para1),
+        _lineGroup([l10n.howItWorksSlide7Line1, l10n.howItWorksSlide7Line2, l10n.howItWorksSlide7Line3]),
+        _para(l10n.howItWorksSlide7Para2),
+        _para(l10n.howItWorksSlide7Para3),
+        _para(l10n.howItWorksSlide7Para4),
+      ],
+    );
+  }
 }

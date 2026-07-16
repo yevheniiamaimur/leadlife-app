@@ -1,0 +1,941 @@
+{
+  "@@locale": "en",
+  "welcomeGreeting": "Welcome",
+  "@welcomeGreeting": {
+    "description": "Greeting at the top of the Home tab"
+  },
+  "whatsYourWish": "What's your wish?",
+  "@whatsYourWish": {
+    "description": "Heading on the Home tab's wish-preview card"
+  },
+  "presentPerfectPrompt": "Write in the present perfect tense — as if it has already come true.",
+  "@presentPerfectPrompt": {
+    "description": "Reminder on how to phrase a wish; shown on Home and the wish-entry screen"
+  },
+  "typeItHere": "Type it here…",
+  "@typeItHere": {
+    "description": "Placeholder-style hint on the Home tab's wish-preview card"
+  },
+  "howItWorks": "How It Works",
+  "@howItWorks": {
+    "description": "Nav button label and screen title for the How It Works explainer"
+  },
+  "buildSuccessCode": "Build Success Code",
+  "@buildSuccessCode": {
+    "description": "Nav button label leading into the wish/journey flow"
+  },
+  "navHome": "Home",
+  "@navHome": {
+    "description": "Bottom nav tab label and drawer menu item"
+  },
+  "navJournal": "Journal",
+  "@navJournal": {
+    "description": "Bottom nav tab label and drawer menu item"
+  },
+  "navDiary": "Diary",
+  "@navDiary": {
+    "description": "Bottom nav tab label"
+  },
+  "seeExample": "See example",
+  "@seeExample": {
+    "description": "Label next to the '?' help button"
+  },
+  "drawerHistory": "History",
+  "@drawerHistory": {
+    "description": "Drawer menu item — opens the Diary tab"
+  },
+  "drawerProfile": "Profile",
+  "@drawerProfile": {
+    "description": "Drawer menu item — opens the Profile screen"
+  },
+  "drawerHelp": "Help",
+  "@drawerHelp": {
+    "description": "Drawer menu item — opens the Help screen"
+  },
+  "drawerAbout": "About",
+  "@drawerAbout": {
+    "description": "Drawer menu item — opens the About screen"
+  },
+  "stepOneOfThreeIntention": "Step 1 of 3 · Your Intention",
+  "@stepOneOfThreeIntention": {
+    "description": "Step indicator on the wish-entry screen"
+  },
+  "whatDoYouDesire": "What do you desire?",
+  "@whatDoYouDesire": {
+    "description": "Heading on the wish-entry screen"
+  },
+  "wishFieldHint": "I have… / I am… / I experience…",
+  "@wishFieldHint": {
+    "description": "Placeholder text inside the wish text field"
+  },
+  "beSpecificHonestYou": "Be specific. Be honest. Be you.",
+  "@beSpecificHonestYou": {
+    "description": "Short encouragement below the wish text field"
+  },
+  "confirmMyDesire": "Confirm My Desire",
+  "@confirmMyDesire": {
+    "description": "CTA button confirming the wish and starting the journey"
+  },
+  "onboardingStepOfFive": "Step {step} of 5",
+  "@onboardingStepOfFive": {
+    "description": "Step indicator shown at the top of each of the 5 onboarding screens",
+    "placeholders": {
+      "step": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingNameGreeting": "Hello. I'm glad you're here.",
+  "@onboardingNameGreeting": {
+    "description": "Heading on the onboarding name screen"
+  },
+  "onboardingNamePrompt": "Before we begin, what should I call you?",
+  "@onboardingNamePrompt": {
+    "description": "Subheading on the onboarding name screen"
+  },
+  "yourNameHint": "Your name",
+  "@yourNameHint": {
+    "description": "Placeholder hint text in the name text field on the onboarding name screen"
+  },
+  "continueButton": "Continue",
+  "@continueButton": {
+    "description": "CTA button label to proceed to the next onboarding step; used on name, birthday, contact, and focus screens"
+  },
+  "onboardingBirthdayQuestion": "When were you born, {name}?",
+  "@onboardingBirthdayQuestion": {
+    "description": "Heading on the onboarding birthday screen, personalized with the user's name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingBirthdaySubtitle": "This helps us shape your journey around you.",
+  "@onboardingBirthdaySubtitle": {
+    "description": "Subheading on the onboarding birthday screen"
+  },
+  "selectYourBirthday": "Select your birthday",
+  "@selectYourBirthday": {
+    "description": "Placeholder text on the date-picker field before a birthday is chosen"
+  },
+  "onboardingContactHeading": "Stay connected.",
+  "@onboardingContactHeading": {
+    "description": "Heading on the onboarding contact (email) screen"
+  },
+  "onboardingContactSubtitle": "Where can we reach you with your journey?",
+  "@onboardingContactSubtitle": {
+    "description": "Subheading on the onboarding contact (email) screen"
+  },
+  "emailHint": "your@email.com",
+  "@emailHint": {
+    "description": "Placeholder hint text in the email text field on the onboarding contact screen"
+  },
+  "allowGentleReminders": "Allow gentle reminders to keep you on your path.",
+  "@allowGentleReminders": {
+    "description": "Copy next to the notification opt-in checkbox on the onboarding contact screen"
+  },
+  "onboardingFocusHeading": "What's most on your mind\nright now?",
+  "@onboardingFocusHeading": {
+    "description": "Heading on the onboarding focus-selection screen"
+  },
+  "onboardingFocusSubtitle": "Choose the areas calling for your attention.",
+  "@onboardingFocusSubtitle": {
+    "description": "Subheading on the onboarding focus-selection screen"
+  },
+  "focusRelationships": "Relationships",
+  "@focusRelationships": {
+    "description": "Selectable focus-area option on the onboarding focus screen"
+  },
+  "focusCareerPurpose": "Career & Purpose",
+  "@focusCareerPurpose": {
+    "description": "Selectable focus-area option on the onboarding focus screen"
+  },
+  "focusHealthEnergy": "Health & Energy",
+  "@focusHealthEnergy": {
+    "description": "Selectable focus-area option on the onboarding focus screen"
+  },
+  "focusMoneyAbundance": "Money & Abundance",
+  "@focusMoneyAbundance": {
+    "description": "Selectable focus-area option on the onboarding focus screen"
+  },
+  "focusInnerPeace": "Inner Peace",
+  "@focusInnerPeace": {
+    "description": "Selectable focus-area option on the onboarding focus screen"
+  },
+  "takeABreathIn": "Take a breath in.",
+  "@takeABreathIn": {
+    "description": "First line of copy on the final onboarding ready screen"
+  },
+  "andOut": "And out.",
+  "@andOut": {
+    "description": "Second line of copy on the final onboarding ready screen, paired with takeABreathIn"
+  },
+  "onboardingReadyMessage": "{name}, your path is about to begin.",
+  "@onboardingReadyMessage": {
+    "description": "Personalized closing message on the final onboarding ready screen",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "letsStart": "Let's Start",
+  "@letsStart": {
+    "description": "Final CTA button label that completes onboarding and enters the app"
+  },
+  "yourPathLabel": "Your Path",
+  "@yourPathLabel": {
+    "description": "Small-caps label above the field number on the game board header"
+  },
+  "fieldOfTotal": "Field {num} of {total}",
+  "@fieldOfTotal": {
+    "description": "Game board header showing the current field number out of the total field count",
+    "placeholders": {
+      "num": {
+        "type": "String"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "myAnswersLabel": "My Answers",
+  "@myAnswersLabel": {
+    "description": "Tap label on the game board header and heading of the answers bottom sheet"
+  },
+  "enterFieldCta": "Enter Field {num}  →",
+  "@enterFieldCta": {
+    "description": "CTA button on the game board that navigates into the current field",
+    "placeholders": {
+      "num": {
+        "type": "String"
+      }
+    }
+  },
+  "answersEmptyState": "Your answers will appear here.",
+  "@answersEmptyState": {
+    "description": "Empty-state message shown when no answers have been recorded yet, on the answers bottom sheet and the success code screen"
+  },
+  "fieldBadgeNumber": "FIELD {num}",
+  "@fieldBadgeNumber": {
+    "description": "Small badge on the field intro screen showing the field number",
+    "placeholders": {
+      "num": {
+        "type": "String"
+      }
+    }
+  },
+  "receiveMyTaskCta": "Receive My Task  →",
+  "@receiveMyTaskCta": {
+    "description": "CTA button on the field intro screen leading to the field task screen"
+  },
+  "fieldNumberAndName": "FIELD {num} · {name}",
+  "@fieldNumberAndName": {
+    "description": "Small-caps label on the field task screen showing the field number and name",
+    "placeholders": {
+      "num": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "yourAnswerHint": "Your answer…",
+  "@yourAnswerHint": {
+    "description": "Placeholder hint text inside the free-text answer field on the field task screen"
+  },
+  "taskLabel": "Task",
+  "@taskLabel": {
+    "description": "Small-caps section label above the fill-in-the-blank task on the field task screen"
+  },
+  "saveMyAnswerCta": "Save My Answer",
+  "@saveMyAnswerCta": {
+    "description": "CTA button that saves the user's answer on the field task screen"
+  },
+  "saveProgressError": "Couldn't save your progress — check your device storage.",
+  "@saveProgressError": {
+    "description": "SnackBar message shown when saving progress fails on the field task screen"
+  },
+  "answerReceivedHeading": "Your answer is received.",
+  "@answerReceivedHeading": {
+    "description": "Heading on the answer-saved confirmation screen"
+  },
+  "walkedThroughField": "You have walked through {fieldName}. The path continues.",
+  "@walkedThroughField": {
+    "description": "Rich text on the answer-saved screen confirming which field was completed; fieldName is rendered in a different color/style within the sentence",
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "rollForNextFieldCta": "Roll for the Next Field",
+  "@rollForNextFieldCta": {
+    "description": "CTA button on the answer-saved screen leading to the dice roll screen"
+  },
+  "finalTurnLabel": "The final turn",
+  "@finalTurnLabel": {
+    "description": "Small-caps status label on the mid-game dice screen when the player is on the final turn"
+  },
+  "pathContinuesLabel": "The path continues",
+  "@pathContinuesLabel": {
+    "description": "Small-caps status label on the mid-game dice screen when the journey is not yet on the final turn"
+  },
+  "yourDesireLabel": "Your desire",
+  "@yourDesireLabel": {
+    "description": "Small-caps label above the wish text on the mid-game dice screen"
+  },
+  "currentAreaOfActionColon": "Your current area of action:",
+  "@currentAreaOfActionColon": {
+    "description": "Instruction sentence shown on the mid-game dice screen after the final roll result appears"
+  },
+  "reachedFinalPathText": "You have reached the final path.",
+  "@reachedFinalPathText": {
+    "description": "Instruction sentence on the mid-game dice screen when a non-final roll overshoots the last field"
+  },
+  "youAreNowOnText": "You are now on",
+  "@youAreNowOnText": {
+    "description": "Instruction sentence on the mid-game dice screen introducing the newly landed field"
+  },
+  "finalTurnInstructions": "You have walked all 32 paths. One final turn — to know where you stand now.",
+  "@finalTurnInstructions": {
+    "description": "Instruction sentence on the mid-game dice screen before rolling the final dice"
+  },
+  "onFieldWhereWillPathLead": "You are on Field {num}. Where will the path lead?",
+  "@onFieldWhereWillPathLead": {
+    "description": "Instruction sentence on the mid-game dice screen before a non-final roll",
+    "placeholders": {
+      "num": {
+        "type": "String"
+      }
+    }
+  },
+  "fromThisPlaceLabel": "From this place",
+  "@fromThisPlaceLabel": {
+    "description": "Small-caps label above the result on the mid-game dice screen after the final roll"
+  },
+  "arrivingAtField": "Arriving · Field {num}",
+  "@arrivingAtField": {
+    "description": "Small-caps label above the result on the mid-game dice screen after a non-final roll",
+    "placeholders": {
+      "num": {
+        "type": "String"
+      }
+    }
+  },
+  "wheelTurnsOnceMore": "The wheel turns once more…",
+  "@wheelTurnsOnceMore": {
+    "description": "Text shown while the dice is rolling on the mid-game dice screen, final turn variant"
+  },
+  "pathTurnsEllipsis": "The path turns…",
+  "@pathTurnsEllipsis": {
+    "description": "Text shown while the dice is rolling on the mid-game dice screen, non-final variant"
+  },
+  "rollingEllipsis": "Rolling…",
+  "@rollingEllipsis": {
+    "description": "CTA button label while the dice is actively rolling on the mid-game dice screen"
+  },
+  "rollFinalDiceCta": "Roll the Final Dice",
+  "@rollFinalDiceCta": {
+    "description": "CTA button label to roll the dice on the final turn of the mid-game dice screen"
+  },
+  "rollDiceCta": "Roll the Dice",
+  "@rollDiceCta": {
+    "description": "CTA button label to roll the dice on a non-final turn of the mid-game dice screen"
+  },
+  "receiveSuccessCodeCta": "Receive My Success Code  →",
+  "@receiveSuccessCodeCta": {
+    "description": "CTA button on the mid-game dice screen after the final roll, leading to the success code screen"
+  },
+  "enterFieldNameCta": "Enter {name}  →",
+  "@enterFieldNameCta": {
+    "description": "CTA button on the mid-game dice screen after a non-final roll, leading into the newly landed field",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "journeyCompleteHeading": "Your Journey\nis Complete",
+  "@journeyCompleteHeading": {
+    "description": "Main heading on the success code screen"
+  },
+  "journeyCompleteSubtext": "You have walked all 32 paths.\nThis is your Success Code.",
+  "@journeyCompleteSubtext": {
+    "description": "Subheading on the success code screen"
+  },
+  "yourOriginalDesireLabel": "Your Original Desire",
+  "@yourOriginalDesireLabel": {
+    "description": "Small-caps label above the wish text on the success code screen"
+  },
+  "currentAreaOfActionLabel": "Your current area of action",
+  "@currentAreaOfActionLabel": {
+    "description": "Small-caps label above the current field name on the success code screen"
+  },
+  "whatYouHaveDiscoveredLabel": "What you have discovered",
+  "@whatYouHaveDiscoveredLabel": {
+    "description": "Section heading above the list of recorded answers on the success code screen"
+  },
+  "preparingPdfCta": "Preparing PDF…",
+  "@preparingPdfCta": {
+    "description": "CTA button label on the success code screen while the PDF is being generated"
+  },
+  "savePdfCta": "Save as PDF",
+  "@savePdfCta": {
+    "description": "CTA button label on the success code screen to export the journey as a PDF"
+  },
+  "startNewJourneyCta": "Start a New Journey",
+  "@startNewJourneyCta": {
+    "description": "CTA button label on the success code screen to reset progress and start over"
+  },
+  "goldenFishClosingLine": "The golden fish is already on its way.\nYour work is to believe — and to act.",
+  "@goldenFishClosingLine": {
+    "description": "Closing inspirational line on the success code screen"
+  },
+  "todaysIntentionHeading": "Today's Intention",
+  "@todaysIntentionHeading": {
+    "description": "Heading on the Diary tab"
+  },
+  "todaysIntentionSubtitle": "Your result follows your intention — write it down.",
+  "@todaysIntentionSubtitle": {
+    "description": "Subtitle on the Diary tab"
+  },
+  "diaryIntentionHint": "Write your intention for today…",
+  "@diaryIntentionHint": {
+    "description": "Hint text inside the Diary tab's text field"
+  },
+  "saveButton": "Save",
+  "@saveButton": {
+    "description": "Button label for saving a diary intention"
+  },
+  "checkButton": "Check",
+  "@checkButton": {
+    "description": "Button label for checking a diary intention against the wish path"
+  },
+  "diarySaveError": "Couldn't save — check your device storage.",
+  "@diarySaveError": {
+    "description": "SnackBar error shown when saving a diary entry fails"
+  },
+  "diaryEmptyState": "Your intentions will appear here.",
+  "@diaryEmptyState": {
+    "description": "Empty-state text on the Diary tab's history section"
+  },
+  "yourJourneysHeading": "Your Journeys",
+  "@yourJourneysHeading": {
+    "description": "Heading on the Journal tab"
+  },
+  "journeysSubtitle": "Every wish you have set, and how far it has carried you.",
+  "@journeysSubtitle": {
+    "description": "Subtitle on the Journal tab"
+  },
+  "journeysEmptyState": "Your journeys will appear here.",
+  "@journeysEmptyState": {
+    "description": "Empty-state text on the Journal tab"
+  },
+  "journeyCompletedOn": "Completed · {date}",
+  "@journeyCompletedOn": {
+    "description": "Small-caps status label on a journey history card, shown when the journey is complete",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "journeyInProgress": "In Progress",
+  "@journeyInProgress": {
+    "description": "Small-caps status label on a journey history card, shown when the journey is not yet complete"
+  },
+  "journeyFieldsProgress": "{count} / {total} fields",
+  "@journeyFieldsProgress": {
+    "description": "Progress label on a journey history card showing completed fields out of total fields",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "yourProfileFallback": "Your Profile",
+  "@yourProfileFallback": {
+    "description": "Fallback heading on the Profile screen when no name is available"
+  },
+  "profileNoDataMessage": "We don't have your details yet — they're captured during onboarding.",
+  "@profileNoDataMessage": {
+    "description": "Message shown on the Profile screen when no profile data has been captured"
+  },
+  "profileBirthdayLabel": "Birthday",
+  "@profileBirthdayLabel": {
+    "description": "Row label on the Profile screen for the birthday field"
+  },
+  "profileEmailLabel": "Email",
+  "@profileEmailLabel": {
+    "description": "Row label on the Profile screen for the email field"
+  },
+  "profileFocusLabel": "Focus",
+  "@profileFocusLabel": {
+    "description": "Row label on the Profile screen for the focus field"
+  },
+  "helpSubtitle": "Answers to the questions we hear most.",
+  "@helpSubtitle": {
+    "description": "Subtitle on the Help screen"
+  },
+  "helpFaqWhatIsLeadlifeQ": "What is leadlife?",
+  "@helpFaqWhatIsLeadlifeQ": {
+    "description": "FAQ question on the Help screen"
+  },
+  "helpFaqWhatIsLeadlifeA": "A guided journey built around one intention you set — helping you clarify what you want, shift your inner state, and find your direction.",
+  "@helpFaqWhatIsLeadlifeA": {
+    "description": "FAQ answer on the Help screen"
+  },
+  "helpFaqDiceQ": "How does the dice work?",
+  "@helpFaqDiceQ": {
+    "description": "FAQ question on the Help screen"
+  },
+  "helpFaqDiceA": "Roll to see if your intention is ready. If it is, your journey begins. If not, you receive a clue to refine it and try again.",
+  "@helpFaqDiceA": {
+    "description": "FAQ answer on the Help screen"
+  },
+  "helpFaqStuckFieldQ": "What if I get stuck on a field?",
+  "@helpFaqStuckFieldQ": {
+    "description": "FAQ question on the Help screen"
+  },
+  "helpFaqStuckFieldA": "Answer honestly, in a few words. There are no wrong answers — each field simply shifts your focus for a moment.",
+  "@helpFaqStuckFieldA": {
+    "description": "FAQ answer on the Help screen"
+  },
+  "helpFaqSavedIntentionsQ": "Where do my saved intentions go?",
+  "@helpFaqSavedIntentionsQ": {
+    "description": "FAQ question on the Help screen"
+  },
+  "helpFaqSavedIntentionsA": "Anything you save in the Diary tab stays in its history, right there on your device.",
+  "@helpFaqSavedIntentionsA": {
+    "description": "FAQ answer on the Help screen"
+  },
+  "helpFaqChangeIntentionQ": "Can I change my intention later?",
+  "@helpFaqChangeIntentionQ": {
+    "description": "FAQ question on the Help screen"
+  },
+  "helpFaqChangeIntentionA": "Yes — write a new one any time from the Diary tab and check it against your path.",
+  "@helpFaqChangeIntentionA": {
+    "description": "FAQ answer on the Help screen"
+  },
+  "aboutHeading": "About the System",
+  "@aboutHeading": {
+    "description": "Heading on the About screen"
+  },
+  "aboutIntro": "leadlife is built around 32 fields, arranged in one continuous path.",
+  "@aboutIntro": {
+    "description": "Intro paragraph on the About screen"
+  },
+  "tenLevelsHeading": "10 Levels of Reality",
+  "@tenLevelsHeading": {
+    "description": "Section heading on the About screen"
+  },
+  "tenLevelsBody": "The layers your intention moves through — from the concrete circumstances of your life to the deeper states behind them.",
+  "@tenLevelsBody": {
+    "description": "Section paragraph on the About screen, under '10 Levels of Reality'"
+  },
+  "lifeStrategiesHeading": "22 Life Strategies",
+  "@lifeStrategiesHeading": {
+    "description": "Section heading on the About screen"
+  },
+  "lifeStrategiesBody": "Different ways of thinking, choosing, feeling and acting. You don't need to study them — you simply move through the ones your path leads you to.",
+  "@lifeStrategiesBody": {
+    "description": "Section paragraph on the About screen, under '22 Life Strategies'"
+  },
+  "successCodeHeading": "Your Success Code",
+  "@successCodeHeading": {
+    "description": "Section heading on the About screen"
+  },
+  "successCodeBody": "At the end of the journey, your own decisions and insights are brought together into a personal code — not a universal answer, but a map back to your desire.",
+  "@successCodeBody": {
+    "description": "Section paragraph on the About screen, under 'Your Success Code'"
+  },
+  "helpModalExampleLabel": "An example",
+  "@helpModalExampleLabel": {
+    "description": "Small-caps label at the top of the help modal shown from the Home tab"
+  },
+  "helpModalNamingHeading": "How a desire is named",
+  "@helpModalNamingHeading": {
+    "description": "Heading inside the help modal shown from the Home tab"
+  },
+  "helpModalYesLabel": "YES — PRESENT PERFECT",
+  "@helpModalYesLabel": {
+    "description": "Label above the correctly-phrased example wish in the help modal"
+  },
+  "helpModalNoLabel": "NOT YET — FUTURE TENSE",
+  "@helpModalNoLabel": {
+    "description": "Label above the incorrectly-phrased example wish in the help modal"
+  },
+  "helpModalGoodExample": "\"I have built a life where my work and my truth are the same thing.\"",
+  "@helpModalGoodExample": {
+    "description": "Example of a correctly-phrased (present perfect) wish in the help modal"
+  },
+  "helpModalBadExample": "\"I want to build a life where…\"",
+  "@helpModalBadExample": {
+    "description": "Example of an incorrectly-phrased (future tense) wish in the help modal"
+  },
+  "helpModalClosingText": "Speak as if it has already come.\nThe path responds to certainty.",
+  "@helpModalClosingText": {
+    "description": "Closing two-line reminder text at the bottom of the help modal"
+  },
+  "helpModalUnderstandCta": "I Understand",
+  "@helpModalUnderstandCta": {
+    "description": "CTA button label to dismiss the help modal"
+  },
+  "diceStepTwoOfThree": "Step 2 of 3",
+  "@diceStepTwoOfThree": {
+    "description": "Step indicator on the dice roll screen"
+  },
+  "diceScreenTitle": "Awakening the Path",
+  "@diceScreenTitle": {
+    "description": "Heading on the dice roll screen"
+  },
+  "diceYourIntentionLabel": "Your intention",
+  "@diceYourIntentionLabel": {
+    "description": "Small-caps label above the echoed wish on the dice roll screen"
+  },
+  "diceClueYesTitle": "Yes",
+  "@diceClueYesTitle": {
+    "description": "Title of the dice clue shown when the player rolls 1"
+  },
+  "diceClueYesText": "Your desire is ready. The path can begin.",
+  "@diceClueYesText": {
+    "description": "Body text of the dice clue shown when the player rolls 1"
+  },
+  "diceClueConnectionsTitle": "Connections",
+  "@diceClueConnectionsTitle": {
+    "description": "Title of the dice clue shown when the player rolls 2"
+  },
+  "diceClueConnectionsText": "Who is connected to this desire? Trust your intuition. Is there a person, relationship, or collaboration that belongs here? Add what feels right.",
+  "@diceClueConnectionsText": {
+    "description": "Body text of the dice clue shown when the player rolls 2"
+  },
+  "diceClueClarityTitle": "Clarity",
+  "@diceClueClarityTitle": {
+    "description": "Title of the dice clue shown when the player rolls 3"
+  },
+  "diceClueClarityText": "Make your desire more specific. Add details so it's clear exactly what you want.",
+  "@diceClueClarityText": {
+    "description": "Body text of the dice clue shown when the player rolls 3"
+  },
+  "diceClueExpansionTitle": "Expansion",
+  "@diceClueExpansionTitle": {
+    "description": "Title of the dice clue shown when the player rolls 4"
+  },
+  "diceClueExpansionText": "Think bigger. Expand your horizon. How could this desire become even more meaningful or inspiring?",
+  "@diceClueExpansionText": {
+    "description": "Body text of the dice clue shown when the player rolls 4"
+  },
+  "diceClueFreedomTitle": "Freedom",
+  "@diceClueFreedomTitle": {
+    "description": "Title of the dice clue shown when the player rolls 5"
+  },
+  "diceClueFreedomText": "Does your desire contain any hidden limitations? Rephrase it so it gives you freedom, possibilities, and strength instead of restrictions.",
+  "@diceClueFreedomText": {
+    "description": "Body text of the dice clue shown when the player rolls 5"
+  },
+  "diceClueMeaningTitle": "Meaning",
+  "@diceClueMeaningTitle": {
+    "description": "Title of the dice clue shown when the player rolls 6"
+  },
+  "diceClueMeaningText": "What makes this desire truly important to you? Add your personal values and deeper meaning.",
+  "@diceClueMeaningText": {
+    "description": "Body text of the dice clue shown when the player rolls 6"
+  },
+  "diceClueFeelingsTitle": "Feelings",
+  "@diceClueFeelingsTitle": {
+    "description": "Title of the dice clue shown when the player rolls 7"
+  },
+  "diceClueFeelingsText": "How do you want to feel when this desire becomes reality? Add those emotions to your desire—they matter.",
+  "@diceClueFeelingsText": {
+    "description": "Body text of the dice clue shown when the player rolls 7"
+  },
+  "diceClueExpressionTitle": "Expression",
+  "@diceClueExpressionTitle": {
+    "description": "Title of the dice clue shown when the player rolls 8"
+  },
+  "diceClueExpressionText": "Rewrite your desire. Choose words that feel lighter, clearer, and more natural. Sometimes a different wording changes everything.",
+  "@diceClueExpressionText": {
+    "description": "Body text of the dice clue shown when the player rolls 8"
+  },
+  "diceUniverseListens": "The universe listens…",
+  "@diceUniverseListens": {
+    "description": "Message shown on the dice roll screen while the dice is rolling"
+  },
+  "diceRollingLabel": "Rolling…",
+  "@diceRollingLabel": {
+    "description": "CTA button label while the dice animation is in progress on the dice roll screen"
+  },
+  "diceRollLabel": "Roll",
+  "@diceRollLabel": {
+    "description": "CTA button label for the first dice roll"
+  },
+  "diceRollAgainLabel": "Roll Again",
+  "@diceRollAgainLabel": {
+    "description": "CTA button label to roll the dice again, used both for a non-1 result and as the primary CTA on subsequent rolls"
+  },
+  "diceEnterFirstFieldCta": "Enter the First Field  →",
+  "@diceEnterFirstFieldCta": {
+    "description": "CTA button label shown after rolling a 1, leading to the paywall screen"
+  },
+  "diceRefineMyDesire": "Refine my desire",
+  "@diceRefineMyDesire": {
+    "description": "Link/button text letting the player go back and edit their wish after a non-1 dice roll"
+  },
+  "paywallHeadlineLine1": "Your desire said yes.",
+  "@paywallHeadlineLine1": {
+    "description": "First line of the headline on the paywall screen"
+  },
+  "paywallHeadlineLine2": "Your path is ready.",
+  "@paywallHeadlineLine2": {
+    "description": "Second line of the headline on the paywall screen"
+  },
+  "paywallSubheading": "Choose how deep you want to go.",
+  "@paywallSubheading": {
+    "description": "Subheading below the headline on the paywall screen"
+  },
+  "paywallSeeDetails": "See details",
+  "@paywallSeeDetails": {
+    "description": "Link at the bottom of a tariff card on the paywall screen"
+  },
+  "paywallChooseThisPathCta": "Choose This Path",
+  "@paywallChooseThisPathCta": {
+    "description": "CTA button on the tariff detail screen to select the plan"
+  },
+  "paywallTariffOneJourneyTitle": "One Journey",
+  "@paywallTariffOneJourneyTitle": {
+    "description": "Title of the one-time-purchase tariff on the paywall screen"
+  },
+  "paywallTariffOneJourneyTagline": "One Desire, One Direction",
+  "@paywallTariffOneJourneyTagline": {
+    "description": "Tagline of the one-time-purchase tariff on the paywall screen"
+  },
+  "paywallFeatureQuestionnairesToEndPractices": "Questionnaires to end practices",
+  "@paywallFeatureQuestionnairesToEndPractices": {
+    "description": "Feature bullet for the One Journey tariff"
+  },
+  "paywallFeatureFinalDirection": "Final direction",
+  "@paywallFeatureFinalDirection": {
+    "description": "Feature bullet for the One Journey tariff"
+  },
+  "paywallFeaturePersonalJournal": "Personal journal",
+  "@paywallFeaturePersonalJournal": {
+    "description": "Feature bullet shared by both paywall tariffs"
+  },
+  "paywallTariffLeadlifePassTitle": "leadlife Pass",
+  "@paywallTariffLeadlifePassTitle": {
+    "description": "Title of the subscription tariff on the paywall screen"
+  },
+  "paywallTariffLeadlifePassTagline": "Go deeper anytime",
+  "@paywallTariffLeadlifePassTagline": {
+    "description": "Tagline of the subscription tariff on the paywall screen"
+  },
+  "paywallFeatureUnlimitedJourneys": "Unlimited journeys",
+  "@paywallFeatureUnlimitedJourneys": {
+    "description": "Feature bullet for the leadlife Pass tariff"
+  },
+  "paywallFeatureFullJourneyHistory": "Full journey history",
+  "@paywallFeatureFullJourneyHistory": {
+    "description": "Feature bullet for the leadlife Pass tariff"
+  },
+  "paywallFeatureNewPractices": "New practices",
+  "@paywallFeatureNewPractices": {
+    "description": "Feature bullet for the leadlife Pass tariff"
+  },
+  "awakenedStepThreeOfThree": "Step 3 of 3",
+  "@awakenedStepThreeOfThree": {
+    "description": "Step indicator on the awakened screen"
+  },
+  "awakenedFieldOneAwaits": "Field 01 awaits",
+  "@awakenedFieldOneAwaits": {
+    "description": "Small-caps label on the awakened screen"
+  },
+  "awakenedJourneyBegunTitle": "Your journey\nhas begun.",
+  "@awakenedJourneyBegunTitle": {
+    "description": "Main heading on the awakened screen"
+  },
+  "awakenedPathRespondBody": "The path will respond to your intention.\nWalk it with patience.",
+  "@awakenedPathRespondBody": {
+    "description": "Body text on the awakened screen"
+  },
+  "awakenedHeldInLight": "Held in light",
+  "@awakenedHeldInLight": {
+    "description": "Small-caps label above the echoed wish on the awakened screen"
+  },
+  "awakenedEnterFieldOneCta": "Enter Field 01  →",
+  "@awakenedEnterFieldOneCta": {
+    "description": "CTA button on the awakened screen leading into the game board"
+  },
+  "howItWorksStepOfTotal": "Step {step} of {total}",
+  "@howItWorksStepOfTotal": {
+    "description": "Step indicator on the How It Works onboarding slides",
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "howItWorksBeginJourneyCta": "Begin your journey",
+  "@howItWorksBeginJourneyCta": {
+    "description": "CTA button label on the final How It Works slide"
+  },
+  "howItWorksContinueCta": "Continue",
+  "@howItWorksContinueCta": {
+    "description": "CTA button label on non-final How It Works slides"
+  },
+  "howItWorksSlide1Title": "What is the leadlife journey?",
+  "@howItWorksSlide1Title": {
+    "description": "Title of slide 1 of the How It Works onboarding"
+  },
+  "howItWorksSlide1Para": "A guided journey designed to help you clarify what you truly want, shift your inner state, and find your direction.",
+  "@howItWorksSlide1Para": {
+    "description": "Paragraph on slide 1 of the How It Works onboarding"
+  },
+  "howItWorksSlide2Title": "Start with one desire",
+  "@howItWorksSlide2Title": {
+    "description": "Title of slide 2 of the How It Works onboarding"
+  },
+  "howItWorksSlide2Line1": "Write down what you want as if it is already true.",
+  "@howItWorksSlide2Line1": {
+    "description": "First short line on slide 2 of the How It Works onboarding"
+  },
+  "howItWorksSlide2Line2": "Focus on it.",
+  "@howItWorksSlide2Line2": {
+    "description": "Second short line on slide 2 of the How It Works onboarding"
+  },
+  "howItWorksSlide2Line3": "Then roll the dice.",
+  "@howItWorksSlide2Line3": {
+    "description": "Third short line on slide 2 of the How It Works onboarding"
+  },
+  "howItWorksSlide2Para": "In leadlife, your journey begins by clarifying the intention you are ready to work with right now.",
+  "@howItWorksSlide2Para": {
+    "description": "Paragraph on slide 2 of the How It Works onboarding"
+  },
+  "howItWorksSlide3Title": "Let the dice guide you",
+  "@howItWorksSlide3Title": {
+    "description": "Title of slide 3 of the How It Works onboarding"
+  },
+  "howItWorksSlide3Line1": "If you roll 1, your desire is ready.",
+  "@howItWorksSlide3Line1": {
+    "description": "First short line on slide 3 of the How It Works onboarding"
+  },
+  "howItWorksSlide3Line2": "Your journey begins.",
+  "@howItWorksSlide3Line2": {
+    "description": "Second short line on slide 3 of the How It Works onboarding"
+  },
+  "howItWorksSlide3Para1": "If another number appears, you'll receive a clue to help you clarify, rewrite, or reconsider your desire.",
+  "@howItWorksSlide3Para1": {
+    "description": "First paragraph on slide 3 of the How It Works onboarding"
+  },
+  "howItWorksSlide3Para2": "You can refine it — or choose a completely different one.",
+  "@howItWorksSlide3Para2": {
+    "description": "Second paragraph on slide 3 of the How It Works onboarding"
+  },
+  "howItWorksSlide4Title": "Then your journey begins",
+  "@howItWorksSlide4Title": {
+    "description": "Title of slide 4 of the How It Works onboarding"
+  },
+  "howItWorksSlide4Para1": "Choose how you want to interact with leadlife and start moving through your unique path.",
+  "@howItWorksSlide4Para1": {
+    "description": "First paragraph on slide 4 of the How It Works onboarding"
+  },
+  "howItWorksSlide4Line": "The system is built around 32 fields:",
+  "@howItWorksSlide4Line": {
+    "description": "Short line introducing the field breakdown on slide 4 of the How It Works onboarding"
+  },
+  "howItWorksSlide4Line1": "10 levels of reality.",
+  "@howItWorksSlide4Line1": {
+    "description": "First short line of the field breakdown on slide 4 of the How It Works onboarding"
+  },
+  "howItWorksSlide4Line2": "22 life strategies.",
+  "@howItWorksSlide4Line2": {
+    "description": "Second short line of the field breakdown on slide 4 of the How It Works onboarding"
+  },
+  "howItWorksSlide4Para2": "Your path through them is uniquely yours.",
+  "@howItWorksSlide4Para2": {
+    "description": "Second paragraph on slide 4 of the How It Works onboarding"
+  },
+  "howItWorksSlide5Title": "Move through your path",
+  "@howItWorksSlide5Title": {
+    "description": "Title of slide 5 of the How It Works onboarding"
+  },
+  "howItWorksSlide5Line1": "Roll the dice.",
+  "@howItWorksSlide5Line1": {
+    "description": "First short line on slide 5 of the How It Works onboarding"
+  },
+  "howItWorksSlide5Line2": "Enter a field.",
+  "@howItWorksSlide5Line2": {
+    "description": "Second short line on slide 5 of the How It Works onboarding"
+  },
+  "howItWorksSlide5Line3": "Answer one question or complete one simple task.",
+  "@howItWorksSlide5Line3": {
+    "description": "Third short line on slide 5 of the How It Works onboarding"
+  },
+  "howItWorksSlide5Para1": "Most interactions take less than a minute.",
+  "@howItWorksSlide5Para1": {
+    "description": "First paragraph on slide 5 of the How It Works onboarding"
+  },
+  "howItWorksSlide5Para2": "Each field shifts your focus and helps you explore your desire from a different perspective.",
+  "@howItWorksSlide5Para2": {
+    "description": "Second paragraph on slide 5 of the How It Works onboarding"
+  },
+  "howItWorksSlide6Title": "22 strategies. Different ways of moving.",
+  "@howItWorksSlide6Title": {
+    "description": "Title of slide 6 of the How It Works onboarding"
+  },
+  "howItWorksSlide6Para1": "You move through different life strategies — ways of thinking, choosing, feeling and acting.",
+  "@howItWorksSlide6Para1": {
+    "description": "First paragraph on slide 6 of the How It Works onboarding"
+  },
+  "howItWorksSlide6Para2": "You don't need to study the system. Just follow your path.",
+  "@howItWorksSlide6Para2": {
+    "description": "Second paragraph on slide 6 of the How It Works onboarding"
+  },
+  "howItWorksSlide6RichTextBefore": "Want to understand the structure behind it? Explore ",
+  "@howItWorksSlide6RichTextBefore": {
+    "description": "Text before the menu icon in the rich-text sentence on slide 6 of the How It Works onboarding"
+  },
+  "howItWorksSlide6RichTextAfter": " About the system in the menu.",
+  "@howItWorksSlide6RichTextAfter": {
+    "description": "Text after the menu icon in the rich-text sentence on slide 6 of the How It Works onboarding"
+  },
+  "howItWorksSlide7Title": "Your success code",
+  "@howItWorksSlide7Title": {
+    "description": "Title of slide 7 of the How It Works onboarding"
+  },
+  "howItWorksSlide7Para1": "At the end of your journey, your answers come together.",
+  "@howItWorksSlide7Para1": {
+    "description": "First paragraph on slide 7 of the How It Works onboarding"
+  },
+  "howItWorksSlide7Line1": "Your decisions.",
+  "@howItWorksSlide7Line1": {
+    "description": "First short line on slide 7 of the How It Works onboarding"
+  },
+  "howItWorksSlide7Line2": "Your insights.",
+  "@howItWorksSlide7Line2": {
+    "description": "Second short line on slide 7 of the How It Works onboarding"
+  },
+  "howItWorksSlide7Line3": "Your direction.",
+  "@howItWorksSlide7Line3": {
+    "description": "Third short line on slide 7 of the How It Works onboarding"
+  },
+  "howItWorksSlide7Para2": "leadlife turns them into your personal success code — a map back to your desire.",
+  "@howItWorksSlide7Para2": {
+    "description": "Second paragraph on slide 7 of the How It Works onboarding"
+  },
+  "howItWorksSlide7Para3": "Not a universal answer.",
+  "@howItWorksSlide7Para3": {
+    "description": "Third paragraph on slide 7 of the How It Works onboarding"
+  },
+  "howItWorksSlide7Para4": "Your path, built from your own answers.",
+  "@howItWorksSlide7Para4": {
+    "description": "Fourth paragraph on slide 7 of the How It Works onboarding"
+  }
+}

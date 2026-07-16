@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../models/field.dart';
 import '../widgets/ll_widgets.dart';
 import 'field_intro_screen.dart';
@@ -87,10 +88,13 @@ class _GameBoardScreenState extends State<GameBoardScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const LLSmallCaps('Your Path', size: 10),
+                            LLSmallCaps(AppLocalizations.of(context).yourPathLabel, size: 10),
                             const SizedBox(height: 4),
                             Text(
-                              'Field ${widget.currentFieldNum.toString().padLeft(2, '0')} of ${kFields.length}',
+                              AppLocalizations.of(context).fieldOfTotal(
+                                widget.currentFieldNum.toString().padLeft(2, '0'),
+                                kFields.length,
+                              ),
                               style: llSerif(size: 22, height: 1.1),
                             ),
                           ],
@@ -100,7 +104,7 @@ class _GameBoardScreenState extends State<GameBoardScreen> {
                         padding: const EdgeInsets.only(top: 18),
                         child: GestureDetector(
                           onTap: () => _showAnswers(context),
-                          child: Text('My Answers',
+                          child: Text(AppLocalizations.of(context).myAnswersLabel,
                             style: llUi(size: 12, color: llMuted, letterSpacing: 0.3)),
                         ),
                       ),
@@ -218,7 +222,9 @@ class _GameBoardScreenState extends State<GameBoardScreen> {
             child: SafeArea(
               top: false,
               child: LLCTA(
-                label: 'Enter Field ${widget.currentFieldNum.toString().padLeft(2, '0')}  →',
+                label: AppLocalizations.of(context).enterFieldCta(
+                  widget.currentFieldNum.toString().padLeft(2, '0'),
+                ),
                 onTap: () => _goToField(context, currentField),
               ),
             ),
@@ -263,12 +269,12 @@ class _AnswersSheet extends StatelessWidget {
         children: [
           Container(width: 40, height: 4, decoration: BoxDecoration(color: llHair, borderRadius: BorderRadius.circular(2))),
           const SizedBox(height: 16),
-          const LLSmallCaps('My Answers'),
+          LLSmallCaps(AppLocalizations.of(context).myAnswersLabel),
           const SizedBox(height: 16),
           if (entries.isEmpty)
             Padding(
               padding: const EdgeInsets.all(24),
-              child: Text('Your answers will appear here.', style: llSerifItalic(size: 14, color: llMutedSoft)),
+              child: Text(AppLocalizations.of(context).answersEmptyState, style: llSerifItalic(size: 14, color: llMutedSoft)),
             )
           else
             Expanded(

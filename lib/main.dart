@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app_theme.dart';
+import 'l10n/app_localizations.dart';
 import 'screens/mid_dice_screen.dart';
 import 'screens/onboarding_name_screen.dart';
 import 'screens/rules_screen.dart';
@@ -43,6 +44,8 @@ class LeadLifeApp extends StatelessWidget {
     return MaterialApp(
       title: 'leadlife',
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: llGold, surface: llBg),
         scaffoldBackgroundColor: llBg,

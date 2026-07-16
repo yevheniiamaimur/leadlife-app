@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../services/game_history_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'dice_roll_screen.dart';
@@ -41,7 +42,7 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
                   // Step label
                   Center(
                     child: LLSmallCaps(
-                      'Step 1 of 3 · Your Intention',
+                      AppLocalizations.of(context).stepOneOfThreeIntention,
                       color: llGold,
                     ),
                   ),
@@ -52,11 +53,11 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('What do you desire?',
+                        Text(AppLocalizations.of(context).whatDoYouDesire,
                           style: llSerif(size: 30, height: 1.1)),
                         const SizedBox(height: 10),
                         Text(
-                          'Write in the present perfect tense — as if it has already come true.',
+                          AppLocalizations.of(context).presentPerfectPrompt,
                           style: llSerifItalic(size: 14, height: 1.5),
                         ),
                       ],
@@ -86,7 +87,7 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
                             textAlignVertical: TextAlignVertical.top,
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: 'I have… / I am… / I experience…',
+                              hintText: AppLocalizations.of(context).wishFieldHint,
                               hintStyle: llSerifItalic(size: 17, color: llHair, height: 2.0),
                             ),
                             style: llSerif(size: 17, height: 2.0),
@@ -101,7 +102,7 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32),
                     child: Text(
-                      'Be specific. Be honest. Be you.',
+                      AppLocalizations.of(context).beSpecificHonestYou,
                       textAlign: TextAlign.center,
                       style: llUi(size: 12, color: llMutedSoft, letterSpacing: 0.3),
                     ),
@@ -112,7 +113,7 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
                     child: ValueListenableBuilder<TextEditingValue>(
                       valueListenable: _ctrl,
                       builder: (_, _, _) => LLCTA(
-                        label: 'Confirm My Desire',
+                        label: AppLocalizations.of(context).confirmMyDesire,
                         enabled: _canSubmit,
                         onTap: _canSubmit ? () {
                           FocusScope.of(context).unfocus();

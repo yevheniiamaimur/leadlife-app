@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../models/diary_entry.dart';
 import '../services/diary_service.dart';
 import '../widgets/ll_widgets.dart';
@@ -40,8 +41,8 @@ class _DiaryTabState extends State<DiaryTab> {
     FocusScope.of(context).unfocus();
 
     if (!saved) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Couldn't save — check your device storage."),
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(AppLocalizations.of(context).diarySaveError),
       ));
       return;
     }
@@ -76,13 +77,13 @@ class _DiaryTabState extends State<DiaryTab> {
         child: Column(
           children: [
             Text(
-              "Today's Intention",
+              AppLocalizations.of(context).todaysIntentionHeading,
               textAlign: TextAlign.center,
               style: llSerif(size: 26, weight: FontWeight.w600),
             ),
             const SizedBox(height: 10),
             Text(
-              'Your result follows your intention — write it down.',
+              AppLocalizations.of(context).todaysIntentionSubtitle,
               textAlign: TextAlign.center,
               style: llSerifItalic(size: 14, height: 1.5),
             ),
@@ -98,7 +99,7 @@ class _DiaryTabState extends State<DiaryTab> {
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: 'Write your intention for today…',
+                  hintText: AppLocalizations.of(context).diaryIntentionHint,
                   hintStyle: llSerifItalic(size: 15, color: llMutedSoft, height: 1.4),
                 ),
                 style: llSerif(size: 16, height: 1.4),
@@ -108,19 +109,19 @@ class _DiaryTabState extends State<DiaryTab> {
             const SizedBox(height: 20),
             Row(
               children: [
-                Expanded(child: LLCTA(label: 'Save', onTap: _save)),
+                Expanded(child: LLCTA(label: AppLocalizations.of(context).saveButton, onTap: _save)),
                 const SizedBox(width: 12),
-                Expanded(child: LLCTA(label: 'Check', variant: 'outline', onTap: _check)),
+                Expanded(child: LLCTA(label: AppLocalizations.of(context).checkButton, variant: 'outline', onTap: _check)),
               ],
             ),
             const SizedBox(height: 36),
             const LLHairline(width: 48),
             const SizedBox(height: 18),
-            const LLSmallCaps('History', color: llGold),
+            LLSmallCaps(AppLocalizations.of(context).drawerHistory, color: llGold),
             const SizedBox(height: 18),
             if (_entries.isEmpty)
               Text(
-                'Your intentions will appear here.',
+                AppLocalizations.of(context).diaryEmptyState,
                 textAlign: TextAlign.center,
                 style: llSerifItalic(size: 14, color: llMutedSoft),
               )

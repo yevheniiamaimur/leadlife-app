@@ -5,6 +5,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../models/field.dart';
 import '../services/game_history_service.dart';
 import '../services/progress_service.dart';
@@ -238,13 +239,13 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                         ),
                         const SizedBox(height: 28),
                         Text(
-                          'Your Journey\nis Complete',
+                          AppLocalizations.of(context).journeyCompleteHeading,
                           textAlign: TextAlign.center,
                           style: llSerif(size: 28, height: 1.15),
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          'You have walked all 32 paths.\nThis is your Success Code.',
+                          AppLocalizations.of(context).journeyCompleteSubtext,
                           textAlign: TextAlign.center,
                           style: llSerifItalic(size: 14, color: llMuted, height: 1.6),
                         ),
@@ -262,7 +263,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                           ),
                           child: Column(
                             children: [
-                              const LLSmallCaps('Your Original Desire'),
+                              LLSmallCaps(AppLocalizations.of(context).yourOriginalDesireLabel),
                               const SizedBox(height: 8),
                               Text(
                                 '"${widget.wish}"',
@@ -275,7 +276,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                         const SizedBox(height: 22),
                         Column(
                           children: [
-                            LLSmallCaps('Your current area of action', size: 10, color: llMuted),
+                            LLSmallCaps(AppLocalizations.of(context).currentAreaOfActionLabel, size: 10, color: llMuted),
                             const SizedBox(height: 6),
                             Text(
                               widget.currentAreaField.name,
@@ -288,13 +289,13 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                           ],
                         ),
                         const SizedBox(height: 28),
-                        Text('What you have discovered',
+                        Text(AppLocalizations.of(context).whatYouHaveDiscoveredLabel,
                           style: llUi(size: 13, weight: FontWeight.w600)),
                         const SizedBox(height: 12),
                         if (entries.isEmpty)
                           Padding(
                             padding: const EdgeInsets.all(8),
-                            child: Text('Your answers will appear here.',
+                            child: Text(AppLocalizations.of(context).answersEmptyState,
                               style: llSerifItalic(size: 13, color: llMutedSoft)),
                           )
                         else
@@ -326,7 +327,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                         const Center(child: LLHairline(width: 28)),
                         const SizedBox(height: 18),
                         Text(
-                          'The golden fish is already on its way.\nYour work is to believe — and to act.',
+                          AppLocalizations.of(context).goldenFishClosingLine,
                           textAlign: TextAlign.center,
                           style: llSerifItalic(size: 15, color: llGold, height: 1.6),
                         ),
@@ -351,14 +352,16 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                     child: Column(
                       children: [
                         LLCTA(
-                          label: _generatingPdf ? 'Preparing PDF…' : 'Save as PDF',
+                          label: _generatingPdf
+                              ? AppLocalizations.of(context).preparingPdfCta
+                              : AppLocalizations.of(context).savePdfCta,
                           variant: 'outline',
                           enabled: !_generatingPdf,
                           onTap: _generatingPdf ? null : _savePdf,
                         ),
                         const SizedBox(height: 10),
                         LLCTA(
-                          label: 'Start a New Journey',
+                          label: AppLocalizations.of(context).startNewJourneyCta,
                           onTap: () {
                             ProgressService.clear().ignore();
                             Navigator.of(context).pushAndRemoveUntil(

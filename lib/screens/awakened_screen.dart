@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../widgets/ll_widgets.dart';
 import 'game_board_screen.dart';
 
@@ -9,6 +10,7 @@ class AwakenedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: llBg,
       body: Stack(
@@ -17,7 +19,7 @@ class AwakenedScreen extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 28),
-                const LLSmallCaps('Step 3 of 3', color: llMuted),
+                LLSmallCaps(l10n.awakenedStepThreeOfThree, color: llMuted),
                 const SizedBox(height: 28),
                 // Glow ring + logo
                 Stack(
@@ -37,10 +39,10 @@ class AwakenedScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 44),
-                const LLSmallCaps('Field 01 awaits', color: llGold),
+                LLSmallCaps(l10n.awakenedFieldOneAwaits, color: llGold),
                 const SizedBox(height: 10),
                 Text(
-                  'Your journey\nhas begun.',
+                  l10n.awakenedJourneyBegunTitle,
                   textAlign: TextAlign.center,
                   style: llSerif(size: 28, height: 1.2),
                 ),
@@ -50,7 +52,7 @@ class AwakenedScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Text(
-                    'The path will respond to your intention.\nWalk it with patience.',
+                    l10n.awakenedPathRespondBody,
                     textAlign: TextAlign.center,
                     style: llSerifItalic(size: 14, height: 1.7),
                   ),
@@ -69,7 +71,7 @@ class AwakenedScreen extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        const LLSmallCaps('Held in light', size: 9),
+                        LLSmallCaps(l10n.awakenedHeldInLight, size: 9),
                         const SizedBox(height: 6),
                         Text('"$wish"',
                           textAlign: TextAlign.center,
@@ -82,7 +84,7 @@ class AwakenedScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: LLCTA(
-                    label: 'Enter Field 01  →',
+                    label: l10n.awakenedEnterFieldOneCta,
                     onTap: () {
                       Navigator.of(context).pushAndRemoveUntil(
                         _fadeRoute(GameBoardScreen(wish: wish, currentFieldNum: 1, completedFields: const [], answers: const {})),

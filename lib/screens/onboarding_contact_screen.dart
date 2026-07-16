@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../services/notification_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'onboarding_focus_screen.dart';
@@ -63,17 +64,17 @@ class _OnboardingContactScreenState extends State<OnboardingContactScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 28),
-                  Center(child: LLSmallCaps('Step 3 of 5', color: llGold)),
+                  Center(child: LLSmallCaps(AppLocalizations.of(context).onboardingStepOfFive(3), color: llGold)),
                   const SizedBox(height: 28),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Stay connected.', style: llSerif(size: 28, height: 1.2)),
+                        Text(AppLocalizations.of(context).onboardingContactHeading, style: llSerif(size: 28, height: 1.2)),
                         const SizedBox(height: 10),
                         Text(
-                          'Where can we reach you with your journey?',
+                          AppLocalizations.of(context).onboardingContactSubtitle,
                           style: llSerifItalic(size: 14, height: 1.5),
                         ),
                       ],
@@ -93,7 +94,7 @@ class _OnboardingContactScreenState extends State<OnboardingContactScreen> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'your@email.com',
+                            hintText: AppLocalizations.of(context).emailHint,
                             hintStyle: llSerifItalic(size: 17, color: llHair),
                           ),
                           style: llSerif(size: 17),
@@ -119,7 +120,7 @@ class _OnboardingContactScreenState extends State<OnboardingContactScreen> {
                             const SizedBox(width: 14),
                             Expanded(
                               child: Text(
-                                'Allow gentle reminders to keep you on your path.',
+                                AppLocalizations.of(context).allowGentleReminders,
                                 style: llUi(size: 13.5, color: llMuted),
                               ),
                             ),
@@ -140,7 +141,7 @@ class _OnboardingContactScreenState extends State<OnboardingContactScreen> {
                     child: ValueListenableBuilder<TextEditingValue>(
                       valueListenable: _ctrl,
                       builder: (_, _, _) => LLCTA(
-                        label: 'Continue',
+                        label: AppLocalizations.of(context).continueButton,
                         enabled: _canContinue,
                         onTap: _canContinue ? _goNext : null,
                       ),

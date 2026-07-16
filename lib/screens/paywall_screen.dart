@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../widgets/ll_widgets.dart';
 import 'awakened_screen.dart';
 
@@ -19,29 +20,35 @@ class PaywallTariff {
   final List<String> features;
 }
 
-const _personalizedPass = PaywallTariff(
-  title: 'One Journey',
-  tagline: 'One Desire, One Direction',
-  price: '€2.50',
-  features: [
-    'Questionnaires to end practices',
-    'Final direction',
-    'Personal journal',
-  ],
-);
+PaywallTariff personalizedPass(BuildContext context) {
+  final l10n = AppLocalizations.of(context);
+  return PaywallTariff(
+    title: l10n.paywallTariffOneJourneyTitle,
+    tagline: l10n.paywallTariffOneJourneyTagline,
+    price: '€2.50',
+    features: [
+      l10n.paywallFeatureQuestionnairesToEndPractices,
+      l10n.paywallFeatureFinalDirection,
+      l10n.paywallFeaturePersonalJournal,
+    ],
+  );
+}
 
-const _leadLifePass = PaywallTariff(
-  title: 'leadlife Pass',
-  tagline: 'Go deeper anytime',
-  price: '€14.90',
-  period: '/month',
-  features: [
-    'Unlimited journeys',
-    'Full journey history',
-    'Personal journal',
-    'New practices',
-  ],
-);
+PaywallTariff leadLifePass(BuildContext context) {
+  final l10n = AppLocalizations.of(context);
+  return PaywallTariff(
+    title: l10n.paywallTariffLeadlifePassTitle,
+    tagline: l10n.paywallTariffLeadlifePassTagline,
+    price: '€14.90',
+    period: '/month',
+    features: [
+      l10n.paywallFeatureUnlimitedJourneys,
+      l10n.paywallFeatureFullJourneyHistory,
+      l10n.paywallFeaturePersonalJournal,
+      l10n.paywallFeatureNewPractices,
+    ],
+  );
+}
 
 class PaywallScreen extends StatelessWidget {
   const PaywallScreen({super.key, required this.wish});
@@ -49,6 +56,9 @@ class PaywallScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final personalized = personalizedPass(context);
+    final leadLife = leadLifePass(context);
     return Scaffold(
       backgroundColor: llBg,
       body: Stack(
@@ -62,19 +72,19 @@ class PaywallScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'Your desire said yes.',
+                        l10n.paywallHeadlineLine1,
                         textAlign: TextAlign.center,
                         style: llSerif(size: 26, height: 1.15),
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Your path is ready.',
+                        l10n.paywallHeadlineLine2,
                         textAlign: TextAlign.center,
                         style: llSerif(size: 26, height: 1.15),
                       ),
                       const SizedBox(height: 14),
                       Text(
-                        'Choose how deep you want to go.',
+                        l10n.paywallSubheading,
                         textAlign: TextAlign.center,
                         style: llSerifItalic(size: 14, height: 1.5),
                       ),
@@ -88,16 +98,16 @@ class PaywallScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         PaywallTariffCard(
-                          tariff: _personalizedPass,
+                          tariff: personalized,
                           onTap: () => Navigator.of(context).push(_fadeRoute(
-                            TariffDetailScreen(wish: wish, tariff: _personalizedPass),
+                            TariffDetailScreen(wish: wish, tariff: personalized),
                           )),
                         ),
                         const SizedBox(height: 16),
                         PaywallTariffCard(
-                          tariff: _leadLifePass,
+                          tariff: leadLife,
                           onTap: () => Navigator.of(context).push(_fadeRoute(
-                            TariffDetailScreen(wish: wish, tariff: _leadLifePass),
+                            TariffDetailScreen(wish: wish, tariff: leadLife),
                           )),
                         ),
                         const SizedBox(height: 24),
@@ -164,7 +174,7 @@ class PaywallTariffCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text('See details', style: llUi(size: 12, color: llGold, weight: FontWeight.w500)),
+                Text(AppLocalizations.of(context).paywallSeeDetails, style: llUi(size: 12, color: llGold, weight: FontWeight.w500)),
                 const SizedBox(width: 4),
                 const Icon(Icons.chevron_right_rounded, size: 16, color: llGold),
               ],
@@ -234,7 +244,7 @@ class TariffDetailScreen extends StatelessWidget {
                     ),
                   ),
                   LLCTA(
-                    label: 'Choose This Path',
+                    label: AppLocalizations.of(context).paywallChooseThisPathCta,
                     onTap: () => Navigator.of(context).push(_fadeRoute(
                       AwakenedScreen(wish: wish),
                     )),

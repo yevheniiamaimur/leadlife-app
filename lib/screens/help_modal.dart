@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../widgets/ll_widgets.dart';
 
 class HelpModal extends StatelessWidget {
@@ -8,6 +9,7 @@ class HelpModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return GestureDetector(
       onTap: onClose,
       child: Container(
@@ -29,10 +31,10 @@ class HelpModal extends StatelessWidget {
                 children: [
                   const LLLogo(size: 32, color: llGold),
                   const SizedBox(height: 14),
-                  const LLSmallCaps('An example'),
+                  LLSmallCaps(l10n.helpModalExampleLabel),
                   const SizedBox(height: 10),
                   Text(
-                    'How a desire is named',
+                    l10n.helpModalNamingHeading,
                     textAlign: TextAlign.center,
                     style: llSerif(size: 22, height: 1.2),
                   ),
@@ -50,11 +52,11 @@ class HelpModal extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('YES — PRESENT PERFECT',
+                        Text(l10n.helpModalYesLabel,
                           style: llUi(size: 10, color: llGreen, letterSpacing: 1.5, weight: FontWeight.w600)),
                         const SizedBox(height: 4),
                         Text(
-                          '"I have built a life where my work and my truth are the same thing."',
+                          l10n.helpModalGoodExample,
                           style: llSerifItalic(size: 15, color: llInk, height: 1.5),
                         ),
                       ],
@@ -72,11 +74,11 @@ class HelpModal extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('NOT YET — FUTURE TENSE',
+                        Text(l10n.helpModalNoLabel,
                           style: llUi(size: 10, color: llViolet, letterSpacing: 1.5, weight: FontWeight.w600)),
                         const SizedBox(height: 4),
                         Text(
-                          '"I want to build a life where…"',
+                          l10n.helpModalBadExample,
                           style: llSerifItalic(size: 15, color: llMuted, height: 1.5),
                         ),
                       ],
@@ -84,12 +86,12 @@ class HelpModal extends StatelessWidget {
                   ),
                   const SizedBox(height: 18),
                   Text(
-                    'Speak as if it has already come.\nThe path responds to certainty.',
+                    l10n.helpModalClosingText,
                     textAlign: TextAlign.center,
                     style: llUi(size: 12.5, color: llMuted),
                   ),
                   const SizedBox(height: 20),
-                  LLCTA(label: 'I Understand', onTap: onClose),
+                  LLCTA(label: l10n.helpModalUnderstandCta, onTap: onClose),
                 ],
               ),
             ),

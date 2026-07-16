@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../widgets/ll_widgets.dart';
 import 'onboarding_ready_screen.dart';
-
-const _focusOptions = [
-  'Relationships',
-  'Career & Purpose',
-  'Health & Energy',
-  'Money & Abundance',
-  'Inner Peace',
-];
 
 class OnboardingFocusScreen extends StatefulWidget {
   const OnboardingFocusScreen({
@@ -39,6 +32,14 @@ class _OnboardingFocusScreenState extends State<OnboardingFocusScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final focusOptions = [
+      l10n.focusRelationships,
+      l10n.focusCareerPurpose,
+      l10n.focusHealthEnergy,
+      l10n.focusMoneyAbundance,
+      l10n.focusInnerPeace,
+    ];
     return Scaffold(
       backgroundColor: llBg,
       body: SafeArea(
@@ -48,17 +49,17 @@ class _OnboardingFocusScreenState extends State<OnboardingFocusScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 28),
-                Center(child: LLSmallCaps('Step 4 of 5', color: llGold)),
+                Center(child: LLSmallCaps(l10n.onboardingStepOfFive(4), color: llGold)),
                 const SizedBox(height: 28),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('What\'s most on your mind\nright now?', style: llSerif(size: 26, height: 1.25)),
+                      Text(l10n.onboardingFocusHeading, style: llSerif(size: 26, height: 1.25)),
                       const SizedBox(height: 10),
                       Text(
-                        'Choose the areas calling for your attention.',
+                        l10n.onboardingFocusSubtitle,
                         style: llSerifItalic(size: 14, height: 1.5),
                       ),
                     ],
@@ -70,7 +71,7 @@ class _OnboardingFocusScreenState extends State<OnboardingFocusScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 32),
                     child: Column(
                       children: [
-                        for (final option in _focusOptions)
+                        for (final option in focusOptions)
                           Padding(
                             padding: const EdgeInsets.only(bottom: 12),
                             child: _FocusOptionCard(
@@ -86,7 +87,7 @@ class _OnboardingFocusScreenState extends State<OnboardingFocusScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: LLCTA(
-                    label: 'Continue',
+                    label: l10n.continueButton,
                     enabled: _selected.isNotEmpty,
                     onTap: _selected.isNotEmpty
                         ? () => Navigator.of(context).push(_fadeRoute(

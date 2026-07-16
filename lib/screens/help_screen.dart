@@ -1,35 +1,21 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../widgets/ll_widgets.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
 
-  static const _items = [
-    (
-      q: 'What is leadlife?',
-      a: 'A guided journey built around one intention you set — helping you clarify what you want, shift your inner state, and find your direction.',
-    ),
-    (
-      q: 'How does the dice work?',
-      a: 'Roll to see if your intention is ready. If it is, your journey begins. If not, you receive a clue to refine it and try again.',
-    ),
-    (
-      q: 'What if I get stuck on a field?',
-      a: 'Answer honestly, in a few words. There are no wrong answers — each field simply shifts your focus for a moment.',
-    ),
-    (
-      q: 'Where do my saved intentions go?',
-      a: 'Anything you save in the Diary tab stays in its history, right there on your device.',
-    ),
-    (
-      q: 'Can I change my intention later?',
-      a: 'Yes — write a new one any time from the Diary tab and check it against your path.',
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final items = [
+      (q: l10n.helpFaqWhatIsLeadlifeQ, a: l10n.helpFaqWhatIsLeadlifeA),
+      (q: l10n.helpFaqDiceQ, a: l10n.helpFaqDiceA),
+      (q: l10n.helpFaqStuckFieldQ, a: l10n.helpFaqStuckFieldA),
+      (q: l10n.helpFaqSavedIntentionsQ, a: l10n.helpFaqSavedIntentionsA),
+      (q: l10n.helpFaqChangeIntentionQ, a: l10n.helpFaqChangeIntentionA),
+    ];
     return Scaffold(
       backgroundColor: llBg,
       body: Stack(
@@ -41,15 +27,15 @@ class HelpScreen extends StatelessWidget {
                 children: [
                   const LLLogo(size: 48, color: llGold),
                   const SizedBox(height: 16),
-                  Text('Help', textAlign: TextAlign.center, style: llSerif(size: 28, weight: FontWeight.w600)),
+                  Text(l10n.drawerHelp, textAlign: TextAlign.center, style: llSerif(size: 28, weight: FontWeight.w600)),
                   const SizedBox(height: 8),
                   Text(
-                    'Answers to the questions we hear most.',
+                    l10n.helpSubtitle,
                     textAlign: TextAlign.center,
                     style: llSerifItalic(size: 14, height: 1.5),
                   ),
                   const SizedBox(height: 28),
-                  for (final item in _items)
+                  for (final item in items)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16),
                       child: Container(

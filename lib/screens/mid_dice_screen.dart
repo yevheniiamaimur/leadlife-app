@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../models/field.dart';
 import '../widgets/ll_widgets.dart';
 import 'success_code_screen.dart';
@@ -66,7 +67,9 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
               children: [
                 const SizedBox(height: 32),
                 LLSmallCaps(
-                  _isFinal ? 'The final turn' : 'The path continues',
+                  _isFinal
+                      ? AppLocalizations.of(context).finalTurnLabel
+                      : AppLocalizations.of(context).pathContinuesLabel,
                   size: 10,
                   color: llMuted,
                   letterSpacing: 2.5,
@@ -86,7 +89,7 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                     ),
                     child: Column(
                       children: [
-                        LLSmallCaps('Your desire', size: 9, color: llMuted, letterSpacing: 2),
+                        LLSmallCaps(AppLocalizations.of(context).yourDesireLabel, size: 9, color: llMuted, letterSpacing: 2),
                         const SizedBox(height: 6),
                         Text(
                           '"${widget.wish}"',
@@ -108,13 +111,15 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                   child: Text(
                     _showResult
                         ? (_isFinal
-                            ? 'Your current area of action:'
+                            ? AppLocalizations.of(context).currentAreaOfActionColon
                             : (_overshoot
-                                ? 'You have reached the final path.'
-                                : 'You are now on'))
+                                ? AppLocalizations.of(context).reachedFinalPathText
+                                : AppLocalizations.of(context).youAreNowOnText))
                         : (_isFinal
-                            ? 'You have walked all 32 paths. One final turn — to know where you stand now.'
-                            : 'You are on Field ${widget.currentFieldNum.toString().padLeft(2, '0')}. Where will the path lead?'),
+                            ? AppLocalizations.of(context).finalTurnInstructions
+                            : AppLocalizations.of(context).onFieldWhereWillPathLead(
+                                widget.currentFieldNum.toString().padLeft(2, '0'),
+                              )),
                     textAlign: TextAlign.center,
                     style: llSerifItalic(size: 14, color: llMuted, height: 1.55),
                   ),
@@ -143,7 +148,11 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                             const Center(child: LLHairline(width: 36)),
                             const SizedBox(height: 16),
                             LLSmallCaps(
-                              _isFinal ? 'From this place' : 'Arriving · Field ${(_newFieldNum ?? 0).toString().padLeft(2, '0')}',
+                              _isFinal
+                                  ? AppLocalizations.of(context).fromThisPlaceLabel
+                                  : AppLocalizations.of(context).arrivingAtField(
+                                      (_newFieldNum ?? 0).toString().padLeft(2, '0'),
+                                    ),
                               size: 10,
                               letterSpacing: 2,
                             ),
@@ -160,7 +169,9 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                         )
                       : _rolling
                           ? Text(
-                              _isFinal ? 'The wheel turns once more…' : 'The path turns…',
+                              _isFinal
+                                  ? AppLocalizations.of(context).wheelTurnsOnceMore
+                                  : AppLocalizations.of(context).pathTurnsEllipsis,
                               style: llSerifItalic(size: 13, color: llMutedSoft),
                             )
                           : const SizedBox.shrink(),
@@ -175,7 +186,11 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                     children: [
                       if (!_showResult)
                         LLCTA(
-                          label: _rolling ? 'Rolling…' : (_isFinal ? 'Roll the Final Dice' : 'Roll the Dice'),
+                          label: _rolling
+                              ? AppLocalizations.of(context).rollingEllipsis
+                              : (_isFinal
+                                  ? AppLocalizations.of(context).rollFinalDiceCta
+                                  : AppLocalizations.of(context).rollDiceCta),
                           enabled: !_rolling,
                           onTap: _roll,
                           variant: 'primary',
@@ -183,8 +198,8 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                       if (_showResult && _newField != null)
                         LLCTA(
                           label: _isFinal
-                              ? 'Receive My Success Code  →'
-                              : 'Enter ${_newField!.name}  →',
+                              ? AppLocalizations.of(context).receiveSuccessCodeCta
+                              : AppLocalizations.of(context).enterFieldNameCta(_newField!.name),
                           onTap: _proceed,
                         ),
                     ],

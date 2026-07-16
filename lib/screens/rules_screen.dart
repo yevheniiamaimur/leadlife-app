@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../widgets/ll_widgets.dart';
 import 'wish_entry_screen.dart';
 import 'how_it_works_screen.dart';
@@ -139,7 +140,7 @@ class _HomeTabState extends State<_HomeTab> {
               const LLLogo(size: 88, color: llGold),
               const SizedBox(height: 20),
               Text(
-                'Welcome',
+                AppLocalizations.of(context).welcomeGreeting,
                 textAlign: TextAlign.center,
                 style: llSerif(size: 20, weight: FontWeight.w600),
               ),
@@ -164,13 +165,13 @@ class _HomeTabState extends State<_HomeTab> {
                     child: Column(
                       children: [
                         Text(
-                          "What's your wish?",
+                          AppLocalizations.of(context).whatsYourWish,
                           textAlign: TextAlign.center,
                           style: llSerif(size: 28, height: 1.2, weight: FontWeight.w600),
                         ),
                         const SizedBox(height: 13),
                         Text(
-                          'Write in the present perfect tense — as if it has already come true.',
+                          AppLocalizations.of(context).presentPerfectPrompt,
                           textAlign: TextAlign.center,
                           style: llSerifItalic(size: 16, height: 1.5),
                         ),
@@ -180,7 +181,7 @@ class _HomeTabState extends State<_HomeTab> {
                           padding: const EdgeInsets.only(bottom: 10),
                           decoration: BoxDecoration(border: Border(bottom: BorderSide(color: llHair))),
                           child: Text(
-                            'Type it here…',
+                            AppLocalizations.of(context).typeItHere,
                             textAlign: TextAlign.center,
                             style: llUi(size: 16, color: llMutedSoft),
                           ),
@@ -198,14 +199,14 @@ class _HomeTabState extends State<_HomeTab> {
                   children: [
                     Expanded(
                       child: _NavButton(
-                        label: 'How It Works',
+                        label: AppLocalizations.of(context).howItWorks,
                         onTap: () => Navigator.of(context).push(_fadeRoute(const HowItWorksScreen())),
                       ),
                     ),
                     const SizedBox(width: 14),
                     Expanded(
                       child: _NavButton(
-                        label: 'Build Success Code',
+                        label: AppLocalizations.of(context).buildSuccessCode,
                         onTap: () => Navigator.of(context).push(_fadeRoute(const WishEntryScreen())),
                       ),
                     ),
@@ -236,38 +237,40 @@ class _BottomBar extends StatelessWidget {
   final int index;
   final ValueChanged<int> onChanged;
 
-  static const _items = [
-    (label: 'Home', icon: Icons.home_rounded),
-    (label: 'Journal', icon: Icons.edit_note_rounded),
-    (label: 'Diary', icon: Icons.auto_stories_rounded),
-  ];
-
   @override
-  Widget build(BuildContext context) => Container(
-    decoration: BoxDecoration(
-      color: llCardBg,
-      border: Border(top: BorderSide(color: llHair)),
-    ),
-    child: SafeArea(
-      top: false,
-      child: SizedBox(
-        height: 76,
-        child: Row(
-          children: [
-            for (var i = 0; i < _items.length; i++)
-              Expanded(
-                child: _BottomBarButton(
-                  label: _items[i].label,
-                  icon: _items[i].icon,
-                  active: i == index,
-                  onTap: () => onChanged(i),
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final items = [
+      (label: l10n.navHome, icon: Icons.home_rounded),
+      (label: l10n.navJournal, icon: Icons.edit_note_rounded),
+      (label: l10n.navDiary, icon: Icons.auto_stories_rounded),
+    ];
+    return Container(
+      decoration: BoxDecoration(
+        color: llCardBg,
+        border: Border(top: BorderSide(color: llHair)),
+      ),
+      child: SafeArea(
+        top: false,
+        child: SizedBox(
+          height: 76,
+          child: Row(
+            children: [
+              for (var i = 0; i < items.length; i++)
+                Expanded(
+                  child: _BottomBarButton(
+                    label: items[i].label,
+                    icon: items[i].icon,
+                    active: i == index,
+                    onTap: () => onChanged(i),
+                  ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class _BottomBarButton extends StatelessWidget {

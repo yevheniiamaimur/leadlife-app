@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../models/field.dart';
 import '../widgets/ll_widgets.dart';
 import 'mid_dice_screen.dart';
@@ -78,27 +79,36 @@ class _AnswerSavedScreenState extends State<AnswerSavedScreen> with TickerProvid
             ),
             const SizedBox(height: 32),
             Text(
-              'Your answer is received.',
+              AppLocalizations.of(context).answerReceivedHeading,
               textAlign: TextAlign.center,
               style: llSerif(size: 24, height: 1.2),
             ),
             const SizedBox(height: 14),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  style: llSerifItalic(size: 15, color: llMuted, height: 1.6),
-                  children: [
-                    const TextSpan(text: 'You have walked through '),
-                    TextSpan(
-                      text: widget.field.name.toLowerCase(),
-                      style: llSerifItalic(size: 15, color: llGold, height: 1.6),
-                    ),
-                    const TextSpan(text: '. The path continues.'),
-                  ],
-                ),
-              ),
+              child: Builder(builder: (context) {
+                final fieldName = widget.field.name.toLowerCase();
+                final baseStyle = llSerifItalic(size: 15, color: llMuted, height: 1.6);
+                final full = AppLocalizations.of(context).walkedThroughField(fieldName);
+                final idx = full.indexOf(fieldName);
+                if (idx == -1) {
+                  return Text(full, textAlign: TextAlign.center, style: baseStyle);
+                }
+                return RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: baseStyle,
+                    children: [
+                      TextSpan(text: full.substring(0, idx)),
+                      TextSpan(
+                        text: fieldName,
+                        style: llSerifItalic(size: 15, color: llGold, height: 1.6),
+                      ),
+                      TextSpan(text: full.substring(idx + fieldName.length)),
+                    ],
+                  ),
+                );
+              }),
             ),
             const Spacer(),
             FadeTransition(
@@ -106,7 +116,7 @@ class _AnswerSavedScreenState extends State<AnswerSavedScreen> with TickerProvid
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: LLCTA(
-                  label: 'Roll for the Next Field',
+                  label: AppLocalizations.of(context).rollForNextFieldCta,
                   onTap: () => Navigator.of(context).push(_fadeRoute(MidDiceScreen(
                     currentFieldNum: widget.field.n,
                     wish: widget.wish,

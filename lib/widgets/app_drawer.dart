@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import 'll_widgets.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -22,6 +23,7 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Drawer(
       backgroundColor: llCardBg,
       width: 280,
@@ -35,12 +37,12 @@ class AppDrawer extends StatelessWidget {
             const SizedBox(height: 24),
             const LLHairline(width: 44),
             const SizedBox(height: 8),
-            _DrawerItem(icon: Icons.home_rounded, label: 'Home', onTap: onHome),
-            _DrawerItem(icon: Icons.person_outline_rounded, label: 'Profile', onTap: onProfile),
-            _DrawerItem(icon: Icons.auto_stories_rounded, label: 'History', onTap: onHistory),
-            _DrawerItem(icon: Icons.edit_note_rounded, label: 'Journal', onTap: onJournal),
-            _DrawerItem(icon: Icons.help_outline_rounded, label: 'Help', onTap: onHelp),
-            _DrawerItem(icon: Icons.info_outline_rounded, label: 'About', onTap: onAbout),
+            _DrawerItem(icon: Icons.home_rounded, label: l10n.navHome, onTap: onHome),
+            _DrawerItem(icon: Icons.person_outline_rounded, label: l10n.drawerProfile, onTap: onProfile),
+            _DrawerItem(icon: Icons.auto_stories_rounded, label: l10n.drawerHistory, onTap: onHistory),
+            _DrawerItem(icon: Icons.edit_note_rounded, label: l10n.navJournal, onTap: onJournal),
+            _DrawerItem(icon: Icons.help_outline_rounded, label: l10n.drawerHelp, onTap: onHelp),
+            _DrawerItem(icon: Icons.info_outline_rounded, label: l10n.drawerAbout, onTap: onAbout),
           ],
         ),
       ),

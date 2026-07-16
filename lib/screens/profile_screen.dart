@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../services/profile_service.dart';
 import '../widgets/ll_widgets.dart';
 
@@ -49,24 +50,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const LLLogo(size: 56, color: llGold),
                         const SizedBox(height: 18),
                         Text(
-                          profile?.name ?? 'Your Profile',
+                          profile?.name ?? AppLocalizations.of(context).yourProfileFallback,
                           textAlign: TextAlign.center,
                           style: llSerif(size: 26, weight: FontWeight.w600),
                         ),
                         const SizedBox(height: 28),
                         if (profile == null)
                           Text(
-                            "We don't have your details yet — they're captured during onboarding.",
+                            AppLocalizations.of(context).profileNoDataMessage,
                             textAlign: TextAlign.center,
                             style: llSerifItalic(size: 14, color: llMutedSoft, height: 1.5),
                           )
                         else ...[
                           if (profile.birthday != null)
-                            _ProfileRow(label: 'Birthday', value: _formatDate(profile.birthday!)),
+                            _ProfileRow(label: AppLocalizations.of(context).profileBirthdayLabel, value: _formatDate(profile.birthday!)),
                           if (profile.email.isNotEmpty)
-                            _ProfileRow(label: 'Email', value: profile.email),
+                            _ProfileRow(label: AppLocalizations.of(context).profileEmailLabel, value: profile.email),
                           if (profile.focus.isNotEmpty)
-                            _ProfileRow(label: 'Focus', value: profile.focus),
+                            _ProfileRow(label: AppLocalizations.of(context).profileFocusLabel, value: profile.focus),
                         ],
                       ],
                     ),

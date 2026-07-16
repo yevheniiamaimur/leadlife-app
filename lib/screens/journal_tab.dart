@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../models/game_history_entry.dart';
 import '../services/game_history_service.dart';
 import '../widgets/ll_widgets.dart';
@@ -44,20 +45,20 @@ class _JournalTabState extends State<JournalTab> {
               child: Column(
                 children: [
                   Text(
-                    'Your Journeys',
+                    AppLocalizations.of(context).yourJourneysHeading,
                     textAlign: TextAlign.center,
                     style: llSerif(size: 26, weight: FontWeight.w600),
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Every wish you have set, and how far it has carried you.',
+                    AppLocalizations.of(context).journeysSubtitle,
                     textAlign: TextAlign.center,
                     style: llSerifItalic(size: 14, height: 1.5),
                   ),
                   const SizedBox(height: 28),
                   if (_entries.isEmpty)
                     Text(
-                      'Your journeys will appear here.',
+                      AppLocalizations.of(context).journeysEmptyState,
                       textAlign: TextAlign.center,
                       style: llSerifItalic(size: 14, color: llMutedSoft),
                     )
@@ -87,7 +88,9 @@ class _JourneyCard extends StatelessWidget {
         child: Column(
           children: [
             LLSmallCaps(
-              completed ? 'Completed · ${formatDate(entry.completedAt!)}' : 'In Progress',
+              completed
+                  ? AppLocalizations.of(context).journeyCompletedOn(formatDate(entry.completedAt!))
+                  : AppLocalizations.of(context).journeyInProgress,
               color: completed ? llGold : llMutedSoft,
             ),
             const SizedBox(height: 10),
@@ -105,7 +108,10 @@ class _JourneyCard extends StatelessWidget {
               )
             else
               Text(
-                '${entry.completedFieldsCount} / ${GameHistoryService.totalFields} fields',
+                AppLocalizations.of(context).journeyFieldsProgress(
+                  entry.completedFieldsCount,
+                  GameHistoryService.totalFields,
+                ),
                 textAlign: TextAlign.center,
                 style: llUi(size: 12.5, color: llMuted),
               ),
