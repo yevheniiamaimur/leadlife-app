@@ -58,7 +58,8 @@ class _GameBoardScreenState extends State<GameBoardScreen> {
   @override
   Widget build(BuildContext context) {
     final trackH = 60.0 + kFields.length * 84 + 80;
-    final currentField = kFields.firstWhere((f) => f.n == widget.currentFieldNum);
+    final l10n = AppLocalizations.of(context);
+    final currentField = localizeField(l10n, kFields.firstWhere((f) => f.n == widget.currentFieldNum));
 
     return Scaffold(
       backgroundColor: llBg,
@@ -131,7 +132,8 @@ class _GameBoardScreenState extends State<GameBoardScreen> {
                 child: CustomPaint(
                   painter: _PathPainter(fields: kFields, xAt: _xAt, yAt: _yAt),
                   child: Stack(
-                    children: kFields.map((f) {
+                    children: kFields.map((raw) {
+                      final f = localizeField(l10n, raw);
                       final i = f.n - 1;
                       final x = _xAt(i);
                       final y = _yAt(i);

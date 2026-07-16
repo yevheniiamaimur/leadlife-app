@@ -725,4 +725,467 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get howItWorksSlide7Para4 => 'Your path, built from your own answers.';
+
+  @override
+  String get field01Name => 'Light';
+
+  @override
+  String get field01Subtitle => 'Desire';
+
+  @override
+  String get field01Intro =>
+      'Every journey begins with a desire.\n\nYour desire matters because it points toward something important for your growth.';
+
+  @override
+  String get field01Task => 'What desire are you bringing into this journey?';
+
+  @override
+  String get field02Name => 'Connection';
+
+  @override
+  String get field02Subtitle => 'Initiative';
+
+  @override
+  String get field02Intro =>
+      'Every idea starts as a spark.\n\nGrowth begins when you share it with the world.\nEvery desire has an origin.\nRemember where this dream first appeared in your life.';
+
+  @override
+  String get field02Task =>
+      'When did this desire first appear in your life?\n\nWho could you share it with today that would support its realization?';
+
+  @override
+  String get field03Name => 'Form';
+
+  @override
+  String get field03Subtitle => 'Vision';
+
+  @override
+  String get field03Intro =>
+      'A desire becomes real when it has a clear shape.\nImagine what success looks like for you.';
+
+  @override
+  String get field03Task => 'What does success look like?';
+
+  @override
+  String get field04Name => 'Scale';
+
+  @override
+  String get field04Subtitle => 'Contribution';
+
+  @override
+  String get field04Intro =>
+      'Every goal creates an impact.\nConsider what value your desire brings to others.';
+
+  @override
+  String get field04Task => 'Who benefits when you achieve this?';
+
+  @override
+  String get field05Name => 'Limitation';
+
+  @override
+  String get field05Subtitle => 'Resilience';
+
+  @override
+  String get field05Intro =>
+      'Limitations are a natural part of every journey.\n\nThey help you develop the strength needed to reach your goal.';
+
+  @override
+  String get field05Task =>
+      'What limitations do you currently have (physical, emotional, financial, social, or other)? How are they helping you grow?';
+
+  @override
+  String get field06Name => 'Values';
+
+  @override
+  String get field06Subtitle => 'Authenticity';
+
+  @override
+  String get field06Intro =>
+      'Your values guide the choices you make.\n\nThe strongest desires are often connected to what has always mattered to you.';
+
+  @override
+  String get field06Task =>
+      'What has always been important to you?\n\nDoes this desire reflect those values?\n\nWhat qualities came naturally to you as a child?\n\nWhich of them are still alive in you today?\n\nHow could these qualities help you achieve your desire?';
+
+  @override
+  String get field07Name => 'Feelings';
+
+  @override
+  String get field07Subtitle => 'Emotional Awareness';
+
+  @override
+  String get field07Intro =>
+      'Feelings are signals, not obstacles.\n\nThey can show you what supports your desire and what needs your attention.';
+
+  @override
+  String get field07Task =>
+      'What emotions do you experience most often? How do they affect your desire?';
+
+  @override
+  String get field08Name => 'Thinking';
+
+  @override
+  String get field08Subtitle => 'Clarity';
+
+  @override
+  String get field08Intro =>
+      'Every desire is supported by some beliefs and limited by others.\n\nThe more clearly you see them, the more freedom you have to choose your path.';
+
+  @override
+  String get field08Task =>
+      'What beliefs support you, and what beliefs hold you back?';
+
+  @override
+  String get field09Name => 'Subconsciousness';
+
+  @override
+  String get field09Subtitle => 'Imagination';
+
+  @override
+  String get field09Intro =>
+      'Your subconscious holds the blueprint of your desired life.';
+
+  @override
+  String get field09Task =>
+      'If your desire were already real, what would your life look like? Describe it.';
+
+  @override
+  String get field10Name => 'Reality';
+
+  @override
+  String get field10Subtitle => 'Action';
+
+  @override
+  String get field10Intro => 'Reality is shaped by the actions you take.';
+
+  @override
+  String get field10Task =>
+      'Write 10 actions you can take today to move closer to your goal.';
+
+  @override
+  String get field11Name => 'Possibility';
+
+  @override
+  String get field11Subtitle => 'Trust';
+
+  @override
+  String get field11Intro =>
+      'Within every desire lies the possibility of its realization.';
+
+  @override
+  String get field11Task =>
+      'Do you truly believe your desire is possible? If yes, can you trust the process?';
+
+  @override
+  String get field12Name => 'Will';
+
+  @override
+  String get field12Subtitle => 'Resourcefulness';
+
+  @override
+  String get field12Intro => 'Your will is your most powerful resource.';
+
+  @override
+  String get field12Task =>
+      'What resources do you already have to reach your wish?';
+
+  @override
+  String get field13Name => 'Intuition';
+
+  @override
+  String get field13Subtitle => 'Inner silence';
+
+  @override
+  String get field13Intro => 'Your inner voice always knows the way.';
+
+  @override
+  String get field13Task =>
+      'What is your inner voice saying about this desire?';
+
+  @override
+  String get field14Name => 'Creation';
+
+  @override
+  String get field14Subtitle => 'Creativity';
+
+  @override
+  String get field14Intro =>
+      'Every reality begins as a possibility.\n\nCreation is the bridge between an idea and its expression.\n\nCreation turns possibilities into reality.\n\nEvery day you create something through your actions, energy, and attention.';
+
+  @override
+  String get field14Task =>
+      'How can this desire take its first form?\n\nWhat are you already creating in your life?';
+
+  @override
+  String get field15Name => 'Power';
+
+  @override
+  String get field15Subtitle => 'Management';
+
+  @override
+  String get field15Intro =>
+      'Power begins with structure.\n\nYou can only manage what has structure.\n\nWhat you can manage, you can improve.';
+
+  @override
+  String get field15Task =>
+      'What do you need to manage to move closer to your goal?\n\nI create structure in __________ to build __________.';
+
+  @override
+  String get field16Name => 'Knowledge';
+
+  @override
+  String get field16Subtitle => 'Experience';
+
+  @override
+  String get field16Intro =>
+      'Knowledge becomes valuable when you use it.\n\nReal wisdom appears through action.\n\nThe right knowledge can show you the next step forward.';
+
+  @override
+  String get field16Task =>
+      'Do you already have enough knowledge to achieve your goal?\n\nIf yes, what knowledge will help you?\n\nIf not, where can you find the knowledge you need?\n\nThe knowledge that will help me move forward is __________.\n\nI can gain new knowledge from __________.';
+
+  @override
+  String get field17Name => 'Choice';
+
+  @override
+  String get field17Subtitle => 'Self-Trust';
+
+  @override
+  String get field17Intro =>
+      'Every choice shapes who you become.\n\nWhen you choose what is truly yours, you move forward with confidence.\n\nYour heart already knows what feels true.\n\nTrust yourself enough to choose it.';
+
+  @override
+  String get field17Task =>
+      'What feels truly right for you?\n\nI choose __________ because it is mine.';
+
+  @override
+  String get field18Name => 'Movement';
+
+  @override
+  String get field18Subtitle => 'Discipline';
+
+  @override
+  String get field18Intro =>
+      'Your desire requires discipline from you.\nThrough small, consistent steps, you can move closer to what you want.';
+
+  @override
+  String get field18Task =>
+      'What action are you willing to do with discipline to reach your desire?\n\nFor how long are you willing to keep doing it?\n\nI will do __________ regularly for __________ to move closer to my desire.';
+
+  @override
+  String get field19Name => 'Truth';
+
+  @override
+  String get field19Subtitle => 'Honesty';
+
+  @override
+  String get field19Intro =>
+      'Progress begins with seeing things as they are.\n\nTruth creates the foundation for change.';
+
+  @override
+  String get field19Task =>
+      'What is true for you right now?\n\nMy truth right now is __________.\n\nTo move closer to my desire, I intend to improve __________.';
+
+  @override
+  String get field20Name => 'Purpose';
+
+  @override
+  String get field20Subtitle => 'Courage';
+
+  @override
+  String get field20Intro =>
+      'A meaningful goal benefits more than just yourself.\n\nWhen your desire serves a greater purpose, it becomes stronger.\n\nIt takes courage to follow your own path.\n\nThe more meaningful your goal is, the more people it can inspire and help.';
+
+  @override
+  String get field20Task =>
+      'How could your desire benefit others?\n\nWrite 10 ways your desire could help other people.';
+
+  @override
+  String get field21Name => 'Change';
+
+  @override
+  String get field21Subtitle => 'Flexibility';
+
+  @override
+  String get field21Intro =>
+      'Life keeps moving.\n\nYou cannot control every change, but you can learn to move with it.';
+
+  @override
+  String get field21Task =>
+      'What is beginning to unfold in your life right now?\n\nI let go of control over __________ and allow life to move.\n\nI notice that __________ is beginning to unfold in my life.\n\nI start doing __________ to grow __________.';
+
+  @override
+  String get field22Name => 'Balance';
+
+  @override
+  String get field22Subtitle => 'Self-Mastery';
+
+  @override
+  String get field22Intro =>
+      'True strength is not force.\n\nIt is the ability to balance power and gentleness.';
+
+  @override
+  String get field22Task =>
+      'Where in your life could you stop forcing and start responding with balance?\n\nWhere could you use less force and more balance?\n\nMy strength is that I can __________ without forcing, controlling, or fighting.';
+
+  @override
+  String get field23Name => 'Observe';
+
+  @override
+  String get field23Subtitle => 'Awareness';
+
+  @override
+  String get field23Intro =>
+      'Sometimes a pause is also a step forward.\n\nBy observing, you begin to see things differently.';
+
+  @override
+  String get field23Task =>
+      'What are you trying to force right now?\n\nTake one minute to pause and observe.\n\nWhat do you see differently now?\n\nBy slowing down, I realize __________.';
+
+  @override
+  String get field24Name => 'Transformation';
+
+  @override
+  String get field24Subtitle => 'Ability to Change';
+
+  @override
+  String get field24Intro =>
+      'Growth requires change.\n\nTo create something new, you may need to let go of something old.';
+
+  @override
+  String get field24Task =>
+      'What are you holding on to that no longer serves you?\n\nWhat needs to change in you to reach your goal?\n\nI let go of __________ to become myself.';
+
+  @override
+  String get field25Name => 'Intention';
+
+  @override
+  String get field25Subtitle => 'Focus';
+
+  @override
+  String get field25Intro =>
+      'What you focus on grows.\n\nA clear intention gives your desire direction and meaning.';
+
+  @override
+  String get field25Task =>
+      'Why does this desire matter to you?\n\nThis desire matters to me because __________.';
+
+  @override
+  String get field26Name => 'Attachment';
+
+  @override
+  String get field26Subtitle => 'Self-Honesty';
+
+  @override
+  String get field26Intro =>
+      'Not everything you hold onto is truly yours.\n\nSometimes fear disguises itself as a desire.';
+
+  @override
+  String get field26Task =>
+      'What are you doing because you are afraid not to?\n\nOne goal that no longer feels truly mine is __________.\n\nOne intention that still feels true is __________.';
+
+  @override
+  String get field27Name => 'Breakdown';
+
+  @override
+  String get field27Subtitle => 'Resilience';
+
+  @override
+  String get field27Intro =>
+      'Sometimes something old needs to break down before you can move forward.\n\nWhen your thoughts and feelings work together, your path becomes clearer.';
+
+  @override
+  String get field27Task =>
+      'What do you think about your desire?\n\nWhat do you feel about your desire?\n\nIs there a contradiction between the two?\n\nIf there is a contradiction, try to bring your thoughts and feelings together.\n\nWhat do your feelings need to hear?\n\nWhat do your thoughts need to understand?';
+
+  @override
+  String get field28Name => 'Guidance';
+
+  @override
+  String get field28Subtitle => 'Alignment with Flow';
+
+  @override
+  String get field28Intro =>
+      'Life flows through receiving and giving.\n\nThe more open you are to this flow, the easier it becomes to follow your path.';
+
+  @override
+  String get field28Task =>
+      'Where is this desire guiding you?\n\nMy desire is guiding me toward __________.\n\nI choose to be myself and trust the flow, even if __________.';
+
+  @override
+  String get field29Name => 'Feeling';
+
+  @override
+  String get field29Subtitle => 'Sensitivity';
+
+  @override
+  String get field29Intro =>
+      'Not everything can be seen clearly.\n\nSometimes the only way forward is to trust what you feel.';
+
+  @override
+  String get field29Task =>
+      'What are you afraid to face?\n\nI am ready to face __________.\n\nI meet the shadow that __________.';
+
+  @override
+  String get field30Name => 'Integration';
+
+  @override
+  String get field30Subtitle => 'Recognition';
+
+  @override
+  String get field30Intro =>
+      'You begin to recognize yourself in a new reality.\n\nThe more clearly you see who you are becoming, the easier it becomes to integrate this identity into your life.';
+
+  @override
+  String get field30Task =>
+      'Who are you when this desire is already part of your life?\n\nWho are you when this desire has already come true?\n\nI am a person who __________.\n\nI recognize myself as someone who __________.';
+
+  @override
+  String get field31Name => 'Awakening';
+
+  @override
+  String get field31Subtitle => 'Action';
+
+  @override
+  String get field31Intro =>
+      'You already know enough.\n\nThe question is no longer what you want. The question is whether you are ready to act.';
+
+  @override
+  String get field31Task =>
+      'What action can you no longer postpone?\n\nWhat action do you know you need to take?\n\nI am ready to take action and __________.\n\nI wake up and take action by __________.';
+
+  @override
+  String get field32Name => 'Wholeness';
+
+  @override
+  String get field32Subtitle => 'Bravery';
+
+  @override
+  String get field32Intro =>
+      'Wholeness begins when you gather all parts of yourself.\n\nYou may still feel fear, but you are ready to take the next step.';
+
+  @override
+  String get field32Task =>
+      'What fears still stand between you and your next step?\n\nI acknowledge these fears, and I choose to move toward __________ anyway.';
+
+  @override
+  String get pdfJourneyReportLabel => 'Your Journey Report';
+
+  @override
+  String get pdfJourneyCompleteHeading => 'Your Journey\nIs Complete';
+
+  @override
+  String get pdfWalkedAllPathsLine => 'You have walked all 32 paths.';
+
+  @override
+  String get pdfYourDesireLabel => 'YOUR DESIRE';
+
+  @override
+  String get pdfCurrentAreaOfActionLabel => 'YOUR CURRENT AREA OF ACTION';
+
+  @override
+  String get pdfWhatYouHaveDiscoveredLabel => 'WHAT YOU HAVE DISCOVERED';
+
+  @override
+  String get pdfNoAnswersRecorded => 'No answers recorded.';
 }

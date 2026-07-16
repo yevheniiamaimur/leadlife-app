@@ -40,7 +40,7 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
 
   GameField? get _newField => _newFieldNum == null
       ? null
-      : kFields.firstWhere((f) => f.n == _newFieldNum!);
+      : localizeField(AppLocalizations.of(context), kFields.firstWhere((f) => f.n == _newFieldNum!));
 
   bool get _overshoot => !_isFinal && _result != null && (widget.currentFieldNum + _result!) > kFields.length;
 

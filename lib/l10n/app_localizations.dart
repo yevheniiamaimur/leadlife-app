@@ -1377,6 +1377,816 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your path, built from your own answers.'**
   String get howItWorksSlide7Para4;
+
+  /// Field 1 (Light) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get field01Name;
+
+  /// Field 1 (Light) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Desire'**
+  String get field01Subtitle;
+
+  /// Field 1 (Light) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Every journey begins with a desire.\n\nYour desire matters because it points toward something important for your growth.'**
+  String get field01Intro;
+
+  /// Field 1 (Light) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What desire are you bringing into this journey?'**
+  String get field01Task;
+
+  /// Field 2 (Connection) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Connection'**
+  String get field02Name;
+
+  /// Field 2 (Connection) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Initiative'**
+  String get field02Subtitle;
+
+  /// Field 2 (Connection) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Every idea starts as a spark.\n\nGrowth begins when you share it with the world.\nEvery desire has an origin.\nRemember where this dream first appeared in your life.'**
+  String get field02Intro;
+
+  /// Field 2 (Connection) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'When did this desire first appear in your life?\n\nWho could you share it with today that would support its realization?'**
+  String get field02Task;
+
+  /// Field 3 (Form) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Form'**
+  String get field03Name;
+
+  /// Field 3 (Form) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Vision'**
+  String get field03Subtitle;
+
+  /// Field 3 (Form) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'A desire becomes real when it has a clear shape.\nImagine what success looks like for you.'**
+  String get field03Intro;
+
+  /// Field 3 (Form) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What does success look like?'**
+  String get field03Task;
+
+  /// Field 4 (Scale) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Scale'**
+  String get field04Name;
+
+  /// Field 4 (Scale) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Contribution'**
+  String get field04Subtitle;
+
+  /// Field 4 (Scale) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Every goal creates an impact.\nConsider what value your desire brings to others.'**
+  String get field04Intro;
+
+  /// Field 4 (Scale) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'Who benefits when you achieve this?'**
+  String get field04Task;
+
+  /// Field 5 (Limitation) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Limitation'**
+  String get field05Name;
+
+  /// Field 5 (Limitation) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Resilience'**
+  String get field05Subtitle;
+
+  /// Field 5 (Limitation) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Limitations are a natural part of every journey.\n\nThey help you develop the strength needed to reach your goal.'**
+  String get field05Intro;
+
+  /// Field 5 (Limitation) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What limitations do you currently have (physical, emotional, financial, social, or other)? How are they helping you grow?'**
+  String get field05Task;
+
+  /// Field 6 (Values) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Values'**
+  String get field06Name;
+
+  /// Field 6 (Values) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Authenticity'**
+  String get field06Subtitle;
+
+  /// Field 6 (Values) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Your values guide the choices you make.\n\nThe strongest desires are often connected to what has always mattered to you.'**
+  String get field06Intro;
+
+  /// Field 6 (Values) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What has always been important to you?\n\nDoes this desire reflect those values?\n\nWhat qualities came naturally to you as a child?\n\nWhich of them are still alive in you today?\n\nHow could these qualities help you achieve your desire?'**
+  String get field06Task;
+
+  /// Field 7 (Feelings) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Feelings'**
+  String get field07Name;
+
+  /// Field 7 (Feelings) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Emotional Awareness'**
+  String get field07Subtitle;
+
+  /// Field 7 (Feelings) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Feelings are signals, not obstacles.\n\nThey can show you what supports your desire and what needs your attention.'**
+  String get field07Intro;
+
+  /// Field 7 (Feelings) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What emotions do you experience most often? How do they affect your desire?'**
+  String get field07Task;
+
+  /// Field 8 (Thinking) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Thinking'**
+  String get field08Name;
+
+  /// Field 8 (Thinking) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Clarity'**
+  String get field08Subtitle;
+
+  /// Field 8 (Thinking) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Every desire is supported by some beliefs and limited by others.\n\nThe more clearly you see them, the more freedom you have to choose your path.'**
+  String get field08Intro;
+
+  /// Field 8 (Thinking) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What beliefs support you, and what beliefs hold you back?'**
+  String get field08Task;
+
+  /// Field 9 (Subconsciousness) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Subconsciousness'**
+  String get field09Name;
+
+  /// Field 9 (Subconsciousness) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Imagination'**
+  String get field09Subtitle;
+
+  /// Field 9 (Subconsciousness) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Your subconscious holds the blueprint of your desired life.'**
+  String get field09Intro;
+
+  /// Field 9 (Subconsciousness) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'If your desire were already real, what would your life look like? Describe it.'**
+  String get field09Task;
+
+  /// Field 10 (Reality) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Reality'**
+  String get field10Name;
+
+  /// Field 10 (Reality) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Action'**
+  String get field10Subtitle;
+
+  /// Field 10 (Reality) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Reality is shaped by the actions you take.'**
+  String get field10Intro;
+
+  /// Field 10 (Reality) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'Write 10 actions you can take today to move closer to your goal.'**
+  String get field10Task;
+
+  /// Field 11 (Possibility) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Possibility'**
+  String get field11Name;
+
+  /// Field 11 (Possibility) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Trust'**
+  String get field11Subtitle;
+
+  /// Field 11 (Possibility) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Within every desire lies the possibility of its realization.'**
+  String get field11Intro;
+
+  /// Field 11 (Possibility) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'Do you truly believe your desire is possible? If yes, can you trust the process?'**
+  String get field11Task;
+
+  /// Field 12 (Will) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Will'**
+  String get field12Name;
+
+  /// Field 12 (Will) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Resourcefulness'**
+  String get field12Subtitle;
+
+  /// Field 12 (Will) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Your will is your most powerful resource.'**
+  String get field12Intro;
+
+  /// Field 12 (Will) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What resources do you already have to reach your wish?'**
+  String get field12Task;
+
+  /// Field 13 (Intuition) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Intuition'**
+  String get field13Name;
+
+  /// Field 13 (Intuition) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Inner silence'**
+  String get field13Subtitle;
+
+  /// Field 13 (Intuition) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Your inner voice always knows the way.'**
+  String get field13Intro;
+
+  /// Field 13 (Intuition) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What is your inner voice saying about this desire?'**
+  String get field13Task;
+
+  /// Field 14 (Creation) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Creation'**
+  String get field14Name;
+
+  /// Field 14 (Creation) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Creativity'**
+  String get field14Subtitle;
+
+  /// Field 14 (Creation) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Every reality begins as a possibility.\n\nCreation is the bridge between an idea and its expression.\n\nCreation turns possibilities into reality.\n\nEvery day you create something through your actions, energy, and attention.'**
+  String get field14Intro;
+
+  /// Field 14 (Creation) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'How can this desire take its first form?\n\nWhat are you already creating in your life?'**
+  String get field14Task;
+
+  /// Field 15 (Power) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Power'**
+  String get field15Name;
+
+  /// Field 15 (Power) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Management'**
+  String get field15Subtitle;
+
+  /// Field 15 (Power) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Power begins with structure.\n\nYou can only manage what has structure.\n\nWhat you can manage, you can improve.'**
+  String get field15Intro;
+
+  /// Field 15 (Power) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What do you need to manage to move closer to your goal?\n\nI create structure in __________ to build __________.'**
+  String get field15Task;
+
+  /// Field 16 (Knowledge) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Knowledge'**
+  String get field16Name;
+
+  /// Field 16 (Knowledge) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Experience'**
+  String get field16Subtitle;
+
+  /// Field 16 (Knowledge) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Knowledge becomes valuable when you use it.\n\nReal wisdom appears through action.\n\nThe right knowledge can show you the next step forward.'**
+  String get field16Intro;
+
+  /// Field 16 (Knowledge) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'Do you already have enough knowledge to achieve your goal?\n\nIf yes, what knowledge will help you?\n\nIf not, where can you find the knowledge you need?\n\nThe knowledge that will help me move forward is __________.\n\nI can gain new knowledge from __________.'**
+  String get field16Task;
+
+  /// Field 17 (Choice) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Choice'**
+  String get field17Name;
+
+  /// Field 17 (Choice) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Self-Trust'**
+  String get field17Subtitle;
+
+  /// Field 17 (Choice) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Every choice shapes who you become.\n\nWhen you choose what is truly yours, you move forward with confidence.\n\nYour heart already knows what feels true.\n\nTrust yourself enough to choose it.'**
+  String get field17Intro;
+
+  /// Field 17 (Choice) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What feels truly right for you?\n\nI choose __________ because it is mine.'**
+  String get field17Task;
+
+  /// Field 18 (Movement) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Movement'**
+  String get field18Name;
+
+  /// Field 18 (Movement) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Discipline'**
+  String get field18Subtitle;
+
+  /// Field 18 (Movement) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Your desire requires discipline from you.\nThrough small, consistent steps, you can move closer to what you want.'**
+  String get field18Intro;
+
+  /// Field 18 (Movement) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What action are you willing to do with discipline to reach your desire?\n\nFor how long are you willing to keep doing it?\n\nI will do __________ regularly for __________ to move closer to my desire.'**
+  String get field18Task;
+
+  /// Field 19 (Truth) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Truth'**
+  String get field19Name;
+
+  /// Field 19 (Truth) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Honesty'**
+  String get field19Subtitle;
+
+  /// Field 19 (Truth) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Progress begins with seeing things as they are.\n\nTruth creates the foundation for change.'**
+  String get field19Intro;
+
+  /// Field 19 (Truth) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What is true for you right now?\n\nMy truth right now is __________.\n\nTo move closer to my desire, I intend to improve __________.'**
+  String get field19Task;
+
+  /// Field 20 (Purpose) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Purpose'**
+  String get field20Name;
+
+  /// Field 20 (Purpose) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Courage'**
+  String get field20Subtitle;
+
+  /// Field 20 (Purpose) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'A meaningful goal benefits more than just yourself.\n\nWhen your desire serves a greater purpose, it becomes stronger.\n\nIt takes courage to follow your own path.\n\nThe more meaningful your goal is, the more people it can inspire and help.'**
+  String get field20Intro;
+
+  /// Field 20 (Purpose) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'How could your desire benefit others?\n\nWrite 10 ways your desire could help other people.'**
+  String get field20Task;
+
+  /// Field 21 (Change) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get field21Name;
+
+  /// Field 21 (Change) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Flexibility'**
+  String get field21Subtitle;
+
+  /// Field 21 (Change) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Life keeps moving.\n\nYou cannot control every change, but you can learn to move with it.'**
+  String get field21Intro;
+
+  /// Field 21 (Change) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What is beginning to unfold in your life right now?\n\nI let go of control over __________ and allow life to move.\n\nI notice that __________ is beginning to unfold in my life.\n\nI start doing __________ to grow __________.'**
+  String get field21Task;
+
+  /// Field 22 (Balance) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Balance'**
+  String get field22Name;
+
+  /// Field 22 (Balance) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Self-Mastery'**
+  String get field22Subtitle;
+
+  /// Field 22 (Balance) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'True strength is not force.\n\nIt is the ability to balance power and gentleness.'**
+  String get field22Intro;
+
+  /// Field 22 (Balance) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'Where in your life could you stop forcing and start responding with balance?\n\nWhere could you use less force and more balance?\n\nMy strength is that I can __________ without forcing, controlling, or fighting.'**
+  String get field22Task;
+
+  /// Field 23 (Observe) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Observe'**
+  String get field23Name;
+
+  /// Field 23 (Observe) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Awareness'**
+  String get field23Subtitle;
+
+  /// Field 23 (Observe) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Sometimes a pause is also a step forward.\n\nBy observing, you begin to see things differently.'**
+  String get field23Intro;
+
+  /// Field 23 (Observe) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What are you trying to force right now?\n\nTake one minute to pause and observe.\n\nWhat do you see differently now?\n\nBy slowing down, I realize __________.'**
+  String get field23Task;
+
+  /// Field 24 (Transformation) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Transformation'**
+  String get field24Name;
+
+  /// Field 24 (Transformation) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Ability to Change'**
+  String get field24Subtitle;
+
+  /// Field 24 (Transformation) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Growth requires change.\n\nTo create something new, you may need to let go of something old.'**
+  String get field24Intro;
+
+  /// Field 24 (Transformation) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What are you holding on to that no longer serves you?\n\nWhat needs to change in you to reach your goal?\n\nI let go of __________ to become myself.'**
+  String get field24Task;
+
+  /// Field 25 (Intention) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Intention'**
+  String get field25Name;
+
+  /// Field 25 (Intention) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Focus'**
+  String get field25Subtitle;
+
+  /// Field 25 (Intention) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'What you focus on grows.\n\nA clear intention gives your desire direction and meaning.'**
+  String get field25Intro;
+
+  /// Field 25 (Intention) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'Why does this desire matter to you?\n\nThis desire matters to me because __________.'**
+  String get field25Task;
+
+  /// Field 26 (Attachment) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Attachment'**
+  String get field26Name;
+
+  /// Field 26 (Attachment) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Self-Honesty'**
+  String get field26Subtitle;
+
+  /// Field 26 (Attachment) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Not everything you hold onto is truly yours.\n\nSometimes fear disguises itself as a desire.'**
+  String get field26Intro;
+
+  /// Field 26 (Attachment) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What are you doing because you are afraid not to?\n\nOne goal that no longer feels truly mine is __________.\n\nOne intention that still feels true is __________.'**
+  String get field26Task;
+
+  /// Field 27 (Breakdown) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Breakdown'**
+  String get field27Name;
+
+  /// Field 27 (Breakdown) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Resilience'**
+  String get field27Subtitle;
+
+  /// Field 27 (Breakdown) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Sometimes something old needs to break down before you can move forward.\n\nWhen your thoughts and feelings work together, your path becomes clearer.'**
+  String get field27Intro;
+
+  /// Field 27 (Breakdown) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What do you think about your desire?\n\nWhat do you feel about your desire?\n\nIs there a contradiction between the two?\n\nIf there is a contradiction, try to bring your thoughts and feelings together.\n\nWhat do your feelings need to hear?\n\nWhat do your thoughts need to understand?'**
+  String get field27Task;
+
+  /// Field 28 (Guidance) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Guidance'**
+  String get field28Name;
+
+  /// Field 28 (Guidance) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Alignment with Flow'**
+  String get field28Subtitle;
+
+  /// Field 28 (Guidance) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Life flows through receiving and giving.\n\nThe more open you are to this flow, the easier it becomes to follow your path.'**
+  String get field28Intro;
+
+  /// Field 28 (Guidance) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'Where is this desire guiding you?\n\nMy desire is guiding me toward __________.\n\nI choose to be myself and trust the flow, even if __________.'**
+  String get field28Task;
+
+  /// Field 29 (Feeling) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Feeling'**
+  String get field29Name;
+
+  /// Field 29 (Feeling) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Sensitivity'**
+  String get field29Subtitle;
+
+  /// Field 29 (Feeling) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Not everything can be seen clearly.\n\nSometimes the only way forward is to trust what you feel.'**
+  String get field29Intro;
+
+  /// Field 29 (Feeling) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What are you afraid to face?\n\nI am ready to face __________.\n\nI meet the shadow that __________.'**
+  String get field29Task;
+
+  /// Field 30 (Integration) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Integration'**
+  String get field30Name;
+
+  /// Field 30 (Integration) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Recognition'**
+  String get field30Subtitle;
+
+  /// Field 30 (Integration) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'You begin to recognize yourself in a new reality.\n\nThe more clearly you see who you are becoming, the easier it becomes to integrate this identity into your life.'**
+  String get field30Intro;
+
+  /// Field 30 (Integration) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'Who are you when this desire is already part of your life?\n\nWho are you when this desire has already come true?\n\nI am a person who __________.\n\nI recognize myself as someone who __________.'**
+  String get field30Task;
+
+  /// Field 31 (Awakening) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Awakening'**
+  String get field31Name;
+
+  /// Field 31 (Awakening) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Action'**
+  String get field31Subtitle;
+
+  /// Field 31 (Awakening) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'You already know enough.\n\nThe question is no longer what you want. The question is whether you are ready to act.'**
+  String get field31Intro;
+
+  /// Field 31 (Awakening) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What action can you no longer postpone?\n\nWhat action do you know you need to take?\n\nI am ready to take action and __________.\n\nI wake up and take action by __________.'**
+  String get field31Task;
+
+  /// Field 32 (Wholeness) — name text
+  ///
+  /// In en, this message translates to:
+  /// **'Wholeness'**
+  String get field32Name;
+
+  /// Field 32 (Wholeness) — subtitle text
+  ///
+  /// In en, this message translates to:
+  /// **'Bravery'**
+  String get field32Subtitle;
+
+  /// Field 32 (Wholeness) — intro text
+  ///
+  /// In en, this message translates to:
+  /// **'Wholeness begins when you gather all parts of yourself.\n\nYou may still feel fear, but you are ready to take the next step.'**
+  String get field32Intro;
+
+  /// Field 32 (Wholeness) — task text
+  ///
+  /// In en, this message translates to:
+  /// **'What fears still stand between you and your next step?\n\nI acknowledge these fears, and I choose to move toward __________ anyway.'**
+  String get field32Task;
+
+  /// PDF export header label, top-right
+  ///
+  /// In en, this message translates to:
+  /// **'Your Journey Report'**
+  String get pdfJourneyReportLabel;
+
+  /// PDF export main title
+  ///
+  /// In en, this message translates to:
+  /// **'Your Journey\nIs Complete'**
+  String get pdfJourneyCompleteHeading;
+
+  /// PDF export subtitle line below the main title
+  ///
+  /// In en, this message translates to:
+  /// **'You have walked all 32 paths.'**
+  String get pdfWalkedAllPathsLine;
+
+  /// PDF export all-caps section label above the wish text
+  ///
+  /// In en, this message translates to:
+  /// **'YOUR DESIRE'**
+  String get pdfYourDesireLabel;
+
+  /// PDF export all-caps section label above the current field name
+  ///
+  /// In en, this message translates to:
+  /// **'YOUR CURRENT AREA OF ACTION'**
+  String get pdfCurrentAreaOfActionLabel;
+
+  /// PDF export all-caps section label above the list of recorded answers
+  ///
+  /// In en, this message translates to:
+  /// **'WHAT YOU HAVE DISCOVERED'**
+  String get pdfWhatYouHaveDiscoveredLabel;
+
+  /// PDF export empty-state text when no answers were recorded
+  ///
+  /// In en, this message translates to:
+  /// **'No answers recorded.'**
+  String get pdfNoAnswersRecorded;
 }
 
 class _AppLocalizationsDelegate

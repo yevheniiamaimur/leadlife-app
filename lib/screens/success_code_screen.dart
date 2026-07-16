@@ -55,6 +55,9 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
   }
 
   Future<Uint8List> _buildPdf() async {
+    // Captured before any awaits, so it's safe to use even if the widget
+    // is unmounted by the time the PDF finishes building.
+    final l10n = AppLocalizations.of(context);
     final gold   = PdfColor.fromHex('C8A96E');
     final ink    = PdfColor.fromHex('2C2C2C');
     final muted  = PdfColor.fromHex('8A7E70');
@@ -100,7 +103,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
                   pw.Text('leadlife', style: label(8, color: gold, letterSpacing: 3)),
-                  pw.Text('Your Journey Report', style: serifItalic(9, color: muted)),
+                  pw.Text(l10n.pdfJourneyReportLabel, style: serifItalic(9, color: muted)),
                 ],
               ),
               pw.SizedBox(height: 6),
@@ -119,10 +122,10 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
           ),
         ),
         build: (_) => [
-          pw.Text('Your Journey\nIs Complete',
+          pw.Text(l10n.pdfJourneyCompleteHeading,
             style: pw.TextStyle(font: fontSerifBold, fontSize: 28, color: ink, lineSpacing: 8)),
           pw.SizedBox(height: 6),
-          pw.Text('You have walked all 32 paths.', style: serifItalic(13, color: muted)),
+          pw.Text(l10n.pdfWalkedAllPathsLine, style: serifItalic(13, color: muted)),
           pw.SizedBox(height: 26),
 
           // Desire card
@@ -137,7 +140,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
             child: pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
-                pw.Text('YOUR DESIRE', style: label(7.5, color: gold, letterSpacing: 2)),
+                pw.Text(l10n.pdfYourDesireLabel, style: label(7.5, color: gold, letterSpacing: 2)),
                 pw.SizedBox(height: 8),
                 pw.Text('"${widget.wish}"', style: serifItalic(14, lineSpacing: 4)),
               ],
@@ -146,7 +149,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
           pw.SizedBox(height: 20),
 
           // Area of action
-          pw.Text('YOUR CURRENT AREA OF ACTION', style: label(7.5, letterSpacing: 2)),
+          pw.Text(l10n.pdfCurrentAreaOfActionLabel, style: label(7.5, letterSpacing: 2)),
           pw.SizedBox(height: 6),
           pw.Text(widget.currentAreaField.name, style: serif(22, letterSpacing: 2)),
           pw.SizedBox(height: 2),
@@ -155,14 +158,14 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
 
           pw.Container(height: 0.5, color: hair),
           pw.SizedBox(height: 22),
-          pw.Text('WHAT YOU HAVE DISCOVERED', style: label(7.5, letterSpacing: 2)),
+          pw.Text(l10n.pdfWhatYouHaveDiscoveredLabel, style: label(7.5, letterSpacing: 2)),
           pw.SizedBox(height: 16),
 
           if (entries.isEmpty)
-            pw.Text('No answers recorded.', style: serifItalic(12, color: muted)),
+            pw.Text(l10n.pdfNoAnswersRecorded, style: serifItalic(12, color: muted)),
 
           ...entries.map((e) {
-            final field = kFields.firstWhere((f) => f.n == e.key);
+            final field = localizeField(l10n, kFields.firstWhere((f) => f.n == e.key));
             return pw.Padding(
               padding: const pw.EdgeInsets.only(bottom: 14),
               child: pw.Container(

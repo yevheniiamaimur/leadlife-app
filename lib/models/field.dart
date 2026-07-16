@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 
 class GameField {
   const GameField({
@@ -216,3 +217,330 @@ const List<GameField> kFields = [
     task: 'What fears still stand between you and your next step?\n\nI acknowledge these fears, and I choose to move toward __________ anyway.',
   ),
 ];
+
+GameField localizeField(AppLocalizations l10n, GameField field) {
+  switch (field.n) {
+    case 1:
+      return GameField(
+        n: field.n,
+        name: l10n.field01Name,
+        subtitle: l10n.field01Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field01Intro,
+        task: l10n.field01Task,
+      );
+    case 2:
+      return GameField(
+        n: field.n,
+        name: l10n.field02Name,
+        subtitle: l10n.field02Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field02Intro,
+        task: l10n.field02Task,
+      );
+    case 3:
+      return GameField(
+        n: field.n,
+        name: l10n.field03Name,
+        subtitle: l10n.field03Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field03Intro,
+        task: l10n.field03Task,
+      );
+    case 4:
+      return GameField(
+        n: field.n,
+        name: l10n.field04Name,
+        subtitle: l10n.field04Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field04Intro,
+        task: l10n.field04Task,
+      );
+    case 5:
+      return GameField(
+        n: field.n,
+        name: l10n.field05Name,
+        subtitle: l10n.field05Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field05Intro,
+        task: l10n.field05Task,
+      );
+    case 6:
+      return GameField(
+        n: field.n,
+        name: l10n.field06Name,
+        subtitle: l10n.field06Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field06Intro,
+        task: l10n.field06Task,
+      );
+    case 7:
+      return GameField(
+        n: field.n,
+        name: l10n.field07Name,
+        subtitle: l10n.field07Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field07Intro,
+        task: l10n.field07Task,
+      );
+    case 8:
+      return GameField(
+        n: field.n,
+        name: l10n.field08Name,
+        subtitle: l10n.field08Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field08Intro,
+        task: l10n.field08Task,
+      );
+    case 9:
+      return GameField(
+        n: field.n,
+        name: l10n.field09Name,
+        subtitle: l10n.field09Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field09Intro,
+        task: l10n.field09Task,
+      );
+    case 10:
+      return GameField(
+        n: field.n,
+        name: l10n.field10Name,
+        subtitle: l10n.field10Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field10Intro,
+        task: l10n.field10Task,
+      );
+    case 11:
+      return GameField(
+        n: field.n,
+        name: l10n.field11Name,
+        subtitle: l10n.field11Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field11Intro,
+        task: l10n.field11Task,
+      );
+    case 12:
+      return GameField(
+        n: field.n,
+        name: l10n.field12Name,
+        subtitle: l10n.field12Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field12Intro,
+        task: l10n.field12Task,
+      );
+    case 13:
+      return GameField(
+        n: field.n,
+        name: l10n.field13Name,
+        subtitle: l10n.field13Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field13Intro,
+        task: l10n.field13Task,
+      );
+    case 14:
+      return GameField(
+        n: field.n,
+        name: l10n.field14Name,
+        subtitle: l10n.field14Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field14Intro,
+        task: l10n.field14Task,
+      );
+    case 15:
+      return GameField(
+        n: field.n,
+        name: l10n.field15Name,
+        subtitle: l10n.field15Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field15Intro,
+        task: l10n.field15Task,
+      );
+    case 16:
+      return GameField(
+        n: field.n,
+        name: l10n.field16Name,
+        subtitle: l10n.field16Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field16Intro,
+        task: l10n.field16Task,
+      );
+    case 17:
+      return GameField(
+        n: field.n,
+        name: l10n.field17Name,
+        subtitle: l10n.field17Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field17Intro,
+        task: l10n.field17Task,
+      );
+    case 18:
+      return GameField(
+        n: field.n,
+        name: l10n.field18Name,
+        subtitle: l10n.field18Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field18Intro,
+        task: l10n.field18Task,
+      );
+    case 19:
+      return GameField(
+        n: field.n,
+        name: l10n.field19Name,
+        subtitle: l10n.field19Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field19Intro,
+        task: l10n.field19Task,
+      );
+    case 20:
+      return GameField(
+        n: field.n,
+        name: l10n.field20Name,
+        subtitle: l10n.field20Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field20Intro,
+        task: l10n.field20Task,
+      );
+    case 21:
+      return GameField(
+        n: field.n,
+        name: l10n.field21Name,
+        subtitle: l10n.field21Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field21Intro,
+        task: l10n.field21Task,
+      );
+    case 22:
+      return GameField(
+        n: field.n,
+        name: l10n.field22Name,
+        subtitle: l10n.field22Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field22Intro,
+        task: l10n.field22Task,
+      );
+    case 23:
+      return GameField(
+        n: field.n,
+        name: l10n.field23Name,
+        subtitle: l10n.field23Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field23Intro,
+        task: l10n.field23Task,
+      );
+    case 24:
+      return GameField(
+        n: field.n,
+        name: l10n.field24Name,
+        subtitle: l10n.field24Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field24Intro,
+        task: l10n.field24Task,
+      );
+    case 25:
+      return GameField(
+        n: field.n,
+        name: l10n.field25Name,
+        subtitle: l10n.field25Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field25Intro,
+        task: l10n.field25Task,
+      );
+    case 26:
+      return GameField(
+        n: field.n,
+        name: l10n.field26Name,
+        subtitle: l10n.field26Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field26Intro,
+        task: l10n.field26Task,
+      );
+    case 27:
+      return GameField(
+        n: field.n,
+        name: l10n.field27Name,
+        subtitle: l10n.field27Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field27Intro,
+        task: l10n.field27Task,
+      );
+    case 28:
+      return GameField(
+        n: field.n,
+        name: l10n.field28Name,
+        subtitle: l10n.field28Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field28Intro,
+        task: l10n.field28Task,
+      );
+    case 29:
+      return GameField(
+        n: field.n,
+        name: l10n.field29Name,
+        subtitle: l10n.field29Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field29Intro,
+        task: l10n.field29Task,
+      );
+    case 30:
+      return GameField(
+        n: field.n,
+        name: l10n.field30Name,
+        subtitle: l10n.field30Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field30Intro,
+        task: l10n.field30Task,
+      );
+    case 31:
+      return GameField(
+        n: field.n,
+        name: l10n.field31Name,
+        subtitle: l10n.field31Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field31Intro,
+        task: l10n.field31Task,
+      );
+    case 32:
+      return GameField(
+        n: field.n,
+        name: l10n.field32Name,
+        subtitle: l10n.field32Subtitle,
+        superpower: field.superpower,
+        color: field.color,
+        intro: l10n.field32Intro,
+        task: l10n.field32Task,
+      );
+    default:
+      return field;
+  }
+}

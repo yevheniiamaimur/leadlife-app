@@ -937,5 +937,545 @@
   "howItWorksSlide7Para4": "Your path, built from your own answers.",
   "@howItWorksSlide7Para4": {
     "description": "Fourth paragraph on slide 7 of the How It Works onboarding"
+  },
+  "field01Name": "Light",
+  "@field01Name": {
+    "description": "Field 1 (Light) — name text"
+  },
+  "field01Subtitle": "Desire",
+  "@field01Subtitle": {
+    "description": "Field 1 (Light) — subtitle text"
+  },
+  "field01Intro": "Every journey begins with a desire.\n\nYour desire matters because it points toward something important for your growth.",
+  "@field01Intro": {
+    "description": "Field 1 (Light) — intro text"
+  },
+  "field01Task": "What desire are you bringing into this journey?",
+  "@field01Task": {
+    "description": "Field 1 (Light) — task text"
+  },
+  "field02Name": "Connection",
+  "@field02Name": {
+    "description": "Field 2 (Connection) — name text"
+  },
+  "field02Subtitle": "Initiative",
+  "@field02Subtitle": {
+    "description": "Field 2 (Connection) — subtitle text"
+  },
+  "field02Intro": "Every idea starts as a spark.\n\nGrowth begins when you share it with the world.\nEvery desire has an origin.\nRemember where this dream first appeared in your life.",
+  "@field02Intro": {
+    "description": "Field 2 (Connection) — intro text"
+  },
+  "field02Task": "When did this desire first appear in your life?\n\nWho could you share it with today that would support its realization?",
+  "@field02Task": {
+    "description": "Field 2 (Connection) — task text"
+  },
+  "field03Name": "Form",
+  "@field03Name": {
+    "description": "Field 3 (Form) — name text"
+  },
+  "field03Subtitle": "Vision",
+  "@field03Subtitle": {
+    "description": "Field 3 (Form) — subtitle text"
+  },
+  "field03Intro": "A desire becomes real when it has a clear shape.\nImagine what success looks like for you.",
+  "@field03Intro": {
+    "description": "Field 3 (Form) — intro text"
+  },
+  "field03Task": "What does success look like?",
+  "@field03Task": {
+    "description": "Field 3 (Form) — task text"
+  },
+  "field04Name": "Scale",
+  "@field04Name": {
+    "description": "Field 4 (Scale) — name text"
+  },
+  "field04Subtitle": "Contribution",
+  "@field04Subtitle": {
+    "description": "Field 4 (Scale) — subtitle text"
+  },
+  "field04Intro": "Every goal creates an impact.\nConsider what value your desire brings to others.",
+  "@field04Intro": {
+    "description": "Field 4 (Scale) — intro text"
+  },
+  "field04Task": "Who benefits when you achieve this?",
+  "@field04Task": {
+    "description": "Field 4 (Scale) — task text"
+  },
+  "field05Name": "Limitation",
+  "@field05Name": {
+    "description": "Field 5 (Limitation) — name text"
+  },
+  "field05Subtitle": "Resilience",
+  "@field05Subtitle": {
+    "description": "Field 5 (Limitation) — subtitle text"
+  },
+  "field05Intro": "Limitations are a natural part of every journey.\n\nThey help you develop the strength needed to reach your goal.",
+  "@field05Intro": {
+    "description": "Field 5 (Limitation) — intro text"
+  },
+  "field05Task": "What limitations do you currently have (physical, emotional, financial, social, or other)? How are they helping you grow?",
+  "@field05Task": {
+    "description": "Field 5 (Limitation) — task text"
+  },
+  "field06Name": "Values",
+  "@field06Name": {
+    "description": "Field 6 (Values) — name text"
+  },
+  "field06Subtitle": "Authenticity",
+  "@field06Subtitle": {
+    "description": "Field 6 (Values) — subtitle text"
+  },
+  "field06Intro": "Your values guide the choices you make.\n\nThe strongest desires are often connected to what has always mattered to you.",
+  "@field06Intro": {
+    "description": "Field 6 (Values) — intro text"
+  },
+  "field06Task": "What has always been important to you?\n\nDoes this desire reflect those values?\n\nWhat qualities came naturally to you as a child?\n\nWhich of them are still alive in you today?\n\nHow could these qualities help you achieve your desire?",
+  "@field06Task": {
+    "description": "Field 6 (Values) — task text"
+  },
+  "field07Name": "Feelings",
+  "@field07Name": {
+    "description": "Field 7 (Feelings) — name text"
+  },
+  "field07Subtitle": "Emotional Awareness",
+  "@field07Subtitle": {
+    "description": "Field 7 (Feelings) — subtitle text"
+  },
+  "field07Intro": "Feelings are signals, not obstacles.\n\nThey can show you what supports your desire and what needs your attention.",
+  "@field07Intro": {
+    "description": "Field 7 (Feelings) — intro text"
+  },
+  "field07Task": "What emotions do you experience most often? How do they affect your desire?",
+  "@field07Task": {
+    "description": "Field 7 (Feelings) — task text"
+  },
+  "field08Name": "Thinking",
+  "@field08Name": {
+    "description": "Field 8 (Thinking) — name text"
+  },
+  "field08Subtitle": "Clarity",
+  "@field08Subtitle": {
+    "description": "Field 8 (Thinking) — subtitle text"
+  },
+  "field08Intro": "Every desire is supported by some beliefs and limited by others.\n\nThe more clearly you see them, the more freedom you have to choose your path.",
+  "@field08Intro": {
+    "description": "Field 8 (Thinking) — intro text"
+  },
+  "field08Task": "What beliefs support you, and what beliefs hold you back?",
+  "@field08Task": {
+    "description": "Field 8 (Thinking) — task text"
+  },
+  "field09Name": "Subconsciousness",
+  "@field09Name": {
+    "description": "Field 9 (Subconsciousness) — name text"
+  },
+  "field09Subtitle": "Imagination",
+  "@field09Subtitle": {
+    "description": "Field 9 (Subconsciousness) — subtitle text"
+  },
+  "field09Intro": "Your subconscious holds the blueprint of your desired life.",
+  "@field09Intro": {
+    "description": "Field 9 (Subconsciousness) — intro text"
+  },
+  "field09Task": "If your desire were already real, what would your life look like? Describe it.",
+  "@field09Task": {
+    "description": "Field 9 (Subconsciousness) — task text"
+  },
+  "field10Name": "Reality",
+  "@field10Name": {
+    "description": "Field 10 (Reality) — name text"
+  },
+  "field10Subtitle": "Action",
+  "@field10Subtitle": {
+    "description": "Field 10 (Reality) — subtitle text"
+  },
+  "field10Intro": "Reality is shaped by the actions you take.",
+  "@field10Intro": {
+    "description": "Field 10 (Reality) — intro text"
+  },
+  "field10Task": "Write 10 actions you can take today to move closer to your goal.",
+  "@field10Task": {
+    "description": "Field 10 (Reality) — task text"
+  },
+  "field11Name": "Possibility",
+  "@field11Name": {
+    "description": "Field 11 (Possibility) — name text"
+  },
+  "field11Subtitle": "Trust",
+  "@field11Subtitle": {
+    "description": "Field 11 (Possibility) — subtitle text"
+  },
+  "field11Intro": "Within every desire lies the possibility of its realization.",
+  "@field11Intro": {
+    "description": "Field 11 (Possibility) — intro text"
+  },
+  "field11Task": "Do you truly believe your desire is possible? If yes, can you trust the process?",
+  "@field11Task": {
+    "description": "Field 11 (Possibility) — task text"
+  },
+  "field12Name": "Will",
+  "@field12Name": {
+    "description": "Field 12 (Will) — name text"
+  },
+  "field12Subtitle": "Resourcefulness",
+  "@field12Subtitle": {
+    "description": "Field 12 (Will) — subtitle text"
+  },
+  "field12Intro": "Your will is your most powerful resource.",
+  "@field12Intro": {
+    "description": "Field 12 (Will) — intro text"
+  },
+  "field12Task": "What resources do you already have to reach your wish?",
+  "@field12Task": {
+    "description": "Field 12 (Will) — task text"
+  },
+  "field13Name": "Intuition",
+  "@field13Name": {
+    "description": "Field 13 (Intuition) — name text"
+  },
+  "field13Subtitle": "Inner silence",
+  "@field13Subtitle": {
+    "description": "Field 13 (Intuition) — subtitle text"
+  },
+  "field13Intro": "Your inner voice always knows the way.",
+  "@field13Intro": {
+    "description": "Field 13 (Intuition) — intro text"
+  },
+  "field13Task": "What is your inner voice saying about this desire?",
+  "@field13Task": {
+    "description": "Field 13 (Intuition) — task text"
+  },
+  "field14Name": "Creation",
+  "@field14Name": {
+    "description": "Field 14 (Creation) — name text"
+  },
+  "field14Subtitle": "Creativity",
+  "@field14Subtitle": {
+    "description": "Field 14 (Creation) — subtitle text"
+  },
+  "field14Intro": "Every reality begins as a possibility.\n\nCreation is the bridge between an idea and its expression.\n\nCreation turns possibilities into reality.\n\nEvery day you create something through your actions, energy, and attention.",
+  "@field14Intro": {
+    "description": "Field 14 (Creation) — intro text"
+  },
+  "field14Task": "How can this desire take its first form?\n\nWhat are you already creating in your life?",
+  "@field14Task": {
+    "description": "Field 14 (Creation) — task text"
+  },
+  "field15Name": "Power",
+  "@field15Name": {
+    "description": "Field 15 (Power) — name text"
+  },
+  "field15Subtitle": "Management",
+  "@field15Subtitle": {
+    "description": "Field 15 (Power) — subtitle text"
+  },
+  "field15Intro": "Power begins with structure.\n\nYou can only manage what has structure.\n\nWhat you can manage, you can improve.",
+  "@field15Intro": {
+    "description": "Field 15 (Power) — intro text"
+  },
+  "field15Task": "What do you need to manage to move closer to your goal?\n\nI create structure in __________ to build __________.",
+  "@field15Task": {
+    "description": "Field 15 (Power) — task text"
+  },
+  "field16Name": "Knowledge",
+  "@field16Name": {
+    "description": "Field 16 (Knowledge) — name text"
+  },
+  "field16Subtitle": "Experience",
+  "@field16Subtitle": {
+    "description": "Field 16 (Knowledge) — subtitle text"
+  },
+  "field16Intro": "Knowledge becomes valuable when you use it.\n\nReal wisdom appears through action.\n\nThe right knowledge can show you the next step forward.",
+  "@field16Intro": {
+    "description": "Field 16 (Knowledge) — intro text"
+  },
+  "field16Task": "Do you already have enough knowledge to achieve your goal?\n\nIf yes, what knowledge will help you?\n\nIf not, where can you find the knowledge you need?\n\nThe knowledge that will help me move forward is __________.\n\nI can gain new knowledge from __________.",
+  "@field16Task": {
+    "description": "Field 16 (Knowledge) — task text"
+  },
+  "field17Name": "Choice",
+  "@field17Name": {
+    "description": "Field 17 (Choice) — name text"
+  },
+  "field17Subtitle": "Self-Trust",
+  "@field17Subtitle": {
+    "description": "Field 17 (Choice) — subtitle text"
+  },
+  "field17Intro": "Every choice shapes who you become.\n\nWhen you choose what is truly yours, you move forward with confidence.\n\nYour heart already knows what feels true.\n\nTrust yourself enough to choose it.",
+  "@field17Intro": {
+    "description": "Field 17 (Choice) — intro text"
+  },
+  "field17Task": "What feels truly right for you?\n\nI choose __________ because it is mine.",
+  "@field17Task": {
+    "description": "Field 17 (Choice) — task text"
+  },
+  "field18Name": "Movement",
+  "@field18Name": {
+    "description": "Field 18 (Movement) — name text"
+  },
+  "field18Subtitle": "Discipline",
+  "@field18Subtitle": {
+    "description": "Field 18 (Movement) — subtitle text"
+  },
+  "field18Intro": "Your desire requires discipline from you.\nThrough small, consistent steps, you can move closer to what you want.",
+  "@field18Intro": {
+    "description": "Field 18 (Movement) — intro text"
+  },
+  "field18Task": "What action are you willing to do with discipline to reach your desire?\n\nFor how long are you willing to keep doing it?\n\nI will do __________ regularly for __________ to move closer to my desire.",
+  "@field18Task": {
+    "description": "Field 18 (Movement) — task text"
+  },
+  "field19Name": "Truth",
+  "@field19Name": {
+    "description": "Field 19 (Truth) — name text"
+  },
+  "field19Subtitle": "Honesty",
+  "@field19Subtitle": {
+    "description": "Field 19 (Truth) — subtitle text"
+  },
+  "field19Intro": "Progress begins with seeing things as they are.\n\nTruth creates the foundation for change.",
+  "@field19Intro": {
+    "description": "Field 19 (Truth) — intro text"
+  },
+  "field19Task": "What is true for you right now?\n\nMy truth right now is __________.\n\nTo move closer to my desire, I intend to improve __________.",
+  "@field19Task": {
+    "description": "Field 19 (Truth) — task text"
+  },
+  "field20Name": "Purpose",
+  "@field20Name": {
+    "description": "Field 20 (Purpose) — name text"
+  },
+  "field20Subtitle": "Courage",
+  "@field20Subtitle": {
+    "description": "Field 20 (Purpose) — subtitle text"
+  },
+  "field20Intro": "A meaningful goal benefits more than just yourself.\n\nWhen your desire serves a greater purpose, it becomes stronger.\n\nIt takes courage to follow your own path.\n\nThe more meaningful your goal is, the more people it can inspire and help.",
+  "@field20Intro": {
+    "description": "Field 20 (Purpose) — intro text"
+  },
+  "field20Task": "How could your desire benefit others?\n\nWrite 10 ways your desire could help other people.",
+  "@field20Task": {
+    "description": "Field 20 (Purpose) — task text"
+  },
+  "field21Name": "Change",
+  "@field21Name": {
+    "description": "Field 21 (Change) — name text"
+  },
+  "field21Subtitle": "Flexibility",
+  "@field21Subtitle": {
+    "description": "Field 21 (Change) — subtitle text"
+  },
+  "field21Intro": "Life keeps moving.\n\nYou cannot control every change, but you can learn to move with it.",
+  "@field21Intro": {
+    "description": "Field 21 (Change) — intro text"
+  },
+  "field21Task": "What is beginning to unfold in your life right now?\n\nI let go of control over __________ and allow life to move.\n\nI notice that __________ is beginning to unfold in my life.\n\nI start doing __________ to grow __________.",
+  "@field21Task": {
+    "description": "Field 21 (Change) — task text"
+  },
+  "field22Name": "Balance",
+  "@field22Name": {
+    "description": "Field 22 (Balance) — name text"
+  },
+  "field22Subtitle": "Self-Mastery",
+  "@field22Subtitle": {
+    "description": "Field 22 (Balance) — subtitle text"
+  },
+  "field22Intro": "True strength is not force.\n\nIt is the ability to balance power and gentleness.",
+  "@field22Intro": {
+    "description": "Field 22 (Balance) — intro text"
+  },
+  "field22Task": "Where in your life could you stop forcing and start responding with balance?\n\nWhere could you use less force and more balance?\n\nMy strength is that I can __________ without forcing, controlling, or fighting.",
+  "@field22Task": {
+    "description": "Field 22 (Balance) — task text"
+  },
+  "field23Name": "Observe",
+  "@field23Name": {
+    "description": "Field 23 (Observe) — name text"
+  },
+  "field23Subtitle": "Awareness",
+  "@field23Subtitle": {
+    "description": "Field 23 (Observe) — subtitle text"
+  },
+  "field23Intro": "Sometimes a pause is also a step forward.\n\nBy observing, you begin to see things differently.",
+  "@field23Intro": {
+    "description": "Field 23 (Observe) — intro text"
+  },
+  "field23Task": "What are you trying to force right now?\n\nTake one minute to pause and observe.\n\nWhat do you see differently now?\n\nBy slowing down, I realize __________.",
+  "@field23Task": {
+    "description": "Field 23 (Observe) — task text"
+  },
+  "field24Name": "Transformation",
+  "@field24Name": {
+    "description": "Field 24 (Transformation) — name text"
+  },
+  "field24Subtitle": "Ability to Change",
+  "@field24Subtitle": {
+    "description": "Field 24 (Transformation) — subtitle text"
+  },
+  "field24Intro": "Growth requires change.\n\nTo create something new, you may need to let go of something old.",
+  "@field24Intro": {
+    "description": "Field 24 (Transformation) — intro text"
+  },
+  "field24Task": "What are you holding on to that no longer serves you?\n\nWhat needs to change in you to reach your goal?\n\nI let go of __________ to become myself.",
+  "@field24Task": {
+    "description": "Field 24 (Transformation) — task text"
+  },
+  "field25Name": "Intention",
+  "@field25Name": {
+    "description": "Field 25 (Intention) — name text"
+  },
+  "field25Subtitle": "Focus",
+  "@field25Subtitle": {
+    "description": "Field 25 (Intention) — subtitle text"
+  },
+  "field25Intro": "What you focus on grows.\n\nA clear intention gives your desire direction and meaning.",
+  "@field25Intro": {
+    "description": "Field 25 (Intention) — intro text"
+  },
+  "field25Task": "Why does this desire matter to you?\n\nThis desire matters to me because __________.",
+  "@field25Task": {
+    "description": "Field 25 (Intention) — task text"
+  },
+  "field26Name": "Attachment",
+  "@field26Name": {
+    "description": "Field 26 (Attachment) — name text"
+  },
+  "field26Subtitle": "Self-Honesty",
+  "@field26Subtitle": {
+    "description": "Field 26 (Attachment) — subtitle text"
+  },
+  "field26Intro": "Not everything you hold onto is truly yours.\n\nSometimes fear disguises itself as a desire.",
+  "@field26Intro": {
+    "description": "Field 26 (Attachment) — intro text"
+  },
+  "field26Task": "What are you doing because you are afraid not to?\n\nOne goal that no longer feels truly mine is __________.\n\nOne intention that still feels true is __________.",
+  "@field26Task": {
+    "description": "Field 26 (Attachment) — task text"
+  },
+  "field27Name": "Breakdown",
+  "@field27Name": {
+    "description": "Field 27 (Breakdown) — name text"
+  },
+  "field27Subtitle": "Resilience",
+  "@field27Subtitle": {
+    "description": "Field 27 (Breakdown) — subtitle text"
+  },
+  "field27Intro": "Sometimes something old needs to break down before you can move forward.\n\nWhen your thoughts and feelings work together, your path becomes clearer.",
+  "@field27Intro": {
+    "description": "Field 27 (Breakdown) — intro text"
+  },
+  "field27Task": "What do you think about your desire?\n\nWhat do you feel about your desire?\n\nIs there a contradiction between the two?\n\nIf there is a contradiction, try to bring your thoughts and feelings together.\n\nWhat do your feelings need to hear?\n\nWhat do your thoughts need to understand?",
+  "@field27Task": {
+    "description": "Field 27 (Breakdown) — task text"
+  },
+  "field28Name": "Guidance",
+  "@field28Name": {
+    "description": "Field 28 (Guidance) — name text"
+  },
+  "field28Subtitle": "Alignment with Flow",
+  "@field28Subtitle": {
+    "description": "Field 28 (Guidance) — subtitle text"
+  },
+  "field28Intro": "Life flows through receiving and giving.\n\nThe more open you are to this flow, the easier it becomes to follow your path.",
+  "@field28Intro": {
+    "description": "Field 28 (Guidance) — intro text"
+  },
+  "field28Task": "Where is this desire guiding you?\n\nMy desire is guiding me toward __________.\n\nI choose to be myself and trust the flow, even if __________.",
+  "@field28Task": {
+    "description": "Field 28 (Guidance) — task text"
+  },
+  "field29Name": "Feeling",
+  "@field29Name": {
+    "description": "Field 29 (Feeling) — name text"
+  },
+  "field29Subtitle": "Sensitivity",
+  "@field29Subtitle": {
+    "description": "Field 29 (Feeling) — subtitle text"
+  },
+  "field29Intro": "Not everything can be seen clearly.\n\nSometimes the only way forward is to trust what you feel.",
+  "@field29Intro": {
+    "description": "Field 29 (Feeling) — intro text"
+  },
+  "field29Task": "What are you afraid to face?\n\nI am ready to face __________.\n\nI meet the shadow that __________.",
+  "@field29Task": {
+    "description": "Field 29 (Feeling) — task text"
+  },
+  "field30Name": "Integration",
+  "@field30Name": {
+    "description": "Field 30 (Integration) — name text"
+  },
+  "field30Subtitle": "Recognition",
+  "@field30Subtitle": {
+    "description": "Field 30 (Integration) — subtitle text"
+  },
+  "field30Intro": "You begin to recognize yourself in a new reality.\n\nThe more clearly you see who you are becoming, the easier it becomes to integrate this identity into your life.",
+  "@field30Intro": {
+    "description": "Field 30 (Integration) — intro text"
+  },
+  "field30Task": "Who are you when this desire is already part of your life?\n\nWho are you when this desire has already come true?\n\nI am a person who __________.\n\nI recognize myself as someone who __________.",
+  "@field30Task": {
+    "description": "Field 30 (Integration) — task text"
+  },
+  "field31Name": "Awakening",
+  "@field31Name": {
+    "description": "Field 31 (Awakening) — name text"
+  },
+  "field31Subtitle": "Action",
+  "@field31Subtitle": {
+    "description": "Field 31 (Awakening) — subtitle text"
+  },
+  "field31Intro": "You already know enough.\n\nThe question is no longer what you want. The question is whether you are ready to act.",
+  "@field31Intro": {
+    "description": "Field 31 (Awakening) — intro text"
+  },
+  "field31Task": "What action can you no longer postpone?\n\nWhat action do you know you need to take?\n\nI am ready to take action and __________.\n\nI wake up and take action by __________.",
+  "@field31Task": {
+    "description": "Field 31 (Awakening) — task text"
+  },
+  "field32Name": "Wholeness",
+  "@field32Name": {
+    "description": "Field 32 (Wholeness) — name text"
+  },
+  "field32Subtitle": "Bravery",
+  "@field32Subtitle": {
+    "description": "Field 32 (Wholeness) — subtitle text"
+  },
+  "field32Intro": "Wholeness begins when you gather all parts of yourself.\n\nYou may still feel fear, but you are ready to take the next step.",
+  "@field32Intro": {
+    "description": "Field 32 (Wholeness) — intro text"
+  },
+  "field32Task": "What fears still stand between you and your next step?\n\nI acknowledge these fears, and I choose to move toward __________ anyway.",
+  "@field32Task": {
+    "description": "Field 32 (Wholeness) — task text"
+  },
+  "pdfJourneyReportLabel": "Your Journey Report",
+  "@pdfJourneyReportLabel": {
+    "description": "PDF export header label, top-right"
+  },
+  "pdfJourneyCompleteHeading": "Your Journey\nIs Complete",
+  "@pdfJourneyCompleteHeading": {
+    "description": "PDF export main title"
+  },
+  "pdfWalkedAllPathsLine": "You have walked all 32 paths.",
+  "@pdfWalkedAllPathsLine": {
+    "description": "PDF export subtitle line below the main title"
+  },
+  "pdfYourDesireLabel": "YOUR DESIRE",
+  "@pdfYourDesireLabel": {
+    "description": "PDF export all-caps section label above the wish text"
+  },
+  "pdfCurrentAreaOfActionLabel": "YOUR CURRENT AREA OF ACTION",
+  "@pdfCurrentAreaOfActionLabel": {
+    "description": "PDF export all-caps section label above the current field name"
+  },
+  "pdfWhatYouHaveDiscoveredLabel": "WHAT YOU HAVE DISCOVERED",
+  "@pdfWhatYouHaveDiscoveredLabel": {
+    "description": "PDF export all-caps section label above the list of recorded answers"
+  },
+  "pdfNoAnswersRecorded": "No answers recorded.",
+  "@pdfNoAnswersRecorded": {
+    "description": "PDF export empty-state text when no answers were recorded"
   }
 }
