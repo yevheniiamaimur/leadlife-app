@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../app_theme.dart';
+import '../services/notification_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'onboarding_focus_screen.dart';
 
@@ -32,7 +33,12 @@ class _OnboardingContactScreenState extends State<OnboardingContactScreen> {
 
   Future<void> _goNext() async {
     FocusScope.of(context).unfocus();
-    if (_notifyChecked) await Permission.notification.request();
+    if (_notifyChecked) {
+      final status = await Permission.notification.request();
+      if (status.isGranted) {
+        NotificationService.instance.scheduleDailyReminder().ignore();
+      }
+    }
     if (!mounted) return;
     Navigator.of(context).push(_fadeRoute(
       OnboardingFocusScreen(
