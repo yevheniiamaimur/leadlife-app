@@ -1,22 +1,21 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../app_theme.dart';
 
 // ── Brand typography helpers ─────────────────────────────────
+// Fonts are bundled as local assets (see pubspec.yaml) rather than fetched
+// at runtime via google_fonts, so the app has no network dependency for
+// text rendering and no first-frame font-swap flicker.
 const _cyrillicFallback = ['Helvetica Neue', 'Arial'];
 
 TextStyle llSerif({double size = 16, FontWeight weight = FontWeight.w400, Color color = llInk, double height = 1.3}) =>
-    GoogleFonts.playfairDisplay(fontSize: size, fontWeight: weight, color: color, height: height)
-      .copyWith(fontFamilyFallback: _cyrillicFallback);
+    TextStyle(fontFamily: 'PlayfairDisplay', fontSize: size, fontWeight: weight, color: color, height: height, fontFamilyFallback: _cyrillicFallback);
 
 TextStyle llSerifItalic({double size = 14, Color color = llMuted, double height = 1.5, FontWeight weight = FontWeight.w400}) =>
-    GoogleFonts.workSans(fontSize: size, fontStyle: FontStyle.italic, fontWeight: weight, color: color, height: height)
-      .copyWith(fontFamilyFallback: _cyrillicFallback);
+    TextStyle(fontFamily: 'WorkSans', fontStyle: FontStyle.italic, fontSize: size, fontWeight: weight, color: color, height: height, fontFamilyFallback: _cyrillicFallback);
 
 TextStyle llUi({double size = 13, Color color = llInk, FontWeight weight = FontWeight.w400, double letterSpacing = 0}) =>
-    GoogleFonts.workSans(fontSize: size, fontWeight: weight, color: color, letterSpacing: letterSpacing)
-      .copyWith(fontFamilyFallback: _cyrillicFallback);
+    TextStyle(fontFamily: 'WorkSans', fontSize: size, fontWeight: weight, color: color, letterSpacing: letterSpacing, fontFamilyFallback: _cyrillicFallback);
 
 // ── SmallCaps label ──────────────────────────────────────────
 class LLSmallCaps extends StatelessWidget {
@@ -29,12 +28,14 @@ class LLSmallCaps extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     text.toUpperCase(),
-    style: GoogleFonts.workSans(
+    style: TextStyle(
+      fontFamily: 'WorkSans',
       fontSize: size,
       fontWeight: FontWeight.w600,
       color: color,
       letterSpacing: letterSpacing,
-    ).copyWith(fontFamilyFallback: _cyrillicFallback),
+      fontFamilyFallback: _cyrillicFallback,
+    ),
   );
 }
 
@@ -69,12 +70,14 @@ class _LLMarqueeState extends State<LLMarquee> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    final style = GoogleFonts.workSans(
+    final style = TextStyle(
+      fontFamily: 'WorkSans',
       fontSize: widget.size,
       fontWeight: FontWeight.w700,
       color: widget.color,
       letterSpacing: 4,
-    ).copyWith(fontFamilyFallback: _cyrillicFallback);
+      fontFamilyFallback: _cyrillicFallback,
+    );
     final unit = '${widget.uppercase ? widget.text.toUpperCase() : widget.text}    ';
     final painter = TextPainter(text: TextSpan(text: unit, style: style), textDirection: TextDirection.ltr)..layout();
     final unitWidth = painter.width;
@@ -152,12 +155,14 @@ class LLCTA extends StatelessWidget {
           child: Center(
             child: Text(
               label,
-              style: GoogleFonts.workSans(
+              style: TextStyle(
+                fontFamily: 'WorkSans',
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
                 color: (isPrimary || isDark) ? Colors.white : fill,
                 letterSpacing: 0.3,
-              ).copyWith(fontFamilyFallback: _cyrillicFallback),
+                fontFamilyFallback: _cyrillicFallback,
+              ),
             ),
           ),
         ),
@@ -264,13 +269,15 @@ class WishStrip extends StatelessWidget {
           ),
           child: Text(
             '"$wish"',
-            style: GoogleFonts.workSans(
+            style: TextStyle(
+              fontFamily: 'WorkSans',
               fontStyle: FontStyle.italic,
               fontSize: 11.5,
               color: llGoldDark,
               letterSpacing: 0.2,
               height: 1.3,
-            ).copyWith(fontFamilyFallback: _cyrillicFallback),
+              fontFamilyFallback: _cyrillicFallback,
+            ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -59,12 +60,15 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
     final hair   = PdfColor.fromHex('E0D8CC');
     final cardBg = PdfColor.fromHex('FFFFF8');
 
-    // Noto fonts — full Cyrillic + Latin support
-    final fontSerif       = await PdfGoogleFonts.notoSerifRegular();
-    final fontSerifItalic = await PdfGoogleFonts.notoSerifItalic();
-    final fontSerifBold   = await PdfGoogleFonts.notoSerifBold();
-    final fontSans        = await PdfGoogleFonts.notoSansRegular();
-    final fontSansBold    = await PdfGoogleFonts.notoSansBold();
+    // Noto fonts — full Cyrillic + Latin support, bundled locally so PDF
+    // export doesn't depend on a network fetch at generation time.
+    Future<pw.Font> loadFont(String asset) async =>
+        pw.Font.ttf(await rootBundle.load(asset));
+    final fontSerif       = await loadFont('assets/fonts/NotoSerif-Regular.ttf');
+    final fontSerifItalic = await loadFont('assets/fonts/NotoSerif-Italic.ttf');
+    final fontSerifBold   = await loadFont('assets/fonts/NotoSerif-Bold.ttf');
+    final fontSans        = await loadFont('assets/fonts/NotoSans-Regular.ttf');
+    final fontSansBold    = await loadFont('assets/fonts/NotoSans-Bold.ttf');
 
     pw.TextStyle serif(double size, {PdfColor? color, double lineSpacing = 0, double letterSpacing = 0}) =>
         pw.TextStyle(font: fontSerif, fontSize: size, color: color ?? ink,
