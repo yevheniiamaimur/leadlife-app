@@ -35,12 +35,12 @@ class _DiaryTabState extends State<DiaryTab> {
   Future<void> _save() async {
     final text = _ctrl.text.trim();
     if (text.isEmpty) return;
-    final updated = [DiaryEntry(date: DateTime.now(), text: text), ..._entries];
-    await DiaryService.save(updated);
+    await DiaryService.insert(DiaryEntry(date: DateTime.now(), text: text));
+    final entries = await DiaryService.load();
     if (!mounted) return;
     FocusScope.of(context).unfocus();
     setState(() {
-      _entries = updated;
+      _entries = entries;
       _ctrl.clear();
     });
   }

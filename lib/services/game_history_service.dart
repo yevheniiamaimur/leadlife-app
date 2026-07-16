@@ -1,45 +1,41 @@
-import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite/sqflite.dart';
 import '../models/game_history_entry.dart';
+import 'app_database.dart';
 
 class GameHistoryService {
-  static const _kEntries = 'gameHistory';
   static const totalFields = 32;
 
   static Future<List<GameHistoryEntry>> load() async {
-    final prefs = await SharedPreferences.getInstance();
-    final json = prefs.getString(_kEntries);
-    if (json == null) return [];
-    return (jsonDecode(json) as List)
-        .map((e) => GameHistoryEntry.fromJson(e as Map<String, dynamic>))
-        .toList();
-  }
-
-  static Future<void> _saveAll(List<GameHistoryEntry> entries) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(
-      _kEntries,
-      jsonEncode(entries.map((e) => e.toJson()).toList()),
-    );
+    final db = await AppDatabase.instance.database;
+    final rows = await db.query('game_history', orderBy: 'id DESC');
+    return rows.map(GameHistoryEntry.fromMap).toList();
   }
 
   // Records the start of a new wish/journey — unless the most recent
   // entry is already an in-progress attempt at the same wish.
   static Future<void> recordStart(String wish) async {
-    final entries = await load();
-    if (entries.isNotEmpty && !entries.last.isCompleted && entries.last.wish == wish) {
+    final db = await AppDatabase.instance.database;
+    final last = await db.query('game_history', orderBy: 'id DESC', limit: 1);
+    if (last.isNotEmpty && last.first['completedAt'] == null && last.first['wish'] == wish) {
       return;
     }
-    entries.add(GameHistoryEntry(wish: wish, startedAt: DateTime.now(), completedFieldsCount: 0));
-    await _saveAll(entries);
+    await db.insert('game_history', GameHistoryEntry(
+      wish: wish,
+      startedAt: DateTime.now(),
+      completedFieldsCount: 0,
+    ).toMap());
   }
 
   static Future<void> updateProgress(String wish, int completedFieldsCount) async {
-    final entries = await load();
-    final index = entries.lastIndexWhere((e) => !e.isCompleted && e.wish == wish);
-    if (index == -1) return;
-    entries[index] = entries[index].copyWith(completedFieldsCount: completedFieldsCount);
-    await _saveAll(entries);
+    final db = await AppDatabase.instance.database;
+    final id = await _openEntryId(db, wish);
+    if (id == null) return;
+    await db.update(
+      'game_history',
+      {'completedFieldsCount': completedFieldsCount},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 
   static Future<void> markCompleted(
@@ -47,25 +43,42 @@ class GameHistoryService {
     required int completedFieldsCount,
     required String successCode,
   }) async {
-    final entries = await load();
-    final index = entries.lastIndexWhere((e) => !e.isCompleted && e.wish == wish);
-    final now = DateTime.now();
-    if (index == -1) {
-      entries.add(GameHistoryEntry(
+    final db = await AppDatabase.instance.database;
+    final id = await _openEntryId(db, wish);
+    final now = DateTime.now().toIso8601String();
+    if (id == null) {
+      await db.insert('game_history', GameHistoryEntry(
         wish: wish,
-        startedAt: now,
-        completedAt: now,
+        startedAt: DateTime.now(),
+        completedAt: DateTime.now(),
         completedFieldsCount: completedFieldsCount,
         successCode: successCode,
-      ));
+      ).toMap());
     } else {
-      entries[index] = entries[index].copyWith(
-        completedAt: now,
-        completedFieldsCount: completedFieldsCount,
-        successCode: successCode,
+      await db.update(
+        'game_history',
+        {
+          'completedAt': now,
+          'completedFieldsCount': completedFieldsCount,
+          'successCode': successCode,
+        },
+        where: 'id = ?',
+        whereArgs: [id],
       );
     }
-    await _saveAll(entries);
+  }
+
+  // The most recent not-yet-completed entry for this wish, if any.
+  static Future<int?> _openEntryId(Database db, String wish) async {
+    final rows = await db.query(
+      'game_history',
+      columns: ['id'],
+      where: 'wish = ? AND completedAt IS NULL',
+      whereArgs: [wish],
+      orderBy: 'id DESC',
+      limit: 1,
+    );
+    return rows.isEmpty ? null : rows.first['id'] as int;
   }
 
   // A short, deterministic code built from the path of completed fields —

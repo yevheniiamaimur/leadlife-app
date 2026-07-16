@@ -1,5 +1,6 @@
 class GameHistoryEntry {
   const GameHistoryEntry({
+    this.id,
     required this.wish,
     required this.startedAt,
     this.completedAt,
@@ -7,6 +8,7 @@ class GameHistoryEntry {
     this.successCode,
   });
 
+  final int? id;
   final String wish;
   final DateTime startedAt;
   final DateTime? completedAt;
@@ -15,19 +17,7 @@ class GameHistoryEntry {
 
   bool get isCompleted => completedAt != null;
 
-  GameHistoryEntry copyWith({
-    DateTime? completedAt,
-    int? completedFieldsCount,
-    String? successCode,
-  }) => GameHistoryEntry(
-    wish: wish,
-    startedAt: startedAt,
-    completedAt: completedAt ?? this.completedAt,
-    completedFieldsCount: completedFieldsCount ?? this.completedFieldsCount,
-    successCode: successCode ?? this.successCode,
-  );
-
-  Map<String, dynamic> toJson() => {
+  Map<String, Object?> toMap() => {
     'wish': wish,
     'startedAt': startedAt.toIso8601String(),
     'completedAt': completedAt?.toIso8601String(),
@@ -35,11 +25,12 @@ class GameHistoryEntry {
     'successCode': successCode,
   };
 
-  factory GameHistoryEntry.fromJson(Map<String, dynamic> json) => GameHistoryEntry(
-    wish: json['wish'] as String,
-    startedAt: DateTime.parse(json['startedAt'] as String),
-    completedAt: json['completedAt'] != null ? DateTime.parse(json['completedAt'] as String) : null,
-    completedFieldsCount: json['completedFieldsCount'] as int,
-    successCode: json['successCode'] as String?,
+  factory GameHistoryEntry.fromMap(Map<String, Object?> map) => GameHistoryEntry(
+    id: map['id'] as int?,
+    wish: map['wish'] as String,
+    startedAt: DateTime.parse(map['startedAt'] as String),
+    completedAt: map['completedAt'] != null ? DateTime.parse(map['completedAt'] as String) : null,
+    completedFieldsCount: map['completedFieldsCount'] as int,
+    successCode: map['successCode'] as String?,
   );
 }

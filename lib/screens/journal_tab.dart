@@ -24,7 +24,7 @@ class _JournalTabState extends State<JournalTab> {
     final entries = await GameHistoryService.load();
     if (mounted) {
       setState(() {
-        _entries = entries.reversed.toList();
+        _entries = entries;
         _loading = false;
       });
     }
