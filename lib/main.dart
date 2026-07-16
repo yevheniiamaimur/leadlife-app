@@ -4,6 +4,7 @@ import 'app_theme.dart';
 import 'screens/mid_dice_screen.dart';
 import 'screens/onboarding_name_screen.dart';
 import 'screens/rules_screen.dart';
+import 'services/notification_service.dart';
 import 'services/onboarding_service.dart';
 import 'services/progress_service.dart';
 
@@ -12,13 +13,19 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   final progress = await ProgressService.load();
   final onboardingDone = await OnboardingService.isDone();
-  runApp(LeadLifeApp(resumeProgress: progress, onboardingDone: onboardingDone));
+  final launchTabIndex = await NotificationService.instance.consumeLaunchTabIndex();
+  runApp(LeadLifeApp(
+    resumeProgress: progress,
+    onboardingDone: onboardingDone,
+    launchTabIndex: launchTabIndex,
+  ));
 }
 
 class LeadLifeApp extends StatelessWidget {
-  const LeadLifeApp({super.key, this.resumeProgress, required this.onboardingDone});
+  const LeadLifeApp({super.key, this.resumeProgress, required this.onboardingDone, this.launchTabIndex});
   final SavedProgress? resumeProgress;
   final bool onboardingDone;
+  final int? launchTabIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +38,7 @@ class LeadLifeApp extends StatelessWidget {
                 completedFields: resumeProgress!.completedFields,
                 answers: resumeProgress!.answers,
               )
-            : const RulesScreen();
+            : RulesScreen(initialTab: launchTabIndex ?? 0);
 
     return MaterialApp(
       title: 'leadlife',

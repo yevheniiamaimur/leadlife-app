@@ -9,17 +9,38 @@ import 'journal_tab.dart';
 import 'profile_screen.dart';
 import 'help_screen.dart';
 import 'about_screen.dart';
+import '../services/notification_service.dart';
 import '../widgets/app_drawer.dart';
 
 class RulesScreen extends StatefulWidget {
-  const RulesScreen({super.key});
+  const RulesScreen({super.key, this.initialTab = 0});
+  final int initialTab;
   @override
   State<RulesScreen> createState() => _RulesScreenState();
 }
 
 class _RulesScreenState extends State<RulesScreen> {
-  int _tabIndex = 0;
+  late int _tabIndex = widget.initialTab;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    NotificationService.instance.pendingTabIndex.addListener(_onNotificationTap);
+  }
+
+  @override
+  void dispose() {
+    NotificationService.instance.pendingTabIndex.removeListener(_onNotificationTap);
+    super.dispose();
+  }
+
+  void _onNotificationTap() {
+    final tab = NotificationService.instance.pendingTabIndex.value;
+    if (tab == null) return;
+    NotificationService.instance.pendingTabIndex.value = null;
+    setState(() => _tabIndex = tab);
+  }
 
   void _selectTab(int i) {
     _scaffoldKey.currentState?.closeDrawer();

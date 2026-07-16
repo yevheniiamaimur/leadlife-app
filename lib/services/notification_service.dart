@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
@@ -9,10 +10,17 @@ class NotificationService {
   NotificationService._();
   static final NotificationService instance = NotificationService._();
 
+  // Bottom-nav index of the Diary tab in RulesScreen — where the daily
+  // reminder should land the user.
+  static const diaryTabIndex = 2;
   static const _dailyReminderId = 1;
 
   final _plugin = FlutterLocalNotificationsPlugin();
   bool _initialized = false;
+
+  // Set when a notification is tapped while the app is already running.
+  // RulesScreen listens and consumes it (resets to null) once handled.
+  final ValueNotifier<int?> pendingTabIndex = ValueNotifier<int?>(null);
 
   Future<void> _ensureInitialized() async {
     if (_initialized) return;
@@ -24,17 +32,39 @@ class NotificationService {
       // timezone name isn't one the tz database recognizes.
     }
 
-    await _plugin.initialize(const InitializationSettings(
-      android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-      // Permission is requested explicitly during onboarding via
-      // permission_handler, so this shouldn't prompt again.
-      iOS: DarwinInitializationSettings(
-        requestAlertPermission: false,
-        requestBadgePermission: false,
-        requestSoundPermission: false,
+    await _plugin.initialize(
+      const InitializationSettings(
+        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+        // Permission is requested explicitly during onboarding via
+        // permission_handler, so this shouldn't prompt again.
+        iOS: DarwinInitializationSettings(
+          requestAlertPermission: false,
+          requestBadgePermission: false,
+          requestSoundPermission: false,
+        ),
       ),
-    ));
+      onDidReceiveNotificationResponse: _handleTap,
+    );
     _initialized = true;
+  }
+
+  void _handleTap(NotificationResponse response) {
+    if (response.id == _dailyReminderId) {
+      pendingTabIndex.value = diaryTabIndex;
+    }
+  }
+
+  // Call once at app startup: reports which tab to open on if the app
+  // was launched (cold start) by tapping the reminder, so the caller
+  // can pass it straight into RulesScreen's initial tab.
+  Future<int?> consumeLaunchTabIndex() async {
+    await _ensureInitialized();
+    final launch = await _plugin.getNotificationAppLaunchDetails();
+    final tappedId = launch?.notificationResponse?.id;
+    if (launch?.didNotificationLaunchApp == true && tappedId == _dailyReminderId) {
+      return diaryTabIndex;
+    }
+    return null;
   }
 
   Future<void> scheduleDailyReminder() async {
