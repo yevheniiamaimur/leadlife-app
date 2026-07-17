@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
+import '../services/analytics_service.dart';
 import '../services/game_history_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'dice_roll_screen.dart';
@@ -119,6 +120,7 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
                           FocusScope.of(context).unfocus();
                           final wish = _ctrl.text.trim();
                           GameHistoryService.recordStart(wish).ignore();
+                          AnalyticsService.instance.logWishConfirmed().ignore();
                           Navigator.of(context).push(_fadeRoute(
                             DiceRollScreen(wish: wish),
                           ));

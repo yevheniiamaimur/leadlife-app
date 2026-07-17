@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "222731607255",
+    "project_id": "leadlife-app",
+    "storage_bucket": "leadlife-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222731607255:android:ea0782b21421ea985a2492",
+        "android_client_info": {
+          "package_name": "com.leadlife.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "222731607255-com5b9jhgota963108o6uiv7bmbjsebj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLM4wqCZfz88_dw3X1ExPFjvNL49uo6MU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222731607255-com5b9jhgota963108o6uiv7bmbjsebj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "222731607255-202m1radfp646s2vmjisnrqftge9fuql.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.leadlife.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

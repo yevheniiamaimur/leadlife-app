@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 
 /// Runs [write], retrying on failure with a short backoff, so a single
@@ -13,7 +14,18 @@ Future<bool> safeWrite(String label, Future<void> Function() write, {int retries
     } catch (e, st) {
       final isLastAttempt = attempt >= retries;
       debugPrint('safeWrite [$label] attempt ${attempt + 1} failed: $e${isLastAttempt ? '\n$st' : ' — retrying'}');
-      if (isLastAttempt) return false;
+      if (isLastAttempt) {
+        // Best-effort — e.g. in tests Firebase isn't initialized at all,
+        // and that shouldn't take down the write path itself.
+        try {
+          await FirebaseCrashlytics.instance.recordError(
+            e, st,
+            reason: 'safeWrite [$label] gave up after ${attempt + 1} attempts',
+            fatal: false,
+          );
+        } catch (_) {}
+        return false;
+      }
       await Future.delayed(Duration(milliseconds: 200 * (attempt + 1)));
     }
   }

@@ -7,6 +7,7 @@ import 'package:printing/printing.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../models/field.dart';
+import '../services/analytics_service.dart';
 import '../services/game_history_service.dart';
 import '../services/progress_service.dart';
 import '../widgets/ll_widgets.dart';
@@ -42,6 +43,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
       completedFieldsCount: widget.answers.length,
       successCode: GameHistoryService.buildSuccessCode(widget.answers.keys.toList()),
     ).ignore();
+    AnalyticsService.instance.logJourneyCompleted().ignore();
   }
 
   Future<void> _savePdf() async {
