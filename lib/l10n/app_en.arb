@@ -706,6 +706,42 @@
   "@paywallChooseThisPathCta": {
     "description": "CTA button on the tariff detail screen to select the plan"
   },
+  "accountLinkHeadline": "Protect Your Journey",
+  "@accountLinkHeadline": {
+    "description": "Headline on the optional account-linking screen shown right after choosing a paid tariff"
+  },
+  "accountLinkSubtitle": "Create an account so your journey and purchase follow you, even if you switch phones.",
+  "@accountLinkSubtitle": {
+    "description": "Subtitle explaining why linking an account is offered, on the optional account-linking screen"
+  },
+  "continueWithApple": "Continue with Apple",
+  "@continueWithApple": {
+    "description": "Button label to sign in / link an account with Apple"
+  },
+  "continueWithGoogle": "Continue with Google",
+  "@continueWithGoogle": {
+    "description": "Button label to sign in / link an account with Google"
+  },
+  "continueWithEmail": "Continue with Email",
+  "@continueWithEmail": {
+    "description": "Button label to reveal the email/password form for linking an account"
+  },
+  "accountLinkPasswordHint": "Create a password",
+  "@accountLinkPasswordHint": {
+    "description": "Placeholder hint text in the password field on the optional account-linking screen"
+  },
+  "createAccountCta": "Create Account",
+  "@createAccountCta": {
+    "description": "CTA button to submit the email/password form on the optional account-linking screen"
+  },
+  "accountLinkSkip": "Maybe later",
+  "@accountLinkSkip": {
+    "description": "Small-print link to skip account linking and continue without creating an account"
+  },
+  "accountLinkErrorGeneric": "Something went wrong. Please try again.",
+  "@accountLinkErrorGeneric": {
+    "description": "Generic error message shown when account linking fails"
+  },
   "paywallTariffOneJourneyTitle": "One Journey",
   "@paywallTariffOneJourneyTitle": {
     "description": "Title of the one-time-purchase tariff on the paywall screen"

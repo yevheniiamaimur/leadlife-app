@@ -539,6 +539,35 @@ class AppLocalizationsEn extends AppLocalizations {
   String get paywallChooseThisPathCta => 'Choose This Path';
 
   @override
+  String get accountLinkHeadline => 'Protect Your Journey';
+
+  @override
+  String get accountLinkSubtitle =>
+      'Create an account so your journey and purchase follow you, even if you switch phones.';
+
+  @override
+  String get continueWithApple => 'Continue with Apple';
+
+  @override
+  String get continueWithGoogle => 'Continue with Google';
+
+  @override
+  String get continueWithEmail => 'Continue with Email';
+
+  @override
+  String get accountLinkPasswordHint => 'Create a password';
+
+  @override
+  String get createAccountCta => 'Create Account';
+
+  @override
+  String get accountLinkSkip => 'Maybe later';
+
+  @override
+  String get accountLinkErrorGeneric =>
+      'Something went wrong. Please try again.';
+
+  @override
   String get paywallTariffOneJourneyTitle => 'One Journey';
 
   @override

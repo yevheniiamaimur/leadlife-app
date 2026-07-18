@@ -1042,6 +1042,60 @@ abstract class AppLocalizations {
   /// **'Choose This Path'**
   String get paywallChooseThisPathCta;
 
+  /// Headline on the optional account-linking screen shown right after choosing a paid tariff
+  ///
+  /// In en, this message translates to:
+  /// **'Protect Your Journey'**
+  String get accountLinkHeadline;
+
+  /// Subtitle explaining why linking an account is offered, on the optional account-linking screen
+  ///
+  /// In en, this message translates to:
+  /// **'Create an account so your journey and purchase follow you, even if you switch phones.'**
+  String get accountLinkSubtitle;
+
+  /// Button label to sign in / link an account with Apple
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get continueWithApple;
+
+  /// Button label to sign in / link an account with Google
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get continueWithGoogle;
+
+  /// Button label to reveal the email/password form for linking an account
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Email'**
+  String get continueWithEmail;
+
+  /// Placeholder hint text in the password field on the optional account-linking screen
+  ///
+  /// In en, this message translates to:
+  /// **'Create a password'**
+  String get accountLinkPasswordHint;
+
+  /// CTA button to submit the email/password form on the optional account-linking screen
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get createAccountCta;
+
+  /// Small-print link to skip account linking and continue without creating an account
+  ///
+  /// In en, this message translates to:
+  /// **'Maybe later'**
+  String get accountLinkSkip;
+
+  /// Generic error message shown when account linking fails
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get accountLinkErrorGeneric;
+
   /// Title of the one-time-purchase tariff on the paywall screen
   ///
   /// In en, this message translates to:

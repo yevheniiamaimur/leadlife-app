@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../widgets/ll_widgets.dart';
-import 'awakened_screen.dart';
+import 'account_link_screen.dart';
 
 class PaywallTariff {
   const PaywallTariff({
@@ -246,7 +246,7 @@ class TariffDetailScreen extends StatelessWidget {
                   LLCTA(
                     label: AppLocalizations.of(context).paywallChooseThisPathCta,
                     onTap: () => Navigator.of(context).push(_fadeRoute(
-                      AwakenedScreen(wish: wish),
+                      AccountLinkScreen(wish: wish),
                     )),
                   ),
                   const SizedBox(height: 40),
