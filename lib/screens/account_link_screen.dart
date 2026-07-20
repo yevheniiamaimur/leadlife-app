@@ -21,6 +21,7 @@ class AccountLinkScreen extends StatefulWidget {
 
 class _AccountLinkScreenState extends State<AccountLinkScreen> {
   final _passwordCtrl = TextEditingController();
+  final _scrollCtrl = ScrollController();
   late final TextEditingController _emailCtrl;
   bool _showEmailForm = false;
   bool _busy = false;
@@ -41,7 +42,32 @@ class _AccountLinkScreenState extends State<AccountLinkScreen> {
   void dispose() {
     _emailCtrl.dispose();
     _passwordCtrl.dispose();
+    _scrollCtrl.dispose();
     super.dispose();
+  }
+
+  void _toggleEmailForm() {
+    setState(() => _showEmailForm = !_showEmailForm);
+    if (_showEmailForm) _scrollToBottomSoon();
+  }
+
+  // The form + CTA appear below the fold once the keyboard opens — scroll
+  // them into view instead of leaving them hidden behind it. Called both
+  // when the form first expands and again once a field gains focus (the
+  // extra delay there lets the keyboard's own open animation settle before
+  // we measure how far there is left to scroll).
+  void _scrollToBottomSoon({Duration delay = Duration.zero}) {
+    Future.delayed(delay, () {
+      if (!mounted) return;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!_scrollCtrl.hasClients) return;
+        _scrollCtrl.animateTo(
+          _scrollCtrl.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      });
+    });
   }
 
   void _continue() {
@@ -74,13 +100,13 @@ class _AccountLinkScreenState extends State<AccountLinkScreen> {
         child: Stack(
           children: [
             SingleChildScrollView(
-              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+              controller: _scrollCtrl,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 84),
+                    const SizedBox(height: 130),
                     Text(l10n.accountLinkHeadline, style: llSerif(size: 28, height: 1.2)),
                     const SizedBox(height: 10),
                     Text(l10n.accountLinkSubtitle, style: llSerifItalic(size: 14, height: 1.5)),
@@ -102,7 +128,7 @@ class _AccountLinkScreenState extends State<AccountLinkScreen> {
                     LLCTA(
                       label: l10n.continueWithEmail,
                       variant: 'secondary',
-                      onTap: _busy ? null : () => setState(() => _showEmailForm = !_showEmailForm),
+                      onTap: _busy ? null : _toggleEmailForm,
                     ),
                     if (_showEmailForm) ...[
                       const SizedBox(height: 20),
@@ -112,6 +138,7 @@ class _AccountLinkScreenState extends State<AccountLinkScreen> {
                         child: TextField(
                           controller: _emailCtrl,
                           keyboardType: TextInputType.emailAddress,
+                          onTap: () => _scrollToBottomSoon(delay: const Duration(milliseconds: 250)),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: l10n.emailHint,
@@ -129,6 +156,7 @@ class _AccountLinkScreenState extends State<AccountLinkScreen> {
                         child: TextField(
                           controller: _passwordCtrl,
                           obscureText: true,
+                          onTap: () => _scrollToBottomSoon(delay: const Duration(milliseconds: 250)),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: l10n.accountLinkPasswordHint,
