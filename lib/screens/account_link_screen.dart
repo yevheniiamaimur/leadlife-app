@@ -75,15 +75,56 @@ class _AccountLinkScreenState extends State<AccountLinkScreen> {
     Navigator.of(context).push(_fadeRoute(AwakenedScreen(wish: widget.wish)));
   }
 
+  Future<void> _resetPassword() async {
+    final email = _emailCtrl.text.trim();
+    if (!email.contains('@')) {
+      setState(() => _error = AppLocalizations.of(context).resetPasswordPrompt);
+      return;
+    }
+    setState(() {
+      _busy = true;
+      _error = null;
+    });
+    try {
+      await AuthService.instance.sendPasswordResetEmail(email);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context).resetPasswordSent),
+          ),
+        );
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(
+          () => _error = AppLocalizations.of(context).accountLinkErrorGeneric,
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
   Future<void> _run(Future<void> Function() action) async {
-    setState(() { _busy = true; _error = null; });
+    setState(() {
+      _busy = true;
+      _error = null;
+    });
     try {
       await action();
       _continue();
     } on FirebaseAuthException catch (_) {
-      if (mounted) setState(() => _error = AppLocalizations.of(context).accountLinkErrorGeneric);
+      if (mounted) {
+        setState(
+          () => _error = AppLocalizations.of(context).accountLinkErrorGeneric,
+        );
+      }
     } catch (_) {
-      if (mounted) setState(() => _error = AppLocalizations.of(context).accountLinkErrorGeneric);
+      if (mounted) {
+        setState(
+          () => _error = AppLocalizations.of(context).accountLinkErrorGeneric,
+        );
+      }
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -107,22 +148,36 @@ class _AccountLinkScreenState extends State<AccountLinkScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 130),
-                    Text(l10n.accountLinkHeadline, style: llSerif(size: 28, height: 1.2)),
+                    Text(
+                      l10n.accountLinkHeadline,
+                      style: llSerif(size: 28, height: 1.2),
+                    ),
                     const SizedBox(height: 10),
-                    Text(l10n.accountLinkSubtitle, style: llSerifItalic(size: 14, height: 1.5)),
+                    Text(
+                      l10n.accountLinkSubtitle,
+                      style: llSerifItalic(size: 14, height: 1.5),
+                    ),
                     const SizedBox(height: 32),
                     if (isIOS) ...[
                       LLCTA(
                         label: l10n.continueWithApple,
                         variant: 'dark',
-                        onTap: _busy ? null : () => _run(() => AuthService.instance.linkWithApple()),
+                        onTap: _busy
+                            ? null
+                            : () => _run(
+                                () => AuthService.instance.linkWithApple(),
+                              ),
                       ),
                       const SizedBox(height: 12),
                     ],
                     LLCTA(
                       label: l10n.continueWithGoogle,
                       variant: 'secondary',
-                      onTap: _busy ? null : () => _run(() => AuthService.instance.linkWithGoogle()),
+                      onTap: _busy
+                          ? null
+                          : () => _run(
+                              () => AuthService.instance.linkWithGoogle(),
+                            ),
                     ),
                     const SizedBox(height: 12),
                     LLCTA(
@@ -134,11 +189,17 @@ class _AccountLinkScreenState extends State<AccountLinkScreen> {
                       const SizedBox(height: 20),
                       Container(
                         decoration: llCardDecoration(),
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 6,
+                        ),
                         child: TextField(
                           controller: _emailCtrl,
+                          onChanged: (_) => setState(() {}),
                           keyboardType: TextInputType.emailAddress,
-                          onTap: () => _scrollToBottomSoon(delay: const Duration(milliseconds: 250)),
+                          onTap: () => _scrollToBottomSoon(
+                            delay: const Duration(milliseconds: 250),
+                          ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: l10n.emailHint,
@@ -152,11 +213,17 @@ class _AccountLinkScreenState extends State<AccountLinkScreen> {
                       const SizedBox(height: 12),
                       Container(
                         decoration: llCardDecoration(),
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 6,
+                        ),
                         child: TextField(
                           controller: _passwordCtrl,
+                          onChanged: (_) => setState(() {}),
                           obscureText: true,
-                          onTap: () => _scrollToBottomSoon(delay: const Duration(milliseconds: 250)),
+                          onTap: () => _scrollToBottomSoon(
+                            delay: const Duration(milliseconds: 250),
+                          ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: l10n.accountLinkPasswordHint,
@@ -168,24 +235,50 @@ class _AccountLinkScreenState extends State<AccountLinkScreen> {
                         ),
                       ),
                       const SizedBox(height: 16),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: GestureDetector(
+                          onTap: _busy ? null : _resetPassword,
+                          child: Text(
+                            l10n.resetPasswordAction,
+                            style: llUi(
+                              size: 12,
+                              color: llGold,
+                              weight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
                       LLCTA(
                         label: l10n.createAccountCta,
-                        enabled: !_busy && _emailCtrl.text.trim().contains('@') && _passwordCtrl.text.trim().length >= 6,
-                        onTap: () => _run(() => AuthService.instance.linkWithEmailPassword(
-                          _emailCtrl.text.trim(),
-                          _passwordCtrl.text.trim(),
-                        )),
+                        enabled:
+                            !_busy &&
+                            _emailCtrl.text.trim().contains('@') &&
+                            _passwordCtrl.text.trim().length >= 6,
+                        onTap: () => _run(
+                          () => AuthService.instance.linkWithEmailPassword(
+                            _emailCtrl.text.trim(),
+                            _passwordCtrl.text.trim(),
+                          ),
+                        ),
                       ),
                     ],
                     if (_error != null) ...[
                       const SizedBox(height: 14),
-                      Text(_error!, style: llUi(size: 12, color: Colors.redAccent)),
+                      Text(
+                        _error!,
+                        style: llUi(size: 12, color: Colors.redAccent),
+                      ),
                     ],
                     const SizedBox(height: 24),
                     Center(
                       child: GestureDetector(
                         onTap: _busy ? null : _continue,
-                        child: Text(l10n.accountLinkSkip, style: llUi(size: 12, color: llMutedSoft)),
+                        child: Text(
+                          l10n.accountLinkSkip,
+                          style: llUi(size: 12, color: llMutedSoft),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 40),
@@ -203,6 +296,7 @@ class _AccountLinkScreenState extends State<AccountLinkScreen> {
 
 PageRouteBuilder<T> _fadeRoute<T>(Widget page) => PageRouteBuilder(
   pageBuilder: (_, _, _) => page,
-  transitionsBuilder: (_, a, _, child) => FadeTransition(opacity: a, child: child),
+  transitionsBuilder: (_, a, _, child) =>
+      FadeTransition(opacity: a, child: child),
   transitionDuration: const Duration(milliseconds: 350),
 );

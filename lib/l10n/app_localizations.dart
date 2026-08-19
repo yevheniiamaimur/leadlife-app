@@ -208,6 +208,48 @@ abstract class AppLocalizations {
   /// **'Confirm My Desire'**
   String get confirmMyDesire;
 
+  /// Link on the wish-entry screen that opens the AI wish-clarification chat
+  ///
+  /// In en, this message translates to:
+  /// **'✨ Not sure how to put it into words? Ask the assistant'**
+  String get aiAssistantLinkCta;
+
+  /// Title shown at the top of the AI wish-clarification chat screen
+  ///
+  /// In en, this message translates to:
+  /// **'Clarify Your Wish'**
+  String get aiAssistantTitle;
+
+  /// Assistant's opening message shown when the AI wish-clarification chat screen opens, before any API call
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s the desire you\'re bringing into this journey? Tell me a bit about it and I\'ll help you put it into words.'**
+  String get aiAssistantGreeting;
+
+  /// Placeholder text in the chat input field on the AI wish-clarification chat screen
+  ///
+  /// In en, this message translates to:
+  /// **'Type your reply…'**
+  String get aiAssistantInputHint;
+
+  /// CTA button shown once the assistant has proposed a ready-to-use wish statement
+  ///
+  /// In en, this message translates to:
+  /// **'Use This Wish'**
+  String get aiAssistantUseThisWish;
+
+  /// Error message shown in the AI wish-clarification chat when a request fails
+  ///
+  /// In en, this message translates to:
+  /// **'The assistant couldn\'t respond — check your connection and try again.'**
+  String get aiAssistantError;
+
+  /// Retry button shown next to the error message in the AI wish-clarification chat
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get aiAssistantRetryCta;
+
   /// Step indicator shown at the top of each of the 5 onboarding screens
   ///
   /// In en, this message translates to:
@@ -591,6 +633,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The golden fish is already on its way.\nYour work is to believe — and to act.'**
   String get goldenFishClosingLine;
+
+  /// Section label above the AI-generated analysis of the player's answers, shown on the success code screen and in the PDF export
+  ///
+  /// In en, this message translates to:
+  /// **'Your Analysis'**
+  String get yourAnalysisLabel;
+
+  /// Section label above the AI-generated single next area of focus, shown on the success code screen and in the PDF export
+  ///
+  /// In en, this message translates to:
+  /// **'Your Next Direction'**
+  String get yourNextDirectionLabel;
+
+  /// Section label above the AI-generated list of concrete next steps, shown on the success code screen and in the PDF export
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended Next Steps'**
+  String get recommendedStepsLabel;
 
   /// Heading on the Diary tab
   ///
@@ -2241,6 +2301,354 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No answers recorded.'**
   String get pdfNoAnswersRecorded;
+
+  /// Title of the Privacy Policy screen, and the tappable link label pointing to it
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicyLabel;
+
+  /// Title of the Terms of Use screen, and the tappable link label pointing to it
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Use'**
+  String get termsOfUseLabel;
+
+  /// First segment of the mandatory consent row on the onboarding contact screen, immediately followed by the tappable Terms of Use link
+  ///
+  /// In en, this message translates to:
+  /// **'I agree to the '**
+  String get legalConsentPrefix;
+
+  /// Segment joining the Terms of Use and Privacy Policy links in the mandatory consent row
+  ///
+  /// In en, this message translates to:
+  /// **' and '**
+  String get legalConsentAnd;
+
+  /// Final segment of the mandatory consent row, immediately following the tappable Privacy Policy link
+  ///
+  /// In en, this message translates to:
+  /// **'.'**
+  String get legalConsentSuffix;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get legalPrivacySection1Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated: [fill in before release]. This policy explains what information LeadLife (\"we\") collects when you use the LeadLife app, why we collect it, and the choices you have. By using the app you agree to this policy.'**
+  String get legalPrivacySection1Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Information We Collect'**
+  String get legalPrivacySection2Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'Profile details you enter (your name, birthday, email address, and areas of focus) so we can personalize your journey. Account credentials, only if you choose to create an account with Google, Apple, or email and password, handled through Firebase Authentication. Usage and diagnostic data, such as anonymized interaction events and crash reports, your device model, operating system, and app version, collected through Firebase Analytics and Crashlytics. Purchase information, if you subscribe, processed by the App Store or Google Play and our subscription billing partner — we never see or store your card details.'**
+  String get legalPrivacySection2Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'How We Use Your Information'**
+  String get legalPrivacySection3Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'To personalize your journey and reminders, to send the gentle reminder notifications you opted into, to diagnose crashes and fix bugs, to understand how features are used so we can improve the app, and to manage your account and subscription.'**
+  String get legalPrivacySection3Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Where Your Data Lives'**
+  String get legalPrivacySection4Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'Your profile details stay only on your device (in local app storage) unless you choose to create an account. If you create an account, your credentials are stored by Firebase Authentication (Google LLC). Analytics and crash data are processed by Firebase Analytics and Firebase Crashlytics (Google LLC).'**
+  String get legalPrivacySection4Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Sharing'**
+  String get legalPrivacySection5Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'We do not sell your data and we do not use advertising networks. We only share data with service providers who act on our behalf: Firebase/Google, the App Store or Google Play, and our subscription billing partner.'**
+  String get legalPrivacySection5Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'International Transfers'**
+  String get legalPrivacySection6Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'Firebase infrastructure may process data outside your country or the European Economic Area, under standard contractual safeguards required by applicable law.'**
+  String get legalPrivacySection6Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Data Retention & Deletion'**
+  String get legalPrivacySection7Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'Profile details stored only on your device are removed when you delete the app. If you have an account, you can delete it and its associated data at any time from within the app, or by contacting us at [support email].'**
+  String get legalPrivacySection7Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Your Rights'**
+  String get legalPrivacySection8Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'Depending on where you live, you may have the right to access, correct, delete, or export your data, to object to certain processing, and to withdraw consent at any time. Contact us at [support email] to exercise these rights.'**
+  String get legalPrivacySection8Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Children'**
+  String get legalPrivacySection9Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'LeadLife is not directed at children under 16, and we do not knowingly collect information from them.'**
+  String get legalPrivacySection9Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Changes & Contact'**
+  String get legalPrivacySection10Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'We may update this policy from time to time; material changes will be reflected in the app. Questions? Reach us at [support email].'**
+  String get legalPrivacySection10Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Acceptance of Terms'**
+  String get legalTermsSection1Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated: [fill in before release]. By using LeadLife, you agree to these Terms of Use. If you do not agree, please do not use the app.'**
+  String get legalTermsSection1Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'The Service'**
+  String get legalTermsSection2Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'LeadLife is a personal-growth and self-reflection companion built around your wish, a 32-field journey, and gentle reminders. Content is provided for entertainment and self-reflection purposes only, and is not professional medical, psychological, financial, or legal advice.'**
+  String get legalTermsSection2Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Eligibility'**
+  String get legalTermsSection3Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'You must be at least 16 years old, or the age of digital consent in your country, to use LeadLife, and you agree to provide accurate information.'**
+  String get legalTermsSection3Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Accounts'**
+  String get legalTermsSection4Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'The app works anonymously by default. You may optionally link an account with Google, Apple, or email and password so your journey and purchases carry over to a new device. You are responsible for keeping your credentials secure.'**
+  String get legalTermsSection4Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Subscriptions & Payments'**
+  String get legalTermsSection5Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'Paid plans are auto-renewing subscriptions billed through the App Store or Google Play. Price and renewal terms are shown before you purchase. You can cancel any time in your App Store or Google Play account settings; cancellation takes effect at the end of the current billing period. Refunds are handled by Apple or Google according to their own policies.'**
+  String get legalTermsSection5Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Your Content'**
+  String get legalTermsSection6Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'You own what you write in the app. You grant us a limited license to store and process it solely to provide the service to you.'**
+  String get legalTermsSection6Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Acceptable Use'**
+  String get legalTermsSection7Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'You agree not to use the app unlawfully, to interfere with its operation, or to reverse-engineer, decompile, or disassemble it.'**
+  String get legalTermsSection7Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Disclaimer & Liability'**
+  String get legalTermsSection8Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'LeadLife is provided \"as is\", without warranties of any kind. To the fullest extent permitted by law, we are not liable for indirect, incidental, or consequential damages arising from your use of the app.'**
+  String get legalTermsSection8Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Termination'**
+  String get legalTermsSection9Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'We may suspend or terminate access to the app for violation of these terms. You may stop using the app, and delete your account, at any time.'**
+  String get legalTermsSection9Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Governing Law & Changes'**
+  String get legalTermsSection10Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'These terms are governed by the laws of [fill in your jurisdiction]. We may update these terms from time to time; material changes will be reflected in the app. Questions? Reach us at [support email].'**
+  String get legalTermsSection10Body;
+
+  /// No description provided for @accountSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get accountSectionTitle;
+
+  /// No description provided for @accountAnonymousStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data is currently stored only on this device.'**
+  String get accountAnonymousStatus;
+
+  /// No description provided for @accountConnectedStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data is safely synced with your account.'**
+  String get accountConnectedStatus;
+
+  /// No description provided for @resetPasswordAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset password'**
+  String get resetPasswordAction;
+
+  /// No description provided for @resetPasswordPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the email address connected to your account.'**
+  String get resetPasswordPrompt;
+
+  /// No description provided for @resetPasswordSent.
+  ///
+  /// In en, this message translates to:
+  /// **'A password reset link has been sent.'**
+  String get resetPasswordSent;
+
+  /// No description provided for @signOutAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get signOutAction;
+
+  /// No description provided for @signOutConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cloud copy will stay safe. Local data will be removed from this device.'**
+  String get signOutConfirm;
+
+  /// No description provided for @deleteAccountAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get deleteAccountAction;
+
+  /// No description provided for @deleteAccountConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'This permanently deletes your account, cloud data, journey, diary, and history. This cannot be undone.'**
+  String get deleteAccountConfirm;
+
+  /// No description provided for @cancelAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancelAction;
+
+  /// No description provided for @confirmAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirmAction;
+
+  /// No description provided for @accountActionError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please check your connection and try again.'**
+  String get accountActionError;
 }
 
 class _AppLocalizationsDelegate

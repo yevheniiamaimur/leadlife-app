@@ -1,11 +1,12 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'safe_write.dart';
+import 'cloud_sync_service.dart';
 
 class ProfileService {
-  static const _kName     = 'profileName';
+  static const _kName = 'profileName';
   static const _kBirthday = 'profileBirthday';
-  static const _kEmail    = 'profileEmail';
-  static const _kFocus    = 'profileFocus';
+  static const _kEmail = 'profileEmail';
+  static const _kFocus = 'profileFocus';
 
   static Future<bool> save({
     required String name,
@@ -20,6 +21,7 @@ class ProfileService {
       prefs.setString(_kEmail, email),
       prefs.setString(_kFocus, focus),
     ]);
+    CloudSyncService.instance.notifyLocalChange();
   });
 
   static Future<Profile?> load() async {
@@ -38,7 +40,12 @@ class ProfileService {
 }
 
 class Profile {
-  const Profile({required this.name, required this.birthday, required this.email, required this.focus});
+  const Profile({
+    required this.name,
+    required this.birthday,
+    required this.email,
+    required this.focus,
+  });
   final String name;
   final DateTime? birthday;
   final String email;

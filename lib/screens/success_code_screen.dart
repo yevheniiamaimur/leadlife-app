@@ -7,7 +7,9 @@ import 'package:printing/printing.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../models/field.dart';
+import '../services/ai_service.dart';
 import '../services/analytics_service.dart';
+import '../services/game_content_service.dart';
 import '../services/game_history_service.dart';
 import '../services/progress_service.dart';
 import '../widgets/ll_widgets.dart';
@@ -31,6 +33,9 @@ class SuccessCodeScreen extends StatefulWidget {
 
 class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
   bool _generatingPdf = false;
+  bool _analysisStarted = false;
+  bool _analysisLoading = false;
+  FinalAnalysisResult? _analysis;
 
   List<MapEntry<int, String>> get _entries =>
       widget.answers.entries.toList()..sort((a, b) => a.key.compareTo(b.key));
@@ -44,6 +49,39 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
       successCode: GameHistoryService.buildSuccessCode(widget.answers.keys.toList()),
     ).ignore();
     AnalyticsService.instance.logJourneyCompleted().ignore();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Needs GameContentService.fields(context), so this can't run until
+    // context is fully ready — didChangeDependencies, guarded to fire once.
+    if (_analysisStarted) return;
+    _analysisStarted = true;
+    _loadAnalysis();
+  }
+
+  static String _questionOf(GameField field) =>
+      field.task.split('\n\n').where((p) => !p.contains('__________')).join('\n\n');
+
+  Future<void> _loadAnalysis() async {
+    setState(() => _analysisLoading = true);
+    final fields = GameContentService.fields(context);
+    final entries = _entries.map((e) {
+      final field = fields.firstWhere((f) => f.n == e.key);
+      return AnswerEntry(n: e.key, fieldName: field.name, question: _questionOf(field), answer: e.value);
+    }).toList();
+    try {
+      final result = await AiService.finalAnalysis(wish: widget.wish, entries: entries);
+      if (!mounted) return;
+      setState(() {
+        _analysis = result;
+        _analysisLoading = false;
+      });
+    } on AiServiceException {
+      if (!mounted) return;
+      setState(() => _analysisLoading = false);
+    }
   }
 
   Future<void> _savePdf() async {
@@ -60,6 +98,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
     // Captured before any awaits, so it's safe to use even if the widget
     // is unmounted by the time the PDF finishes building.
     final l10n = AppLocalizations.of(context);
+    final fields = GameContentService.fields(context);
     final gold   = PdfColor.fromHex('C8A96E');
     final ink    = PdfColor.fromHex('2C2C2C');
     final muted  = PdfColor.fromHex('8A7E70');
@@ -167,7 +206,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
             pw.Text(l10n.pdfNoAnswersRecorded, style: serifItalic(12, color: muted)),
 
           ...entries.map((e) {
-            final field = localizeField(l10n, kFields.firstWhere((f) => f.n == e.key));
+            final field = fields.firstWhere((f) => f.n == e.key);
             return pw.Padding(
               padding: const pw.EdgeInsets.only(bottom: 14),
               child: pw.Container(
@@ -188,6 +227,26 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
             );
           }),
 
+          if (_analysis != null) ...[
+            pw.SizedBox(height: 18),
+            pw.Container(height: 0.5, color: hair),
+            pw.SizedBox(height: 22),
+            pw.Text(l10n.yourAnalysisLabel, style: label(7.5, letterSpacing: 2)),
+            pw.SizedBox(height: 10),
+            pw.Text(_analysis!.analysis, style: serif(13, lineSpacing: 4)),
+            pw.SizedBox(height: 16),
+            pw.Text(l10n.yourNextDirectionLabel, style: label(7.5, color: gold, letterSpacing: 2)),
+            pw.SizedBox(height: 8),
+            pw.Text(_analysis!.finalDirection, style: serifItalic(14, color: gold, lineSpacing: 4)),
+            pw.SizedBox(height: 16),
+            pw.Text(l10n.recommendedStepsLabel, style: label(7.5, letterSpacing: 2)),
+            pw.SizedBox(height: 10),
+            ..._analysis!.recommendations.map((r) => pw.Padding(
+              padding: const pw.EdgeInsets.only(bottom: 6),
+              child: pw.Text('• $r', style: serif(12, lineSpacing: 2)),
+            )),
+          ],
+
           pw.SizedBox(height: 18),
           pw.Container(height: 0.5, color: hair),
           pw.SizedBox(height: 14),
@@ -206,6 +265,8 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
   @override
   Widget build(BuildContext context) {
     final entries = _entries;
+    final l10n = AppLocalizations.of(context);
+    final fields = GameContentService.fields(context);
 
     return Scaffold(
       backgroundColor: llBg,
@@ -306,7 +367,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                         else
                           Column(
                             children: entries.map((e) {
-                              final field = kFields.firstWhere((f) => f.n == e.key);
+                              final field = fields.firstWhere((f) => f.n == e.key);
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 14),
                                 child: Container(
@@ -328,6 +389,69 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                               );
                             }).toList(),
                           ),
+                        if (_analysisLoading || _analysis != null) ...[
+                          const SizedBox(height: 24),
+                          const Center(child: LLHairline(width: 28)),
+                          const SizedBox(height: 24),
+                          if (_analysisLoading)
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 12),
+                              child: SizedBox(
+                                width: 22,
+                                height: 22,
+                                child: CircularProgressIndicator(strokeWidth: 2, color: llGold),
+                              ),
+                            )
+                          else if (_analysis != null) ...[
+                            LLSmallCaps(l10n.yourAnalysisLabel, color: llGold),
+                            const SizedBox(height: 12),
+                            Text(
+                              _analysis!.analysis,
+                              textAlign: TextAlign.center,
+                              style: llSerifItalic(size: 14, color: llInk, height: 1.6),
+                            ),
+                            const SizedBox(height: 22),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(18),
+                              decoration: BoxDecoration(
+                                color: llCardBg,
+                                borderRadius: BorderRadius.circular(14),
+                                border: Border.all(color: const Color(0x80C8A96E)),
+                              ),
+                              child: Column(
+                                children: [
+                                  LLSmallCaps(l10n.yourNextDirectionLabel, size: 9, color: llMuted),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    _analysis!.finalDirection,
+                                    textAlign: TextAlign.center,
+                                    style: llSerifItalic(size: 15, color: llGold, height: 1.5),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 22),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(l10n.recommendedStepsLabel,
+                                style: llUi(size: 13, weight: FontWeight.w600)),
+                            ),
+                            const SizedBox(height: 10),
+                            ..._analysis!.recommendations.map((r) => Padding(
+                              padding: const EdgeInsets.only(bottom: 8),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('· ', style: llSerif(size: 15, color: llGold)),
+                                  Expanded(
+                                    child: Text(r, style: llUi(size: 14, color: llInk, weight: FontWeight.w400).copyWith(height: 1.4)),
+                                  ),
+                                ],
+                              ),
+                            )),
+                          ],
+                        ],
                         const SizedBox(height: 24),
                         const Center(child: LLHairline(width: 28)),
                         const SizedBox(height: 18),
@@ -369,6 +493,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                           label: AppLocalizations.of(context).startNewJourneyCta,
                           onTap: () {
                             ProgressService.clear().ignore();
+                            GameContentService.clear().ignore();
                             Navigator.of(context).pushAndRemoveUntil(
                               _fadeRoute(const RulesScreen()),
                               (_) => false,

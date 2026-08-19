@@ -11,9 +11,11 @@ import 'screens/onboarding_name_screen.dart';
 import 'screens/rules_screen.dart';
 import 'services/analytics_service.dart';
 import 'services/auth_service.dart';
+import 'services/game_content_service.dart';
 import 'services/notification_service.dart';
 import 'services/onboarding_service.dart';
 import 'services/progress_service.dart';
+import 'services/cloud_sync_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +23,7 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await AuthService.instance.ensureSignedIn();
+  await CloudSyncService.instance.restoreOrUpload();
 
   // Route uncaught errors to Crashlytics instead of just the console —
   // debug builds still print to console too, via debugPrint below.
@@ -34,14 +37,20 @@ void main() async {
   };
 
   final progress = await ProgressService.load();
+  if (progress != null) {
+    await GameContentService.restore(progress.wish);
+  }
   final onboardingDone = await OnboardingService.isDone();
-  final launchTabIndex = await NotificationService.instance.consumeLaunchTabIndex();
-  runApp(LeadLifeApp(
-    resumeProgress: progress,
-    onboardingDone: onboardingDone,
-    launchTabIndex: launchTabIndex,
-    navigatorObservers: [AnalyticsService.instance.navigatorObserver],
-  ));
+  final launchTabIndex = await NotificationService.instance
+      .consumeLaunchTabIndex();
+  runApp(
+    LeadLifeApp(
+      resumeProgress: progress,
+      onboardingDone: onboardingDone,
+      launchTabIndex: launchTabIndex,
+      navigatorObservers: [AnalyticsService.instance.navigatorObserver],
+    ),
+  );
 }
 
 class LeadLifeApp extends StatelessWidget {
@@ -65,13 +74,13 @@ class LeadLifeApp extends StatelessWidget {
     final Widget home = !onboardingDone
         ? const OnboardingNameScreen()
         : resumeProgress != null
-            ? MidDiceScreen(
-                currentFieldNum: resumeProgress!.currentFieldNum,
-                wish: resumeProgress!.wish,
-                completedFields: resumeProgress!.completedFields,
-                answers: resumeProgress!.answers,
-              )
-            : RulesScreen(initialTab: launchTabIndex ?? 0);
+        ? MidDiceScreen(
+            currentFieldNum: resumeProgress!.currentFieldNum,
+            wish: resumeProgress!.wish,
+            completedFields: resumeProgress!.completedFields,
+            answers: resumeProgress!.answers,
+          )
+        : RulesScreen(initialTab: launchTabIndex ?? 0);
 
     return MaterialApp(
       title: 'leadlife',

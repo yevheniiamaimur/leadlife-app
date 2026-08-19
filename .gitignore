@@ -36,6 +36,10 @@ migrate_working_dir/
 /build/
 /coverage/
 
+# Firebase Functions generated files and downloaded packages
+/functions/lib/
+/functions/node_modules/
+
 # Symbolication related
 app.*.symbols
 

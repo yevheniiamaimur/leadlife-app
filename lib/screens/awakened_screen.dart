@@ -1,12 +1,33 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
+import '../services/game_content_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'game_board_screen.dart';
 
-class AwakenedScreen extends StatelessWidget {
+class AwakenedScreen extends StatefulWidget {
   const AwakenedScreen({super.key, required this.wish});
   final String wish;
+
+  @override
+  State<AwakenedScreen> createState() => _AwakenedScreenState();
+}
+
+class _AwakenedScreenState extends State<AwakenedScreen> {
+  bool _entering = false;
+
+  Future<void> _enterFieldOne() async {
+    setState(() => _entering = true);
+    // Very likely already resolved by now — the player just went through
+    // the dice/paywall/account-link ritual, giving generation plenty of
+    // time to finish in the background. Falls back silently if not.
+    await GameContentService.ensureReady();
+    if (!mounted) return;
+    Navigator.of(context).pushAndRemoveUntil(
+      _fadeRoute(GameBoardScreen(wish: widget.wish, currentFieldNum: 1, completedFields: const [], answers: const {})),
+      (_) => false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +94,7 @@ class AwakenedScreen extends StatelessWidget {
                       children: [
                         LLSmallCaps(l10n.awakenedHeldInLight, size: 9),
                         const SizedBox(height: 6),
-                        Text('"$wish"',
+                        Text('"${widget.wish}"',
                           textAlign: TextAlign.center,
                           style: llSerifItalic(size: 15, color: llInk, height: 1.45)),
                       ],
@@ -85,12 +106,8 @@ class AwakenedScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: LLCTA(
                     label: l10n.awakenedEnterFieldOneCta,
-                    onTap: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                        _fadeRoute(GameBoardScreen(wish: wish, currentFieldNum: 1, completedFields: const [], answers: const {})),
-                        (_) => false,
-                      );
-                    },
+                    enabled: !_entering,
+                    onTap: _entering ? null : _enterFieldOne,
                   ),
                 ),
                 const SizedBox(height: 40),

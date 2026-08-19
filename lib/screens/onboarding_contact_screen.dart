@@ -1,9 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../services/notification_service.dart';
 import '../widgets/ll_widgets.dart';
+import 'legal_document_screen.dart';
 import 'onboarding_focus_screen.dart';
 
 class OnboardingContactScreen extends StatefulWidget {
@@ -18,6 +20,7 @@ class OnboardingContactScreen extends StatefulWidget {
 class _OnboardingContactScreenState extends State<OnboardingContactScreen> {
   final _ctrl = TextEditingController();
   bool _notifyChecked = false;
+  bool _termsAgreed = false;
 
   @override
   void dispose() {
@@ -27,10 +30,16 @@ class _OnboardingContactScreenState extends State<OnboardingContactScreen> {
 
   bool get _canContinue {
     final v = _ctrl.text.trim();
-    return v.contains('@') && v.contains('.') && v.length >= 5;
+    return v.contains('@') && v.contains('.') && v.length >= 5 && _termsAgreed;
   }
 
   void _toggleNotify() => setState(() => _notifyChecked = !_notifyChecked);
+  void _toggleTermsAgreed() => setState(() => _termsAgreed = !_termsAgreed);
+
+  void _openLegalDocument(LegalDocumentType type) {
+    FocusScope.of(context).unfocus();
+    Navigator.of(context).push(_fadeRoute(LegalDocumentScreen(type: type)));
+  }
 
   Future<void> _goNext() async {
     FocusScope.of(context).unfocus();
@@ -129,6 +138,54 @@ class _OnboardingContactScreenState extends State<OnboardingContactScreen> {
                               _notifyChecked ? Icons.check_box_rounded : Icons.check_box_outline_blank_rounded,
                               size: 24,
                               color: _notifyChecked ? llGold : llMutedSoft,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32),
+                    child: GestureDetector(
+                      onTap: _toggleTermsAgreed,
+                      child: Container(
+                        decoration: llCardDecoration(borderColor: _termsAgreed ? llGold : llHair).copyWith(
+                          color: _termsAgreed ? llGold.withAlpha(18) : llCardBg,
+                        ),
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              _termsAgreed ? Icons.check_box_rounded : Icons.check_box_outline_blank_rounded,
+                              size: 24,
+                              color: _termsAgreed ? llGold : llMutedSoft,
+                            ),
+                            const SizedBox(width: 14),
+                            Expanded(
+                              child: Text.rich(
+                                TextSpan(
+                                  style: llUi(size: 13.5, color: llMuted),
+                                  children: [
+                                    TextSpan(text: AppLocalizations.of(context).legalConsentPrefix),
+                                    TextSpan(
+                                      text: AppLocalizations.of(context).termsOfUseLabel,
+                                      style: llUi(size: 13.5, color: llGold, weight: FontWeight.w600),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () => _openLegalDocument(LegalDocumentType.termsOfUse),
+                                    ),
+                                    TextSpan(text: AppLocalizations.of(context).legalConsentAnd),
+                                    TextSpan(
+                                      text: AppLocalizations.of(context).privacyPolicyLabel,
+                                      style: llUi(size: 13.5, color: llGold, weight: FontWeight.w600),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () => _openLegalDocument(LegalDocumentType.privacyPolicy),
+                                    ),
+                                    TextSpan(text: AppLocalizations.of(context).legalConsentSuffix),
+                                  ],
+                                ),
+                              ),
                             ),
                           ],
                         ),

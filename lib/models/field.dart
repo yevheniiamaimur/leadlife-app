@@ -10,6 +10,7 @@ class GameField {
     required this.color,
     required this.intro,
     required this.task,
+    this.arrivalNote = '',
   });
 
   final int n;
@@ -19,6 +20,11 @@ class GameField {
   final Color color;
   final String intro;
   final String task;
+
+  /// AI-personalized flavor text shown when the dice-driven path leads the
+  /// player to this field (see GameContentService). Empty when this field's
+  /// content wasn't AI-generated (fallback mode).
+  final String arrivalNote;
 
   String get paddedNumber => n.toString().padLeft(2, '0');
 }

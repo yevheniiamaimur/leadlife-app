@@ -3,8 +3,10 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'cloud_sync_service.dart';
 
 // Every user gets a silent anonymous Firebase account on first launch —
 // no sign-in screen, no friction. Linking a real identity (Google/Apple/
@@ -41,19 +43,43 @@ class AuthService {
   Future<UserCredential> linkWithApple() async {
     final rawNonce = _generateNonce();
     final appleCredential = await SignInWithApple.getAppleIDCredential(
-      scopes: [AppleIDAuthorizationScopes.email, AppleIDAuthorizationScopes.fullName],
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
       nonce: _sha256(rawNonce),
     );
-    final credential = OAuthProvider('apple.com').credential(
-      idToken: appleCredential.identityToken,
-      rawNonce: rawNonce,
-    );
+    final credential = OAuthProvider(
+      'apple.com',
+    ).credential(idToken: appleCredential.identityToken, rawNonce: rawNonce);
     return _linkOrSignIn(credential);
   }
 
   Future<UserCredential> linkWithEmailPassword(String email, String password) {
-    final credential = EmailAuthProvider.credential(email: email, password: password);
+    final credential = EmailAuthProvider.credential(
+      email: email,
+      password: password,
+    );
     return _linkOrSignIn(credential);
+  }
+
+  Future<void> sendPasswordResetEmail(String email) =>
+      _auth.sendPasswordResetEmail(email: email.trim());
+
+  Future<void> signOutAndStartFresh() async {
+    await CloudSyncService.instance.upload();
+    await CloudSyncService.instance.clearLocalData();
+    await _auth.signOut();
+    await _auth.signInAnonymously();
+  }
+
+  Future<void> deleteAccount() async {
+    await FirebaseFunctions.instance
+        .httpsCallable('deleteAccount')
+        .call<void>();
+    await CloudSyncService.instance.clearLocalData();
+    await _auth.signOut();
+    await _auth.signInAnonymously();
   }
 
   // Anonymous users upgrade in place via linkWithCredential, preserving their
@@ -64,21 +90,32 @@ class AuthService {
     final user = _auth.currentUser;
     if (user != null && user.isAnonymous) {
       try {
-        return await user.linkWithCredential(credential);
+        final result = await user.linkWithCredential(credential);
+        await CloudSyncService.instance.restoreOrUpload();
+        return result;
       } on FirebaseAuthException catch (e) {
-        if (e.code == 'credential-already-in-use' || e.code == 'email-already-in-use') {
-          return _auth.signInWithCredential(credential);
+        if (e.code == 'credential-already-in-use' ||
+            e.code == 'email-already-in-use') {
+          final result = await _auth.signInWithCredential(credential);
+          await CloudSyncService.instance.restoreOrUpload();
+          return result;
         }
         rethrow;
       }
     }
-    return _auth.signInWithCredential(credential);
+    final result = await _auth.signInWithCredential(credential);
+    await CloudSyncService.instance.restoreOrUpload();
+    return result;
   }
 
   String _generateNonce([int length = 32]) {
-    const charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    const charset =
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
     final random = Random.secure();
-    return List.generate(length, (_) => charset[random.nextInt(charset.length)]).join();
+    return List.generate(
+      length,
+      (_) => charset[random.nextInt(charset.length)],
+    ).join();
   }
 
   String _sha256(String input) => sha256.convert(utf8.encode(input)).toString();

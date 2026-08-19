@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../models/field.dart';
+import '../services/game_content_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'success_code_screen.dart';
 import 'game_board_screen.dart';
@@ -29,20 +30,22 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
   int? _result;
   bool _rolling = false;
 
-  bool get _isFinal => widget.currentFieldNum == kFields.length; // 32 = Wholeness
+  List<GameField> get _fields => GameContentService.fields(context);
+
+  bool get _isFinal => widget.currentFieldNum == _fields.length; // 32 = Wholeness
   bool get _showResult => _result != null && !_rolling;
 
   int? get _newFieldNum {
     if (_result == null) return null;
     if (_isFinal) return _result; // final: area of action = roll value (1-8)
-    return math.min(widget.currentFieldNum + _result!, kFields.length);
+    return math.min(widget.currentFieldNum + _result!, _fields.length);
   }
 
   GameField? get _newField => _newFieldNum == null
       ? null
-      : localizeField(AppLocalizations.of(context), kFields.firstWhere((f) => f.n == _newFieldNum!));
+      : _fields.firstWhere((f) => f.n == _newFieldNum!);
 
-  bool get _overshoot => !_isFinal && _result != null && (widget.currentFieldNum + _result!) > kFields.length;
+  bool get _overshoot => !_isFinal && _result != null && (widget.currentFieldNum + _result!) > _fields.length;
 
   void _roll() {
     if (_rolling) return;
@@ -165,6 +168,17 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                             const SizedBox(height: 4),
                             Text(_newField!.subtitle,
                               style: llSerifItalic(size: 13, color: llMuted)),
+                            if (_newField!.arrivalNote.isNotEmpty) ...[
+                              const SizedBox(height: 14),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 28),
+                                child: Text(
+                                  _newField!.arrivalNote,
+                                  textAlign: TextAlign.center,
+                                  style: llSerifItalic(size: 13, color: llGoldDark, height: 1.5),
+                                ),
+                              ),
+                            ],
                           ],
                         )
                       : _rolling

@@ -67,6 +67,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmMyDesire => 'Confirm My Desire';
 
   @override
+  String get aiAssistantLinkCta =>
+      '✨ Not sure how to put it into words? Ask the assistant';
+
+  @override
+  String get aiAssistantTitle => 'Clarify Your Wish';
+
+  @override
+  String get aiAssistantGreeting =>
+      'What\'s the desire you\'re bringing into this journey? Tell me a bit about it and I\'ll help you put it into words.';
+
+  @override
+  String get aiAssistantInputHint => 'Type your reply…';
+
+  @override
+  String get aiAssistantUseThisWish => 'Use This Wish';
+
+  @override
+  String get aiAssistantError =>
+      'The assistant couldn\'t respond — check your connection and try again.';
+
+  @override
+  String get aiAssistantRetryCta => 'Try again';
+
+  @override
   String onboardingStepOfFive(int step) {
     return 'Step $step of 5';
   }
@@ -287,6 +311,15 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get goldenFishClosingLine =>
       'The golden fish is already on its way.\nYour work is to believe — and to act.';
+
+  @override
+  String get yourAnalysisLabel => 'Your Analysis';
+
+  @override
+  String get yourNextDirectionLabel => 'Your Next Direction';
+
+  @override
+  String get recommendedStepsLabel => 'Recommended Next Steps';
 
   @override
   String get todaysIntentionHeading => 'Today\'s Intention';
@@ -1217,4 +1250,204 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pdfNoAnswersRecorded => 'No answers recorded.';
+
+  @override
+  String get privacyPolicyLabel => 'Privacy Policy';
+
+  @override
+  String get termsOfUseLabel => 'Terms of Use';
+
+  @override
+  String get legalConsentPrefix => 'I agree to the ';
+
+  @override
+  String get legalConsentAnd => ' and ';
+
+  @override
+  String get legalConsentSuffix => '.';
+
+  @override
+  String get legalPrivacySection1Heading => 'Overview';
+
+  @override
+  String get legalPrivacySection1Body =>
+      'Last updated: [fill in before release]. This policy explains what information LeadLife (\"we\") collects when you use the LeadLife app, why we collect it, and the choices you have. By using the app you agree to this policy.';
+
+  @override
+  String get legalPrivacySection2Heading => 'Information We Collect';
+
+  @override
+  String get legalPrivacySection2Body =>
+      'Profile details you enter (your name, birthday, email address, and areas of focus) so we can personalize your journey. Account credentials, only if you choose to create an account with Google, Apple, or email and password, handled through Firebase Authentication. Usage and diagnostic data, such as anonymized interaction events and crash reports, your device model, operating system, and app version, collected through Firebase Analytics and Crashlytics. Purchase information, if you subscribe, processed by the App Store or Google Play and our subscription billing partner — we never see or store your card details.';
+
+  @override
+  String get legalPrivacySection3Heading => 'How We Use Your Information';
+
+  @override
+  String get legalPrivacySection3Body =>
+      'To personalize your journey and reminders, to send the gentle reminder notifications you opted into, to diagnose crashes and fix bugs, to understand how features are used so we can improve the app, and to manage your account and subscription.';
+
+  @override
+  String get legalPrivacySection4Heading => 'Where Your Data Lives';
+
+  @override
+  String get legalPrivacySection4Body =>
+      'Your profile details stay only on your device (in local app storage) unless you choose to create an account. If you create an account, your credentials are stored by Firebase Authentication (Google LLC). Analytics and crash data are processed by Firebase Analytics and Firebase Crashlytics (Google LLC).';
+
+  @override
+  String get legalPrivacySection5Heading => 'Sharing';
+
+  @override
+  String get legalPrivacySection5Body =>
+      'We do not sell your data and we do not use advertising networks. We only share data with service providers who act on our behalf: Firebase/Google, the App Store or Google Play, and our subscription billing partner.';
+
+  @override
+  String get legalPrivacySection6Heading => 'International Transfers';
+
+  @override
+  String get legalPrivacySection6Body =>
+      'Firebase infrastructure may process data outside your country or the European Economic Area, under standard contractual safeguards required by applicable law.';
+
+  @override
+  String get legalPrivacySection7Heading => 'Data Retention & Deletion';
+
+  @override
+  String get legalPrivacySection7Body =>
+      'Profile details stored only on your device are removed when you delete the app. If you have an account, you can delete it and its associated data at any time from within the app, or by contacting us at [support email].';
+
+  @override
+  String get legalPrivacySection8Heading => 'Your Rights';
+
+  @override
+  String get legalPrivacySection8Body =>
+      'Depending on where you live, you may have the right to access, correct, delete, or export your data, to object to certain processing, and to withdraw consent at any time. Contact us at [support email] to exercise these rights.';
+
+  @override
+  String get legalPrivacySection9Heading => 'Children';
+
+  @override
+  String get legalPrivacySection9Body =>
+      'LeadLife is not directed at children under 16, and we do not knowingly collect information from them.';
+
+  @override
+  String get legalPrivacySection10Heading => 'Changes & Contact';
+
+  @override
+  String get legalPrivacySection10Body =>
+      'We may update this policy from time to time; material changes will be reflected in the app. Questions? Reach us at [support email].';
+
+  @override
+  String get legalTermsSection1Heading => 'Acceptance of Terms';
+
+  @override
+  String get legalTermsSection1Body =>
+      'Last updated: [fill in before release]. By using LeadLife, you agree to these Terms of Use. If you do not agree, please do not use the app.';
+
+  @override
+  String get legalTermsSection2Heading => 'The Service';
+
+  @override
+  String get legalTermsSection2Body =>
+      'LeadLife is a personal-growth and self-reflection companion built around your wish, a 32-field journey, and gentle reminders. Content is provided for entertainment and self-reflection purposes only, and is not professional medical, psychological, financial, or legal advice.';
+
+  @override
+  String get legalTermsSection3Heading => 'Eligibility';
+
+  @override
+  String get legalTermsSection3Body =>
+      'You must be at least 16 years old, or the age of digital consent in your country, to use LeadLife, and you agree to provide accurate information.';
+
+  @override
+  String get legalTermsSection4Heading => 'Accounts';
+
+  @override
+  String get legalTermsSection4Body =>
+      'The app works anonymously by default. You may optionally link an account with Google, Apple, or email and password so your journey and purchases carry over to a new device. You are responsible for keeping your credentials secure.';
+
+  @override
+  String get legalTermsSection5Heading => 'Subscriptions & Payments';
+
+  @override
+  String get legalTermsSection5Body =>
+      'Paid plans are auto-renewing subscriptions billed through the App Store or Google Play. Price and renewal terms are shown before you purchase. You can cancel any time in your App Store or Google Play account settings; cancellation takes effect at the end of the current billing period. Refunds are handled by Apple or Google according to their own policies.';
+
+  @override
+  String get legalTermsSection6Heading => 'Your Content';
+
+  @override
+  String get legalTermsSection6Body =>
+      'You own what you write in the app. You grant us a limited license to store and process it solely to provide the service to you.';
+
+  @override
+  String get legalTermsSection7Heading => 'Acceptable Use';
+
+  @override
+  String get legalTermsSection7Body =>
+      'You agree not to use the app unlawfully, to interfere with its operation, or to reverse-engineer, decompile, or disassemble it.';
+
+  @override
+  String get legalTermsSection8Heading => 'Disclaimer & Liability';
+
+  @override
+  String get legalTermsSection8Body =>
+      'LeadLife is provided \"as is\", without warranties of any kind. To the fullest extent permitted by law, we are not liable for indirect, incidental, or consequential damages arising from your use of the app.';
+
+  @override
+  String get legalTermsSection9Heading => 'Termination';
+
+  @override
+  String get legalTermsSection9Body =>
+      'We may suspend or terminate access to the app for violation of these terms. You may stop using the app, and delete your account, at any time.';
+
+  @override
+  String get legalTermsSection10Heading => 'Governing Law & Changes';
+
+  @override
+  String get legalTermsSection10Body =>
+      'These terms are governed by the laws of [fill in your jurisdiction]. We may update these terms from time to time; material changes will be reflected in the app. Questions? Reach us at [support email].';
+
+  @override
+  String get accountSectionTitle => 'Account';
+
+  @override
+  String get accountAnonymousStatus =>
+      'Your data is currently stored only on this device.';
+
+  @override
+  String get accountConnectedStatus =>
+      'Your data is safely synced with your account.';
+
+  @override
+  String get resetPasswordAction => 'Reset password';
+
+  @override
+  String get resetPasswordPrompt =>
+      'Enter the email address connected to your account.';
+
+  @override
+  String get resetPasswordSent => 'A password reset link has been sent.';
+
+  @override
+  String get signOutAction => 'Sign out';
+
+  @override
+  String get signOutConfirm =>
+      'Your cloud copy will stay safe. Local data will be removed from this device.';
+
+  @override
+  String get deleteAccountAction => 'Delete account';
+
+  @override
+  String get deleteAccountConfirm =>
+      'This permanently deletes your account, cloud data, journey, diary, and history. This cannot be undone.';
+
+  @override
+  String get cancelAction => 'Cancel';
+
+  @override
+  String get confirmAction => 'Confirm';
+
+  @override
+  String get accountActionError =>
+      'Something went wrong. Please check your connection and try again.';
 }

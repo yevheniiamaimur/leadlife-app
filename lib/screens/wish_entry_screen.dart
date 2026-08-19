@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../services/analytics_service.dart';
+import '../services/game_content_service.dart';
 import '../services/game_history_service.dart';
+import '../services/profile_service.dart';
 import '../widgets/ll_widgets.dart';
+import 'ai_wish_assistant_screen.dart';
 import 'dice_roll_screen.dart';
 import 'help_modal.dart';
 
@@ -25,6 +28,27 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
   }
 
   bool get _canSubmit => _ctrl.text.trim().length > 3;
+
+  /// Fire-and-forget: kicks off batch game-content generation in the
+  /// background so it's very likely already done by the time the player
+  /// finishes the dice-roll/paywall/account-link ritual and reaches the
+  /// board. Never blocks navigation — see GameContentService for the
+  /// fallback behavior if this fails.
+  void _startGameGeneration(String wish) {
+    ProfileService.load().then((profile) {
+      GameContentService.generate(wish: wish, focus: profile?.focus);
+    });
+  }
+
+  Future<void> _openAssistant() async {
+    FocusScope.of(context).unfocus();
+    final suggestion = await Navigator.of(context).push<String>(
+      _fadeRoute(const AiWishAssistantScreen()),
+    );
+    if (suggestion != null && mounted) {
+      setState(() => _ctrl.text = suggestion);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +132,17 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
                       style: llUi(size: 12, color: llMutedSoft, letterSpacing: 0.3),
                     ),
                   ),
+                  const SizedBox(height: 12),
+                  Center(
+                    child: GestureDetector(
+                      onTap: _openAssistant,
+                      child: Text(
+                        AppLocalizations.of(context).aiAssistantLinkCta,
+                        textAlign: TextAlign.center,
+                        style: llUi(size: 12, color: llGold, weight: FontWeight.w600, letterSpacing: 0.2),
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -121,6 +156,7 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
                           final wish = _ctrl.text.trim();
                           GameHistoryService.recordStart(wish).ignore();
                           AnalyticsService.instance.logWishConfirmed().ignore();
+                          _startGameGeneration(wish);
                           Navigator.of(context).push(_fadeRoute(
                             DiceRollScreen(wish: wish),
                           ));

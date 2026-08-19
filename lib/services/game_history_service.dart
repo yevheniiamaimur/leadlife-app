@@ -2,6 +2,7 @@ import 'package:sqflite/sqflite.dart';
 import '../models/game_history_entry.dart';
 import 'app_database.dart';
 import 'safe_write.dart';
+import 'cloud_sync_service.dart';
 
 class GameHistoryService {
   static const totalFields = 32;
@@ -14,31 +15,41 @@ class GameHistoryService {
 
   // Records the start of a new wish/journey — unless the most recent
   // entry is already an in-progress attempt at the same wish.
-  static Future<bool> recordStart(String wish) => safeWrite('GameHistoryService.recordStart', () async {
-    final db = await AppDatabase.instance.database;
-    final last = await db.query('game_history', orderBy: 'id DESC', limit: 1);
-    if (last.isNotEmpty && last.first['completedAt'] == null && last.first['wish'] == wish) {
-      return;
-    }
-    await db.insert('game_history', GameHistoryEntry(
-      wish: wish,
-      startedAt: DateTime.now(),
-      completedFieldsCount: 0,
-    ).toMap());
-  });
+  static Future<bool> recordStart(String wish) => safeWrite(
+    'GameHistoryService.recordStart',
+    () async {
+      final db = await AppDatabase.instance.database;
+      final last = await db.query('game_history', orderBy: 'id DESC', limit: 1);
+      if (last.isNotEmpty &&
+          last.first['completedAt'] == null &&
+          last.first['wish'] == wish) {
+        return;
+      }
+      await db.insert(
+        'game_history',
+        GameHistoryEntry(
+          wish: wish,
+          startedAt: DateTime.now(),
+          completedFieldsCount: 0,
+        ).toMap(),
+      );
+      CloudSyncService.instance.notifyLocalChange();
+    },
+  );
 
   static Future<bool> updateProgress(String wish, int completedFieldsCount) =>
       safeWrite('GameHistoryService.updateProgress', () async {
-    final db = await AppDatabase.instance.database;
-    final id = await _openEntryId(db, wish);
-    if (id == null) return;
-    await db.update(
-      'game_history',
-      {'completedFieldsCount': completedFieldsCount},
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-  });
+        final db = await AppDatabase.instance.database;
+        final id = await _openEntryId(db, wish);
+        if (id == null) return;
+        await db.update(
+          'game_history',
+          {'completedFieldsCount': completedFieldsCount},
+          where: 'id = ?',
+          whereArgs: [id],
+        );
+        CloudSyncService.instance.notifyLocalChange();
+      });
 
   static Future<bool> markCompleted(
     String wish, {
@@ -49,13 +60,16 @@ class GameHistoryService {
     final id = await _openEntryId(db, wish);
     final now = DateTime.now().toIso8601String();
     if (id == null) {
-      await db.insert('game_history', GameHistoryEntry(
-        wish: wish,
-        startedAt: DateTime.now(),
-        completedAt: DateTime.now(),
-        completedFieldsCount: completedFieldsCount,
-        successCode: successCode,
-      ).toMap());
+      await db.insert(
+        'game_history',
+        GameHistoryEntry(
+          wish: wish,
+          startedAt: DateTime.now(),
+          completedAt: DateTime.now(),
+          completedFieldsCount: completedFieldsCount,
+          successCode: successCode,
+        ).toMap(),
+      );
     } else {
       await db.update(
         'game_history',
@@ -68,6 +82,7 @@ class GameHistoryService {
         whereArgs: [id],
       );
     }
+    CloudSyncService.instance.notifyLocalChange();
   });
 
   // The most recent not-yet-completed entry for this wish, if any.

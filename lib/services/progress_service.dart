@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'safe_write.dart';
+import 'cloud_sync_service.dart';
 
 class ProgressService {
-  static const _kWish         = 'wish';
+  static const _kWish = 'wish';
   static const _kCurrentField = 'currentField';
-  static const _kCompleted    = 'completedFields';
-  static const _kAnswers      = 'answers';
+  static const _kCompleted = 'completedFields';
+  static const _kAnswers = 'answers';
 
   static Future<bool> save({
     required String wish,
@@ -19,10 +20,12 @@ class ProgressService {
       prefs.setString(_kWish, wish),
       prefs.setInt(_kCurrentField, currentFieldNum),
       prefs.setString(_kCompleted, jsonEncode(completedFields)),
-      prefs.setString(_kAnswers, jsonEncode(
-        answers.map((k, v) => MapEntry(k.toString(), v)),
-      )),
+      prefs.setString(
+        _kAnswers,
+        jsonEncode(answers.map((k, v) => MapEntry(k.toString(), v))),
+      ),
     ]);
+    CloudSyncService.instance.notifyLocalChange();
   });
 
   static Future<SavedProgress?> load() async {
@@ -31,15 +34,16 @@ class ProgressService {
     if (wish == null || wish.isEmpty) return null;
 
     final currentFieldNum = prefs.getInt(_kCurrentField) ?? 1;
-    final completedJson   = prefs.getString(_kCompleted);
-    final answersJson     = prefs.getString(_kAnswers);
+    final completedJson = prefs.getString(_kCompleted);
+    final answersJson = prefs.getString(_kAnswers);
 
     final completed = completedJson != null
         ? List<int>.from(jsonDecode(completedJson) as List)
         : <int>[];
     final answers = answersJson != null
-        ? (jsonDecode(answersJson) as Map<String, dynamic>)
-            .map((k, v) => MapEntry(int.parse(k), v as String))
+        ? (jsonDecode(answersJson) as Map<String, dynamic>).map(
+            (k, v) => MapEntry(int.parse(k), v as String),
+          )
         : <int, String>{};
 
     return SavedProgress(
@@ -58,6 +62,7 @@ class ProgressService {
       prefs.remove(_kCompleted),
       prefs.remove(_kAnswers),
     ]);
+    CloudSyncService.instance.notifyLocalChange();
   });
 }
 

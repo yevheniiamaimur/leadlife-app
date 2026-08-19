@@ -468,6 +468,34 @@ class _GlyphPainter extends CustomPainter {
   bool shouldRepaint(_GlyphPainter old) => old.color != color;
 }
 
+// ── Chat bubble (AI assistant conversations) ───────────────────
+class LLChatBubble extends StatelessWidget {
+  const LLChatBubble({super.key, required this.text, required this.isUser});
+
+  final String text;
+  final bool isUser;
+
+  @override
+  Widget build(BuildContext context) => Align(
+    alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+    child: Container(
+      constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.78),
+      margin: const EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: isUser ? llGold : llCardBg,
+        borderRadius: BorderRadius.circular(16),
+        border: isUser ? null : Border.all(color: llHair, width: 1),
+        boxShadow: llShadowSoft,
+      ),
+      child: Text(
+        text,
+        style: llUi(size: 15, color: isUser ? Colors.white : llInk, weight: FontWeight.w400).copyWith(height: 1.4),
+      ),
+    ),
+  );
+}
+
 // ── Logo mark ────────────────────────────────────────────────
 class LLLogo extends StatelessWidget {
   const LLLogo({super.key, this.size = 48, this.color = llGold});

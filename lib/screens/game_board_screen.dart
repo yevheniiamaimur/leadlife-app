@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../models/field.dart';
+import '../services/game_content_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'field_intro_screen.dart';
 
@@ -57,9 +58,9 @@ class _GameBoardScreenState extends State<GameBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final trackH = 60.0 + kFields.length * 84 + 80;
-    final l10n = AppLocalizations.of(context);
-    final currentField = localizeField(l10n, kFields.firstWhere((f) => f.n == widget.currentFieldNum));
+    final fields = GameContentService.fields(context);
+    final trackH = 60.0 + fields.length * 84 + 80;
+    final currentField = fields.firstWhere((f) => f.n == widget.currentFieldNum);
 
     return Scaffold(
       backgroundColor: llBg,
@@ -94,7 +95,7 @@ class _GameBoardScreenState extends State<GameBoardScreen> {
                             Text(
                               AppLocalizations.of(context).fieldOfTotal(
                                 widget.currentFieldNum.toString().padLeft(2, '0'),
-                                kFields.length,
+                                fields.length,
                               ),
                               style: llSerif(size: 22, height: 1.1),
                             ),
@@ -130,10 +131,9 @@ class _GameBoardScreenState extends State<GameBoardScreen> {
                 width: double.infinity,
                 height: trackH,
                 child: CustomPaint(
-                  painter: _PathPainter(fields: kFields, xAt: _xAt, yAt: _yAt),
+                  painter: _PathPainter(fields: fields, xAt: _xAt, yAt: _yAt),
                   child: Stack(
-                    children: kFields.map((raw) {
-                      final f = localizeField(l10n, raw);
+                    children: fields.map((f) {
                       final i = f.n - 1;
                       final x = _xAt(i);
                       final y = _yAt(i);
@@ -264,6 +264,7 @@ class _AnswersSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final entries = answers.entries.toList()..sort((a, b) => a.key.compareTo(b.key));
+    final fields = GameContentService.fields(context);
     return Container(
       padding: const EdgeInsets.all(24),
       constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.7),
@@ -285,7 +286,7 @@ class _AnswersSheet extends StatelessWidget {
                 separatorBuilder: (_, _) => const SizedBox(height: 14),
                 itemBuilder: (_, i) {
                   final e = entries[i];
-                  final field = kFields.firstWhere((f) => f.n == e.key);
+                  final field = fields.firstWhere((f) => f.n == e.key);
                   return Container(
                     padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
                     decoration: const BoxDecoration(
