@@ -9,5 +9,8 @@ service cloud.firestore {
     match /gameGenerationUsage/{documentId} {
       allow read, write: if false;
     }
+    match /aiUsage/{documentId} {
+      allow read, write: if false;
+    }
   }
 }

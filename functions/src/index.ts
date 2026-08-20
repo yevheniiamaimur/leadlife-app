@@ -22,6 +22,34 @@ const FIELD_COUNT = 32;
 // resource-exhausted, and the client's existing fallback (static field
 // content) engages transparently — see GameContentService on the Dart side.
 const MONTHLY_GENERATION_LIMIT = 10;
+const DAILY_CLARIFY_LIMIT = 40;
+const DAILY_FINAL_ANALYSIS_LIMIT = 10;
+
+async function reserveDailyAiCall(
+  uid: string,
+  action: "clarify" | "final",
+  limit: number
+): Promise<void> {
+  const day = new Date().toISOString().slice(0, 10);
+  const ref = db.collection("aiUsage").doc(`${uid}_${action}_${day}`);
+  await db.runTransaction(async (tx: Transaction) => {
+    const snap = await tx.get(ref);
+    const count = (snap.data()?.count as number | undefined) ?? 0;
+    if (count >= limit) {
+      throw new HttpsError(
+        "resource-exhausted",
+        `Daily ${action} limit (${limit}) reached.`
+      );
+    }
+    tx.set(ref, {
+      uid,
+      action,
+      day,
+      count: count + 1,
+      updatedAt: FieldValue.serverTimestamp(),
+    }, { merge: true });
+  });
+}
 
 export const deleteAccount = onCall(
   { region: "us-central1" },
@@ -33,9 +61,11 @@ export const deleteAccount = onCall(
       .startAt(`${uid}_`)
       .endAt(`${uid}_\uf8ff`)
       .get();
+    const aiUsage = await db.collection("aiUsage").where("uid", "==", uid).get();
     const batch = db.batch();
     batch.delete(db.collection("users").doc(uid));
     for (const document of usage.docs) batch.delete(document.ref);
+    for (const document of aiUsage.docs) batch.delete(document.ref);
     await batch.commit();
     await getAuth().deleteUser(uid);
     return { deleted: true };
@@ -170,6 +200,8 @@ export const clarifyWish = onCall(
       throw new HttpsError("invalid-argument", "The last history entry must be from the user.");
     }
 
+    await reserveDailyAiCall(request.auth!.uid, "clarify", DAILY_CLARIFY_LIMIT);
+
     const client = new Anthropic({ apiKey: anthropicApiKey.value() });
 
     const response = await client.messages.create({
@@ -302,7 +334,7 @@ export const finalAnalysis = onCall(
     if (typeof wish !== "string" || wish.trim().length === 0) {
       throw new HttpsError("invalid-argument", "wish must be a non-empty string.");
     }
-    if (!Array.isArray(entries) || entries.length === 0) {
+    if (!Array.isArray(entries) || entries.length === 0 || entries.length > FIELD_COUNT) {
       throw new HttpsError("invalid-argument", "entries must be a non-empty array.");
     }
 
@@ -322,6 +354,8 @@ export const finalAnalysis = onCall(
           `Answer: "${e.answer.trim().slice(0, MAX_TEXT_LENGTH)}"`
       );
     }
+
+    await reserveDailyAiCall(request.auth!.uid, "final", DAILY_FINAL_ANALYSIS_LIMIT);
 
     const client = new Anthropic({ apiKey: anthropicApiKey.value() });
 

@@ -32,24 +32,35 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
 
   List<GameField> get _fields => GameContentService.fields(context);
 
-  bool get _isFinal => widget.currentFieldNum == _fields.length; // 32 = Wholeness
+  bool get _isFinal =>
+      widget.currentFieldNum == _fields.length; // 32 = Wholeness
   bool get _showResult => _result != null && !_rolling;
+
+  bool get _crossedBoundary =>
+      !_isFinal &&
+      _result != null &&
+      widget.currentFieldNum + _result! > _fields.length;
+
+  bool get _journeyComplete => _isFinal || _crossedBoundary;
 
   int? get _newFieldNum {
     if (_result == null) return null;
     if (_isFinal) return _result; // final: area of action = roll value (1-8)
-    return math.min(widget.currentFieldNum + _result!, _fields.length);
+    final destination = widget.currentFieldNum + _result!;
+    if (destination > _fields.length) return destination - _fields.length;
+    return math.min(destination, _fields.length);
   }
 
   GameField? get _newField => _newFieldNum == null
       ? null
       : _fields.firstWhere((f) => f.n == _newFieldNum!);
 
-  bool get _overshoot => !_isFinal && _result != null && (widget.currentFieldNum + _result!) > _fields.length;
-
   void _roll() {
     if (_rolling) return;
-    setState(() { _rolling = true; _result = null; });
+    setState(() {
+      _rolling = true;
+      _result = null;
+    });
     Future.delayed(const Duration(milliseconds: 1200), () {
       if (!mounted) return;
       setState(() {
@@ -84,7 +95,10 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 18,
+                      vertical: 14,
+                    ),
                     decoration: BoxDecoration(
                       color: llCardBg,
                       borderRadius: BorderRadius.circular(12),
@@ -92,12 +106,22 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                     ),
                     child: Column(
                       children: [
-                        LLSmallCaps(AppLocalizations.of(context).yourDesireLabel, size: 9, color: llMuted, letterSpacing: 2),
+                        LLSmallCaps(
+                          AppLocalizations.of(context).yourDesireLabel,
+                          size: 9,
+                          color: llMuted,
+                          letterSpacing: 2,
+                        ),
                         const SizedBox(height: 6),
                         Text(
                           '"${widget.wish}"',
                           textAlign: TextAlign.center,
-                          style: llSerifItalic(size: 15, color: llGoldDark, height: 1.45, weight: FontWeight.w500),
+                          style: llSerifItalic(
+                            size: 15,
+                            color: llGoldDark,
+                            height: 1.45,
+                            weight: FontWeight.w500,
+                          ),
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -113,18 +137,29 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 36),
                   child: Text(
                     _showResult
-                        ? (_isFinal
-                            ? AppLocalizations.of(context).currentAreaOfActionColon
-                            : (_overshoot
-                                ? AppLocalizations.of(context).reachedFinalPathText
-                                : AppLocalizations.of(context).youAreNowOnText))
+                        ? (_journeyComplete
+                              ? AppLocalizations.of(
+                                  context,
+                                ).currentAreaOfActionColon
+                              : AppLocalizations.of(context).youAreNowOnText)
                         : (_isFinal
-                            ? AppLocalizations.of(context).finalTurnInstructions
-                            : AppLocalizations.of(context).onFieldWhereWillPathLead(
-                                widget.currentFieldNum.toString().padLeft(2, '0'),
-                              )),
+                              ? AppLocalizations.of(
+                                  context,
+                                ).finalTurnInstructions
+                              : AppLocalizations.of(
+                                  context,
+                                ).onFieldWhereWillPathLead(
+                                  widget.currentFieldNum.toString().padLeft(
+                                    2,
+                                    '0',
+                                  ),
+                                )),
                     textAlign: TextAlign.center,
-                    style: llSerifItalic(size: 14, color: llMuted, height: 1.55),
+                    style: llSerifItalic(
+                      size: 14,
+                      color: llMuted,
+                      height: 1.55,
+                    ),
                   ),
                 ),
 
@@ -151,10 +186,17 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                             const Center(child: LLHairline(width: 36)),
                             const SizedBox(height: 16),
                             LLSmallCaps(
-                              _isFinal
-                                  ? AppLocalizations.of(context).fromThisPlaceLabel
-                                  : AppLocalizations.of(context).arrivingAtField(
-                                      (_newFieldNum ?? 0).toString().padLeft(2, '0'),
+                              _journeyComplete
+                                  ? AppLocalizations.of(
+                                      context,
+                                    ).fromThisPlaceLabel
+                                  : AppLocalizations.of(
+                                      context,
+                                    ).arrivingAtField(
+                                      (_newFieldNum ?? 0).toString().padLeft(
+                                        2,
+                                        '0',
+                                      ),
                                     ),
                               size: 10,
                               letterSpacing: 2,
@@ -163,32 +205,44 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                             Text(
                               _newField!.name,
                               textAlign: TextAlign.center,
-                              style: llSerif(size: 26, height: 1.1, weight: FontWeight.w600).copyWith(letterSpacing: 2),
+                              style: llSerif(
+                                size: 26,
+                                height: 1.1,
+                                weight: FontWeight.w600,
+                              ).copyWith(letterSpacing: 2),
                             ),
                             const SizedBox(height: 4),
-                            Text(_newField!.subtitle,
-                              style: llSerifItalic(size: 13, color: llMuted)),
+                            Text(
+                              _newField!.subtitle,
+                              style: llSerifItalic(size: 13, color: llMuted),
+                            ),
                             if (_newField!.arrivalNote.isNotEmpty) ...[
                               const SizedBox(height: 14),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 28),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 28,
+                                ),
                                 child: Text(
                                   _newField!.arrivalNote,
                                   textAlign: TextAlign.center,
-                                  style: llSerifItalic(size: 13, color: llGoldDark, height: 1.5),
+                                  style: llSerifItalic(
+                                    size: 13,
+                                    color: llGoldDark,
+                                    height: 1.5,
+                                  ),
                                 ),
                               ),
                             ],
                           ],
                         )
                       : _rolling
-                          ? Text(
-                              _isFinal
-                                  ? AppLocalizations.of(context).wheelTurnsOnceMore
-                                  : AppLocalizations.of(context).pathTurnsEllipsis,
-                              style: llSerifItalic(size: 13, color: llMutedSoft),
-                            )
-                          : const SizedBox.shrink(),
+                      ? Text(
+                          _isFinal
+                              ? AppLocalizations.of(context).wheelTurnsOnceMore
+                              : AppLocalizations.of(context).pathTurnsEllipsis,
+                          style: llSerifItalic(size: 13, color: llMutedSoft),
+                        )
+                      : const SizedBox.shrink(),
                 ),
 
                 const Spacer(),
@@ -203,17 +257,23 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
                           label: _rolling
                               ? AppLocalizations.of(context).rollingEllipsis
                               : (_isFinal
-                                  ? AppLocalizations.of(context).rollFinalDiceCta
-                                  : AppLocalizations.of(context).rollDiceCta),
+                                    ? AppLocalizations.of(
+                                        context,
+                                      ).rollFinalDiceCta
+                                    : AppLocalizations.of(context).rollDiceCta),
                           enabled: !_rolling,
                           onTap: _roll,
                           variant: 'primary',
                         ),
                       if (_showResult && _newField != null)
                         LLCTA(
-                          label: _isFinal
-                              ? AppLocalizations.of(context).receiveSuccessCodeCta
-                              : AppLocalizations.of(context).enterFieldNameCta(_newField!.name),
+                          label: _journeyComplete
+                              ? AppLocalizations.of(
+                                  context,
+                                ).receiveSuccessCodeCta
+                              : AppLocalizations.of(
+                                  context,
+                                ).enterFieldNameCta(_newField!.name),
                           onTap: _proceed,
                         ),
                     ],
@@ -225,12 +285,14 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
           ),
           LLBackArrow(
             onTap: () => Navigator.of(context).pushAndRemoveUntil(
-              _fadeRoute(GameBoardScreen(
-                wish: widget.wish,
-                currentFieldNum: widget.currentFieldNum,
-                completedFields: widget.completedFields,
-                answers: widget.answers,
-              )),
+              _fadeRoute(
+                GameBoardScreen(
+                  wish: widget.wish,
+                  currentFieldNum: widget.currentFieldNum,
+                  completedFields: widget.completedFields,
+                  answers: widget.answers,
+                ),
+              ),
               (_) => false,
             ),
           ),
@@ -241,23 +303,27 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
 
   void _proceed() {
     if (_newField == null) return;
-    if (_isFinal) {
+    if (_journeyComplete) {
       Navigator.of(context).pushAndRemoveUntil(
-        _fadeRoute(SuccessCodeScreen(
-          wish: widget.wish,
-          answers: widget.answers,
-          currentAreaField: _newField!,
-        )),
+        _fadeRoute(
+          SuccessCodeScreen(
+            wish: widget.wish,
+            answers: widget.answers,
+            currentAreaField: _newField!,
+          ),
+        ),
         (_) => false,
       );
     } else {
       Navigator.of(context).pushAndRemoveUntil(
-        _fadeRoute(GameBoardScreen(
-          wish: widget.wish,
-          currentFieldNum: _newField!.n,
-          completedFields: widget.completedFields,
-          answers: widget.answers,
-        )),
+        _fadeRoute(
+          GameBoardScreen(
+            wish: widget.wish,
+            currentFieldNum: _newField!.n,
+            completedFields: widget.completedFields,
+            answers: widget.answers,
+          ),
+        ),
         (r) => r.isFirst,
       );
     }
@@ -266,6 +332,7 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
 
 PageRouteBuilder<T> _fadeRoute<T>(Widget page) => PageRouteBuilder(
   pageBuilder: (_, _, _) => page,
-  transitionsBuilder: (_, a, _, child) => FadeTransition(opacity: a, child: child),
+  transitionsBuilder: (_, a, _, child) =>
+      FadeTransition(opacity: a, child: child),
   transitionDuration: const Duration(milliseconds: 350),
 );

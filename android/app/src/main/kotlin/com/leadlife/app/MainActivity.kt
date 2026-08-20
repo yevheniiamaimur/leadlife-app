@@ -1,4 +1,4 @@
-package com.example.leadlife_app
+package com.leadlife.app
 
 import io.flutter.embedding.android.FlutterActivity
 
