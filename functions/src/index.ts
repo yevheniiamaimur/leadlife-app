@@ -13,7 +13,6 @@ const anthropicApiKey = defineSecret("ANTHROPIC_API_KEY");
 
 const MODEL = "claude-opus-4-8";
 const MAX_TEXT_LENGTH = 500;
-const MAX_HISTORY_TURNS = 20;
 const FIELD_COUNT = 32;
 
 // Soft cap on game generation specifically — the "Unlimited Journeys"
@@ -22,12 +21,11 @@ const FIELD_COUNT = 32;
 // resource-exhausted, and the client's existing fallback (static field
 // content) engages transparently — see GameContentService on the Dart side.
 const MONTHLY_GENERATION_LIMIT = 10;
-const DAILY_CLARIFY_LIMIT = 40;
 const DAILY_FINAL_ANALYSIS_LIMIT = 10;
 
 async function reserveDailyAiCall(
   uid: string,
-  action: "clarify" | "final",
+  action: "final",
   limit: number
 ): Promise<void> {
   const day = new Date().toISOString().slice(0, 10);
@@ -93,18 +91,6 @@ async function reserveGenerationSlot(uid: string): Promise<void> {
   });
 }
 
-const CLARIFY_SYSTEM_SUFFIX = `
-
-Your job here: help the player turn a vague desire into ONE clear, specific,
-present-tense wish statement — in the style "I have…", "I am…", "I experience…"
-(present tense, as if it's already true — not "I want" or future tense).
-Ask at most one or two short, warm clarifying questions per turn to sharpen
-vague or generic desires. Keep replies brief (2-4 sentences).
-Once the wish feels concrete, specific, and present-tense, end your reply
-with a final line, on its own, formatted EXACTLY as:
-SUGGESTED_WISH: <the wish statement>
-Only include that line when you're confident the wish is ready — not on every turn.`;
-
 const GENERATE_GAME_SYSTEM_SUFFIX = `
 
 Your job here: personalize the game for one player before they start.
@@ -134,11 +120,6 @@ write:
 - "recommendations": 3-5 short, concrete, imperative-sentence next steps.
 Respond in the same language as their answers.`;
 
-interface ChatTurnInput {
-  role: "user" | "assistant";
-  text: string;
-}
-
 interface AnswerEntryInput {
   n: number;
   fieldName: string;
@@ -156,76 +137,11 @@ function extractText(response: Anthropic.Message): string {
   return parts.join("\n").trim();
 }
 
-function extractSuggestedWish(raw: string): { reply: string; suggestedWish: string | null } {
-  const match = raw.match(/^SUGGESTED_WISH:\s*(.+)$/m);
-  if (!match) {
-    return { reply: raw, suggestedWish: null };
-  }
-  const suggestedWish = match[1].trim();
-  const reply = raw.slice(0, match.index).trim();
-  return { reply: reply || suggestedWish, suggestedWish };
-}
-
 function requireAuth(request: { auth?: unknown }): void {
   if (!request.auth) {
     throw new HttpsError("unauthenticated", "Sign-in required.");
   }
 }
-
-export const clarifyWish = onCall(
-  { secrets: [anthropicApiKey], region: "us-central1" },
-  async (request) => {
-    requireAuth(request);
-
-    const history = request.data?.history;
-    if (!Array.isArray(history) || history.length === 0) {
-      throw new HttpsError("invalid-argument", "history must be a non-empty array.");
-    }
-    if (history.length > MAX_HISTORY_TURNS) {
-      throw new HttpsError("invalid-argument", `history cannot exceed ${MAX_HISTORY_TURNS} turns.`);
-    }
-
-    const messages: Anthropic.MessageParam[] = [];
-    for (const turn of history as ChatTurnInput[]) {
-      if (
-        (turn.role !== "user" && turn.role !== "assistant") ||
-        typeof turn.text !== "string" ||
-        turn.text.trim().length === 0
-      ) {
-        throw new HttpsError("invalid-argument", "Each history entry needs a role and non-empty text.");
-      }
-      messages.push({ role: turn.role, content: turn.text.trim().slice(0, MAX_TEXT_LENGTH) });
-    }
-    if (messages[messages.length - 1].role !== "user") {
-      throw new HttpsError("invalid-argument", "The last history entry must be from the user.");
-    }
-
-    await reserveDailyAiCall(request.auth!.uid, "clarify", DAILY_CLARIFY_LIMIT);
-
-    const client = new Anthropic({ apiKey: anthropicApiKey.value() });
-
-    const response = await client.messages.create({
-      model: MODEL,
-      max_tokens: 500,
-      output_config: { effort: "medium" },
-      system: [
-        {
-          type: "text",
-          text: GAME_SYSTEM_PROMPT + CLARIFY_SYSTEM_SUFFIX,
-          cache_control: { type: "ephemeral" },
-        },
-      ],
-      messages,
-    });
-
-    const rawText = extractText(response);
-    if (!rawText) {
-      throw new HttpsError("internal", "The assistant returned an empty response.");
-    }
-
-    return extractSuggestedWish(rawText);
-  }
-);
 
 export const generateGame = onCall(
   { secrets: [anthropicApiKey], region: "us-central1", timeoutSeconds: 120 },

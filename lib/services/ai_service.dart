@@ -1,28 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
 
-/// One turn in a wish-clarification conversation with the AI assistant.
-class ChatTurn {
-  const ChatTurn({required this.role, required this.text});
-
-  /// Either `'user'` or `'assistant'`.
-  final String role;
-  final String text;
-
-  Map<String, String> toJson() => {'role': role, 'text': text};
-}
-
-/// Result of a [AiService.clarifyWish] call.
-class ClarifyWishResult {
-  const ClarifyWishResult({required this.reply, this.suggestedWish});
-
-  /// The assistant's visible chat reply.
-  final String reply;
-
-  /// A ready-to-use wish statement, when the assistant judged the
-  /// conversation has produced a clear, present-tense wish. Null otherwise.
-  final String? suggestedWish;
-}
-
 /// AI-personalized content for one field, as returned by
 /// [AiService.generateGame]. See [GameContentService] for how this gets
 /// merged into the static field skeleton.
@@ -98,27 +75,6 @@ class AiService {
   AiService._();
 
   static final FirebaseFunctions _functions = FirebaseFunctions.instance;
-
-  static Future<ClarifyWishResult> clarifyWish({
-    required List<ChatTurn> history,
-  }) async {
-    try {
-      final callable = _functions.httpsCallable('clarifyWish');
-      final result = await callable.call<Map<String, dynamic>>({
-        'history': history.map((t) => t.toJson()).toList(),
-      });
-      final reply = result.data['reply'] as String?;
-      if (reply == null || reply.trim().isEmpty) {
-        throw const AiServiceException('Empty response from assistant.');
-      }
-      return ClarifyWishResult(
-        reply: reply,
-        suggestedWish: result.data['suggestedWish'] as String?,
-      );
-    } on FirebaseFunctionsException catch (e) {
-      throw AiServiceException(e.message ?? e.code);
-    }
-  }
 
   static Future<List<GeneratedFieldContent>> generateGame({
     required String wish,

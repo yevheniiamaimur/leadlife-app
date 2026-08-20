@@ -6,7 +6,6 @@ import '../services/game_content_service.dart';
 import '../services/game_history_service.dart';
 import '../services/profile_service.dart';
 import '../widgets/ll_widgets.dart';
-import 'ai_wish_assistant_screen.dart';
 import 'dice_roll_screen.dart';
 import 'help_modal.dart';
 
@@ -38,16 +37,6 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
     ProfileService.load().then((profile) {
       GameContentService.generate(wish: wish, focus: profile?.focus);
     });
-  }
-
-  Future<void> _openAssistant() async {
-    FocusScope.of(context).unfocus();
-    final suggestion = await Navigator.of(context).push<String>(
-      _fadeRoute(const AiWishAssistantScreen()),
-    );
-    if (suggestion != null && mounted) {
-      setState(() => _ctrl.text = suggestion);
-    }
   }
 
   @override
@@ -133,16 +122,6 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Center(
-                    child: GestureDetector(
-                      onTap: _openAssistant,
-                      child: Text(
-                        AppLocalizations.of(context).aiAssistantLinkCta,
-                        textAlign: TextAlign.center,
-                        style: llUi(size: 12, color: llGold, weight: FontWeight.w600, letterSpacing: 0.2),
-                      ),
-                    ),
-                  ),
                   const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
