@@ -4,12 +4,31 @@ class AnalyticsService {
   AnalyticsService._();
   static final AnalyticsService instance = AnalyticsService._();
 
-  final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
+  bool _available = false;
+  FirebaseAnalytics? _analytics;
 
-  FirebaseAnalyticsObserver get navigatorObserver =>
-      FirebaseAnalyticsObserver(analytics: _analytics);
+  void configure({required bool firebaseAvailable}) {
+    _available = firebaseAvailable;
+    _analytics = firebaseAvailable ? FirebaseAnalytics.instance : null;
+  }
 
-  Future<void> logWishConfirmed() => _analytics.logEvent(name: 'wish_confirmed');
+  FirebaseAnalyticsObserver? get navigatorObserver {
+    final analytics = _analytics;
+    return analytics == null
+        ? null
+        : FirebaseAnalyticsObserver(analytics: analytics);
+  }
 
-  Future<void> logJourneyCompleted() => _analytics.logEvent(name: 'journey_completed');
+  Future<void> logWishConfirmed() => _log('wish_confirmed');
+
+  Future<void> logJourneyCompleted() => _log('journey_completed');
+
+  Future<void> _log(String name) async {
+    if (!_available) return;
+    try {
+      await _analytics?.logEvent(name: name);
+    } catch (_) {
+      // Analytics must never interrupt the game.
+    }
+  }
 }

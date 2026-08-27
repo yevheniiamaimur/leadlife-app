@@ -18,6 +18,36 @@ TextStyle llSerifItalic({double size = 14, Color color = llMuted, double height 
 TextStyle llUi({double size = 13, Color color = llInk, FontWeight weight = FontWeight.w400, double letterSpacing = 0}) =>
     TextStyle(fontFamily: 'WorkSans', fontSize: size, fontWeight: weight, color: color, letterSpacing: letterSpacing, fontFamilyFallback: _cyrillicFallback);
 
+// Hatchpot wordmark: the capital H is intentionally condensed so it keeps
+// the visual rhythm of the lowercase letters.
+class HatchpotWordmark extends StatelessWidget {
+  const HatchpotWordmark({super.key, this.size = 19, this.color = llInk});
+
+  final double size;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    final style = llSerif(size: size, weight: FontWeight.w600, color: color);
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.alphabetic,
+      children: [
+        Transform.scale(
+          scaleX: 0.78,
+          alignment: Alignment.centerRight,
+          child: Text('H', style: style),
+        ),
+        Transform.translate(
+          offset: Offset(-size * 0.1, 0),
+          child: Text('atchpot', style: style),
+        ),
+      ],
+    );
+  }
+}
+
 // ── SmallCaps label ──────────────────────────────────────────
 class LLSmallCaps extends StatelessWidget {
   const LLSmallCaps(this.text, {super.key, this.size = 11, this.color = llGold, this.letterSpacing = 2.0});
@@ -512,4 +542,3 @@ class LLLogo extends StatelessWidget {
     ),
   );
 }
-

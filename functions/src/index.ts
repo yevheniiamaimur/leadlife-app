@@ -120,6 +120,18 @@ write:
 - "recommendations": 3-5 short, concrete, imperative-sentence next steps.
 Respond in the same language as their answers.`;
 
+const OUTPUT_LANGUAGES: Record<string, string> = {
+  en: "English",
+  es: "Spanish",
+};
+
+function outputLanguage(data: unknown): string {
+  if (typeof data !== "string" || !(data in OUTPUT_LANGUAGES)) {
+    return OUTPUT_LANGUAGES.en;
+  }
+  return OUTPUT_LANGUAGES[data];
+}
+
 interface AnswerEntryInput {
   n: number;
   fieldName: string;
@@ -150,6 +162,7 @@ export const generateGame = onCall(
 
     const wish = request.data?.wish;
     const focus = request.data?.focus;
+    const language = outputLanguage(request.data?.language);
 
     if (typeof wish !== "string" || wish.trim().length === 0) {
       throw new HttpsError("invalid-argument", "wish must be a non-empty string.");
@@ -204,8 +217,8 @@ export const generateGame = onCall(
         {
           role: "user",
           content: trimmedFocus
-            ? `My desire: "${trimmedWish}"\nMy life focus area: "${trimmedFocus}"`
-            : `My desire: "${trimmedWish}"`,
+            ? `Output language: ${language}. Write every generated field only in ${language}.\nMy desire: "${trimmedWish}"\nMy life focus area: "${trimmedFocus}"`
+            : `Output language: ${language}. Write every generated field only in ${language}.\nMy desire: "${trimmedWish}"`,
         },
       ],
     });
@@ -246,6 +259,7 @@ export const finalAnalysis = onCall(
 
     const wish = request.data?.wish;
     const entries = request.data?.entries;
+    const language = outputLanguage(request.data?.language);
 
     if (typeof wish !== "string" || wish.trim().length === 0) {
       throw new HttpsError("invalid-argument", "wish must be a non-empty string.");
@@ -304,7 +318,7 @@ export const finalAnalysis = onCall(
       messages: [
         {
           role: "user",
-          content: `My desire: "${wish.trim().slice(0, MAX_TEXT_LENGTH)}"\n\n${lines.join("\n\n")}`,
+          content: `Output language: ${language}. Write the complete analysis only in ${language}.\nMy desire: "${wish.trim().slice(0, MAX_TEXT_LENGTH)}"\n\n${lines.join("\n\n")}`,
         },
       ],
     });

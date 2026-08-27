@@ -48,7 +48,7 @@ const FIELD_LIST_TEXT = GAME_FIELDS.map(
   (f) => `${f.n}. ${f.name} (${f.subtitle}) — ${f.task}`
 ).join("\n");
 
-const GAME_OVERVIEW = `You are the in-app assistant for "Leadlife" — a 32-field self-development board game.
+const GAME_OVERVIEW = `You are the in-app assistant for "Hatchpot" — a 32-field self-development board game.
 The player starts by naming a "desire" (their wish/goal), then journeys through 32 fields in order,
 rolling dice and, on each field, reflecting on that field's question in relation to their desire.
 Each field explores one theme (e.g. Vision, Resilience, Purpose) via its own superpower/subtitle.

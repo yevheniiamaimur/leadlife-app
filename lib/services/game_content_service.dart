@@ -18,6 +18,7 @@ class GameContentService {
 
   static const _kFieldsJson = 'generatedFieldContent';
   static const _kWishKey = 'generatedFieldContentWish';
+  static const _kLanguageKey = 'generatedFieldContentLanguage';
 
   static Map<int, GeneratedFieldContent>? _cached;
   static Future<void>? _inFlight;
@@ -26,17 +27,33 @@ class GameContentService {
   /// on failure the static fallback content is used instead. Call this
   /// once, right when the wish is confirmed; other screens should await
   /// [ensureReady] before they actually need [fields].
-  static Future<void> generate({required String wish, String? focus}) {
-    final future = _generate(wish: wish, focus: focus);
+  static Future<void> generate({
+    required String wish,
+    required String languageCode,
+    String? focus,
+  }) {
+    final future = _generate(
+      wish: wish,
+      languageCode: languageCode,
+      focus: focus,
+    );
     _inFlight = future;
     return future;
   }
 
-  static Future<void> _generate({required String wish, String? focus}) async {
+  static Future<void> _generate({
+    required String wish,
+    required String languageCode,
+    String? focus,
+  }) async {
     try {
-      final content = await AiService.generateGame(wish: wish, focus: focus);
+      final content = await AiService.generateGame(
+        wish: wish,
+        languageCode: languageCode,
+        focus: focus,
+      );
       _cached = {for (final c in content) c.n: c};
-      await _persist(wish);
+      await _persist(wish, languageCode);
     } catch (_) {
       // Network error, timeout, malformed response — any failure here
       // just means [fields] falls back to the static content.
@@ -47,7 +64,9 @@ class GameContentService {
   /// Waits for an in-flight [generate] call to finish, up to [timeout].
   /// Never throws — a timeout (or a failure already handled inside
   /// [_generate]) just means [fields] will return the static fallback.
-  static Future<void> ensureReady({Duration timeout = const Duration(seconds: 12)}) async {
+  static Future<void> ensureReady({
+    Duration timeout = const Duration(seconds: 12),
+  }) async {
     final inFlight = _inFlight;
     if (inFlight == null) return;
     try {
@@ -81,33 +100,52 @@ class GameContentService {
   /// template sentences from the original static task are preserved as-is
   /// (they're tied to FieldTaskScreen's blank-parsing/answer-saving logic).
   static String _mergeTask(String aiQuestion, String originalTask) {
-    final blankParas = originalTask.split('\n\n').where((p) => p.contains('__________')).toList();
+    final blankParas = originalTask
+        .split('\n\n')
+        .where((p) => p.contains('__________'))
+        .toList();
     if (blankParas.isEmpty) return aiQuestion;
     return [aiQuestion, ...blankParas].join('\n\n');
   }
 
-  static Future<void> _persist(String wish) => safeWrite('GameContentService.persist', () async {
-    final cached = _cached;
-    if (cached == null) return;
-    final prefs = await SharedPreferences.getInstance();
-    await Future.wait([
-      prefs.setString(_kWishKey, wish),
-      prefs.setString(_kFieldsJson, jsonEncode(cached.values.map((c) => c.toJson()).toList())),
-    ]);
-  });
+  static Future<void> _persist(String wish, String languageCode) =>
+      safeWrite('GameContentService.persist', () async {
+        final cached = _cached;
+        if (cached == null) return;
+        final prefs = await SharedPreferences.getInstance();
+        await Future.wait([
+          prefs.setString(_kWishKey, wish),
+          prefs.setString(_kLanguageKey, languageCode),
+          prefs.setString(
+            _kFieldsJson,
+            jsonEncode(cached.values.map((c) => c.toJson()).toList()),
+          ),
+        ]);
+      });
 
   /// Restores previously-generated content for [wish] from disk, e.g. on
   /// app relaunch mid-game. No-op (fallback stays engaged) if nothing was
   /// persisted, or it was generated for a different wish.
-  static Future<void> restore(String wish) async {
+  static Future<void> restore(
+    String wish, {
+    required String languageCode,
+  }) async {
     final prefs = await SharedPreferences.getInstance();
     final savedWish = prefs.getString(_kWishKey);
+    final savedLanguage = prefs.getString(_kLanguageKey);
     final fieldsJson = prefs.getString(_kFieldsJson);
-    if (savedWish != wish || fieldsJson == null) return;
+    if (savedWish != wish ||
+        savedLanguage != languageCode ||
+        fieldsJson == null)
+      return;
     try {
       final decoded = jsonDecode(fieldsJson) as List<dynamic>;
       final content = decoded
-          .map((f) => GeneratedFieldContent.fromJson(Map<String, dynamic>.from(f as Map)))
+          .map(
+            (f) => GeneratedFieldContent.fromJson(
+              Map<String, dynamic>.from(f as Map),
+            ),
+          )
           .toList();
       _cached = {for (final c in content) c.n: c};
     } catch (_) {
@@ -115,13 +153,15 @@ class GameContentService {
     }
   }
 
-  static Future<void> clear() => safeWrite('GameContentService.clear', () async {
-    _cached = null;
-    _inFlight = null;
-    final prefs = await SharedPreferences.getInstance();
-    await Future.wait([
-      prefs.remove(_kWishKey),
-      prefs.remove(_kFieldsJson),
-    ]);
-  });
+  static Future<void> clear() =>
+      safeWrite('GameContentService.clear', () async {
+        _cached = null;
+        _inFlight = null;
+        final prefs = await SharedPreferences.getInstance();
+        await Future.wait([
+          prefs.remove(_kWishKey),
+          prefs.remove(_kLanguageKey),
+          prefs.remove(_kFieldsJson),
+        ]);
+      });
 }

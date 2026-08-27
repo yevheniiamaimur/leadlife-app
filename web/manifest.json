@@ -1,6 +1,6 @@
 {
-    "name": "leadlife_app",
-    "short_name": "leadlife_app",
+    "name": "Hatchpot",
+    "short_name": "Hatchpot",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

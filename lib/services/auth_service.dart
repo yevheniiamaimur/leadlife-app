@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -16,17 +17,32 @@ class AuthService {
   AuthService._();
   static final AuthService instance = AuthService._();
 
-  final _auth = FirebaseAuth.instance;
   bool _googleInitialized = false;
 
-  User? get currentUser => _auth.currentUser;
-  String? get uid => _auth.currentUser?.uid;
-  bool get isAnonymous => _auth.currentUser?.isAnonymous ?? true;
-  Stream<User?> get userChanges => _auth.userChanges();
+  FirebaseAuth? get _auth {
+    if (Firebase.apps.isEmpty) return null;
+    try {
+      return FirebaseAuth.instance;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  FirebaseAuth get _requiredAuth {
+    final auth = _auth;
+    if (auth == null) throw StateError('Firebase is temporarily unavailable.');
+    return auth;
+  }
+
+  User? get currentUser => _auth?.currentUser;
+  String? get uid => _auth?.currentUser?.uid;
+  bool get isAnonymous => _auth?.currentUser?.isAnonymous ?? true;
+  Stream<User?> get userChanges => _auth?.userChanges() ?? Stream.value(null);
 
   Future<void> ensureSignedIn() async {
-    if (_auth.currentUser != null) return;
-    await _auth.signInAnonymously();
+    final auth = _requiredAuth;
+    if (auth.currentUser != null) return;
+    await auth.signInAnonymously();
   }
 
   Future<UserCredential> linkWithGoogle() async {
@@ -64,13 +80,14 @@ class AuthService {
   }
 
   Future<void> sendPasswordResetEmail(String email) =>
-      _auth.sendPasswordResetEmail(email: email.trim());
+      _requiredAuth.sendPasswordResetEmail(email: email.trim());
 
   Future<void> signOutAndStartFresh() async {
     await CloudSyncService.instance.upload();
     await CloudSyncService.instance.clearLocalData();
-    await _auth.signOut();
-    await _auth.signInAnonymously();
+    final auth = _requiredAuth;
+    await auth.signOut();
+    await auth.signInAnonymously();
   }
 
   Future<void> deleteAccount() async {
@@ -78,8 +95,9 @@ class AuthService {
         .httpsCallable('deleteAccount')
         .call<void>();
     await CloudSyncService.instance.clearLocalData();
-    await _auth.signOut();
-    await _auth.signInAnonymously();
+    final auth = _requiredAuth;
+    await auth.signOut();
+    await auth.signInAnonymously();
   }
 
   // Anonymous users upgrade in place via linkWithCredential, preserving their
@@ -87,7 +105,8 @@ class AuthService {
   // different account, fall back to signing into the existing account instead
   // of failing outright — the user picked a real identity, so honor it.
   Future<UserCredential> _linkOrSignIn(AuthCredential credential) async {
-    final user = _auth.currentUser;
+    final auth = _requiredAuth;
+    final user = auth.currentUser;
     if (user != null && user.isAnonymous) {
       try {
         final result = await user.linkWithCredential(credential);
@@ -96,14 +115,14 @@ class AuthService {
       } on FirebaseAuthException catch (e) {
         if (e.code == 'credential-already-in-use' ||
             e.code == 'email-already-in-use') {
-          final result = await _auth.signInWithCredential(credential);
+          final result = await auth.signInWithCredential(credential);
           await CloudSyncService.instance.restoreOrUpload();
           return result;
         }
         rethrow;
       }
     }
-    final result = await _auth.signInWithCredential(credential);
+    final result = await auth.signInWithCredential(credential);
     await CloudSyncService.instance.restoreOrUpload();
     return result;
   }

@@ -8,6 +8,7 @@ import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../models/field.dart';
 import '../services/ai_service.dart';
+import '../services/locale_service.dart';
 import '../services/analytics_service.dart';
 import '../services/game_content_service.dart';
 import '../services/game_history_service.dart';
@@ -72,7 +73,11 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
       return AnswerEntry(n: e.key, fieldName: field.name, question: _questionOf(field), answer: e.value);
     }).toList();
     try {
-      final result = await AiService.finalAnalysis(wish: widget.wish, entries: entries);
+      final result = await AiService.finalAnalysis(
+        wish: widget.wish,
+        entries: entries,
+        languageCode: LocaleService.instance.effectiveLanguageCode,
+      );
       if (!mounted) return;
       setState(() {
         _analysis = result;
@@ -88,7 +93,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
     setState(() => _generatingPdf = true);
     try {
       final bytes = await _buildPdf();
-      await Printing.sharePdf(bytes: bytes, filename: 'lead_life_journey.pdf');
+      await Printing.sharePdf(bytes: bytes, filename: 'hatchpot_journey.pdf');
     } finally {
       if (mounted) setState(() => _generatingPdf = false);
     }
@@ -143,7 +148,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
-                  pw.Text('leadlife', style: label(8, color: gold, letterSpacing: 3)),
+                  pw.Text('Hatchpot', style: label(8, color: gold, letterSpacing: 3)),
                   pw.Text(l10n.pdfJourneyReportLabel, style: serifItalic(9, color: muted)),
                 ],
               ),
@@ -157,7 +162,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
           child: pw.Row(
             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
             children: [
-              pw.Text('leadlife', style: serifItalic(8, color: muted)),
+              pw.Text('Hatchpot', style: serifItalic(8, color: muted)),
               pw.Text('${ctx.pageNumber} / ${ctx.pagesCount}', style: sans(8)),
             ],
           ),
@@ -297,7 +302,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                         const LLLogo(size: 56, color: llGold),
                         const SizedBox(height: 14),
                         Text(
-                          'leadlife',
+                          'Hatchpot',
                           style: llSerif(size: 13, color: llGold).copyWith(
                             letterSpacing: 4,
                             fontWeight: FontWeight.w600,

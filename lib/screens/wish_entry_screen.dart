@@ -3,6 +3,7 @@ import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../services/analytics_service.dart';
 import '../services/game_content_service.dart';
+import '../services/locale_service.dart';
 import '../services/game_history_service.dart';
 import '../services/profile_service.dart';
 import '../widgets/ll_widgets.dart';
@@ -35,7 +36,11 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
   /// fallback behavior if this fails.
   void _startGameGeneration(String wish) {
     ProfileService.load().then((profile) {
-      GameContentService.generate(wish: wish, focus: profile?.focus);
+      GameContentService.generate(
+        wish: wish,
+        languageCode: LocaleService.instance.effectiveLanguageCode,
+        focus: profile?.focus,
+      );
     });
   }
 

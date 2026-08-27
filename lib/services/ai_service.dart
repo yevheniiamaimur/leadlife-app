@@ -11,12 +11,13 @@ class GeneratedFieldContent {
     required this.arrivalNote,
   });
 
-  factory GeneratedFieldContent.fromJson(Map<String, dynamic> json) => GeneratedFieldContent(
-    n: json['n'] as int,
-    intro: json['intro'] as String,
-    question: json['question'] as String,
-    arrivalNote: json['arrivalNote'] as String,
-  );
+  factory GeneratedFieldContent.fromJson(Map<String, dynamic> json) =>
+      GeneratedFieldContent(
+        n: json['n'] as int,
+        intro: json['intro'] as String,
+        question: json['question'] as String,
+        arrivalNote: json['arrivalNote'] as String,
+      );
 
   final int n;
   final String intro;
@@ -78,12 +79,14 @@ class AiService {
 
   static Future<List<GeneratedFieldContent>> generateGame({
     required String wish,
+    required String languageCode,
     String? focus,
   }) async {
     try {
       final callable = _functions.httpsCallable('generateGame');
       final result = await callable.call<Map<String, dynamic>>({
         'wish': wish,
+        'language': languageCode,
         if (focus != null && focus.isNotEmpty) 'focus': focus,
       });
       final fields = result.data['fields'] as List<dynamic>?;
@@ -91,7 +94,11 @@ class AiService {
         throw const AiServiceException('Empty response from assistant.');
       }
       return fields
-          .map((f) => GeneratedFieldContent.fromJson(Map<String, dynamic>.from(f as Map)))
+          .map(
+            (f) => GeneratedFieldContent.fromJson(
+              Map<String, dynamic>.from(f as Map),
+            ),
+          )
           .toList();
     } on FirebaseFunctionsException catch (e) {
       throw AiServiceException(e.message ?? e.code);
@@ -101,17 +108,21 @@ class AiService {
   static Future<FinalAnalysisResult> finalAnalysis({
     required String wish,
     required List<AnswerEntry> entries,
+    required String languageCode,
   }) async {
     try {
       final callable = _functions.httpsCallable('finalAnalysis');
       final result = await callable.call<Map<String, dynamic>>({
         'wish': wish,
+        'language': languageCode,
         'entries': entries.map((e) => e.toJson()).toList(),
       });
       final analysis = result.data['analysis'] as String?;
       final finalDirection = result.data['finalDirection'] as String?;
       final recommendations = result.data['recommendations'] as List<dynamic>?;
-      if (analysis == null || finalDirection == null || recommendations == null) {
+      if (analysis == null ||
+          finalDirection == null ||
+          recommendations == null) {
         throw const AiServiceException('Malformed response from assistant.');
       }
       return FinalAnalysisResult(

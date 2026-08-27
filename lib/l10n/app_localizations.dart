@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
+import 'app_localizations_es.dart';
 
 // ignore_for_file: type=lint
 
@@ -92,7 +93,22 @@ abstract class AppLocalizations {
       ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('es'),
+  ];
+
+  /// Language picker title and drawer item
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get languageTitle;
+
+  /// Use the device language setting
+  ///
+  /// In en, this message translates to:
+  /// **'Same as phone'**
+  String get languageSystem;
 
   /// Greeting at the top of the Home tab
   ///
@@ -769,7 +785,7 @@ abstract class AppLocalizations {
   /// FAQ question on the Help screen
   ///
   /// In en, this message translates to:
-  /// **'What is leadlife?'**
+  /// **'What is Hatchpot?'**
   String get helpFaqWhatIsLeadlifeQ;
 
   /// FAQ answer on the Help screen
@@ -835,7 +851,7 @@ abstract class AppLocalizations {
   /// Intro paragraph on the About screen
   ///
   /// In en, this message translates to:
-  /// **'leadlife is built around 32 fields, arranged in one continuous path.'**
+  /// **'Hatchpot is built around 32 fields, arranged in one continuous path.'**
   String get aboutIntro;
 
   /// Section heading on the About screen
@@ -1189,7 +1205,7 @@ abstract class AppLocalizations {
   /// Title of the subscription tariff on the paywall screen
   ///
   /// In en, this message translates to:
-  /// **'leadlife Pass'**
+  /// **'Hatchpot Pass'**
   String get paywallTariffLeadlifePassTitle;
 
   /// Tagline of the subscription tariff on the paywall screen
@@ -1273,7 +1289,7 @@ abstract class AppLocalizations {
   /// Title of slide 1 of the How It Works onboarding
   ///
   /// In en, this message translates to:
-  /// **'What is the leadlife journey?'**
+  /// **'What is the Hatchpot journey?'**
   String get howItWorksSlide1Title;
 
   /// Paragraph on slide 1 of the How It Works onboarding
@@ -1309,7 +1325,7 @@ abstract class AppLocalizations {
   /// Paragraph on slide 2 of the How It Works onboarding
   ///
   /// In en, this message translates to:
-  /// **'In leadlife, your journey begins by clarifying the intention you are ready to work with right now.'**
+  /// **'In Hatchpot, your journey begins by clarifying the intention you are ready to work with right now.'**
   String get howItWorksSlide2Para;
 
   /// Title of slide 3 of the How It Works onboarding
@@ -1351,7 +1367,7 @@ abstract class AppLocalizations {
   /// First paragraph on slide 4 of the How It Works onboarding
   ///
   /// In en, this message translates to:
-  /// **'Choose how you want to interact with leadlife and start moving through your unique path.'**
+  /// **'Choose how you want to interact with Hatchpot and start moving through your unique path.'**
   String get howItWorksSlide4Para1;
 
   /// Short line introducing the field breakdown on slide 4 of the How It Works onboarding
@@ -1477,7 +1493,7 @@ abstract class AppLocalizations {
   /// Second paragraph on slide 7 of the How It Works onboarding
   ///
   /// In en, this message translates to:
-  /// **'leadlife turns them into your personal success code — a map back to your desire.'**
+  /// **'Hatchpot turns them into your personal success code — a map back to your desire.'**
   String get howItWorksSlide7Para2;
 
   /// Third paragraph on slide 7 of the How It Works onboarding
@@ -2341,7 +2357,7 @@ abstract class AppLocalizations {
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'Last updated: [fill in before release]. This policy explains what information LeadLife (\"we\") collects when you use the LeadLife app, why we collect it, and the choices you have. By using the app you agree to this policy.'**
+  /// **'Last updated: August 20, 2026. This policy explains what information Hatchpot (\"we\") processes when you use the Hatchpot app, why we process it, where it may be stored, and the choices you have.'**
   String get legalPrivacySection1Body;
 
   /// Privacy Policy section heading
@@ -2353,7 +2369,7 @@ abstract class AppLocalizations {
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'Profile details you enter (your name, birthday, email address, and areas of focus) so we can personalize your journey. Account credentials, only if you choose to create an account with Google, Apple, or email and password, handled through Firebase Authentication. Usage and diagnostic data, such as anonymized interaction events and crash reports, your device model, operating system, and app version, collected through Firebase Analytics and Crashlytics. Purchase information, if you subscribe, processed by the App Store or Google Play and our subscription billing partner — we never see or store your card details.'**
+  /// **'We process information you choose to enter: your name, birthday, email address, focus area, wishes, answers, diary entries, and journey history. If you create an account, Firebase Authentication processes your account identifier and sign-in details. We also process technical and usage information needed for security, analytics, and crash diagnosis, such as app interactions, device and operating-system information, app version, and diagnostic reports. We do not ask you to enter payment-card details.'**
   String get legalPrivacySection2Body;
 
   /// Privacy Policy section heading
@@ -2365,7 +2381,7 @@ abstract class AppLocalizations {
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'To personalize your journey and reminders, to send the gentle reminder notifications you opted into, to diagnose crashes and fix bugs, to understand how features are used so we can improve the app, and to manage your account and subscription.'**
+  /// **'We use this information to provide and personalize your journey, generate AI-personalized field content and a final analysis, save and synchronize your progress when you create an account, provide reminders you request, secure the service, diagnose crashes, understand feature usage, improve the app, and manage your account.'**
   String get legalPrivacySection3Body;
 
   /// Privacy Policy section heading
@@ -2377,7 +2393,7 @@ abstract class AppLocalizations {
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'Your profile details stay only on your device (in local app storage) unless you choose to create an account. If you create an account, your credentials are stored by Firebase Authentication (Google LLC). Analytics and crash data are processed by Firebase Analytics and Firebase Crashlytics (Google LLC).'**
+  /// **'Your information is first stored on your device. If you use only an anonymous account, your progress and diary are not synchronized to another device. If you link an account, your profile, current progress, answers, diary, and journey history are stored in Google Firebase Cloud Firestore so they can be restored on another device. Account information is handled by Firebase Authentication, and usage and crash data may be handled by Firebase Analytics and Firebase Crashlytics. To personalize the game, we send your wish and selected focus area to the Anthropic API. For the final analysis, we send your wish and the questions and answers from the fields you visited. Anthropic returns generated game text and analysis. Under Anthropic\'s standard API retention policy, API inputs and outputs are normally deleted from its backend within 30 days, subject to limited safety, abuse-prevention, and legal exceptions.'**
   String get legalPrivacySection4Body;
 
   /// Privacy Policy section heading
@@ -2389,7 +2405,7 @@ abstract class AppLocalizations {
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'We do not sell your data and we do not use advertising networks. We only share data with service providers who act on our behalf: Firebase/Google, the App Store or Google Play, and our subscription billing partner.'**
+  /// **'We do not sell your personal information and do not use advertising networks. We share information only as needed to operate the app: with Google LLC for Firebase cloud storage, authentication, analytics, crash reporting, App Check, and Cloud Functions; with Anthropic, PBC and its affiliates for AI generation and analysis; and with Apple or Google when you choose their sign-in service. These providers process information under their own applicable terms and privacy commitments.'**
   String get legalPrivacySection5Body;
 
   /// Privacy Policy section heading
@@ -2401,7 +2417,7 @@ abstract class AppLocalizations {
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'Firebase infrastructure may process data outside your country or the European Economic Area, under standard contractual safeguards required by applicable law.'**
+  /// **'Google Firebase and Anthropic may process information outside your country or the European Economic Area, including in the United States and other regions where their service providers operate. Where required, transfers are handled using legally recognized safeguards.'**
   String get legalPrivacySection6Body;
 
   /// Privacy Policy section heading
@@ -2413,7 +2429,7 @@ abstract class AppLocalizations {
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'Profile details stored only on your device are removed when you delete the app. If you have an account, you can delete it and its associated data at any time from within the app, or by contacting us at [support email].'**
+  /// **'Information stored locally is removed when you delete the app or clear its data. If you linked an account, you can delete the account and its associated Firebase profile, progress, diary, and journey history from within the app. Data already sent to Anthropic is handled according to Anthropic\'s API retention rules described above. Some limited records may be retained where required for security, fraud prevention, dispute resolution, or law. You can also contact us at leadlife.app@gmail.com.'**
   String get legalPrivacySection7Body;
 
   /// Privacy Policy section heading
@@ -2425,7 +2441,7 @@ abstract class AppLocalizations {
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'Depending on where you live, you may have the right to access, correct, delete, or export your data, to object to certain processing, and to withdraw consent at any time. Contact us at [support email] to exercise these rights.'**
+  /// **'Depending on where you live, you may have the right to access, correct, delete, or export your data, object to or restrict certain processing, and withdraw consent where processing relies on consent. Contact leadlife.app@gmail.com to make a request. We may need to verify your identity before completing it.'**
   String get legalPrivacySection8Body;
 
   /// Privacy Policy section heading
@@ -2437,7 +2453,7 @@ abstract class AppLocalizations {
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'LeadLife is not directed at children under 16, and we do not knowingly collect information from them.'**
+  /// **'Hatchpot is not directed at children under 16, and we do not knowingly collect information from them.'**
   String get legalPrivacySection9Body;
 
   /// Privacy Policy section heading
@@ -2449,7 +2465,7 @@ abstract class AppLocalizations {
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'We may update this policy from time to time; material changes will be reflected in the app. Questions? Reach us at [support email].'**
+  /// **'We may update this policy when the app or legal requirements change. The updated date will be shown above, and material changes will be reflected in the app. Questions can be sent to leadlife.app@gmail.com.'**
   String get legalPrivacySection10Body;
 
   /// Terms of Use section heading
@@ -2461,7 +2477,7 @@ abstract class AppLocalizations {
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'Last updated: [fill in before release]. By using LeadLife, you agree to these Terms of Use. If you do not agree, please do not use the app.'**
+  /// **'Last updated: [fill in before release]. By using Hatchpot, you agree to these Terms of Use. If you do not agree, please do not use the app.'**
   String get legalTermsSection1Body;
 
   /// Terms of Use section heading
@@ -2473,7 +2489,7 @@ abstract class AppLocalizations {
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'LeadLife is a personal-growth and self-reflection companion built around your wish, a 32-field journey, and gentle reminders. Content is provided for entertainment and self-reflection purposes only, and is not professional medical, psychological, financial, or legal advice.'**
+  /// **'Hatchpot is a personal-growth and self-reflection companion built around your wish, a 32-field journey, and gentle reminders. Content is provided for entertainment and self-reflection purposes only, and is not professional medical, psychological, financial, or legal advice.'**
   String get legalTermsSection2Body;
 
   /// Terms of Use section heading
@@ -2485,7 +2501,7 @@ abstract class AppLocalizations {
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'You must be at least 16 years old, or the age of digital consent in your country, to use LeadLife, and you agree to provide accurate information.'**
+  /// **'You must be at least 16 years old, or the age of digital consent in your country, to use Hatchpot, and you agree to provide accurate information.'**
   String get legalTermsSection3Body;
 
   /// Terms of Use section heading
@@ -2545,7 +2561,7 @@ abstract class AppLocalizations {
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'LeadLife is provided \"as is\", without warranties of any kind. To the fullest extent permitted by law, we are not liable for indirect, incidental, or consequential damages arising from your use of the app.'**
+  /// **'Hatchpot is provided \"as is\", without warranties of any kind. To the fullest extent permitted by law, we are not liable for indirect, incidental, or consequential damages arising from your use of the app.'**
   String get legalTermsSection8Body;
 
   /// Terms of Use section heading
@@ -2662,7 +2678,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en'].contains(locale.languageCode);
+      <String>['en', 'es'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -2673,6 +2689,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   switch (locale.languageCode) {
     case 'en':
       return AppLocalizationsEn();
+    case 'es':
+      return AppLocalizationsEs();
   }
 
   throw FlutterError(
