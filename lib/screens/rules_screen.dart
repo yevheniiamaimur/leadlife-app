@@ -214,7 +214,7 @@ class _HomeTabState extends State<_HomeTab> {
                 ),
               ),
               const SizedBox(height: 32),
-              const LLMarquee(text: 'Hatchpot   Hatchpot', uppercase: false),
+              const LLMarquee(text: 'hatchpot   hatchpot', uppercase: false),
               const Spacer(),
             ],
           ),
