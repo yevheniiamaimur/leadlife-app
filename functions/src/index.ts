@@ -123,6 +123,9 @@ Respond in the same language as their answers.`;
 const OUTPUT_LANGUAGES: Record<string, string> = {
   en: "English",
   es: "Spanish",
+  de: "German",
+  uk: "Ukrainian",
+  ru: "Russian",
 };
 
 function outputLanguage(data: unknown): string {

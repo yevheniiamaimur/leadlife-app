@@ -8,7 +8,7 @@ class LocaleService extends ValueNotifier<Locale?> {
 
   static final LocaleService instance = LocaleService._();
   static const _key = 'app_locale';
-  static const _enabledCodes = {'en', 'es'};
+  static const _enabledCodes = {'en', 'es', 'de', 'uk', 'ru'};
 
   String get effectiveLanguageCode {
     final code =

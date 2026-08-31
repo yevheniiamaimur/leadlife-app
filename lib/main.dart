@@ -158,7 +158,13 @@ class LeadLifeApp extends StatelessWidget {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         // New languages are enabled here only after every user-facing string
         // has been translated and checked, so the UI never mixes languages.
-        supportedLocales: const [Locale('en'), Locale('es')],
+        supportedLocales: const [
+          Locale('en'),
+          Locale('es'),
+          Locale('de'),
+          Locale('uk'),
+          Locale('ru'),
+        ],
         navigatorObservers: navigatorObservers,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: llGold, surface: llBg),

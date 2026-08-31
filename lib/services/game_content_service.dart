@@ -136,8 +136,9 @@ class GameContentService {
     final fieldsJson = prefs.getString(_kFieldsJson);
     if (savedWish != wish ||
         savedLanguage != languageCode ||
-        fieldsJson == null)
+        fieldsJson == null) {
       return;
+    }
     try {
       final decoded = jsonDecode(fieldsJson) as List<dynamic>;
       final content = decoded
