@@ -39,18 +39,27 @@ class AnswerEntry {
     required this.fieldName,
     required this.question,
     required this.answer,
+    this.codes = const [],
+    this.roll,
+    this.nextFieldNumber,
   });
 
   final int n;
   final String fieldName;
   final String question;
   final String answer;
+  final List<String> codes;
+  final int? roll;
+  final int? nextFieldNumber;
 
   Map<String, dynamic> toJson() => {
     'n': n,
     'fieldName': fieldName,
     'question': question,
     'answer': answer,
+    'codes': codes,
+    if (roll != null) 'roll': roll,
+    if (nextFieldNumber != null) 'nextFieldNumber': nextFieldNumber,
   };
 }
 

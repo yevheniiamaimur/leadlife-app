@@ -90,7 +90,7 @@ class GameContentService {
         superpower: localized.superpower,
         color: localized.color,
         intro: generated.intro,
-        task: _mergeTask(generated.question, raw.task),
+        task: _mergeTask(generated.question, localized.task),
         arrivalNote: generated.arrivalNote,
       );
     }).toList();

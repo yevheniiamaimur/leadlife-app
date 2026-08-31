@@ -203,6 +203,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get receiveMyTaskCta => 'Receive My Task  →';
 
   @override
+  String get readyToBeginPathCta => 'I am ready to begin my path  →';
+
+  @override
   String fieldNumberAndName(String num, String name) {
     return 'FIELD $num · $name';
   }
@@ -802,7 +805,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get field01Intro =>
-      'Every journey begins with a desire.\n\nYour desire matters because it points toward something important for your growth.';
+      'In Hatchpot, Light is the symbolic beginning — the energy already present in your idea.\n\nThe desire you wrote reflects something genuinely important to you. Let its value support you as your path begins.';
 
   @override
   String get field01Task => 'What desire are you bringing into this journey?';
@@ -842,10 +845,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get field04Intro =>
-      'Every goal creates an impact.\nConsider what value your desire brings to others.';
+      'A desire needs a structure that can hold its energy and actions.\n\nThis field is symbolically connected with Jupiter, scale, expansion, and kindness.';
 
   @override
-  String get field04Task => 'Who benefits when you achieve this?';
+  String get field04Task =>
+      'Why is it valuable to the world for your desire to come true? Write as many points as feel natural.\n\nI give the world __________, and the world accepts me and gives me opportunities and support.';
 
   @override
   String get field05Name => 'Limitation';
@@ -855,11 +859,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get field05Intro =>
-      'Limitations are a natural part of every journey.\n\nThey help you develop the strength needed to reach your goal.';
+      'Obstacles are a normal stage of every process of becoming.\n\nLook at what stands in your way again: it may already be revealing the strength growing within you.';
 
   @override
   String get field05Task =>
-      'What limitations do you currently have (physical, emotional, financial, social, or other)? How are they helping you grow?';
+      'What currently seems like a limitation? What positive quality or behavior is it teaching you?';
 
   @override
   String get field06Name => 'Values';
@@ -869,11 +873,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get field06Intro =>
-      'Your values guide the choices you make.\n\nThe strongest desires are often connected to what has always mattered to you.';
+      'Your desire reflects a part of you that is ready to manifest.\n\nSee who you become for yourself and the world when it is realized, and what value stands behind it. This field also reflects the inner child and love.';
 
   @override
   String get field06Task =>
-      'What has always been important to you?\n\nDoes this desire reflect those values?\n\nWhat qualities came naturally to you as a child?\n\nWhich of them are still alive in you today?\n\nHow could these qualities help you achieve your desire?';
+      'What part of you does this desire express? Who do you become for yourself and the world when it is realized? What value stands behind it?\n\nI acknowledge myself as __________ and use these qualities to realize what I intend.';
+
+  @override
+  String get field06CodeInstruction =>
+      'Enter the qualities you are ready and want to express in your life.';
 
   @override
   String get field07Name => 'Feelings';
@@ -883,11 +891,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get field07Intro =>
-      'Feelings are signals, not obstacles.\n\nThey can show you what supports your desire and what needs your attention.';
+      'This field shows the emotional dimension of your request. Emotions are signs. If you do not suppress them, but live through them, energy begins to move in the right direction.\n\nThis field works as a readiness filter: it shows which states are now slowing movement down and which ones are opening the way.';
 
   @override
   String get field07Task =>
-      'What emotions do you experience most often? How do they affect your desire?';
+      'What emotions do you experience most often specifically in relation to your request? Is there an emotion or repeating emotional cycle where you feel stuck? What usually causes these states?\n\nI release __________ and allow energy to move toward the realization of my request.';
 
   @override
   String get field08Name => 'Thinking';
@@ -897,11 +905,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get field08Intro =>
-      'Every desire is supported by some beliefs and limited by others.\n\nThe more clearly you see them, the more freedom you have to choose your path.';
+      'This field shows which thoughts and beliefs surround your request. Some beliefs support movement, while others may quietly limit manifestation.\n\nWhen you see them clearly, you can choose a new direction.';
 
   @override
   String get field08Task =>
-      'What beliefs support you, and what beliefs hold you back?';
+      'What do you really think about your request? Which beliefs or assumptions may be blocking its realization?\n\nI transform limiting beliefs into freedom of manifestation.';
 
   @override
   String get field09Name => 'Subconsciousness';
@@ -911,11 +919,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get field09Intro =>
-      'Your subconscious holds the blueprint of your desired life.';
+      'Your subconscious holds all past events and experiences, as well as future probabilities.\n\nThrough this field, we tune in to the desired branch of probability.';
 
   @override
   String get field09Task =>
-      'If your desire were already real, what would your life look like? Describe it.';
+      'Imagine the realization of your request from the heart. What picture do you see? Describe it in brief points: what is happening, where you are, what you feel, and what has already become real.';
 
   @override
   String get field10Name => 'Reality';
@@ -924,11 +932,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get field10Subtitle => 'Action';
 
   @override
-  String get field10Intro => 'Reality is shaped by the actions you take.';
+  String get field10Intro =>
+      'This field is about reality and the physical world. Here, the request begins to move from idea, feeling, and image into concrete action.\n\nIf your request is connected with matter, money, the body, or a visible result, this field is especially important.';
 
   @override
   String get field10Task =>
-      'Write 10 actions you can take today to move closer to your goal.';
+      'Write 10 actions that, in your view, will help realize your request. Try to make most of them actions you can take today, at least half of them.';
 
   @override
   String get field11Name => 'Possibility';

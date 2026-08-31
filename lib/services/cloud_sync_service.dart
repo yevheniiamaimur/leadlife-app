@@ -79,6 +79,7 @@ class CloudSyncService {
         'currentField': prefs.getInt('currentField'),
         'completedFields': _decode(prefs.getString('completedFields')),
         'answers': _decode(prefs.getString('answers')),
+        'journeyEntries': _decode(prefs.getString('journeyEntries')),
       },
       'diary': await db.query('diary_entries', orderBy: 'date ASC, id ASC'),
       'history': await db.query('game_history', orderBy: 'id ASC'),
@@ -119,6 +120,11 @@ class CloudSyncService {
         progress['completedFields'],
       );
       await _setJsonOrRemove(prefs, 'answers', progress['answers']);
+      await _setJsonOrRemove(
+        prefs,
+        'journeyEntries',
+        progress['journeyEntries'],
+      );
 
       final db = await AppDatabase.instance.database;
       await db.transaction((txn) async {
@@ -150,6 +156,7 @@ class CloudSyncService {
       'currentField',
       'completedFields',
       'answers',
+      'journeyEntries',
       'generatedFieldContent',
       'generatedFieldContentWish',
       'onboardingDone',

@@ -44,12 +44,24 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
   @override
   void initState() {
     super.initState();
-    GameHistoryService.markCompleted(
-      widget.wish,
-      completedFieldsCount: widget.answers.length,
-      successCode: GameHistoryService.buildSuccessCode(widget.answers.keys.toList()),
-    ).ignore();
+    _recordCompletion();
     AnalyticsService.instance.logJourneyCompleted().ignore();
+  }
+
+  Future<void> _recordCompletion() async {
+    final progress = await ProgressService.load();
+    final visited = progress?.journeyEntries
+        .map((entry) => entry.fieldNumber)
+        .toSet()
+        .toList();
+    final fieldNumbers = visited == null || visited.isEmpty
+        ? widget.answers.keys.toList()
+        : visited;
+    await GameHistoryService.markCompleted(
+      widget.wish,
+      completedFieldsCount: fieldNumbers.length,
+      successCode: GameHistoryService.buildSuccessCode(fieldNumbers),
+    );
   }
 
   @override
@@ -62,16 +74,46 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
     _loadAnalysis();
   }
 
-  static String _questionOf(GameField field) =>
-      field.task.split('\n\n').where((p) => !p.contains('__________')).join('\n\n');
+  static String _questionOf(GameField field) => field.task
+      .split('\n\n')
+      .where((p) => !p.contains('__________'))
+      .join('\n\n');
 
   Future<void> _loadAnalysis() async {
     setState(() => _analysisLoading = true);
     final fields = GameContentService.fields(context);
-    final entries = _entries.map((e) {
-      final field = fields.firstWhere((f) => f.n == e.key);
-      return AnswerEntry(n: e.key, fieldName: field.name, question: _questionOf(field), answer: e.value);
-    }).toList();
+    final progress = await ProgressService.load();
+    final journey = progress?.journeyEntries ?? const [];
+    final entries = journey
+        .where((step) => step.answer.trim().isNotEmpty || step.codes.isNotEmpty)
+        .map((step) {
+          final field = fields.firstWhere((f) => f.n == step.fieldNumber);
+          return AnswerEntry(
+            n: step.fieldNumber,
+            fieldName: field.name,
+            question: step.question.isEmpty
+                ? _questionOf(field)
+                : step.question,
+            answer: step.answer,
+            codes: step.codes,
+            roll: step.roll,
+            nextFieldNumber: step.nextFieldNumber,
+          );
+        })
+        .toList();
+    if (entries.isEmpty) {
+      entries.addAll(
+        _entries.map((e) {
+          final field = fields.firstWhere((f) => f.n == e.key);
+          return AnswerEntry(
+            n: e.key,
+            fieldName: field.name,
+            question: _questionOf(field),
+            answer: e.value,
+          );
+        }),
+      );
+    }
     try {
       final result = await AiService.finalAnalysis(
         wish: widget.wish,
@@ -104,31 +146,56 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
     // is unmounted by the time the PDF finishes building.
     final l10n = AppLocalizations.of(context);
     final fields = GameContentService.fields(context);
-    final gold   = PdfColor.fromHex('C8A96E');
-    final ink    = PdfColor.fromHex('2C2C2C');
-    final muted  = PdfColor.fromHex('8A7E70');
-    final hair   = PdfColor.fromHex('E0D8CC');
+    final gold = PdfColor.fromHex('C8A96E');
+    final ink = PdfColor.fromHex('2C2C2C');
+    final muted = PdfColor.fromHex('8A7E70');
+    final hair = PdfColor.fromHex('E0D8CC');
     final cardBg = PdfColor.fromHex('FFFFF8');
 
     // Noto fonts — full Cyrillic + Latin support, bundled locally so PDF
     // export doesn't depend on a network fetch at generation time.
     Future<pw.Font> loadFont(String asset) async =>
         pw.Font.ttf(await rootBundle.load(asset));
-    final fontSerif       = await loadFont('assets/fonts/NotoSerif-Regular.ttf');
+    final fontSerif = await loadFont('assets/fonts/NotoSerif-Regular.ttf');
     final fontSerifItalic = await loadFont('assets/fonts/NotoSerif-Italic.ttf');
-    final fontSerifBold   = await loadFont('assets/fonts/NotoSerif-Bold.ttf');
-    final fontSans        = await loadFont('assets/fonts/NotoSans-Regular.ttf');
-    final fontSansBold    = await loadFont('assets/fonts/NotoSans-Bold.ttf');
+    final fontSerifBold = await loadFont('assets/fonts/NotoSerif-Bold.ttf');
+    final fontSans = await loadFont('assets/fonts/NotoSans-Regular.ttf');
+    final fontSansBold = await loadFont('assets/fonts/NotoSans-Bold.ttf');
 
-    pw.TextStyle serif(double size, {PdfColor? color, double lineSpacing = 0, double letterSpacing = 0}) =>
-        pw.TextStyle(font: fontSerif, fontSize: size, color: color ?? ink,
-            lineSpacing: lineSpacing, letterSpacing: letterSpacing);
+    pw.TextStyle serif(
+      double size, {
+      PdfColor? color,
+      double lineSpacing = 0,
+      double letterSpacing = 0,
+    }) => pw.TextStyle(
+      font: fontSerif,
+      fontSize: size,
+      color: color ?? ink,
+      lineSpacing: lineSpacing,
+      letterSpacing: letterSpacing,
+    );
 
-    pw.TextStyle serifItalic(double size, {PdfColor? color, double lineSpacing = 0}) =>
-        pw.TextStyle(font: fontSerifItalic, fontSize: size, color: color ?? ink, lineSpacing: lineSpacing);
+    pw.TextStyle serifItalic(
+      double size, {
+      PdfColor? color,
+      double lineSpacing = 0,
+    }) => pw.TextStyle(
+      font: fontSerifItalic,
+      fontSize: size,
+      color: color ?? ink,
+      lineSpacing: lineSpacing,
+    );
 
-    pw.TextStyle label(double size, {PdfColor? color, double letterSpacing = 0}) =>
-        pw.TextStyle(font: fontSansBold, fontSize: size, color: color ?? muted, letterSpacing: letterSpacing);
+    pw.TextStyle label(
+      double size, {
+      PdfColor? color,
+      double letterSpacing = 0,
+    }) => pw.TextStyle(
+      font: fontSansBold,
+      fontSize: size,
+      color: color ?? muted,
+      letterSpacing: letterSpacing,
+    );
 
     pw.TextStyle sans(double size, {PdfColor? color}) =>
         pw.TextStyle(font: fontSans, fontSize: size, color: color ?? muted);
@@ -148,8 +215,14 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
-                  pw.Text('Hatchpot', style: label(8, color: gold, letterSpacing: 3)),
-                  pw.Text(l10n.pdfJourneyReportLabel, style: serifItalic(9, color: muted)),
+                  pw.Text(
+                    'Hatchpot',
+                    style: label(8, color: gold, letterSpacing: 3),
+                  ),
+                  pw.Text(
+                    l10n.pdfJourneyReportLabel,
+                    style: serifItalic(9, color: muted),
+                  ),
                 ],
               ),
               pw.SizedBox(height: 6),
@@ -168,10 +241,20 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
           ),
         ),
         build: (_) => [
-          pw.Text(l10n.pdfJourneyCompleteHeading,
-            style: pw.TextStyle(font: fontSerifBold, fontSize: 28, color: ink, lineSpacing: 8)),
+          pw.Text(
+            l10n.pdfJourneyCompleteHeading,
+            style: pw.TextStyle(
+              font: fontSerifBold,
+              fontSize: 28,
+              color: ink,
+              lineSpacing: 8,
+            ),
+          ),
           pw.SizedBox(height: 6),
-          pw.Text(l10n.pdfWalkedAllPathsLine, style: serifItalic(13, color: muted)),
+          pw.Text(
+            l10n.pdfWalkedAllPathsLine,
+            style: serifItalic(13, color: muted),
+          ),
           pw.SizedBox(height: 26),
 
           // Desire card
@@ -186,29 +269,50 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
             child: pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
-                pw.Text(l10n.pdfYourDesireLabel, style: label(7.5, color: gold, letterSpacing: 2)),
+                pw.Text(
+                  l10n.pdfYourDesireLabel,
+                  style: label(7.5, color: gold, letterSpacing: 2),
+                ),
                 pw.SizedBox(height: 8),
-                pw.Text('"${widget.wish}"', style: serifItalic(14, lineSpacing: 4)),
+                pw.Text(
+                  '"${widget.wish}"',
+                  style: serifItalic(14, lineSpacing: 4),
+                ),
               ],
             ),
           ),
           pw.SizedBox(height: 20),
 
           // Area of action
-          pw.Text(l10n.pdfCurrentAreaOfActionLabel, style: label(7.5, letterSpacing: 2)),
+          pw.Text(
+            l10n.pdfCurrentAreaOfActionLabel,
+            style: label(7.5, letterSpacing: 2),
+          ),
           pw.SizedBox(height: 6),
-          pw.Text(widget.currentAreaField.name, style: serif(22, letterSpacing: 2)),
+          pw.Text(
+            widget.currentAreaField.name,
+            style: serif(22, letterSpacing: 2),
+          ),
           pw.SizedBox(height: 2),
-          pw.Text(widget.currentAreaField.subtitle, style: serifItalic(11, color: muted)),
+          pw.Text(
+            widget.currentAreaField.subtitle,
+            style: serifItalic(11, color: muted),
+          ),
           pw.SizedBox(height: 28),
 
           pw.Container(height: 0.5, color: hair),
           pw.SizedBox(height: 22),
-          pw.Text(l10n.pdfWhatYouHaveDiscoveredLabel, style: label(7.5, letterSpacing: 2)),
+          pw.Text(
+            l10n.pdfWhatYouHaveDiscoveredLabel,
+            style: label(7.5, letterSpacing: 2),
+          ),
           pw.SizedBox(height: 16),
 
           if (entries.isEmpty)
-            pw.Text(l10n.pdfNoAnswersRecorded, style: serifItalic(12, color: muted)),
+            pw.Text(
+              l10n.pdfNoAnswersRecorded,
+              style: serifItalic(12, color: muted),
+            ),
 
           ...entries.map((e) {
             final field = fields.firstWhere((f) => f.n == e.key);
@@ -222,10 +326,15 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                 child: pw.Column(
                   crossAxisAlignment: pw.CrossAxisAlignment.start,
                   children: [
-                    pw.Text('${field.paddedNumber} · ${field.name.toUpperCase()}',
-                      style: label(7.5, letterSpacing: 1.5)),
+                    pw.Text(
+                      '${field.paddedNumber} · ${field.name.toUpperCase()}',
+                      style: label(7.5, letterSpacing: 1.5),
+                    ),
                     pw.SizedBox(height: 3),
-                    pw.Text('"${e.value}"', style: serifItalic(13, lineSpacing: 3)),
+                    pw.Text(
+                      '"${e.value}"',
+                      style: serifItalic(13, lineSpacing: 3),
+                    ),
                   ],
                 ),
               ),
@@ -236,20 +345,34 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
             pw.SizedBox(height: 18),
             pw.Container(height: 0.5, color: hair),
             pw.SizedBox(height: 22),
-            pw.Text(l10n.yourAnalysisLabel, style: label(7.5, letterSpacing: 2)),
+            pw.Text(
+              l10n.yourAnalysisLabel,
+              style: label(7.5, letterSpacing: 2),
+            ),
             pw.SizedBox(height: 10),
             pw.Text(_analysis!.analysis, style: serif(13, lineSpacing: 4)),
             pw.SizedBox(height: 16),
-            pw.Text(l10n.yourNextDirectionLabel, style: label(7.5, color: gold, letterSpacing: 2)),
+            pw.Text(
+              l10n.yourNextDirectionLabel,
+              style: label(7.5, color: gold, letterSpacing: 2),
+            ),
             pw.SizedBox(height: 8),
-            pw.Text(_analysis!.finalDirection, style: serifItalic(14, color: gold, lineSpacing: 4)),
+            pw.Text(
+              _analysis!.finalDirection,
+              style: serifItalic(14, color: gold, lineSpacing: 4),
+            ),
             pw.SizedBox(height: 16),
-            pw.Text(l10n.recommendedStepsLabel, style: label(7.5, letterSpacing: 2)),
+            pw.Text(
+              l10n.recommendedStepsLabel,
+              style: label(7.5, letterSpacing: 2),
+            ),
             pw.SizedBox(height: 10),
-            ..._analysis!.recommendations.map((r) => pw.Padding(
-              padding: const pw.EdgeInsets.only(bottom: 6),
-              child: pw.Text('• $r', style: serif(12, lineSpacing: 2)),
-            )),
+            ..._analysis!.recommendations.map(
+              (r) => pw.Padding(
+                padding: const pw.EdgeInsets.only(bottom: 6),
+                child: pw.Text('• $r', style: serif(12, lineSpacing: 2)),
+              ),
+            ),
           ],
 
           pw.SizedBox(height: 18),
@@ -278,7 +401,9 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
       body: Stack(
         children: [
           Positioned(
-            top: 0, left: 0, right: 0,
+            top: 0,
+            left: 0,
+            right: 0,
             height: 220,
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -318,7 +443,11 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                         Text(
                           AppLocalizations.of(context).journeyCompleteSubtext,
                           textAlign: TextAlign.center,
-                          style: llSerifItalic(size: 14, color: llMuted, height: 1.6),
+                          style: llSerifItalic(
+                            size: 14,
+                            color: llMuted,
+                            height: 1.6,
+                          ),
                         ),
                         const SizedBox(height: 24),
                         const Center(child: LLHairline(width: 48)),
@@ -330,16 +459,30 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                             color: llCardBg,
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(color: const Color(0x80C8A96E)),
-                            boxShadow: const [BoxShadow(color: Color(0x0FB4A078), blurRadius: 20, offset: Offset(0, 4))],
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0x0FB4A078),
+                                blurRadius: 20,
+                                offset: Offset(0, 4),
+                              ),
+                            ],
                           ),
                           child: Column(
                             children: [
-                              LLSmallCaps(AppLocalizations.of(context).yourOriginalDesireLabel),
+                              LLSmallCaps(
+                                AppLocalizations.of(
+                                  context,
+                                ).yourOriginalDesireLabel,
+                              ),
                               const SizedBox(height: 8),
                               Text(
                                 '"${widget.wish}"',
                                 textAlign: TextAlign.center,
-                                style: llSerifItalic(size: 16, color: llInk, height: 1.5),
+                                style: llSerifItalic(
+                                  size: 16,
+                                  color: llInk,
+                                  height: 1.5,
+                                ),
                               ),
                             ],
                           ),
@@ -347,47 +490,90 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                         const SizedBox(height: 22),
                         Column(
                           children: [
-                            LLSmallCaps(AppLocalizations.of(context).currentAreaOfActionLabel, size: 10, color: llMuted),
+                            LLSmallCaps(
+                              AppLocalizations.of(
+                                context,
+                              ).currentAreaOfActionLabel,
+                              size: 10,
+                              color: llMuted,
+                            ),
                             const SizedBox(height: 6),
                             Text(
                               widget.currentAreaField.name,
                               textAlign: TextAlign.center,
-                              style: llSerif(size: 22, height: 1.2).copyWith(letterSpacing: 2),
+                              style: llSerif(
+                                size: 22,
+                                height: 1.2,
+                              ).copyWith(letterSpacing: 2),
                             ),
                             const SizedBox(height: 4),
-                            Text(widget.currentAreaField.subtitle,
-                              style: llSerifItalic(size: 13, color: llMuted)),
+                            Text(
+                              widget.currentAreaField.subtitle,
+                              style: llSerifItalic(size: 13, color: llMuted),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 28),
-                        Text(AppLocalizations.of(context).whatYouHaveDiscoveredLabel,
-                          style: llUi(size: 13, weight: FontWeight.w600)),
+                        Text(
+                          AppLocalizations.of(
+                            context,
+                          ).whatYouHaveDiscoveredLabel,
+                          style: llUi(size: 13, weight: FontWeight.w600),
+                        ),
                         const SizedBox(height: 12),
                         if (entries.isEmpty)
                           Padding(
                             padding: const EdgeInsets.all(8),
-                            child: Text(AppLocalizations.of(context).answersEmptyState,
-                              style: llSerifItalic(size: 13, color: llMutedSoft)),
+                            child: Text(
+                              AppLocalizations.of(context).answersEmptyState,
+                              style: llSerifItalic(
+                                size: 13,
+                                color: llMutedSoft,
+                              ),
+                            ),
                           )
                         else
                           Column(
                             children: entries.map((e) {
-                              final field = fields.firstWhere((f) => f.n == e.key);
+                              final field = fields.firstWhere(
+                                (f) => f.n == e.key,
+                              );
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 14),
                                 child: Container(
                                   width: double.infinity,
-                                  padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
+                                  padding: const EdgeInsets.fromLTRB(
+                                    14,
+                                    10,
+                                    14,
+                                    10,
+                                  ),
                                   decoration: const BoxDecoration(
-                                    border: Border(left: BorderSide(color: Color(0x80C8A96E), width: 2)),
+                                    border: Border(
+                                      left: BorderSide(
+                                        color: Color(0x80C8A96E),
+                                        width: 2,
+                                      ),
+                                    ),
                                   ),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      LLSmallCaps(field.name, size: 9, letterSpacing: 2.5),
+                                      LLSmallCaps(
+                                        field.name,
+                                        size: 9,
+                                        letterSpacing: 2.5,
+                                      ),
                                       const SizedBox(height: 3),
-                                      Text('"${e.value}"',
-                                        style: llSerifItalic(size: 14, color: llInk, height: 1.5)),
+                                      Text(
+                                        '"${e.value}"',
+                                        style: llSerifItalic(
+                                          size: 14,
+                                          color: llInk,
+                                          height: 1.5,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -404,7 +590,10 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                               child: SizedBox(
                                 width: 22,
                                 height: 22,
-                                child: CircularProgressIndicator(strokeWidth: 2, color: llGold),
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: llGold,
+                                ),
                               ),
                             )
                           else if (_analysis != null) ...[
@@ -413,7 +602,11 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                             Text(
                               _analysis!.analysis,
                               textAlign: TextAlign.center,
-                              style: llSerifItalic(size: 14, color: llInk, height: 1.6),
+                              style: llSerifItalic(
+                                size: 14,
+                                color: llInk,
+                                height: 1.6,
+                              ),
                             ),
                             const SizedBox(height: 22),
                             Container(
@@ -422,16 +615,26 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                               decoration: BoxDecoration(
                                 color: llCardBg,
                                 borderRadius: BorderRadius.circular(14),
-                                border: Border.all(color: const Color(0x80C8A96E)),
+                                border: Border.all(
+                                  color: const Color(0x80C8A96E),
+                                ),
                               ),
                               child: Column(
                                 children: [
-                                  LLSmallCaps(l10n.yourNextDirectionLabel, size: 9, color: llMuted),
+                                  LLSmallCaps(
+                                    l10n.yourNextDirectionLabel,
+                                    size: 9,
+                                    color: llMuted,
+                                  ),
                                   const SizedBox(height: 8),
                                   Text(
                                     _analysis!.finalDirection,
                                     textAlign: TextAlign.center,
-                                    style: llSerifItalic(size: 15, color: llGold, height: 1.5),
+                                    style: llSerifItalic(
+                                      size: 15,
+                                      color: llGold,
+                                      height: 1.5,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -439,22 +642,36 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                             const SizedBox(height: 22),
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: Text(l10n.recommendedStepsLabel,
-                                style: llUi(size: 13, weight: FontWeight.w600)),
+                              child: Text(
+                                l10n.recommendedStepsLabel,
+                                style: llUi(size: 13, weight: FontWeight.w600),
+                              ),
                             ),
                             const SizedBox(height: 10),
-                            ..._analysis!.recommendations.map((r) => Padding(
-                              padding: const EdgeInsets.only(bottom: 8),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('· ', style: llSerif(size: 15, color: llGold)),
-                                  Expanded(
-                                    child: Text(r, style: llUi(size: 14, color: llInk, weight: FontWeight.w400).copyWith(height: 1.4)),
-                                  ),
-                                ],
+                            ..._analysis!.recommendations.map(
+                              (r) => Padding(
+                                padding: const EdgeInsets.only(bottom: 8),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '· ',
+                                      style: llSerif(size: 15, color: llGold),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        r,
+                                        style: llUi(
+                                          size: 14,
+                                          color: llInk,
+                                          weight: FontWeight.w400,
+                                        ).copyWith(height: 1.4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            )),
+                            ),
                           ],
                         ],
                         const SizedBox(height: 24),
@@ -463,7 +680,11 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                         Text(
                           AppLocalizations.of(context).goldenFishClosingLine,
                           textAlign: TextAlign.center,
-                          style: llSerifItalic(size: 15, color: llGold, height: 1.6),
+                          style: llSerifItalic(
+                            size: 15,
+                            color: llGold,
+                            height: 1.6,
+                          ),
                         ),
                         const SizedBox(height: 32),
                       ],
@@ -495,7 +716,9 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                         ),
                         const SizedBox(height: 10),
                         LLCTA(
-                          label: AppLocalizations.of(context).startNewJourneyCta,
+                          label: AppLocalizations.of(
+                            context,
+                          ).startNewJourneyCta,
                           onTap: () {
                             ProgressService.clear().ignore();
                             GameContentService.clear().ignore();
@@ -521,6 +744,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
 
 PageRouteBuilder<T> _fadeRoute<T>(Widget page) => PageRouteBuilder(
   pageBuilder: (_, _, _) => page,
-  transitionsBuilder: (_, a, _, child) => FadeTransition(opacity: a, child: child),
+  transitionsBuilder: (_, a, _, child) =>
+      FadeTransition(opacity: a, child: child),
   transitionDuration: const Duration(milliseconds: 350),
 );

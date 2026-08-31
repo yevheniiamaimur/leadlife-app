@@ -4,6 +4,7 @@ import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../models/field.dart';
 import '../services/game_content_service.dart';
+import '../services/progress_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'success_code_screen.dart';
 import 'game_board_screen.dart';
@@ -301,8 +302,14 @@ class _MidDiceScreenState extends State<MidDiceScreen> {
     );
   }
 
-  void _proceed() {
+  Future<void> _proceed() async {
     if (_newField == null) return;
+    await ProgressService.recordRoll(
+      fieldNumber: widget.currentFieldNum,
+      roll: _result!,
+      nextFieldNumber: _newField!.n,
+    );
+    if (!mounted) return;
     if (_journeyComplete) {
       Navigator.of(context).pushAndRemoveUntil(
         _fadeRoute(

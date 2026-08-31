@@ -452,6 +452,12 @@ abstract class AppLocalizations {
   /// **'Receive My Task  →'**
   String get receiveMyTaskCta;
 
+  /// No description provided for @readyToBeginPathCta.
+  ///
+  /// In en, this message translates to:
+  /// **'I am ready to begin my path  →'**
+  String get readyToBeginPathCta;
+
   /// Small-caps label on the field task screen showing the field number and name
   ///
   /// In en, this message translates to:
@@ -1529,7 +1535,7 @@ abstract class AppLocalizations {
   /// Field 1 (Light) — intro text
   ///
   /// In en, this message translates to:
-  /// **'Every journey begins with a desire.\n\nYour desire matters because it points toward something important for your growth.'**
+  /// **'In Hatchpot, Light is the symbolic beginning — the energy already present in your idea.\n\nThe desire you wrote reflects something genuinely important to you. Let its value support you as your path begins.'**
   String get field01Intro;
 
   /// Field 1 (Light) — task text
@@ -1601,13 +1607,13 @@ abstract class AppLocalizations {
   /// Field 4 (Scale) — intro text
   ///
   /// In en, this message translates to:
-  /// **'Every goal creates an impact.\nConsider what value your desire brings to others.'**
+  /// **'A desire needs a structure that can hold its energy and actions.\n\nThis field is symbolically connected with Jupiter, scale, expansion, and kindness.'**
   String get field04Intro;
 
   /// Field 4 (Scale) — task text
   ///
   /// In en, this message translates to:
-  /// **'Who benefits when you achieve this?'**
+  /// **'Why is it valuable to the world for your desire to come true? Write as many points as feel natural.\n\nI give the world __________, and the world accepts me and gives me opportunities and support.'**
   String get field04Task;
 
   /// Field 5 (Limitation) — name text
@@ -1625,13 +1631,13 @@ abstract class AppLocalizations {
   /// Field 5 (Limitation) — intro text
   ///
   /// In en, this message translates to:
-  /// **'Limitations are a natural part of every journey.\n\nThey help you develop the strength needed to reach your goal.'**
+  /// **'Obstacles are a normal stage of every process of becoming.\n\nLook at what stands in your way again: it may already be revealing the strength growing within you.'**
   String get field05Intro;
 
   /// Field 5 (Limitation) — task text
   ///
   /// In en, this message translates to:
-  /// **'What limitations do you currently have (physical, emotional, financial, social, or other)? How are they helping you grow?'**
+  /// **'What currently seems like a limitation? What positive quality or behavior is it teaching you?'**
   String get field05Task;
 
   /// Field 6 (Values) — name text
@@ -1649,14 +1655,20 @@ abstract class AppLocalizations {
   /// Field 6 (Values) — intro text
   ///
   /// In en, this message translates to:
-  /// **'Your values guide the choices you make.\n\nThe strongest desires are often connected to what has always mattered to you.'**
+  /// **'Your desire reflects a part of you that is ready to manifest.\n\nSee who you become for yourself and the world when it is realized, and what value stands behind it. This field also reflects the inner child and love.'**
   String get field06Intro;
 
   /// Field 6 (Values) — task text
   ///
   /// In en, this message translates to:
-  /// **'What has always been important to you?\n\nDoes this desire reflect those values?\n\nWhat qualities came naturally to you as a child?\n\nWhich of them are still alive in you today?\n\nHow could these qualities help you achieve your desire?'**
+  /// **'What part of you does this desire express? Who do you become for yourself and the world when it is realized? What value stands behind it?\n\nI acknowledge myself as __________ and use these qualities to realize what I intend.'**
   String get field06Task;
+
+  /// No description provided for @field06CodeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the qualities you are ready and want to express in your life.'**
+  String get field06CodeInstruction;
 
   /// Field 7 (Feelings) — name text
   ///
@@ -1673,13 +1685,13 @@ abstract class AppLocalizations {
   /// Field 7 (Feelings) — intro text
   ///
   /// In en, this message translates to:
-  /// **'Feelings are signals, not obstacles.\n\nThey can show you what supports your desire and what needs your attention.'**
+  /// **'This field shows the emotional dimension of your request. Emotions are signs. If you do not suppress them, but live through them, energy begins to move in the right direction.\n\nThis field works as a readiness filter: it shows which states are now slowing movement down and which ones are opening the way.'**
   String get field07Intro;
 
   /// Field 7 (Feelings) — task text
   ///
   /// In en, this message translates to:
-  /// **'What emotions do you experience most often? How do they affect your desire?'**
+  /// **'What emotions do you experience most often specifically in relation to your request? Is there an emotion or repeating emotional cycle where you feel stuck? What usually causes these states?\n\nI release __________ and allow energy to move toward the realization of my request.'**
   String get field07Task;
 
   /// Field 8 (Thinking) — name text
@@ -1697,13 +1709,13 @@ abstract class AppLocalizations {
   /// Field 8 (Thinking) — intro text
   ///
   /// In en, this message translates to:
-  /// **'Every desire is supported by some beliefs and limited by others.\n\nThe more clearly you see them, the more freedom you have to choose your path.'**
+  /// **'This field shows which thoughts and beliefs surround your request. Some beliefs support movement, while others may quietly limit manifestation.\n\nWhen you see them clearly, you can choose a new direction.'**
   String get field08Intro;
 
   /// Field 8 (Thinking) — task text
   ///
   /// In en, this message translates to:
-  /// **'What beliefs support you, and what beliefs hold you back?'**
+  /// **'What do you really think about your request? Which beliefs or assumptions may be blocking its realization?\n\nI transform limiting beliefs into freedom of manifestation.'**
   String get field08Task;
 
   /// Field 9 (Subconsciousness) — name text
@@ -1721,13 +1733,13 @@ abstract class AppLocalizations {
   /// Field 9 (Subconsciousness) — intro text
   ///
   /// In en, this message translates to:
-  /// **'Your subconscious holds the blueprint of your desired life.'**
+  /// **'Your subconscious holds all past events and experiences, as well as future probabilities.\n\nThrough this field, we tune in to the desired branch of probability.'**
   String get field09Intro;
 
   /// Field 9 (Subconsciousness) — task text
   ///
   /// In en, this message translates to:
-  /// **'If your desire were already real, what would your life look like? Describe it.'**
+  /// **'Imagine the realization of your request from the heart. What picture do you see? Describe it in brief points: what is happening, where you are, what you feel, and what has already become real.'**
   String get field09Task;
 
   /// Field 10 (Reality) — name text
@@ -1745,13 +1757,13 @@ abstract class AppLocalizations {
   /// Field 10 (Reality) — intro text
   ///
   /// In en, this message translates to:
-  /// **'Reality is shaped by the actions you take.'**
+  /// **'This field is about reality and the physical world. Here, the request begins to move from idea, feeling, and image into concrete action.\n\nIf your request is connected with matter, money, the body, or a visible result, this field is especially important.'**
   String get field10Intro;
 
   /// Field 10 (Reality) — task text
   ///
   /// In en, this message translates to:
-  /// **'Write 10 actions you can take today to move closer to your goal.'**
+  /// **'Write 10 actions that, in your view, will help realize your request. Try to make most of them actions you can take today, at least half of them.'**
   String get field10Task;
 
   /// Field 11 (Possibility) — name text

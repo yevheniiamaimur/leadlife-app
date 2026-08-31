@@ -205,6 +205,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get receiveMyTaskCta => 'Meine Aufgabe erhalten  →';
 
   @override
+  String get readyToBeginPathCta => 'Ich bin bereit, meinen Weg zu beginnen  →';
+
+  @override
   String fieldNumberAndName(String num, String name) {
     return 'FELD $num · $name';
   }
@@ -809,7 +812,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get field01Intro =>
-      'Jede Reise beginnt mit einem Wunsch.\n\nDein Wunsch ist wichtig, weil er auf etwas hinweist, das für dein Wachstum bedeutsam ist.';
+      'In Hatchpot ist Licht der symbolische Anfang – die Energie, die bereits in deiner Idee liegt.\n\nDer Wunsch, den du aufgeschrieben hast, spiegelt etwas wider, das dir wirklich wichtig ist. Lass dich von seinem Wert auf deinem beginnenden Weg tragen.';
 
   @override
   String get field01Task => 'Welchen Wunsch bringst du auf diese Reise mit?';
@@ -849,10 +852,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get field04Intro =>
-      'Jedes Ziel bewirkt etwas.\nÜberlege, welchen Wert dein Wunsch anderen Menschen bringt.';
+      'Ein Wunsch braucht eine Struktur, die seine Energie und die notwendigen Handlungen tragen kann.\n\nDieses Feld ist symbolisch mit Jupiter, Größe, Erweiterung und Güte verbunden.';
 
   @override
-  String get field04Task => 'Wer profitiert davon, wenn du ihn verwirklichst?';
+  String get field04Task =>
+      'Warum ist es für die Welt wertvoll, dass dein Wunsch wahr wird? Schreibe so viele Punkte auf, wie sich richtig anfühlen.\n\nIch gebe der Welt __________, und die Welt nimmt mich an und gibt mir Möglichkeiten und Unterstützung.';
 
   @override
   String get field05Name => 'Begrenzung';
@@ -862,11 +866,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get field05Intro =>
-      'Begrenzungen sind ein natürlicher Teil jeder Reise.\n\nSie helfen dir, die nötige Kraft zu entwickeln, um dein Ziel zu erreichen.';
+      'Hindernisse sind eine normale Phase jedes Entwicklungsprozesses.\n\nBetrachte noch einmal, was dir im Weg steht: Vielleicht zeigt es bereits die Kraft, die in dir wächst.';
 
   @override
   String get field05Task =>
-      'Welche körperlichen, emotionalen, finanziellen, sozialen oder anderen Begrenzungen hast du gerade? Wie helfen sie dir zu wachsen?';
+      'Was erscheint dir gerade als Begrenzung? Welche positive Eigenschaft oder Verhaltensweise lehrt sie dich?';
 
   @override
   String get field06Name => 'Werte';
@@ -876,11 +880,15 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get field06Intro =>
-      'Deine Werte leiten deine Entscheidungen.\n\nDie stärksten Wünsche sind oft mit dem verbunden, was dir schon immer wichtig war.';
+      'Dein Wunsch spiegelt einen Teil von dir wider, der bereit ist, sich zu zeigen.\n\nErkenne, wer du für dich und die Welt wirst, wenn er sich verwirklicht, und welcher Wert dahintersteht. Dieses Feld spiegelt auch das innere Kind und die Liebe wider.';
 
   @override
   String get field06Task =>
-      'Was war dir schon immer wichtig?\n\nSpiegelt dieser Wunsch diese Werte wider?\n\nWelche Eigenschaften waren für dich als Kind ganz natürlich?\n\nWelche davon sind heute noch in dir lebendig?\n\nWie könnten sie dir helfen, deinen Wunsch zu verwirklichen?';
+      'Welchen Teil von dir drückt dieser Wunsch aus? Wer wirst du für dich und die Welt, wenn er sich verwirklicht? Welcher Wert steht dahinter?\n\nIch erkenne mich als __________ an und nutze diese Eigenschaften, um das Beabsichtigte zu verwirklichen.';
+
+  @override
+  String get field06CodeInstruction =>
+      'Trage die Eigenschaften ein, die du bereit bist und in deinem Leben zeigen möchtest.';
 
   @override
   String get field07Name => 'Gefühle';
@@ -890,11 +898,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get field07Intro =>
-      'Gefühle sind Signale, keine Hindernisse.\n\nSie zeigen dir, was deinen Wunsch unterstützt und was deine Aufmerksamkeit braucht.';
+      'Dieses Feld zeigt die emotionale Dimension deiner Anfrage. Emotionen sind Zeichen. Wenn du sie nicht unterdrückst, sondern durchlebst, beginnt die Energie in die richtige Richtung zu fließen.\n\nDieses Feld wirkt wie ein Bereitschaftsfilter: Es zeigt, welche Zustände die Bewegung gerade bremsen und welche den Weg öffnen.';
 
   @override
   String get field07Task =>
-      'Welche Gefühle erlebst du am häufigsten? Wie beeinflussen sie deinen Wunsch?';
+      'Welche Emotionen erlebst du am häufigsten speziell in Bezug auf deine Anfrage? Gibt es eine Emotion oder einen wiederkehrenden emotionalen Zyklus, in dem du dich wie feststeckend fühlst? Wodurch werden diese Zustände normalerweise ausgelöst?\n\nIch lasse __________ los und erlaube der Energie, in die Verwirklichung meiner Anfrage zu fließen.';
 
   @override
   String get field08Name => 'Denken';
@@ -904,11 +912,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get field08Intro =>
-      'Jeder Wunsch wird von manchen Überzeugungen unterstützt und von anderen begrenzt.\n\nJe klarer du sie erkennst, desto freier kannst du deinen Weg wählen.';
+      'Dieses Feld zeigt, welche Gedanken und Überzeugungen deine Anfrage umgeben. Manche Überzeugungen unterstützen die Bewegung, während andere die Manifestation still begrenzen können.\n\nWenn du sie klar erkennst, kannst du eine neue Richtung wählen.';
 
   @override
   String get field08Task =>
-      'Welche Überzeugungen unterstützen dich und welche halten dich zurück?';
+      'Was denkst du wirklich über deine Anfrage? Welche Einstellungen oder Überzeugungen könnten ihre Verwirklichung blockieren?\n\nIch transformiere begrenzende Überzeugungen in Freiheit der Manifestation.';
 
   @override
   String get field09Name => 'Unterbewusstsein';
@@ -918,11 +926,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get field09Intro =>
-      'Dein Unterbewusstsein trägt den Bauplan deines gewünschten Lebens.';
+      'Das Unterbewusstsein bewahrt alle vergangenen Ereignisse und Erfahrungen sowie zukünftige Wahrscheinlichkeiten.\n\nDurch dieses Feld stimmen wir uns auf den gewünschten Wahrscheinlichkeitszweig ein.';
 
   @override
   String get field09Task =>
-      'Wie würde dein Leben aussehen, wenn dein Wunsch bereits wahr wäre? Beschreibe es.';
+      'Stell dir die Verwirklichung deiner Anfrage aus dem Herzen vor. Welches Bild siehst du? Beschreibe es in kurzen Punkten: was geschieht, wo du bist, was du fühlst und was bereits real geworden ist.';
 
   @override
   String get field10Name => 'Wirklichkeit';
@@ -932,11 +940,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get field10Intro =>
-      'Die Wirklichkeit wird durch deine Handlungen geformt.';
+      'Dieses Feld handelt von der Realität und der physischen Welt. Hier beginnt die Anfrage, aus Idee, Gefühl und Bild in konkrete Handlung überzugehen.\n\nWenn deine Anfrage mit Materie, Geld, dem Körper oder einem sichtbaren Ergebnis verbunden ist, ist dieses Feld besonders wichtig.';
 
   @override
   String get field10Task =>
-      'Schreibe 10 Dinge auf, die du heute tun kannst, um deinem Ziel näherzukommen.';
+      'Schreibe 10 Handlungen auf, die deiner Ansicht nach helfen, deine Anfrage zu verwirklichen. Versuche, dass die meisten davon heute möglich sind, mindestens die Hälfte.';
 
   @override
   String get field11Name => 'Möglichkeit';

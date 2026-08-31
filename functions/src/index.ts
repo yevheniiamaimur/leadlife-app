@@ -103,6 +103,9 @@ For EACH of the 32 fields listed above, write:
 - "arrivalNote": ONE short sentence — what it means for this player when
   their journey (a dice-driven path that can skip fields entirely) leads
   them to this specific field, given their desire.
+Special requirement for field 1: personalize an affirming, inspiring intro,
+but return an empty string for "question" because this field has no question
+or task.
 Respond in the same language as the player's desire. Return exactly one
 entry per field number 1-32, no more, no fewer.`;
 
@@ -140,6 +143,9 @@ interface AnswerEntryInput {
   fieldName: string;
   question: string;
   answer: string;
+  codes?: string[];
+  roll?: number;
+  nextFieldNumber?: number;
 }
 
 function extractText(response: Anthropic.Message): string {
@@ -278,13 +284,21 @@ export const finalAnalysis = onCall(
         typeof e.fieldName !== "string" ||
         typeof e.question !== "string" ||
         typeof e.answer !== "string" ||
-        e.answer.trim().length === 0
+        (e.answer.trim().length === 0 && (!Array.isArray(e.codes) || e.codes.length === 0))
       ) {
         throw new HttpsError("invalid-argument", "Each entry needs n, fieldName, question, and a non-empty answer.");
       }
+      const codes = Array.isArray(e.codes)
+        ? e.codes.filter((code) => typeof code === "string").map((code) => code.slice(0, MAX_TEXT_LENGTH))
+        : [];
+      const transition = typeof e.roll === "number" && typeof e.nextFieldNumber === "number"
+        ? `\nDice: ${e.roll}; next field: ${e.nextFieldNumber}.`
+        : "";
       lines.push(
         `Field ${e.n} (${e.fieldName.slice(0, MAX_TEXT_LENGTH)}) — "${e.question.slice(0, MAX_TEXT_LENGTH)}"\n` +
-          `Answer: "${e.answer.trim().slice(0, MAX_TEXT_LENGTH)}"`
+          `Answer: "${e.answer.trim().slice(0, MAX_TEXT_LENGTH)}"` +
+          (codes.length > 0 ? `\nCompleted codes: ${codes.map((code) => `"${code}"`).join("; ")}` : "") +
+          transition
       );
     }
 
