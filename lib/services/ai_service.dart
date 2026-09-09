@@ -37,6 +37,7 @@ class AnswerEntry {
   const AnswerEntry({
     required this.n,
     required this.fieldName,
+    required this.superpower,
     required this.question,
     required this.answer,
     this.codes = const [],
@@ -46,6 +47,7 @@ class AnswerEntry {
 
   final int n;
   final String fieldName;
+  final String superpower;
   final String question;
   final String answer;
   final List<String> codes;
@@ -55,6 +57,7 @@ class AnswerEntry {
   Map<String, dynamic> toJson() => {
     'n': n,
     'fieldName': fieldName,
+    'superpower': superpower,
     'question': question,
     'answer': answer,
     'codes': codes,
@@ -110,7 +113,7 @@ class AiService {
           )
           .toList();
     } on FirebaseFunctionsException catch (e) {
-      throw AiServiceException(e.message ?? e.code);
+      throw AiServiceException(e.message ?? e.code, code: e.code);
     }
   }
 
@@ -140,14 +143,20 @@ class AiService {
         recommendations: recommendations.map((r) => r as String).toList(),
       );
     } on FirebaseFunctionsException catch (e) {
-      throw AiServiceException(e.message ?? e.code);
+      throw AiServiceException(e.message ?? e.code, code: e.code);
     }
   }
 }
 
+/// [code] mirrors [FirebaseFunctionsException.code] (e.g. `'failed-precondition'`
+/// for a crisis-detected refusal) so callers can distinguish a safety refusal
+/// from an ordinary failure without string-matching [message].
 class AiServiceException implements Exception {
-  const AiServiceException(this.message);
+  const AiServiceException(this.message, {this.code});
   final String message;
+  final String? code;
+
+  bool get isCrisisDetected => code == 'failed-precondition';
 
   @override
   String toString() => message;

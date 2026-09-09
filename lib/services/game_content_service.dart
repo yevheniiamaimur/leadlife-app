@@ -7,8 +7,8 @@ import 'ai_service.dart';
 import 'safe_write.dart';
 
 /// Resolves the effective 32-field content for the current game: one AI
-/// call (see [AiService.generateGame]) personalizes every field's
-/// intro/question up front, and the game then reads from here for the rest
+/// call (see [AiService.generateGame]) personalizes every field's question
+/// and arrival note up front, and the game then reads from here for the rest
 /// of the playthrough — no further AI calls. Falls back to the static
 /// localized `kFields` content transparently whenever generation hasn't
 /// completed, failed, or was never started — the game must always be
@@ -54,8 +54,14 @@ class GameContentService {
       );
       _cached = {for (final c in content) c.n: c};
       await _persist(wish, languageCode);
+    } on AiServiceException catch (e) {
+      _cached = null;
+      // A crisis refusal isn't an ordinary failure to fall back silently
+      // from — the caller must see it and route to safety resources instead
+      // of starting the journey as if nothing happened.
+      if (e.isCrisisDetected) rethrow;
     } catch (_) {
-      // Network error, timeout, malformed response — any failure here
+      // Network error, timeout, malformed response — any other failure here
       // just means [fields] falls back to the static content.
       _cached = null;
     }
@@ -89,7 +95,7 @@ class GameContentService {
         subtitle: localized.subtitle,
         superpower: localized.superpower,
         color: localized.color,
-        intro: generated.intro,
+        intro: localized.intro,
         task: _mergeTask(generated.question, localized.task),
         arrivalNote: generated.arrivalNote,
       );

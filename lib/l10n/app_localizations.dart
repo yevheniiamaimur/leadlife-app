@@ -230,47 +230,35 @@ abstract class AppLocalizations {
   /// **'Confirm My Desire'**
   String get confirmMyDesire;
 
-  /// Link on the wish-entry screen that opens the AI wish-clarification chat
+  /// Heading for the contact-author card on the Help screen
   ///
   /// In en, this message translates to:
-  /// **'✨ Not sure how to put it into words? Ask the assistant'**
-  String get aiAssistantLinkCta;
+  /// **'Contact the game author'**
+  String get contactAuthorTitle;
 
-  /// Title shown at the top of the AI wish-clarification chat screen
+  /// Body text for the contact-author card on the Help screen
   ///
   /// In en, this message translates to:
-  /// **'Clarify Your Wish'**
-  String get aiAssistantTitle;
+  /// **'If you have a question, feedback, or need help, you can write directly.'**
+  String get contactAuthorSubtitle;
 
-  /// Assistant's opening message shown when the AI wish-clarification chat screen opens, before any API call
+  /// Button that opens an email to the game author
   ///
   /// In en, this message translates to:
-  /// **'What\'s the desire you\'re bringing into this journey? Tell me a bit about it and I\'ll help you put it into words.'**
-  String get aiAssistantGreeting;
+  /// **'Write by email'**
+  String get contactAuthorEmailCta;
 
-  /// Placeholder text in the chat input field on the AI wish-clarification chat screen
+  /// Button that opens the game author's Instagram profile
   ///
   /// In en, this message translates to:
-  /// **'Type your reply…'**
-  String get aiAssistantInputHint;
+  /// **'Open Instagram'**
+  String get contactAuthorInstagramCta;
 
-  /// CTA button shown once the assistant has proposed a ready-to-use wish statement
+  /// Snackbar shown when the email app cannot open and the address is copied instead
   ///
   /// In en, this message translates to:
-  /// **'Use This Wish'**
-  String get aiAssistantUseThisWish;
-
-  /// Error message shown in the AI wish-clarification chat when a request fails
-  ///
-  /// In en, this message translates to:
-  /// **'The assistant couldn\'t respond — check your connection and try again.'**
-  String get aiAssistantError;
-
-  /// Retry button shown next to the error message in the AI wish-clarification chat
-  ///
-  /// In en, this message translates to:
-  /// **'Try again'**
-  String get aiAssistantRetryCta;
+  /// **'Email copied: leadlife.app@gmail.com'**
+  String get contactAuthorEmailCopied;
 
   /// Step indicator shown at the top of each of the 5 onboarding screens
   ///
@@ -343,6 +331,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Allow gentle reminders to keep you on your path.'**
   String get allowGentleReminders;
+
+  /// Non-blocking consent toggle for processing sensitive personal data
+  ///
+  /// In en, this message translates to:
+  /// **'Allow processing of information I provide that may relate to health data or other sensitive personal data, so the relevant Hatchpot features can work.'**
+  String get allowSensitiveDataProcessing;
+
+  /// Push notification title nudging the player back to an unfinished journey
+  ///
+  /// In en, this message translates to:
+  /// **'Your path is waiting'**
+  String get comebackReminderTitle;
+
+  /// Push notification body nudging the player back to an unfinished journey
+  ///
+  /// In en, this message translates to:
+  /// **'You left your journey mid-way. Whenever you\'re ready, come back and continue.'**
+  String get comebackReminderBody;
 
   /// Heading on the onboarding focus-selection screen
   ///
@@ -1541,7 +1547,7 @@ abstract class AppLocalizations {
   /// Field 1 (Light) — task text
   ///
   /// In en, this message translates to:
-  /// **'What desire are you bringing into this journey?'**
+  /// **''**
   String get field01Task;
 
   /// Field 2 (Connection) — name text
@@ -1607,7 +1613,7 @@ abstract class AppLocalizations {
   /// Field 4 (Scale) — intro text
   ///
   /// In en, this message translates to:
-  /// **'A desire needs a structure that can hold its energy and actions.\n\nThis field is symbolically connected with Jupiter, scale, expansion, and kindness.'**
+  /// **'A desire needs a structure that can hold its energy and actions.\n\nThis field is connected with scale, expansion, and kindness.'**
   String get field04Intro;
 
   /// Field 4 (Scale) — task text
@@ -2348,6 +2354,12 @@ abstract class AppLocalizations {
   /// **'Terms of Use'**
   String get termsOfUseLabel;
 
+  /// Title of the Subscription & Refund Terms screen, and the tappable link label pointing to it
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription & Refund Terms'**
+  String get subscriptionTermsLabel;
+
   /// First segment of the mandatory consent row on the onboarding contact screen, immediately followed by the tappable Terms of Use link
   ///
   /// In en, this message translates to:
@@ -2375,175 +2387,235 @@ abstract class AppLocalizations {
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'Last updated: August 20, 2026. This policy explains what information Hatchpot (\"we\") processes when you use the Hatchpot app, why we process it, where it may be stored, and the choices you have.'**
+  /// **'Last updated: September 9, 2026. This Privacy Policy explains what information Hatchpot processes, for what purposes, who it may be shared with, where it may be stored, and what rights you have.\n\nHatchpot (\"Hatchpot\", \"we\", \"us\", or \"our service\") is a digital application for personal reflection, self-discovery, and entertainment that uses artificial intelligence technologies.\n\nHatchpot is operated by Maimur Yevheniia Feliksivna, a sole proprietor (individual entrepreneur) registered under the laws of Ukraine.\n\nRegistration and contact details: Taxpayer Identification Number (РНОКПП) 3743203085; registered address: 2 Zhukovskoho St., Dnipro, 49000, Ukraine; email: leadlife.app@gmail.com.'**
   String get legalPrivacySection1Body;
 
   /// Privacy Policy section heading
   ///
   /// In en, this message translates to:
-  /// **'Information We Collect'**
+  /// **'Information We Process'**
   String get legalPrivacySection2Heading;
 
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'We process information you choose to enter: your name, birthday, email address, focus area, wishes, answers, diary entries, and journey history. If you create an account, Firebase Authentication processes your account identifier and sign-in details. We also process technical and usage information needed for security, analytics, and crash diagnosis, such as app interactions, device and operating-system information, app version, and diagnostic reports. We do not ask you to enter payment-card details.'**
+  /// **'Information you provide yourself — depending on the features you use, this may include: your name or chosen name; birthday; email address; selected focus area; your wish or intention; answers to questions; diary entries; your journey history within the app; the content of requests to AI-powered features; and other information you enter as free text.\n\nAccount data — if you create or link an account, Firebase Authentication processes the related data: your account identifier, email address, and the technical data needed for authentication.\n\nTechnical information — device type and model, operating system, app version, technical identifiers, information about your interactions with the app, diagnostic information, and crash reports. Firebase Analytics and Firebase Crashlytics may be used for analytics and diagnostics. We do not ask you to enter payment-card details.'**
   String get legalPrivacySection2Body;
 
   /// Privacy Policy section heading
   ///
   /// In en, this message translates to:
-  /// **'How We Use Your Information'**
+  /// **'Sensitive Information'**
   String get legalPrivacySection3Heading;
 
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'We use this information to provide and personalize your journey, generate AI-personalized field content and a final analysis, save and synchronize your progress when you create an account, provide reminders you request, secure the service, diagnose crashes, understand feature usage, improve the app, and manage your account.'**
+  /// **'Some of the entries you make — particularly diary entries, answers to questions, or free-text fields — may potentially contain information about your health, psychological state, beliefs, relationships, or other personal circumstances.\n\nWe do not require you to provide such information to use the app, but you may choose to enter it voluntarily in the relevant field. If you voluntarily provide information that qualifies as a special category of personal data, it is processed only to the extent necessary for the relevant feature and on an applicable legal basis.\n\nDo not enter passwords, payment details, document numbers, secret keys, or other information whose disclosure could create a risk for you into the app.'**
   String get legalPrivacySection3Body;
 
   /// Privacy Policy section heading
   ///
   /// In en, this message translates to:
-  /// **'Where Your Data Lives'**
+  /// **'Purposes of Processing'**
   String get legalPrivacySection4Heading;
 
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'Your information is first stored on your device. If you use only an anonymous account, your progress and diary are not synchronized to another device. If you link an account, your profile, current progress, answers, diary, and journey history are stored in Google Firebase Cloud Firestore so they can be restored on another device. Account information is handled by Firebase Authentication, and usage and crash data may be handled by Firebase Analytics and Firebase Crashlytics. To personalize the game, we send your wish and selected focus area to the Anthropic API. For the final analysis, we send your wish and the questions and answers from the fields you visited. Anthropic returns generated game text and analysis. Under Anthropic\'s standard API retention policy, API inputs and outputs are normally deleted from its backend within 30 days, subject to limited safety, abuse-prevention, and legal exceptions.'**
+  /// **'We use information only for specific, lawful purposes: providing Hatchpot\'s features; creating personalized game and reflection content; processing requests to AI-powered features; generating the final analysis you request; saving and synchronizing your progress; account recovery; sending reminders you have requested; keeping the service secure; preventing abuse and fraud; diagnosing technical errors; analyzing feature usage; improving the app\'s stability and functionality; complying with legal obligations; and protecting the rights and legitimate interests of you and the operator.\n\nWe do not sell users\' personal data, and we do not use it to sell third-party goods or services through advertising networks.'**
   String get legalPrivacySection4Body;
 
   /// Privacy Policy section heading
   ///
   /// In en, this message translates to:
-  /// **'Sharing'**
+  /// **'Artificial Intelligence and Anthropic'**
   String get legalPrivacySection5Heading;
 
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'We do not sell your personal information and do not use advertising networks. We share information only as needed to operate the app: with Google LLC for Firebase cloud storage, authentication, analytics, crash reporting, App Check, and Cloud Functions; with Anthropic, PBC and its affiliates for AI generation and analysis; and with Apple or Google when you choose their sign-in service. These providers process information under their own applicable terms and privacy commitments.'**
+  /// **'To create personalized AI content, Hatchpot uses third-party artificial intelligence technologies, including the Anthropic API. Depending on the feature used, the context necessary to fulfill your request may be sent to Anthropic: your wish, selected focus area, the questions, your answers, information about the fields you have visited, and other necessary context. We aim to send only the amount of information needed to fulfill a specific request.\n\nAnthropic is a separate technology provider and processes the data sent to it in accordance with its own applicable terms and policies. Under Anthropic\'s commercial API, the standard retention period for inputs and outputs is up to 30 days after receipt or creation, except where otherwise agreed, required by law, or needed to ensure safety and enforce usage policies.\n\nSending data to Anthropic is a transfer of information to a third party and is expressly disclosed to you in this Policy.'**
   String get legalPrivacySection5Body;
 
   /// Privacy Policy section heading
   ///
   /// In en, this message translates to:
-  /// **'International Transfers'**
+  /// **'Service Providers'**
   String get legalPrivacySection6Heading;
 
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'Google Firebase and Anthropic may process information outside your country or the European Economic Area, including in the United States and other regions where their service providers operate. Where required, transfers are handled using legally recognized safeguards.'**
+  /// **'To operate the app, we may use third-party technology services: Google Firebase (Authentication, Cloud Firestore, Analytics, Crashlytics, App Check, Cloud Functions), the Anthropic API, and Apple and/or Google for their respective sign-in services and purchase processing. These providers receive only the amount of data needed to provide their respective service.'**
   String get legalPrivacySection6Body;
 
   /// Privacy Policy section heading
   ///
   /// In en, this message translates to:
-  /// **'Data Retention & Deletion'**
+  /// **'International Transfers'**
   String get legalPrivacySection7Heading;
 
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'Information stored locally is removed when you delete the app or clear its data. If you linked an account, you can delete the account and its associated Firebase profile, progress, diary, and journey history from within the app. Data already sent to Anthropic is handled according to Anthropic\'s API retention rules described above. Some limited records may be retained where required for security, fraud prevention, dispute resolution, or law. You can also contact us at leadlife.app@gmail.com.'**
+  /// **'Google Firebase and Anthropic may process information outside your country or the European Economic Area, including in the United States and other regions where their service providers operate. Where the GDPR or other laws with specific requirements for international data transfers apply, such transfers are carried out on a legally recognized basis and with appropriate safeguards.'**
   String get legalPrivacySection7Body;
 
   /// Privacy Policy section heading
   ///
   /// In en, this message translates to:
-  /// **'Your Rights'**
+  /// **'Legal Bases for Processing'**
   String get legalPrivacySection8Heading;
 
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'Depending on where you live, you may have the right to access, correct, delete, or export your data, object to or restrict certain processing, and withdraw consent where processing relies on consent. Contact leadlife.app@gmail.com to make a request. We may need to verify your identity before completing it.'**
+  /// **'Depending on the specific operation, processing may be based on: your consent; the necessity of performing a contract with you; the necessity of complying with legal obligations; the necessity of protecting vital interests; or legitimate interest, where permitted by applicable law. Processing of sensitive information relies on an additional legal basis where required by law.\n\nIn Ukraine, the processing of health data and certain other special categories is governed by separate requirements of the Law of Ukraine \"On Personal Data Protection\".'**
   String get legalPrivacySection8Body;
 
   /// Privacy Policy section heading
   ///
   /// In en, this message translates to:
-  /// **'Children'**
+  /// **'How Consent Is Given'**
   String get legalPrivacySection9Heading;
 
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'Hatchpot is not directed at children under 16, and we do not knowingly collect information from them.'**
+  /// **'Where required, you give consent through a clearly affirmative action, such as checking the relevant box. Consent is not considered given merely because you use the app, where the law requires separate consent. Consent checkboxes in Hatchpot — including on the AI information screen and for permission to process sensitive information — are not pre-checked: you make an active choice.\n\nYou may withdraw your consent in the cases and manner provided by applicable law. Withdrawing consent does not affect the lawfulness of processing carried out before the withdrawal.'**
   String get legalPrivacySection9Body;
 
   /// Privacy Policy section heading
   ///
   /// In en, this message translates to:
-  /// **'Changes & Contact'**
+  /// **'Data Retention and Deletion'**
   String get legalPrivacySection10Heading;
 
   /// Privacy Policy section body
   ///
   /// In en, this message translates to:
-  /// **'We may update this policy when the app or legal requirements change. The updated date will be shown above, and material changes will be reflected in the app. Questions can be sent to leadlife.app@gmail.com.'**
+  /// **'We retain personal data no longer than necessary for the relevant purposes, unless a longer period is required by law. Locally stored information is removed when you delete the app or clear its data.\n\nWe delete data associated with your account in accordance with the deletion procedure (Section 11), though some data may be retained in backups, security logs, financial records, or where required by law — including for fraud prevention, dispute resolution, security, or to comply with requirements from Apple, Google, or other providers.\n\nData already sent to Anthropic is subject to Anthropic\'s applicable retention rules described above.'**
   String get legalPrivacySection10Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Account Deletion'**
+  String get legalPrivacySection11Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'You can request deletion of your account and the data associated with it through the relevant feature in the app, or by sending a request to leadlife.app@gmail.com. After your account is deleted, some data may remain in backups, security logs, or where its retention is required by law.'**
+  String get legalPrivacySection11Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Your Rights'**
+  String get legalPrivacySection12Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'Depending on applicable law, you may have the right to: obtain information about your personal data; receive a copy of your data; correct inaccurate data; delete your data; restrict processing; object to certain kinds of processing; withdraw consent; receive your data in a machine-readable format; and lodge a complaint with a competent data protection authority.\n\nSend your request to leadlife.app@gmail.com. Before fulfilling a request, we may ask for reasonable proof of your identity.'**
+  String get legalPrivacySection12Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum Age'**
+  String get legalPrivacySection13Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'Hatchpot is intended only for individuals who are 18 years of age or older. Hatchpot is not directed at children or minors. If we become aware that we have received personal data from someone under 18 without an appropriate legal basis, we will take reasonable steps to delete that data.'**
+  String get legalPrivacySection13Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get legalPrivacySection14Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'We apply reasonable technical and organizational measures to protect personal data against unauthorized access, alteration, disclosure, loss, or destruction. No method of transmission or storage can guarantee absolute security.'**
+  String get legalPrivacySection14Body;
+
+  /// Privacy Policy section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Changes & Contact'**
+  String get legalPrivacySection15Heading;
+
+  /// Privacy Policy section body
+  ///
+  /// In en, this message translates to:
+  /// **'We may update this Policy when Hatchpot\'s functionality, the providers we use, or applicable law changes. The date of the last update is shown at the beginning of the document; for material changes, we may additionally notify you through the app or in another reasonable manner.\n\nFor questions about the processing of personal data, write to leadlife.app@gmail.com.\n\nOperator: Maimur Yevheniia Feliksivna, sole proprietor (individual entrepreneur), Ukraine.'**
+  String get legalPrivacySection15Body;
 
   /// Terms of Use section heading
   ///
   /// In en, this message translates to:
-  /// **'Acceptance of Terms'**
+  /// **'General Provisions'**
   String get legalTermsSection1Heading;
 
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'Last updated: [fill in before release]. By using Hatchpot, you agree to these Terms of Use. If you do not agree, please do not use the app.'**
+  /// **'Last updated: September 9, 2026. These Terms of Use (\"Terms\") govern the relationship between the user of Hatchpot (\"user\", \"you\") and the operator of the app — Maimur Yevheniia Feliksivna, a sole proprietor (individual entrepreneur) registered under the laws of Ukraine (Taxpayer Identification Number (РНОКПП) 3743203085, 2 Zhukovskoho St., Dnipro, 49000, Ukraine).\n\nHatchpot is the commercial name of a digital app designed for personal reflection, self-discovery, and entertainment.\n\nBy using Hatchpot, creating an account, or purchasing paid features, you confirm that you have read these Terms. If you do not agree with these Terms, do not use Hatchpot.'**
   String get legalTermsSection1Body;
 
   /// Terms of Use section heading
   ///
   /// In en, this message translates to:
-  /// **'The Service'**
+  /// **'Purpose of Hatchpot'**
   String get legalTermsSection2Heading;
 
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'Hatchpot is a personal-growth and self-reflection companion built around your wish, a 32-field journey, and gentle reminders. Content is provided for entertainment and self-reflection purposes only, and is not professional medical, psychological, financial, or legal advice.'**
+  /// **'Hatchpot provides a digital tool for personal reflection and self-discovery, built around your wish, a journey through game fields, questions, answers, diary entries, and AI-generated content.\n\nHatchpot is not a medical, psychological, psychotherapeutic, or psychiatric service. The content that Hatchpot generates, including AI content, is not medical advice, psychological advice, psychotherapy, psychiatric care, a diagnosis, a treatment, financial advice, or legal advice.'**
   String get legalTermsSection2Body;
 
   /// Terms of Use section heading
   ///
   /// In en, this message translates to:
-  /// **'Eligibility'**
+  /// **'Artificial Intelligence Disclaimer'**
   String get legalTermsSection3Heading;
 
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'You must be at least 16 years old, or the age of digital consent in your country, to use Hatchpot, and you agree to provide accurate information.'**
+  /// **'Some of Hatchpot\'s content is generated using artificial intelligence technologies. AI can produce inaccurate, incomplete, or subjective responses. AI content should not be treated as established fact, professional opinion, or a prediction of future events. You are solely responsible for evaluating the content you receive and for any decisions you make in light of your own circumstances.'**
   String get legalTermsSection3Body;
 
   /// Terms of Use section heading
   ///
   /// In en, this message translates to:
-  /// **'Accounts'**
+  /// **'User Age'**
   String get legalTermsSection4Heading;
 
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'The app works anonymously by default. You may optionally link an account with Google, Apple, or email and password so your journey and purchases carry over to a new device. You are responsible for keeping your credentials secure.'**
+  /// **'Hatchpot is intended for users who are 18 years of age or older. By using Hatchpot, you confirm that you are at least 18 years old. If you are under 18, do not create an account, use paid features, or provide your personal data to use Hatchpot.'**
   String get legalTermsSection4Body;
 
   /// Terms of Use section heading
   ///
   /// In en, this message translates to:
-  /// **'Subscriptions & Payments'**
+  /// **'Accounts'**
   String get legalTermsSection5Heading;
 
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'Paid plans are auto-renewing subscriptions billed through the App Store or Google Play. Price and renewal terms are shown before you purchase. You can cancel any time in your App Store or Google Play account settings; cancellation takes effect at the end of the current billing period. Refunds are handled by Apple or Google according to their own policies.'**
+  /// **'Hatchpot may allow you to use the app without registering. You may link an account using email, Google, Apple, or another supported method. You are responsible for providing accurate information and for keeping your sign-in credentials secure.'**
   String get legalTermsSection5Body;
 
   /// Terms of Use section heading
@@ -2555,56 +2627,260 @@ abstract class AppLocalizations {
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'You own what you write in the app. You grant us a limited license to store and process it solely to provide the service to you.'**
+  /// **'You retain the rights to the text, answers, diary entries, wishes, and other content you create or enter in Hatchpot (\"User Content\"). By providing User Content, you allow Hatchpot, to the extent necessary to operate the service, to access, store, process, transmit, and technically use it to: provide the app\'s features; synchronize your data; generate personalized content; process AI requests, including by sending the relevant context to third-party technology providers, including Anthropic (see the Privacy Policy); generate the analysis you request; keep the service secure; and perform technical maintenance.\n\nHatchpot does not acquire ownership of your User Content, does not sell it, and does not use it for advertising targeting. You confirm that you have the right to provide the information you submit.'**
   String get legalTermsSection6Body;
 
   /// Terms of Use section heading
   ///
   /// In en, this message translates to:
-  /// **'Acceptable Use'**
+  /// **'Prohibited Use'**
   String get legalTermsSection7Heading;
 
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'You agree not to use the app unlawfully, to interfere with its operation, or to reverse-engineer, decompile, or disassemble it.'**
+  /// **'You must not: use Hatchpot unlawfully; interfere with the app\'s operation; attempt to gain unauthorized access to its systems; distribute malicious code; reverse-engineer, decompile, or disassemble the app, except where expressly permitted by applicable law; or use the app to infringe the rights of third parties or to threaten the safety of other users.'**
   String get legalTermsSection7Body;
 
   /// Terms of Use section heading
   ///
   /// In en, this message translates to:
-  /// **'Disclaimer & Liability'**
+  /// **'Crisis Situations'**
   String get legalTermsSection8Heading;
 
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'Hatchpot is provided \"as is\", without warranties of any kind. To the fullest extent permitted by law, we are not liable for indirect, incidental, or consequential damages arising from your use of the app.'**
+  /// **'Hatchpot is not designed for use in emergencies. If your message indicates an immediate threat to the life, health, or safety of you or another person, Hatchpot may suspend its normal game or reflection processing and instead display pre-prepared information about the need to seek emergency or professional help.\n\nDo not use Hatchpot as a substitute for emergency, medical, psychological, or psychiatric help.'**
   String get legalTermsSection8Body;
 
   /// Terms of Use section heading
   ///
   /// In en, this message translates to:
-  /// **'Termination'**
+  /// **'Disclaimer of Warranties'**
   String get legalTermsSection9Heading;
 
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'We may suspend or terminate access to the app for violation of these terms. You may stop using the app, and delete your account, at any time.'**
+  /// **'Hatchpot is provided \"as is\" and \"as available\". We do not warrant that the app will operate without interruption, be free of technical errors, be available at all times, be fully compatible with every device, or generate AI content that is always accurate or appropriate.'**
   String get legalTermsSection9Body;
 
   /// Terms of Use section heading
   ///
   /// In en, this message translates to:
-  /// **'Governing Law & Changes'**
+  /// **'Limitation of Liability'**
   String get legalTermsSection10Heading;
 
   /// Terms of Use section body
   ///
   /// In en, this message translates to:
-  /// **'These terms are governed by the laws of [fill in your jurisdiction]. We may update these terms from time to time; material changes will be reflected in the app. Questions? Reach us at [support email].'**
+  /// **'To the fullest extent permitted by applicable law, Hatchpot is not liable for indirect, incidental, special, or consequential damages arising from your use of, or inability to use, the app. You are solely responsible for decisions you make based on information received through Hatchpot.\n\nNothing in these Terms excludes or limits the operator\'s liability where such exclusion or limitation is prohibited by applicable law, and nothing deprives you, as a consumer, of rights granted by mandatory legal provisions — including Ukrainian law on distance contracts and digital content, and, if you reside in another country, the mandatory rights granted to you by the law of your country of residence.'**
   String get legalTermsSection10Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Paid Features and Subscriptions'**
+  String get legalTermsSection11Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'Hatchpot may offer paid features, subscriptions, and digital content. The terms for payment, automatic renewal, cancellation, and refunds are set out in a separate document, the \"Subscription & Refund Terms\", which forms an integral part of these Terms.'**
+  String get legalTermsSection11Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Account Deletion'**
+  String get legalTermsSection12Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'You may stop using Hatchpot and delete your account through the procedure provided in the app. Deleting your account does not relieve either party of obligations that, by their nature, are meant to survive the end of your use of the service.'**
+  String get legalTermsSection12Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Suspension of Access'**
+  String get legalTermsSection13Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'We may temporarily restrict or terminate a user\'s access if: the user violates these Terms; use of the account poses a security risk; it is necessary to prevent fraud; it is required by law; or it is necessary to protect the rights of other users or the operator.'**
+  String get legalTermsSection13Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Governing Law'**
+  String get legalTermsSection14Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'These Terms are governed by the laws of Ukraine. If you are a consumer residing in another country, the choice of Ukrainian law does not deprive you of the rights granted to you by the mandatory provisions of the law of your country of residence.'**
+  String get legalTermsSection14Body;
+
+  /// Terms of Use section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Changes to the Terms and Contact'**
+  String get legalTermsSection15Heading;
+
+  /// Terms of Use section body
+  ///
+  /// In en, this message translates to:
+  /// **'We may change these Terms if the app, our business model, or applicable law changes. We may notify you of material changes through the app or in another reasonable manner. Continuing to use Hatchpot after changes take effect means using the service under the updated Terms, to the extent permitted by law.\n\nOperator: Maimur Yevheniia Feliksivna, sole proprietor (individual entrepreneur), Ukraine. Email: leadlife.app@gmail.com.'**
+  String get legalTermsSection15Body;
+
+  /// Subscription Terms section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Paid Features'**
+  String get legalSubscriptionSection1Heading;
+
+  /// Subscription Terms section body
+  ///
+  /// In en, this message translates to:
+  /// **'Some Hatchpot features may be offered for a fee. Before you make a purchase, you are shown information about the price, currency, subscription period, whether automatic renewal applies, what the paid feature includes, and the cancellation terms.'**
+  String get legalSubscriptionSection1Body;
+
+  /// Subscription Terms section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription and Automatic Renewal'**
+  String get legalSubscriptionSection2Heading;
+
+  /// Subscription Terms section body
+  ///
+  /// In en, this message translates to:
+  /// **'If the service you choose is a subscription, it renews automatically for the corresponding period unless you cancel it before the renewal date. Canceling a subscription stops future automatic renewals but does not necessarily end your access to the period you have already paid for.'**
+  String get legalSubscriptionSection2Body;
+
+  /// Subscription Terms section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Through App Stores'**
+  String get legalSubscriptionSection3Heading;
+
+  /// Subscription Terms section body
+  ///
+  /// In en, this message translates to:
+  /// **'On iOS, payments are processed through the App Store, and on Android, through Google Play, unless the app specifies otherwise. Certain aspects of payment may be subject to the rules of the relevant store.'**
+  String get legalSubscriptionSection3Body;
+
+  /// Subscription Terms section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Cancellation'**
+  String get legalSubscriptionSection4Heading;
+
+  /// Subscription Terms section body
+  ///
+  /// In en, this message translates to:
+  /// **'You can cancel your subscription in the relevant account settings of the App Store or Google Play. After cancellation, you generally retain access until the end of the period you have already paid for, unless otherwise provided by applicable rules or law.'**
+  String get legalSubscriptionSection4Body;
+
+  /// Subscription Terms section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Refunds'**
+  String get legalSubscriptionSection5Heading;
+
+  /// Subscription Terms section body
+  ///
+  /// In en, this message translates to:
+  /// **'The right to a refund is determined by applicable law, the terms of the contract, and the rules of the relevant app store. Nothing in this document limits your mandatory consumer rights.\n\nIf applicable law grants a right to withdraw from a distance contract or digital content, that right remains available, subject to the conditions set by law. For digital content whose provision has already begun, the right of withdrawal may be limited in cases provided by law, in particular where you have given your express prior consent to the digital content being provided immediately and have been informed of the consequences of that consent.'**
+  String get legalSubscriptionSection5Body;
+
+  /// Subscription Terms section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Free Trial Period'**
+  String get legalSubscriptionSection6Heading;
+
+  /// Subscription Terms section body
+  ///
+  /// In en, this message translates to:
+  /// **'If Hatchpot offers a free trial period, its duration and the terms of automatic conversion to a paid subscription are disclosed before the trial period begins.'**
+  String get legalSubscriptionSection6Body;
+
+  /// Subscription Terms section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Price Changes'**
+  String get legalSubscriptionSection7Heading;
+
+  /// Subscription Terms section body
+  ///
+  /// In en, this message translates to:
+  /// **'If the price of a future subscription period changes, you will be notified in the manner provided by applicable law and the rules of the relevant store.'**
+  String get legalSubscriptionSection7Body;
+
+  /// Subscription Terms section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Erroneous Charges'**
+  String get legalSubscriptionSection8Heading;
+
+  /// Subscription Terms section body
+  ///
+  /// In en, this message translates to:
+  /// **'If you believe you have been charged in error, contact leadlife.app@gmail.com. If needed, you can also use the refund procedure of the relevant app store.'**
+  String get legalSubscriptionSection8Body;
+
+  /// Subscription Terms section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Service-Initiated Cancellation or Suspension'**
+  String get legalSubscriptionSection9Heading;
+
+  /// Subscription Terms section body
+  ///
+  /// In en, this message translates to:
+  /// **'If we cancel or suspend your access for reasons on our side — not because you violated these Terms — you don\'t lose what you\'ve already paid for.\n\nIf you purchased a one-time single-journey plan, access to the journey you already paid for is preserved; if that\'s not technically possible, we refund the unused portion on a pro-rata basis.\n\nIf you have an active subscription and we cancel or suspend it for reasons on our side, you keep access for the remainder of your already-paid period, or receive an equivalent number of additional journeys or days of access to make up for the lost time — or a pro-rata refund if neither option is possible.\n\nThis does not apply where access is restricted because you violated these Terms, or as required by law, fraud, or abuse prevention.'**
+  String get legalSubscriptionSection9Body;
+
+  /// AI/Medical disclaimer screen heading
+  ///
+  /// In en, this message translates to:
+  /// **'IMPORTANT INFORMATION'**
+  String get aiDisclaimerHeading;
+
+  /// AI/Medical disclaimer screen body text
+  ///
+  /// In en, this message translates to:
+  /// **'Hatchpot is designed for entertainment, personal reflection, and self-discovery.\n\nHatchpot is not medical, psychological, psychotherapeutic, or psychiatric care.\n\nResponses generated by artificial intelligence may contain errors, inaccuracies, or subjective interpretations and do not replace consultation with a qualified professional.\n\nDo not use Hatchpot to diagnose a condition, treat an illness, or make decisions that require professional medical, psychological, legal, or financial advice.\n\nHatchpot is not designed for emergencies. If you or another person is in immediate danger, seek emergency help or contact an appropriate professional.'**
+  String get aiDisclaimerBody;
+
+  /// AI/Medical disclaimer screen checkbox label
+  ///
+  /// In en, this message translates to:
+  /// **'I am 18 years of age or older. I have read this information and understand that Hatchpot is not medical, psychological, or psychiatric care, and that AI responses may be inaccurate.'**
+  String get aiDisclaimerCheckboxLabel;
+
+  /// Crisis resources screen heading
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s pause here for a moment'**
+  String get crisisResourcesHeading;
+
+  /// Crisis resources screen body
+  ///
+  /// In en, this message translates to:
+  /// **'What you wrote seems to deserve more than this game can offer. Hatchpot isn\'t built for crisis situations and doesn\'t replace professional help.\n\nPlease reach out to someone you trust, a mental health professional, or your local emergency services. You don\'t have to go through this alone.'**
+  String get crisisResourcesBody;
+
+  /// Crisis resources screen back button
+  ///
+  /// In en, this message translates to:
+  /// **'Go back'**
+  String get crisisResourcesBackCta;
 
   /// No description provided for @accountSectionTitle.
   ///

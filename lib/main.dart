@@ -8,7 +8,7 @@ import 'app_theme.dart';
 import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
 import 'screens/mid_dice_screen.dart';
-import 'screens/onboarding_name_screen.dart';
+import 'screens/onboarding_disclaimer_screen.dart';
 import 'screens/rules_screen.dart';
 import 'services/analytics_service.dart';
 import 'services/auth_service.dart';
@@ -139,7 +139,7 @@ class LeadLifeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Widget home = !onboardingDone
-        ? const OnboardingNameScreen()
+        ? const OnboardingDisclaimerScreen()
         : resumeProgress != null
         ? MidDiceScreen(
             currentFieldNum: resumeProgress!.currentFieldNum,
@@ -176,8 +176,51 @@ class LeadLifeApp extends StatelessWidget {
             },
           ),
         ),
-        home: home,
+        home: onboardingDone ? _ComebackReminderGate(child: home) : home,
       ),
     );
   }
+}
+
+/// Schedules the 30min/1.5h/21h/47h comeback notification chain whenever the
+/// player backgrounds the app with an unfinished journey, and cancels it as
+/// soon as they come back — so returning promptly doesn't leave stale nudges
+/// queued up. Only mounted once onboarding is done, since there's nothing to
+/// resume before that.
+class _ComebackReminderGate extends StatefulWidget {
+  const _ComebackReminderGate({required this.child});
+  final Widget child;
+
+  @override
+  State<_ComebackReminderGate> createState() => _ComebackReminderGateState();
+}
+
+class _ComebackReminderGateState extends State<_ComebackReminderGate> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      ProgressService.load().then((progress) {
+        if (progress != null) {
+          NotificationService.instance.scheduleComebackReminders();
+        }
+      });
+    } else if (state == AppLifecycleState.resumed) {
+      NotificationService.instance.cancelComebackReminders();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }

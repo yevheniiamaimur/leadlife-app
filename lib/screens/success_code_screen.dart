@@ -12,6 +12,7 @@ import '../services/locale_service.dart';
 import '../services/analytics_service.dart';
 import '../services/game_content_service.dart';
 import '../services/game_history_service.dart';
+import '../services/notification_service.dart';
 import '../services/progress_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'rules_screen.dart';
@@ -91,6 +92,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
           return AnswerEntry(
             n: step.fieldNumber,
             fieldName: field.name,
+            superpower: field.superpower,
             question: step.question.isEmpty
                 ? _questionOf(field)
                 : step.question,
@@ -108,6 +110,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
           return AnswerEntry(
             n: e.key,
             fieldName: field.name,
+            superpower: field.superpower,
             question: _questionOf(field),
             answer: e.value,
           );
@@ -722,6 +725,7 @@ class _SuccessCodeScreenState extends State<SuccessCodeScreen> {
                           onTap: () {
                             ProgressService.clear().ignore();
                             GameContentService.clear().ignore();
+                            NotificationService.instance.cancelComebackReminders();
                             Navigator.of(context).pushAndRemoveUntil(
                               _fadeRoute(const RulesScreen()),
                               (_) => false,

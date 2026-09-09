@@ -73,28 +73,21 @@ class AppLocalizationsEs extends AppLocalizations {
   String get confirmMyDesire => 'Confirmar mi deseo';
 
   @override
-  String get aiAssistantLinkCta =>
-      '✨ ¿No sabes cómo expresarlo? Pregúntale al asistente';
+  String get contactAuthorTitle => 'Contactar con la autora del juego';
 
   @override
-  String get aiAssistantTitle => 'Aclara tu deseo';
+  String get contactAuthorSubtitle =>
+      'Si tienes una pregunta, un comentario o necesitas ayuda, puedes escribir directamente.';
 
   @override
-  String get aiAssistantGreeting =>
-      '¿Qué deseo traes a este viaje? Cuéntame un poco y te ayudaré a expresarlo con palabras.';
+  String get contactAuthorEmailCta => 'Escribir por email';
 
   @override
-  String get aiAssistantInputHint => 'Escribe tu respuesta…';
+  String get contactAuthorInstagramCta => 'Abrir Instagram';
 
   @override
-  String get aiAssistantUseThisWish => 'Usar este deseo';
-
-  @override
-  String get aiAssistantError =>
-      'El asistente no pudo responder. Comprueba tu conexión e inténtalo de nuevo.';
-
-  @override
-  String get aiAssistantRetryCta => 'Intentar de nuevo';
+  String get contactAuthorEmailCopied =>
+      'Email copiado: leadlife.app@gmail.com';
 
   @override
   String onboardingStepOfFive(int step) {
@@ -139,6 +132,17 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get allowGentleReminders =>
       'Permite recordatorios suaves para mantenerte en tu camino.';
+
+  @override
+  String get allowSensitiveDataProcessing =>
+      'Permite el tratamiento de la información que proporciono, que puede referirse a datos de salud u otros datos personales sensibles, para el funcionamiento de las funciones correspondientes de Hatchpot.';
+
+  @override
+  String get comebackReminderTitle => 'Tu camino te espera';
+
+  @override
+  String get comebackReminderBody =>
+      'Dejaste tu viaje a medias. Vuelve cuando estés listo(a) y continúa.';
 
   @override
   String get onboardingFocusHeading => '¿Qué ocupa más tu mente\nahora mismo?';
@@ -813,7 +817,7 @@ class AppLocalizationsEs extends AppLocalizations {
       'En Hatchpot, la Luz es el comienzo simbólico: la energía que ya está presente en tu idea.\n\nEl deseo que escribiste refleja algo realmente importante para ti. Deja que su valor te acompañe al comenzar tu camino.';
 
   @override
-  String get field01Task => '¿Qué deseo traes a este viaje?';
+  String get field01Task => '';
 
   @override
   String get field02Name => 'Conexión';
@@ -850,7 +854,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get field04Intro =>
-      'Un deseo necesita una estructura que pueda sostener su energía y sus acciones.\n\nEste campo está conectado simbólicamente con Júpiter, la escala, la expansión y la bondad.';
+      'Un deseo necesita una estructura que pueda sostener su energía y sus acciones.\n\nEste campo está conectado con la escala, la expansión y la bondad.';
 
   @override
   String get field04Task =>
@@ -1276,6 +1280,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get termsOfUseLabel => 'Condiciones de uso';
 
   @override
+  String get subscriptionTermsLabel =>
+      'Condiciones de suscripción y reembolsos';
+
+  @override
   String get legalConsentPrefix => 'Acepto las ';
 
   @override
@@ -1289,141 +1297,301 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get legalPrivacySection1Body =>
-      'Última actualización: 20 de agosto de 2026. Esta política explica qué información trata Hatchpot («nosotros») cuando utilizas la aplicación Hatchpot, por qué la tratamos, dónde puede almacenarse y qué opciones tienes.';
+      'Última actualización: 9 de septiembre de 2026. Esta Política de privacidad explica qué información trata Hatchpot, con qué finalidad, a quién puede comunicarse, dónde puede almacenarse y qué derechos tiene el usuario.\n\nHatchpot («Hatchpot», «nosotros» o «nuestro servicio») es una aplicación digital para la reflexión personal, el autoconocimiento y el entretenimiento que utiliza tecnologías de inteligencia artificial.\n\nEl operador de Hatchpot es Maimur Yevheniia Feliksivna, empresaria individual registrada conforme a la legislación ucraniana.\n\nDatos de registro y de contacto: РНОКПП (número de identificación fiscal) 3743203085; dirección de registro: Calle Zhukovskoho 2, Dnipró, 49000, Ucrania; correo electrónico: leadlife.app@gmail.com.';
 
   @override
-  String get legalPrivacySection2Heading => 'Información que recopilamos';
+  String get legalPrivacySection2Heading => 'Qué información tratamos';
 
   @override
   String get legalPrivacySection2Body =>
-      'Tratamos la información que decides introducir: nombre, fecha de nacimiento, correo electrónico, área de enfoque, deseos, respuestas, entradas del diario e historial de viajes. Si creas una cuenta, Firebase Authentication trata el identificador de tu cuenta y los datos de inicio de sesión. También tratamos información técnica y de uso necesaria para la seguridad, los análisis y el diagnóstico de fallos, como las interacciones con la aplicación, los datos del dispositivo y del sistema operativo, la versión de la aplicación y los informes de diagnóstico. No te pedimos que introduzcas datos de tarjetas de pago.';
+      'Información que proporcionas tú mismo: según las funciones que utilices, puede incluir tu nombre o el nombre elegido; tu fecha de nacimiento; tu correo electrónico; el área de enfoque elegida; tu deseo o intención; tus respuestas a las preguntas; las entradas del diario; el historial de tu viaje por la aplicación; el contenido de las solicitudes a las funciones de inteligencia artificial; y cualquier otra información que indiques en texto libre.\n\nDatos de la cuenta: si creas o vinculas una cuenta, Firebase Authentication trata los datos correspondientes: el identificador de la cuenta, el correo electrónico y los datos técnicos necesarios para la autenticación.\n\nInformación técnica: el tipo y modelo del dispositivo, el sistema operativo, la versión de la aplicación, los identificadores técnicos, los datos sobre la interacción con la aplicación, la información de diagnóstico y los informes de fallos. Firebase Analytics y Firebase Crashlytics pueden utilizarse para análisis y diagnóstico. No te pedimos que introduzcas datos de tarjetas de pago.';
 
   @override
-  String get legalPrivacySection3Heading => 'Cómo utilizamos tu información';
+  String get legalPrivacySection3Heading => 'Información sensible';
 
   @override
   String get legalPrivacySection3Body =>
-      'Utilizamos esta información para ofrecer y personalizar tu viaje, generar mediante IA contenido personalizado para los campos y un análisis final, guardar y sincronizar tu progreso cuando creas una cuenta, proporcionar los recordatorios que solicites, proteger el servicio, diagnosticar fallos, comprender el uso de las funciones, mejorar la aplicación y gestionar tu cuenta.';
+      'Algunas de tus anotaciones —en especial las entradas del diario, las respuestas a las preguntas o el texto libre— pueden contener potencialmente información sobre salud, estado psicológico, creencias, relaciones u otras circunstancias personales.\n\nNo te exigimos que proporciones ese tipo de información para usar la aplicación, pero puedes introducirla voluntariamente en el campo correspondiente. Si aportas voluntariamente información perteneciente a categorías especiales de datos personales, se trata únicamente en la medida necesaria para la función correspondiente y sobre la base jurídica aplicable.\n\nNo introduzcas en la aplicación contraseñas, datos de pago, números de documentos, claves secretas ni ninguna otra información cuya divulgación pueda suponer un riesgo para ti.';
 
   @override
-  String get legalPrivacySection4Heading => 'Dónde se almacenan tus datos';
+  String get legalPrivacySection4Heading => 'Finalidad del tratamiento';
 
   @override
   String get legalPrivacySection4Body =>
-      'Tu información se guarda primero en tu dispositivo. Si solo utilizas una cuenta anónima, tu progreso y tu diario no se sincronizan con otro dispositivo. Si vinculas una cuenta, tu perfil, progreso actual, respuestas, diario e historial de viajes se almacenan en Google Firebase Cloud Firestore para poder restaurarlos en otro dispositivo. Firebase Authentication gestiona la información de la cuenta, y Firebase Analytics y Firebase Crashlytics pueden gestionar los datos de uso y fallos. Para personalizar el juego, enviamos tu deseo y el área de enfoque seleccionada a la API de Anthropic. Para el análisis final, enviamos tu deseo y las preguntas y respuestas de los campos que has visitado. Anthropic devuelve el texto generado para el juego y el análisis. Según la política estándar de conservación de la API de Anthropic, las entradas y salidas de la API normalmente se eliminan de sus sistemas en un plazo de 30 días, salvo excepciones limitadas de seguridad, prevención de abusos y obligaciones legales.';
+      'Utilizamos la información únicamente para fines concretos y lícitos: prestar las funciones de Hatchpot; generar contenido de juego y reflexión personalizado; procesar las solicitudes a las funciones de inteligencia artificial; elaborar el análisis final que solicitas; guardar y sincronizar tu progreso; recuperar tu cuenta; enviar los recordatorios que solicites; garantizar la seguridad del servicio; prevenir abusos y fraudes; diagnosticar errores técnicos; analizar el uso de las funciones; mejorar la estabilidad y la funcionalidad de la aplicación; cumplir obligaciones legales; y proteger los derechos e intereses legítimos del usuario y del operador.\n\nNo vendemos los datos personales de los usuarios ni los utilizamos para vender productos o servicios de terceros a través de redes publicitarias.';
 
   @override
-  String get legalPrivacySection5Heading => 'Comunicación de información';
+  String get legalPrivacySection5Heading =>
+      'Inteligencia artificial y Anthropic';
 
   @override
   String get legalPrivacySection5Body =>
-      'No vendemos tu información personal ni utilizamos redes publicitarias. Solo compartimos información cuando es necesario para operar la aplicación: con Google LLC para almacenamiento en la nube de Firebase, autenticación, análisis, informes de fallos, App Check y Cloud Functions; con Anthropic, PBC y sus filiales para la generación y el análisis mediante IA; y con Apple o Google cuando eliges su servicio de inicio de sesión. Estos proveedores tratan la información conforme a sus propias condiciones y compromisos de privacidad aplicables.';
+      'Para generar contenido de IA personalizado, Hatchpot utiliza tecnologías de inteligencia artificial de terceros, en particular la API de Anthropic. Según la función utilizada, a Anthropic puede transferirse el contexto necesario para atender la solicitud: tu deseo, el área de enfoque elegida, las preguntas, tus respuestas, la información sobre los campos recorridos y otro contexto necesario. Procuramos transferir únicamente el volumen de información necesario para atender cada solicitud concreta.\n\nAnthropic es un proveedor de tecnología independiente y trata los datos que le transferimos conforme a sus propias condiciones y políticas aplicables. Para la API comercial de Anthropic, el plazo estándar de conservación de las entradas y salidas es de hasta 30 días desde su recepción o generación, salvo que se acuerde otra cosa, lo exija la ley o sea necesario para garantizar la seguridad y el cumplimiento de las normas de uso.\n\nLa transferencia de datos a Anthropic constituye una comunicación de información a un tercero y se te revela expresamente en esta Política.';
 
   @override
-  String get legalPrivacySection6Heading => 'Transferencias internacionales';
+  String get legalPrivacySection6Heading => 'Proveedores de servicios';
 
   @override
   String get legalPrivacySection6Body =>
-      'Google Firebase y Anthropic pueden tratar información fuera de tu país o del Espacio Económico Europeo, incluidos Estados Unidos y otras regiones donde operan sus proveedores de servicios. Cuando sea necesario, las transferencias se realizan mediante garantías reconocidas legalmente.';
+      'Para el funcionamiento de la aplicación podemos utilizar servicios tecnológicos de terceros: Google Firebase (Authentication, Cloud Firestore, Analytics, Crashlytics, App Check, Cloud Functions), la API de Anthropic, así como Apple y/o Google para sus respectivos servicios de inicio de sesión y procesamiento de compras. Estos proveedores reciben únicamente el volumen de datos necesario para prestar el servicio correspondiente.';
 
   @override
-  String get legalPrivacySection7Heading =>
-      'Conservación y eliminación de datos';
+  String get legalPrivacySection7Heading => 'Transferencias internacionales';
 
   @override
   String get legalPrivacySection7Body =>
-      'La información almacenada localmente se elimina cuando borras la aplicación o sus datos. Si has vinculado una cuenta, puedes eliminar desde la aplicación la cuenta y el perfil de Firebase, el progreso, el diario y el historial de viajes asociados. Los datos ya enviados a Anthropic se gestionan conforme a sus reglas de conservación de la API descritas anteriormente. Algunos registros limitados pueden conservarse cuando sea necesario por motivos de seguridad, prevención del fraude, resolución de disputas u obligaciones legales. También puedes escribirnos a leadlife.app@gmail.com.';
+      'Google Firebase y Anthropic pueden tratar información fuera de tu país o del Espacio Económico Europeo, incluidos Estados Unidos y otras regiones donde operan sus proveedores de servicios. Cuando sea aplicable el RGPD u otra legislación con requisitos específicos para las transferencias internacionales de datos, dichas transferencias se realizan sobre la base jurídica prevista por la ley y aplicando las garantías adecuadas.';
 
   @override
-  String get legalPrivacySection8Heading => 'Tus derechos';
+  String get legalPrivacySection8Heading => 'Bases jurídicas del tratamiento';
 
   @override
   String get legalPrivacySection8Body =>
-      'Según tu lugar de residencia, puedes tener derecho a acceder, corregir, eliminar o exportar tus datos, oponerte a determinados tratamientos o limitarlos y retirar tu consentimiento cuando el tratamiento se base en él. Escribe a leadlife.app@gmail.com para presentar una solicitud. Es posible que tengamos que verificar tu identidad antes de completarla.';
+      'Según la operación concreta, el tratamiento puede basarse en: el consentimiento del usuario; la necesidad de ejecutar un contrato con el usuario; la necesidad de cumplir obligaciones legales; la necesidad de proteger intereses vitales; o el interés legítimo, cuando la legislación aplicable lo permita. Para el tratamiento de información sensible se aplica una base jurídica adicional cuando la ley lo exige.\n\nEn Ucrania, el tratamiento de datos de salud y de otras categorías especiales se rige por requisitos específicos de la Ley de Ucrania «Sobre la protección de los datos personales».';
 
   @override
-  String get legalPrivacySection9Heading => 'Menores';
+  String get legalPrivacySection9Heading => 'Cómo se otorga el consentimiento';
 
   @override
   String get legalPrivacySection9Body =>
-      'Hatchpot no está dirigido a menores de 16 años y no recopilamos conscientemente información sobre ellos.';
+      'Cuando es necesario, otorgas tu consentimiento mediante una acción expresa, como marcar la casilla correspondiente. El consentimiento no se considera otorgado por el mero uso de la aplicación cuando la legislación exige un consentimiento independiente. Las casillas de consentimiento de Hatchpot —en particular la de la pantalla con información importante sobre la IA y la del permiso para tratar información sensible— no vienen marcadas de antemano: eres tú quien elige activamente.\n\nPuedes retirar tu consentimiento en los casos y del modo previstos por la legislación aplicable. La retirada del consentimiento no afecta a la licitud del tratamiento realizado antes de dicha retirada.';
 
   @override
-  String get legalPrivacySection10Heading => 'Cambios y contacto';
+  String get legalPrivacySection10Heading =>
+      'Conservación y eliminación de datos';
 
   @override
   String get legalPrivacySection10Body =>
-      'Podemos actualizar esta política cuando cambien la aplicación o los requisitos legales. La fecha de actualización aparecerá arriba y los cambios importantes se reflejarán en la aplicación. Puedes enviar tus preguntas a leadlife.app@gmail.com.';
+      'Conservamos los datos personales solo durante el tiempo necesario para las finalidades correspondientes, salvo que la ley prevea un plazo mayor. La información almacenada localmente se elimina cuando borras la aplicación o borras sus datos.\n\nEliminamos los datos asociados a la cuenta conforme al procedimiento de eliminación (sección 11); no obstante, algunos datos pueden conservarse en copias de seguridad, registros de seguridad, documentación financiera o en los casos previstos por la ley, en particular para prevenir el fraude, resolver disputas, garantizar la seguridad o cumplir los requisitos de Apple, Google u otros proveedores.\n\nLos datos ya enviados a Anthropic quedan sujetos a las normas de conservación de Anthropic aplicables descritas anteriormente.';
 
   @override
-  String get legalTermsSection1Heading => 'Aceptación de las condiciones';
+  String get legalPrivacySection11Heading => 'Eliminación de la cuenta';
+
+  @override
+  String get legalPrivacySection11Body =>
+      'Puedes solicitar la eliminación de tu cuenta y de los datos asociados a través de la función correspondiente en la aplicación o enviando una solicitud a leadlife.app@gmail.com. Tras eliminar la cuenta, algunos datos pueden conservarse en copias de seguridad, registros de seguridad o en los casos en que la ley exija su conservación.';
+
+  @override
+  String get legalPrivacySection12Heading => 'Derechos del usuario';
+
+  @override
+  String get legalPrivacySection12Body =>
+      'Según la legislación aplicable, puedes tener derecho a: obtener información sobre tus datos personales; recibir una copia de tus datos; corregir datos inexactos; eliminar tus datos; limitar el tratamiento; oponerte a determinados tipos de tratamiento; retirar tu consentimiento; recibir tus datos en un formato legible por máquina; y presentar una reclamación ante la autoridad de protección de datos competente.\n\nEnvía tu solicitud a leadlife.app@gmail.com. Antes de atenderla, podemos pedirte una verificación razonable de tu identidad.';
+
+  @override
+  String get legalPrivacySection13Heading => 'Edad mínima';
+
+  @override
+  String get legalPrivacySection13Body =>
+      'Hatchpot está destinado únicamente a personas que hayan cumplido 18 años. Hatchpot no está destinado a niños ni a menores de edad. Si tenemos conocimiento de que hemos recibido datos personales de una persona menor de 18 años sin una base jurídica adecuada, adoptaremos medidas razonables para eliminar dichos datos.';
+
+  @override
+  String get legalPrivacySection14Heading => 'Seguridad';
+
+  @override
+  String get legalPrivacySection14Body =>
+      'Aplicamos medidas técnicas y organizativas razonables para proteger los datos personales frente al acceso no autorizado, la alteración, la divulgación, la pérdida o la destrucción. Ningún método de transmisión o almacenamiento de datos puede garantizar una seguridad absoluta.';
+
+  @override
+  String get legalPrivacySection15Heading => 'Cambios y contacto';
+
+  @override
+  String get legalPrivacySection15Body =>
+      'Podemos actualizar esta Política cuando cambien las funcionalidades de Hatchpot, los proveedores utilizados o la legislación aplicable. La fecha de la última actualización se indica al inicio del documento; de los cambios importantes podemos informarte adicionalmente a través de la aplicación o por otro medio razonable.\n\nPara cualquier consulta sobre el tratamiento de datos personales, escribe a leadlife.app@gmail.com.\n\nOperador: Maimur Yevheniia Feliksivna, empresaria individual, Ucrania.';
+
+  @override
+  String get legalTermsSection1Heading => 'Disposiciones generales';
 
   @override
   String get legalTermsSection1Body =>
-      'Última actualización: [completar antes de la publicación]. Al utilizar Hatchpot, aceptas estas Condiciones de uso. Si no estás de acuerdo, no utilices la aplicación.';
+      'Última actualización: 9 de septiembre de 2026. Estas Condiciones de uso («Condiciones») regulan la relación entre el usuario de Hatchpot («usuario», «tú») y el operador de la aplicación, Maimur Yevheniia Feliksivna, empresaria individual registrada conforme a la legislación ucraniana (РНОКПП [número de identificación fiscal] 3743203085, Calle Zhukovskoho 2, Dnipró, 49000, Ucrania).\n\nHatchpot es el nombre comercial de una aplicación digital destinada a la reflexión personal, el autoconocimiento y el entretenimiento.\n\nAl utilizar Hatchpot, crear una cuenta o adquirir funciones de pago, confirmas que has leído estas Condiciones. Si no estás de acuerdo con ellas, no utilices Hatchpot.';
 
   @override
-  String get legalTermsSection2Heading => 'El servicio';
+  String get legalTermsSection2Heading => 'Finalidad de Hatchpot';
 
   @override
   String get legalTermsSection2Body =>
-      'Hatchpot es una herramienta de crecimiento personal y reflexión basada en tu deseo, un viaje por 32 campos y recordatorios suaves. El contenido se ofrece únicamente con fines de entretenimiento y reflexión personal y no constituye asesoramiento médico, psicológico, financiero ni jurídico profesional.';
+      'Hatchpot ofrece una herramienta digital para la reflexión personal y el autoconocimiento, construida en torno a tu deseo, un viaje por campos de juego, preguntas, respuestas, entradas de diario y contenido generado por IA.\n\nHatchpot no es un servicio médico, psicológico, psicoterapéutico ni psiquiátrico. El contenido que genera Hatchpot, incluido el contenido de IA, no constituye asesoramiento médico, asesoramiento psicológico, psicoterapia, atención psiquiátrica, diagnóstico, tratamiento, recomendación financiera ni asesoramiento jurídico.';
 
   @override
-  String get legalTermsSection3Heading => 'Requisitos';
+  String get legalTermsSection3Heading =>
+      'Advertencia sobre la inteligencia artificial';
 
   @override
   String get legalTermsSection3Body =>
-      'Debes tener al menos 16 años, o la edad de consentimiento digital de tu país, para utilizar Hatchpot, y te comprometes a proporcionar información correcta.';
+      'Parte del contenido de Hatchpot se genera utilizando tecnologías de inteligencia artificial. La IA puede producir respuestas inexactas, incompletas o subjetivas. El contenido generado por IA no debe interpretarse como un hecho establecido, una opinión profesional ni una predicción de acontecimientos futuros. Eres tú quien evalúa el contenido recibido y toma decisiones teniendo en cuenta tus propias circunstancias.';
 
   @override
-  String get legalTermsSection4Heading => 'Cuentas';
+  String get legalTermsSection4Heading => 'Edad del usuario';
 
   @override
   String get legalTermsSection4Body =>
-      'La aplicación funciona de forma anónima de manera predeterminada. Puedes vincular opcionalmente una cuenta mediante Google, Apple o correo electrónico y contraseña para conservar tu viaje y tus compras al cambiar de dispositivo. Eres responsable de mantener seguras tus credenciales.';
+      'Hatchpot está destinado a usuarios mayores de 18 años. Al utilizar Hatchpot, confirmas que has cumplido 18 años. Si no has cumplido 18 años, no crees una cuenta, no utilices las funciones de pago ni facilites tus datos personales para usar Hatchpot.';
 
   @override
-  String get legalTermsSection5Heading => 'Suscripciones y pagos';
+  String get legalTermsSection5Heading => 'Cuentas';
 
   @override
   String get legalTermsSection5Body =>
-      'Los planes de pago son suscripciones con renovación automática facturadas a través de App Store o Google Play. El precio y las condiciones de renovación se muestran antes de la compra. Puedes cancelar en cualquier momento desde los ajustes de tu cuenta de App Store o Google Play; la cancelación se hace efectiva al final del periodo de facturación actual. Apple o Google gestionan los reembolsos conforme a sus propias políticas.';
+      'Hatchpot puede permitir el uso de la aplicación sin necesidad de registrarte. Puedes vincular una cuenta mediante correo electrónico, Google, Apple u otro método admitido. Te comprometes a proporcionar información veraz y a mantener seguros tus datos de acceso.';
 
   @override
   String get legalTermsSection6Heading => 'Tu contenido';
 
   @override
   String get legalTermsSection6Body =>
-      'Eres propietario de lo que escribes en la aplicación. Nos concedes una licencia limitada para almacenarlo y tratarlo únicamente con el fin de prestarte el servicio.';
+      'Conservas los derechos sobre el texto, las respuestas, las entradas del diario, los deseos y cualquier otro contenido que crees o introduzcas en Hatchpot («Contenido del usuario»). Al aportar Contenido del usuario, autorizas a Hatchpot, en la medida necesaria para el funcionamiento del servicio, a acceder a él, almacenarlo, tratarlo, transferirlo y utilizarlo técnicamente para: prestar las funciones de la aplicación; sincronizar tus datos; generar contenido personalizado; procesar las solicitudes de inteligencia artificial, en particular transfiriendo el contexto correspondiente a proveedores tecnológicos externos, incluido Anthropic (véase la Política de privacidad); elaborar el análisis que solicites; garantizar la seguridad; y realizar el mantenimiento técnico.\n\nHatchpot no adquiere la propiedad del Contenido del usuario, no lo vende ni lo utiliza para segmentación publicitaria. Confirmas que tienes derecho a proporcionar la información que publicas.';
 
   @override
-  String get legalTermsSection7Heading => 'Uso aceptable';
+  String get legalTermsSection7Heading => 'Uso prohibido';
 
   @override
   String get legalTermsSection7Body =>
-      'Aceptas no utilizar la aplicación de forma ilegal, no interferir en su funcionamiento y no aplicar ingeniería inversa, descompilarla ni desensamblarla.';
+      'No debes: utilizar Hatchpot de forma ilegal; interferir en el funcionamiento de la aplicación; intentar obtener acceso no autorizado a los sistemas; difundir código malicioso; realizar ingeniería inversa, descompilación o desensamblado, salvo en los casos expresamente permitidos por la ley aplicable; ni utilizar la aplicación para vulnerar los derechos de terceros o poner en riesgo la seguridad de otros usuarios.';
 
   @override
-  String get legalTermsSection8Heading => 'Exención de responsabilidad';
+  String get legalTermsSection8Heading => 'Situaciones de crisis';
 
   @override
   String get legalTermsSection8Body =>
-      'Hatchpot se proporciona «tal cual», sin garantías de ningún tipo. En la máxima medida permitida por la ley, no somos responsables de daños indirectos, incidentales o consecuentes derivados del uso de la aplicación.';
+      'Hatchpot no está diseñado para su uso en situaciones de emergencia. Si tu mensaje indica una amenaza inminente para la vida, la salud o la seguridad tuya o de otra persona, Hatchpot puede interrumpir su procesamiento habitual de juego o reflexión y mostrar, en su lugar, información previamente preparada sobre la necesidad de buscar ayuda de emergencia o profesional.\n\nNo utilices Hatchpot como sustituto de la ayuda médica, psicológica, psiquiátrica o de emergencia.';
 
   @override
-  String get legalTermsSection9Heading => 'Finalización';
+  String get legalTermsSection9Heading => 'Exclusión de garantías';
 
   @override
   String get legalTermsSection9Body =>
-      'Podemos suspender o cancelar el acceso a la aplicación por incumplimiento de estas condiciones. Puedes dejar de utilizarla y eliminar tu cuenta en cualquier momento.';
+      'Hatchpot se ofrece «tal cual» y «según disponibilidad». No garantizamos que la aplicación funcione de forma ininterrumpida, que esté libre de errores técnicos, que esté disponible en todo momento, que sea totalmente compatible con todos los dispositivos, ni que genere exclusivamente contenido de IA preciso o pertinente.';
 
   @override
-  String get legalTermsSection10Heading => 'Legislación aplicable y cambios';
+  String get legalTermsSection10Heading => 'Limitación de responsabilidad';
 
   @override
   String get legalTermsSection10Body =>
-      'Estas condiciones se rigen por las leyes de [completar jurisdicción]. Podemos actualizarlas periódicamente; los cambios importantes se reflejarán en la aplicación. ¿Tienes preguntas? Escríbenos a [correo de soporte].';
+      'En la máxima medida permitida por la legislación aplicable, Hatchpot no será responsable de los daños indirectos, incidentales, especiales o consecuentes derivados del uso o de la imposibilidad de uso de la aplicación. Tú decides por tu cuenta a partir de la información obtenida a través de Hatchpot.\n\nNinguna disposición de estas Condiciones excluye ni limita la responsabilidad del operador en los casos en que dicha exclusión o limitación esté prohibida por la legislación aplicable, ni priva al consumidor de los derechos que le confieren las normas imperativas de la ley —en particular, la legislación ucraniana sobre contratos a distancia y contenido digital— y, si resides en otro país, de los derechos obligatorios que te confiera la legislación de tu país de residencia.';
+
+  @override
+  String get legalTermsSection11Heading => 'Funciones de pago y suscripciones';
+
+  @override
+  String get legalTermsSection11Body =>
+      'Hatchpot puede ofrecer funciones de pago, suscripciones y contenido digital. Las condiciones de pago, renovación automática, cancelación y reembolso se establecen en un documento independiente, «Condiciones de suscripción y reembolsos», que forma parte integrante de estas Condiciones.';
+
+  @override
+  String get legalTermsSection12Heading => 'Eliminación de la cuenta';
+
+  @override
+  String get legalTermsSection12Body =>
+      'Puedes dejar de utilizar Hatchpot y eliminar tu cuenta siguiendo el procedimiento previsto en la aplicación. La eliminación de la cuenta no exime a las partes de las obligaciones que, por su naturaleza, deban subsistir tras el cese del uso del servicio.';
+
+  @override
+  String get legalTermsSection13Heading => 'Suspensión del acceso';
+
+  @override
+  String get legalTermsSection13Body =>
+      'Podemos restringir o suspender temporalmente el acceso del usuario si: el usuario incumple estas Condiciones; el uso de la cuenta supone una amenaza para la seguridad; es necesario para prevenir el fraude; lo exige la ley; o es necesario para proteger los derechos de otros usuarios o del operador.';
+
+  @override
+  String get legalTermsSection14Heading => 'Legislación aplicable';
+
+  @override
+  String get legalTermsSection14Body =>
+      'Estas Condiciones se rigen por la legislación de Ucrania. Si eres consumidor y resides en otro país, la elección del derecho ucraniano no te priva de los derechos que te confieran las normas imperativas de la legislación de tu país de residencia.';
+
+  @override
+  String get legalTermsSection15Heading =>
+      'Cambios en las Condiciones y contacto';
+
+  @override
+  String get legalTermsSection15Body =>
+      'Podemos modificar estas Condiciones cuando cambien la aplicación, el modelo de negocio o la legislación. De los cambios importantes podemos informarte a través de la aplicación o por otro medio razonable. Continuar utilizando Hatchpot después de que los cambios entren en vigor implica el uso del servicio conforme a las Condiciones actualizadas, en la medida en que lo permita la ley.\n\nOperador: Maimur Yevheniia Feliksivna, empresaria individual, Ucrania. Correo electrónico: leadlife.app@gmail.com.';
+
+  @override
+  String get legalSubscriptionSection1Heading => 'Funciones de pago';
+
+  @override
+  String get legalSubscriptionSection1Body =>
+      'Algunas funciones de Hatchpot pueden ofrecerse mediante pago. Antes de realizar la compra, recibes información sobre el precio, la moneda, el periodo de suscripción, la existencia de renovación automática, el contenido de la función de pago y las condiciones de cancelación.';
+
+  @override
+  String get legalSubscriptionSection2Heading =>
+      'Suscripción y renovación automática';
+
+  @override
+  String get legalSubscriptionSection2Body =>
+      'Si el servicio elegido es una suscripción, se renueva automáticamente por el periodo correspondiente si no la cancelas antes de la fecha de renovación. Cancelar la suscripción detiene las futuras renovaciones automáticas, pero no interrumpe necesariamente el acceso al periodo ya pagado.';
+
+  @override
+  String get legalSubscriptionSection3Heading =>
+      'Pago a través de las tiendas de aplicaciones';
+
+  @override
+  String get legalSubscriptionSection3Body =>
+      'Los pagos en iOS se realizan a través de App Store, y en Android, a través de Google Play, salvo que se indique otra cosa directamente en la aplicación. Determinados aspectos del pago pueden estar sujetos a las normas de la tienda correspondiente.';
+
+  @override
+  String get legalSubscriptionSection4Heading => 'Cancelación';
+
+  @override
+  String get legalSubscriptionSection4Body =>
+      'Puedes cancelar la suscripción en los ajustes correspondientes de tu cuenta de App Store o Google Play. Tras la cancelación, por lo general conservas el acceso hasta el final del periodo ya pagado, salvo que las normas o la legislación aplicables dispongan otra cosa.';
+
+  @override
+  String get legalSubscriptionSection5Heading => 'Reembolsos';
+
+  @override
+  String get legalSubscriptionSection5Body =>
+      'El derecho a un reembolso se determina conforme a la legislación aplicable, las condiciones del contrato y las normas de la tienda de aplicaciones correspondiente. Nada en este documento limita los derechos obligatorios del consumidor.\n\nSi la legislación aplicable prevé el derecho a desistir de un contrato a distancia o de contenido digital, esta posibilidad se mantiene siempre que se cumplan las condiciones establecidas por la ley. Para el contenido digital cuyo suministro ya haya comenzado, el derecho de desistimiento puede estar limitado en los casos previstos por la ley, en particular si diste previamente tu consentimiento expreso para iniciar el suministro del contenido digital y fuiste informado de las consecuencias de dicho consentimiento.';
+
+  @override
+  String get legalSubscriptionSection6Heading => 'Periodo gratuito';
+
+  @override
+  String get legalSubscriptionSection6Body =>
+      'Si Hatchpot ofrece un periodo de prueba gratuito, su duración y las condiciones para pasar automáticamente a una suscripción de pago se indican antes de que comience el periodo de prueba.';
+
+  @override
+  String get legalSubscriptionSection7Heading => 'Cambio de precio';
+
+  @override
+  String get legalSubscriptionSection7Body =>
+      'En caso de que cambie el precio de un futuro periodo de suscripción, se te informará del modo previsto por la legislación aplicable y las normas de la tienda correspondiente.';
+
+  @override
+  String get legalSubscriptionSection8Heading => 'Cargos erróneos';
+
+  @override
+  String get legalSubscriptionSection8Body =>
+      'Si consideras que se te ha cobrado un importe por error, escribe a leadlife.app@gmail.com. Si es necesario, también puedes recurrir al procedimiento de reembolso de la tienda de aplicaciones correspondiente.';
+
+  @override
+  String get legalSubscriptionSection9Heading =>
+      'Cancelación o suspensión por parte del servicio';
+
+  @override
+  String get legalSubscriptionSection9Body =>
+      'Si cancelamos o suspendemos tu acceso por motivos de nuestro lado —y no porque hayas incumplido estas Condiciones—, no pierdes lo que ya pagaste.\n\nSi compraste un plan de un solo viaje, el acceso al viaje que ya pagaste se mantiene; si eso no es técnicamente posible, reembolsamos la parte no utilizada de forma proporcional.\n\nSi tienes una suscripción activa y la cancelamos o suspendemos por motivos de nuestro lado, conservas el acceso durante el resto del período que ya pagaste, o recibes una cantidad equivalente de viajes o días de acceso adicionales para compensar el tiempo perdido, o un reembolso proporcional si ninguna de estas opciones es posible.\n\nEsto no se aplica cuando el acceso se restringe debido a un incumplimiento de estas Condiciones por tu parte, por requisitos legales, fraude o prevención de abusos.';
+
+  @override
+  String get aiDisclaimerHeading => 'INFORMACIÓN IMPORTANTE';
+
+  @override
+  String get aiDisclaimerBody =>
+      'Hatchpot está diseñado para el entretenimiento, la reflexión personal y el autoconocimiento.\n\nHatchpot no es una ayuda médica, psicológica, psicoterapéutica ni psiquiátrica.\n\nLas respuestas generadas por la inteligencia artificial pueden contener errores, imprecisiones o interpretaciones subjetivas, y no sustituyen la consulta con un profesional cualificado.\n\nNo utilices Hatchpot para establecer un diagnóstico, tratar una enfermedad o tomar decisiones que requieran asesoramiento médico, psicológico, jurídico o financiero profesional.\n\nHatchpot no está diseñado para situaciones de emergencia. Si te encuentras en peligro inminente, o si otra persona lo está, busca ayuda de emergencia o acude a un profesional adecuado.';
+
+  @override
+  String get aiDisclaimerCheckboxLabel =>
+      'He cumplido 18 años. He leído esta información y entiendo que Hatchpot no es una ayuda médica, psicológica ni psiquiátrica, y que las respuestas de la IA pueden ser inexactas.';
+
+  @override
+  String get crisisResourcesHeading => 'Detengámonos aquí un momento';
+
+  @override
+  String get crisisResourcesBody =>
+      'Parece que lo que escribiste merece más de lo que este juego puede ofrecer. Hatchpot no está diseñado para situaciones de crisis y no sustituye la ayuda profesional.\n\nPor favor, busca a alguien de confianza, a un profesional de la salud mental o a los servicios de emergencia de tu país. No tienes que pasar por esto solo(a).';
+
+  @override
+  String get crisisResourcesBackCta => 'Volver';
 
   @override
   String get accountSectionTitle => 'Cuenta';

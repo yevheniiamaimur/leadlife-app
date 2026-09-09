@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
+import '../services/ai_service.dart';
 import '../services/analytics_service.dart';
 import '../services/game_content_service.dart';
 import '../services/locale_service.dart';
 import '../services/game_history_service.dart';
 import '../services/profile_service.dart';
 import '../widgets/ll_widgets.dart';
+import 'crisis_resources_screen.dart';
 import 'dice_roll_screen.dart';
 import 'help_modal.dart';
 
@@ -20,6 +22,7 @@ class WishEntryScreen extends StatefulWidget {
 class _WishEntryScreenState extends State<WishEntryScreen> {
   late final _ctrl = TextEditingController(text: widget.initialText ?? '');
   bool _showHelp = false;
+  bool _submitting = false;
 
   @override
   void dispose() {
@@ -27,21 +30,39 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
     super.dispose();
   }
 
-  bool get _canSubmit => _ctrl.text.trim().length > 3;
+  bool get _canSubmit => _ctrl.text.trim().length > 3 && !_submitting;
 
-  /// Fire-and-forget: kicks off batch game-content generation in the
-  /// background so it's very likely already done by the time the player
-  /// finishes the dice-roll/paywall/account-link ritual and reaches the
-  /// board. Never blocks navigation — see GameContentService for the
-  /// fallback behavior if this fails.
-  void _startGameGeneration(String wish) {
-    ProfileService.load().then((profile) {
-      GameContentService.generate(
+  /// Kicks off game-content generation and awaits it fully (unlike the rest
+  /// of the app's fire-and-forget AI calls) so a crisis-detected refusal can
+  /// be caught here, before the player ever reaches the board — see
+  /// GameContentService for the ordinary-failure fallback behavior, which
+  /// still applies to every non-crisis error.
+  Future<void> _submit() async {
+    FocusScope.of(context).unfocus();
+    final wish = _ctrl.text.trim();
+    setState(() => _submitting = true);
+    GameHistoryService.recordStart(wish).ignore();
+    AnalyticsService.instance.logWishConfirmed().ignore();
+    try {
+      final profile = await ProfileService.load();
+      await GameContentService.generate(
         wish: wish,
         languageCode: LocaleService.instance.effectiveLanguageCode,
         focus: profile?.focus,
       );
-    });
+    } on AiServiceException catch (e) {
+      if (e.isCrisisDetected) {
+        if (!mounted) return;
+        setState(() => _submitting = false);
+        Navigator.of(context).push(_fadeRoute(const CrisisResourcesScreen()));
+        return;
+      }
+      // Any other AiServiceException already left GameContentService on its
+      // static fallback — fall through to the normal journey below.
+    }
+    if (!mounted) return;
+    setState(() => _submitting = false);
+    Navigator.of(context).push(_fadeRoute(DiceRollScreen(wish: wish)));
   }
 
   @override
@@ -135,16 +156,7 @@ class _WishEntryScreenState extends State<WishEntryScreen> {
                       builder: (_, _, _) => LLCTA(
                         label: AppLocalizations.of(context).confirmMyDesire,
                         enabled: _canSubmit,
-                        onTap: _canSubmit ? () {
-                          FocusScope.of(context).unfocus();
-                          final wish = _ctrl.text.trim();
-                          GameHistoryService.recordStart(wish).ignore();
-                          AnalyticsService.instance.logWishConfirmed().ignore();
-                          _startGameGeneration(wish);
-                          Navigator.of(context).push(_fadeRoute(
-                            DiceRollScreen(wish: wish),
-                          ));
-                        } : null,
+                        onTap: _canSubmit ? _submit : null,
                       ),
                     ),
                   ),

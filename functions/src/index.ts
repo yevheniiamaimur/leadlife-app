@@ -5,6 +5,7 @@ import { initializeApp } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import { getFirestore, FieldPath, FieldValue, Transaction } from "firebase-admin/firestore";
 import { GAME_SYSTEM_PROMPT } from "./gamePrompt";
+import { checkInputForCrisis, checkOutputForCrisis, crisisRefusalMessage, crisisSafeAnalysis, logCrisisTrigger } from "./crisisFilter";
 
 initializeApp();
 const db = getFirestore();
@@ -60,10 +61,12 @@ export const deleteAccount = onCall(
       .endAt(`${uid}_\uf8ff`)
       .get();
     const aiUsage = await db.collection("aiUsage").where("uid", "==", uid).get();
+    const crisisTriggers = await db.collection("crisisTriggers").where("uid", "==", uid).get();
     const batch = db.batch();
     batch.delete(db.collection("users").doc(uid));
     for (const document of usage.docs) batch.delete(document.ref);
     for (const document of aiUsage.docs) batch.delete(document.ref);
+    for (const document of crisisTriggers.docs) batch.delete(document.ref);
     await batch.commit();
     await getAuth().deleteUser(uid);
     return { deleted: true };
@@ -95,11 +98,11 @@ const GENERATE_GAME_SYSTEM_SUFFIX = `
 
 Your job here: personalize the game for one player before they start.
 For EACH of the 32 fields listed above, write:
-- "intro": 2-4 sentences replacing the field's original reflective intro,
-  tailored to this player's desire (and life focus area, if given). Keep the
-  field's underlying theme and meaning intact.
-- "question": 1-3 short sentences replacing the field's original question,
-  tailored the same way.
+- "intro": an empty string. The app keeps the approved static intro for each
+  field, so do not rewrite it.
+- "question": 1-3 short sentences personalizing the field's original question
+  to this player's desire (and life focus area, if given). Keep the field's
+  underlying theme and meaning intact.
 - "arrivalNote": ONE short sentence — what it means for this player when
   their journey (a dice-driven path that can skip fields entirely) leads
   them to this specific field, given their desire.
@@ -117,10 +120,13 @@ since the dice can skip fields) and answered each field's question in
 relation to their desire. Given their desire and the answers they gave,
 write:
 - "analysis": 3-6 sentences of warm, insightful analysis connecting patterns
-  across their answers back to their original desire.
+  across their answers back to their original desire. Include the superpowers
+  activated by the fields they visited and explain how these superpowers support
+  the player's process.
 - "finalDirection": ONE clear, motivating sentence naming the single most
   important next area of focus for them.
-- "recommendations": 3-5 short, concrete, imperative-sentence next steps.
+- "recommendations": 3-5 short, concrete, imperative-sentence next steps. When
+  helpful, name the relevant superpower in the recommendation.
 Respond in the same language as their answers.`;
 
 const OUTPUT_LANGUAGES: Record<string, string> = {
@@ -141,6 +147,7 @@ function outputLanguage(data: unknown): string {
 interface AnswerEntryInput {
   n: number;
   fieldName: string;
+  superpower?: string;
   question: string;
   answer: string;
   codes?: string[];
@@ -181,6 +188,12 @@ export const generateGame = onCall(
     }
     const trimmedWish = wish.trim().slice(0, MAX_TEXT_LENGTH);
     const trimmedFocus = typeof focus === "string" ? focus.trim().slice(0, MAX_TEXT_LENGTH) : "";
+
+    const inputCheck = checkInputForCrisis(`${trimmedWish}\n${trimmedFocus}`);
+    if (inputCheck.flagged) {
+      await logCrisisTrigger(db, request.auth!.uid, "generateGame", inputCheck.category!);
+      throw new HttpsError("failed-precondition", crisisRefusalMessage(language), { category: inputCheck.category });
+    }
 
     await reserveGenerationSlot(request.auth!.uid);
 
@@ -257,6 +270,16 @@ export const generateGame = onCall(
       seen.add(n);
     }
 
+    const outputCheck = checkOutputForCrisis(
+      (fields as Array<{ question?: unknown; arrivalNote?: unknown; intro?: unknown }>)
+        .map((f) => `${f.intro ?? ""}\n${f.question ?? ""}\n${f.arrivalNote ?? ""}`)
+        .join("\n")
+    );
+    if (outputCheck.flagged) {
+      await logCrisisTrigger(db, request.auth!.uid, "generateGame", outputCheck.category!);
+      throw new HttpsError("failed-precondition", crisisRefusalMessage(language), { category: outputCheck.category });
+    }
+
     return { fields };
   }
 );
@@ -282,6 +305,7 @@ export const finalAnalysis = onCall(
       if (
         typeof e.n !== "number" ||
         typeof e.fieldName !== "string" ||
+        (e.superpower !== undefined && typeof e.superpower !== "string") ||
         typeof e.question !== "string" ||
         typeof e.answer !== "string" ||
         (e.answer.trim().length === 0 && (!Array.isArray(e.codes) || e.codes.length === 0))
@@ -295,11 +319,17 @@ export const finalAnalysis = onCall(
         ? `\nDice: ${e.roll}; next field: ${e.nextFieldNumber}.`
         : "";
       lines.push(
-        `Field ${e.n} (${e.fieldName.slice(0, MAX_TEXT_LENGTH)}) — "${e.question.slice(0, MAX_TEXT_LENGTH)}"\n` +
+        `Field ${e.n} (${e.fieldName.slice(0, MAX_TEXT_LENGTH)}; superpower: ${(e.superpower ?? "").slice(0, MAX_TEXT_LENGTH)}) — "${e.question.slice(0, MAX_TEXT_LENGTH)}"\n` +
           `Answer: "${e.answer.trim().slice(0, MAX_TEXT_LENGTH)}"` +
           (codes.length > 0 ? `\nCompleted codes: ${codes.map((code) => `"${code}"`).join("; ")}` : "") +
           transition
       );
+    }
+
+    const inputCheck = checkInputForCrisis(`${wish.trim()}\n${lines.join("\n")}`);
+    if (inputCheck.flagged) {
+      await logCrisisTrigger(db, request.auth!.uid, "finalAnalysis", inputCheck.category!);
+      return crisisSafeAnalysis(language);
     }
 
     await reserveDailyAiCall(request.auth!.uid, "final", DAILY_FINAL_ANALYSIS_LIMIT);
@@ -345,10 +375,23 @@ export const finalAnalysis = onCall(
       throw new HttpsError("internal", "The assistant returned an empty response.");
     }
 
+    let parsedAnalysis: { analysis?: unknown; finalDirection?: unknown; recommendations?: unknown };
     try {
-      return JSON.parse(text);
+      parsedAnalysis = JSON.parse(text);
     } catch {
       throw new HttpsError("internal", "The assistant returned invalid JSON.");
     }
+
+    const outputCheck = checkOutputForCrisis(
+      `${parsedAnalysis.analysis ?? ""}\n${parsedAnalysis.finalDirection ?? ""}\n${
+        Array.isArray(parsedAnalysis.recommendations) ? parsedAnalysis.recommendations.join("\n") : ""
+      }`
+    );
+    if (outputCheck.flagged) {
+      await logCrisisTrigger(db, request.auth!.uid, "finalAnalysis", outputCheck.category!);
+      return crisisSafeAnalysis(language);
+    }
+
+    return parsedAnalysis;
   }
 );

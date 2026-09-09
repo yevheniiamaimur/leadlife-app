@@ -1,11 +1,16 @@
+import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
+import '../l10n/app_localizations.dart';
+import 'locale_service.dart';
 
-// The only notification leadlife sends: a gentle daily nudge to set
-// today's intention. No backend involved — purely scheduled on-device.
+// leadlife sends two kinds of on-device notification: a gentle daily nudge
+// to set today's intention, and a short "comeback" chain nudging a player
+// back to a journey they left mid-way. No backend involved — both are
+// purely scheduled on-device.
 class NotificationService {
   NotificationService._();
   static final NotificationService instance = NotificationService._();
@@ -14,6 +19,19 @@ class NotificationService {
   // reminder should land the user.
   static const diaryTabIndex = 2;
   static const _dailyReminderId = 1;
+
+  // 30 min, 1.5h, 21h, 47h after the player backgrounds the app with an
+  // unfinished journey — tapping any of these just reopens the app, which
+  // already resumes straight into the in-progress journey on its own (see
+  // main.dart's resumeProgress handling), so no special tap-routing is
+  // needed here the way the daily reminder needs.
+  static const _comebackReminderIds = [10, 11, 12, 13];
+  static const _comebackDelays = [
+    Duration(minutes: 30),
+    Duration(hours: 1, minutes: 30),
+    Duration(hours: 21),
+    Duration(hours: 47),
+  ];
 
   final _plugin = FlutterLocalNotificationsPlugin();
   bool _initialized = false;
@@ -93,6 +111,47 @@ class NotificationService {
   Future<void> cancelDailyReminder() async {
     await _ensureInitialized();
     await _plugin.cancel(_dailyReminderId);
+  }
+
+  /// Schedules the 30min/1.5h/21h/47h comeback chain, counted from now.
+  /// Call this when the player backgrounds the app with an unfinished
+  /// journey. Cancels any previously-scheduled chain first, so leaving and
+  /// returning repeatedly doesn't stack up duplicate notifications.
+  Future<void> scheduleComebackReminders() async {
+    await _ensureInitialized();
+    await cancelComebackReminders();
+    final l10n = lookupAppLocalizations(Locale(LocaleService.instance.effectiveLanguageCode));
+    final now = tz.TZDateTime.now(tz.local);
+    for (var i = 0; i < _comebackReminderIds.length; i++) {
+      await _plugin.zonedSchedule(
+        _comebackReminderIds[i],
+        l10n.comebackReminderTitle,
+        l10n.comebackReminderBody,
+        now.add(_comebackDelays[i]),
+        const NotificationDetails(
+          android: AndroidNotificationDetails(
+            'comeback_reminder',
+            'Unfinished journey reminder',
+            channelDescription: 'A gentle nudge back to a journey you left mid-way.',
+            importance: Importance.low,
+            priority: Priority.low,
+          ),
+          iOS: DarwinNotificationDetails(),
+        ),
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      );
+    }
+  }
+
+  /// Cancels any pending comeback reminders — call this when the player
+  /// returns to the app or finishes/abandons the journey, so they aren't
+  /// nudged back to something already resolved.
+  Future<void> cancelComebackReminders() async {
+    await _ensureInitialized();
+    for (final id in _comebackReminderIds) {
+      await _plugin.cancel(id);
+    }
   }
 
   tz.TZDateTime _next9am() {

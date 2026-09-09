@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
+import '../services/legal_consent_service.dart';
 import '../services/notification_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'legal_document_screen.dart';
@@ -20,6 +21,7 @@ class OnboardingContactScreen extends StatefulWidget {
 class _OnboardingContactScreenState extends State<OnboardingContactScreen> {
   final _ctrl = TextEditingController();
   bool _notifyChecked = false;
+  bool _sensitiveDataChecked = false;
   bool _termsAgreed = false;
 
   @override
@@ -34,6 +36,7 @@ class _OnboardingContactScreenState extends State<OnboardingContactScreen> {
   }
 
   void _toggleNotify() => setState(() => _notifyChecked = !_notifyChecked);
+  void _toggleSensitiveData() => setState(() => _sensitiveDataChecked = !_sensitiveDataChecked);
   void _toggleTermsAgreed() => setState(() => _termsAgreed = !_termsAgreed);
 
   void _openLegalDocument(LegalDocumentType type) {
@@ -49,6 +52,8 @@ class _OnboardingContactScreenState extends State<OnboardingContactScreen> {
         NotificationService.instance.scheduleDailyReminder().ignore();
       }
     }
+    await LegalConsentService.recordTermsPrivacyAccepted();
+    await LegalConsentService.setSensitiveDataOptIn(_sensitiveDataChecked);
     if (!mounted) return;
     Navigator.of(context).push(_fadeRoute(
       OnboardingFocusScreen(
@@ -138,6 +143,37 @@ class _OnboardingContactScreenState extends State<OnboardingContactScreen> {
                               _notifyChecked ? Icons.check_box_rounded : Icons.check_box_outline_blank_rounded,
                               size: 24,
                               color: _notifyChecked ? llGold : llMutedSoft,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32),
+                    child: GestureDetector(
+                      onTap: _toggleSensitiveData,
+                      child: Container(
+                        decoration: llCardDecoration(borderColor: _sensitiveDataChecked ? llGold : llHair).copyWith(
+                          color: _sensitiveDataChecked ? llGold.withAlpha(18) : llCardBg,
+                        ),
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            Icon(Icons.health_and_safety_outlined, size: 26, color: llGold),
+                            const SizedBox(width: 14),
+                            Expanded(
+                              child: Text(
+                                AppLocalizations.of(context).allowSensitiveDataProcessing,
+                                style: llUi(size: 13.5, color: llMuted),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Icon(
+                              _sensitiveDataChecked ? Icons.check_box_rounded : Icons.check_box_outline_blank_rounded,
+                              size: 24,
+                              color: _sensitiveDataChecked ? llGold : llMutedSoft,
                             ),
                           ],
                         ),

@@ -3,6 +3,7 @@ import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../widgets/ll_widgets.dart';
 import 'account_link_screen.dart';
+import 'legal_document_screen.dart';
 
 class PaywallTariff {
   const PaywallTariff({
@@ -240,6 +241,22 @@ class TariffDetailScreen extends StatelessWidget {
                               ),
                             ),
                         ],
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: GestureDetector(
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const LegalDocumentScreen(type: LegalDocumentType.subscriptionTerms),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Text(
+                          AppLocalizations.of(context).subscriptionTermsLabel,
+                          style: llUi(size: 12, color: llGold, weight: FontWeight.w500),
+                        ),
                       ),
                     ),
                   ),

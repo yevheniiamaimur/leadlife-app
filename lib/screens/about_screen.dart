@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../widgets/ll_widgets.dart';
+import 'legal_document_screen.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -53,6 +54,26 @@ class AboutScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: llUi(size: 14, color: llMuted),
                   ),
+                  const SizedBox(height: 32),
+                  const LLHairline(width: 48),
+                  const SizedBox(height: 20),
+                  for (final entry in [
+                    (l10n.privacyPolicyLabel, LegalDocumentType.privacyPolicy),
+                    (l10n.termsOfUseLabel, LegalDocumentType.termsOfUse),
+                    (l10n.subscriptionTermsLabel, LegalDocumentType.subscriptionTerms),
+                  ])
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: GestureDetector(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => LegalDocumentScreen(type: entry.$2)),
+                        ),
+                        child: Text(
+                          entry.$1,
+                          style: llUi(size: 13.5, color: llGold, weight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),

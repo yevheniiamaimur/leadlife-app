@@ -1,10 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../widgets/ll_widgets.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
+
+  static const _authorEmail = 'leadlife.app@gmail.com';
+  // Add the real Instagram URL here when it is confirmed.
+  static const _authorInstagramUrl = '';
+
+  Future<void> _openEmail(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
+    final uri = Uri(
+      scheme: 'mailto',
+      path: _authorEmail,
+      queryParameters: {'subject': 'Hatchpot'},
+    );
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+      return;
+    }
+    await Clipboard.setData(const ClipboardData(text: _authorEmail));
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(l10n.contactAuthorEmailCopied)),
+    );
+  }
+
+  Future<void> _openInstagram(BuildContext context) async {
+    if (_authorInstagramUrl.isEmpty) return;
+    final uri = Uri.parse(_authorInstagramUrl);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +83,41 @@ class HelpScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                  const SizedBox(height: 12),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(18),
+                    decoration: llCardDecoration(),
+                    child: Column(
+                      children: [
+                        Text(
+                          l10n.contactAuthorTitle,
+                          textAlign: TextAlign.center,
+                          style: llSerif(size: 18, weight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          l10n.contactAuthorSubtitle,
+                          textAlign: TextAlign.center,
+                          style: llUi(size: 14, color: llMuted, letterSpacing: 0.1),
+                        ),
+                        const SizedBox(height: 16),
+                        LLCTA(
+                          label: l10n.contactAuthorEmailCta,
+                          variant: 'secondary',
+                          onTap: () => _openEmail(context),
+                        ),
+                        if (_authorInstagramUrl.isNotEmpty) ...[
+                          const SizedBox(height: 12),
+                          LLCTA(
+                            label: l10n.contactAuthorInstagramCta,
+                            variant: 'secondary',
+                            onTap: () => _openInstagram(context),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

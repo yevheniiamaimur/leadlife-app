@@ -12,5 +12,8 @@ service cloud.firestore {
     match /aiUsage/{documentId} {
       allow read, write: if false;
     }
+    match /crisisTriggers/{documentId} {
+      allow read, write: if false;
+    }
   }
 }

@@ -37,8 +37,8 @@ const List<GameField> kFields = [
     superpower: 'Desire',
     color: Color(0xFFFFFFFF),
     intro:
-        'Every journey begins with a desire.\n\nYour desire matters because it points toward something important for your growth.',
-    task: 'What desire are you bringing into this journey?',
+        'In Hatchpot, Light is the symbolic beginning — the energy already present in your idea.\n\nThe desire you wrote reflects something genuinely important to you. Let its value support you as your path begins.',
+    task: '',
   ),
   GameField(
     n: 2,
@@ -68,7 +68,7 @@ const List<GameField> kFields = [
     superpower: 'Contribution',
     color: Color(0xFF29368D),
     intro:
-        'A desire needs a structure that can hold its energy and actions.\n\nThis field is symbolically connected with Jupiter, scale, expansion, and kindness.',
+        'A desire needs a structure that can hold its energy and actions.\n\nThis field is connected with scale, expansion, and kindness.',
     task:
         'Why is it valuable to the world for your desire to come true? Write as many points as feel natural.\n\nI give the world __________, and the world accepts me and gives me opportunities and support.',
   ),
