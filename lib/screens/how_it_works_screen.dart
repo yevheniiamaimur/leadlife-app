@@ -14,7 +14,7 @@ class _HowItWorksScreenState extends State<HowItWorksScreen> {
   final _controller = PageController();
   int _page = 0;
 
-  static const _totalSlides = 7;
+  static const _totalSlides = 4;
 
   @override
   void dispose() {
@@ -55,7 +55,7 @@ class _HowItWorksScreenState extends State<HowItWorksScreen> {
             Column(
               children: [
                 const SizedBox(height: 28),
-                Center(child: LLSmallCaps(l10n.howItWorksStepOfTotal(_page + 1, _totalSlides), color: llGold)),
+                _DotIndicator(count: _totalSlides, current: _page),
                 const SizedBox(height: 12),
                 Expanded(
                   child: PageView(
@@ -66,9 +66,6 @@ class _HowItWorksScreenState extends State<HowItWorksScreen> {
                       _Slide2(),
                       _Slide3(),
                       _Slide4(),
-                      _Slide5(),
-                      _Slide6(),
-                      _Slide7(),
                     ],
                   ),
                 ),
@@ -96,11 +93,39 @@ PageRouteBuilder<T> _fadeRoute<T>(Widget page) => PageRouteBuilder(
   transitionDuration: const Duration(milliseconds: 350),
 );
 
+// ── Dot page indicator ───────────────────────────────────────
+class _DotIndicator extends StatelessWidget {
+  const _DotIndicator({required this.count, required this.current});
+  final int count;
+  final int current;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        for (var i = 0; i < count; i++)
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 250),
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            width: i == current ? 20 : 6,
+            height: 6,
+            decoration: BoxDecoration(
+              color: i == current ? llGold : llHair,
+              borderRadius: BorderRadius.circular(3),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
 // ── Shared slide scaffold ────────────────────────────────────
 class _SlideBody extends StatelessWidget {
-  const _SlideBody({required this.title, required this.children});
+  const _SlideBody({required this.title, this.visual, required this.body});
   final String title;
-  final List<Widget> children;
+  final Widget? visual;
+  final String body;
 
   @override
   Widget build(BuildContext context) {
@@ -119,8 +144,16 @@ class _SlideBody extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: llSerif(size: 27, weight: FontWeight.w600, height: 1.2),
                 ),
+                if (visual != null) ...[
+                  const SizedBox(height: 24),
+                  visual!,
+                ],
                 const SizedBox(height: 22),
-                ...children,
+                Text(
+                  body,
+                  textAlign: TextAlign.center,
+                  style: llSerifItalic(size: 15.5, height: 1.6),
+                ),
               ],
             ),
           ),
@@ -130,32 +163,7 @@ class _SlideBody extends StatelessWidget {
   }
 }
 
-// A soft italic paragraph — for descriptive/reflective text.
-Widget _para(String text) => Padding(
-  padding: const EdgeInsets.only(bottom: 16),
-  child: Text(text, textAlign: TextAlign.center, style: llSerifItalic(size: 15.5, height: 1.6)),
-);
-
-// A short, plain-weight line — for instructions or list items.
-Widget _line(String text) => Padding(
-  padding: const EdgeInsets.only(bottom: 8),
-  child: Text(
-    text,
-    textAlign: TextAlign.center,
-    style: llSerif(size: 17, weight: FontWeight.w600, height: 1.3, color: llInk),
-  ),
-);
-
-// A group of short lines rendered tightly together.
-Widget _lineGroup(List<String> lines) => Padding(
-  padding: const EdgeInsets.only(bottom: 16),
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [for (final l in lines) _line(l)],
-  ),
-);
-
-// ── Slide 1 ───────────────────────────────────────────────────
+// ── Slide 1 — what Hatchpot is ───────────────────────────────
 class _Slide1 extends StatelessWidget {
   const _Slide1();
   @override
@@ -163,30 +171,42 @@ class _Slide1 extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return _SlideBody(
       title: l10n.howItWorksSlide1Title,
-      children: [
-        _para(l10n.howItWorksSlide1Para),
-      ],
+      visual: const FieldGlyph(color: llGold, size: 72),
+      body: l10n.howItWorksSlide1Body,
     );
   }
 }
 
-// ── Slide 2 ───────────────────────────────────────────────────
-class _Slide2 extends StatelessWidget {
+// ── Slide 2 — the dice reads your unconscious ────────────────
+// The one slide with a genuinely interactive centerpiece: a live tumbling,
+// glowing die the player can tap to re-roll, rather than another static
+// paragraph — this is the beat the whole redesign was about.
+class _Slide2 extends StatefulWidget {
   const _Slide2();
+  @override
+  State<_Slide2> createState() => _Slide2State();
+}
+
+class _Slide2State extends State<_Slide2> {
+  int _pips = 1;
+
+  void _reroll() => setState(() => _pips = _pips % 8 + 1);
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return _SlideBody(
       title: l10n.howItWorksSlide2Title,
-      children: [
-        _lineGroup([l10n.howItWorksSlide2Line1, l10n.howItWorksSlide2Line2, l10n.howItWorksSlide2Line3]),
-        _para(l10n.howItWorksSlide2Para),
-      ],
+      visual: GestureDetector(
+        onTap: _reroll,
+        child: LLDice(pips: _pips, size: 96, glow: true, tumbling: true),
+      ),
+      body: l10n.howItWorksSlide2Body,
     );
   }
 }
 
-// ── Slide 3 ───────────────────────────────────────────────────
+// ── Slide 3 — 32 fields, your own path ───────────────────────
 class _Slide3 extends StatelessWidget {
   const _Slide3();
   @override
@@ -194,16 +214,13 @@ class _Slide3 extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return _SlideBody(
       title: l10n.howItWorksSlide3Title,
-      children: [
-        _lineGroup([l10n.howItWorksSlide3Line1, l10n.howItWorksSlide3Line2]),
-        _para(l10n.howItWorksSlide3Para1),
-        _para(l10n.howItWorksSlide3Para2),
-      ],
+      visual: const FieldGlyph(color: llViolet, size: 72),
+      body: l10n.howItWorksSlide3Body,
     );
   }
 }
 
-// ── Slide 4 ───────────────────────────────────────────────────
+// ── Slide 4 — your success code ──────────────────────────────
 class _Slide4 extends StatelessWidget {
   const _Slide4();
   @override
@@ -211,82 +228,8 @@ class _Slide4 extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return _SlideBody(
       title: l10n.howItWorksSlide4Title,
-      children: [
-        _para(l10n.howItWorksSlide4Para1),
-        _line(l10n.howItWorksSlide4Line),
-        const SizedBox(height: 4),
-        _lineGroup([l10n.howItWorksSlide4Line1, l10n.howItWorksSlide4Line2]),
-        _para(l10n.howItWorksSlide4Para2),
-      ],
-    );
-  }
-}
-
-// ── Slide 5 ───────────────────────────────────────────────────
-class _Slide5 extends StatelessWidget {
-  const _Slide5();
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return _SlideBody(
-      title: l10n.howItWorksSlide5Title,
-      children: [
-        _lineGroup([l10n.howItWorksSlide5Line1, l10n.howItWorksSlide5Line2, l10n.howItWorksSlide5Line3]),
-        _para(l10n.howItWorksSlide5Para1),
-        _para(l10n.howItWorksSlide5Para2),
-      ],
-    );
-  }
-}
-
-// ── Slide 6 ───────────────────────────────────────────────────
-class _Slide6 extends StatelessWidget {
-  const _Slide6();
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return _SlideBody(
-      title: l10n.howItWorksSlide6Title,
-      children: [
-        _para(l10n.howItWorksSlide6Para1),
-        _para(l10n.howItWorksSlide6Para2),
-        Text.rich(
-          textAlign: TextAlign.center,
-          TextSpan(
-            style: llSerifItalic(size: 15.5, height: 1.6),
-            children: [
-              TextSpan(text: l10n.howItWorksSlide6RichTextBefore),
-              WidgetSpan(
-                alignment: PlaceholderAlignment.middle,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 2),
-                  child: Icon(Icons.menu_rounded, size: 17, color: llGold),
-                ),
-              ),
-              TextSpan(text: l10n.howItWorksSlide6RichTextAfter),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-// ── Slide 7 ───────────────────────────────────────────────────
-class _Slide7 extends StatelessWidget {
-  const _Slide7();
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return _SlideBody(
-      title: l10n.howItWorksSlide7Title,
-      children: [
-        _para(l10n.howItWorksSlide7Para1),
-        _lineGroup([l10n.howItWorksSlide7Line1, l10n.howItWorksSlide7Line2, l10n.howItWorksSlide7Line3]),
-        _para(l10n.howItWorksSlide7Para2),
-        _para(l10n.howItWorksSlide7Para3),
-        _para(l10n.howItWorksSlide7Para4),
-      ],
+      visual: const FieldGlyph(color: llGoldDark, size: 72),
+      body: l10n.howItWorksSlide4Body,
     );
   }
 }

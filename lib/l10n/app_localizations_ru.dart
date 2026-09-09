@@ -668,140 +668,38 @@ class AppLocalizationsRu extends AppLocalizations {
   String get awakenedEnterFieldOneCta => 'Войти в поле 01  →';
 
   @override
-  String howItWorksStepOfTotal(int step, int total) {
-    return 'Шаг $step из $total';
-  }
-
-  @override
   String get howItWorksBeginJourneyCta => 'Начать путешествие';
 
   @override
   String get howItWorksContinueCta => 'Продолжить';
 
   @override
-  String get howItWorksSlide1Title => 'Что такое путешествие Hatchpot?';
+  String get howItWorksSlide1Title => 'Структурированный путь к себе';
 
   @override
-  String get howItWorksSlide1Para =>
-      'Направляемое путешествие, созданное, чтобы помочь тебе понять, чего ты на самом деле хочешь, изменить внутреннее состояние и найти своё направление.';
+  String get howItWorksSlide1Body =>
+      'Hatchpot — система саморефлексии, которая соединяет тебя с твоим внутренним «я» через игру, символ и интуицию.';
 
   @override
-  String get howItWorksSlide2Title => 'Начни с одного желания';
+  String get howItWorksSlide2Title => 'Кубик слышит твоё бессознательное';
 
   @override
-  String get howItWorksSlide2Line1 =>
-      'Запиши то, чего хочешь, так, словно это уже стало реальностью.';
+  String get howItWorksSlide2Body =>
+      'Напиши своё желание и брось кубик.\n\nВыпала 1 — оно готово, и путешествие начинается.\n\nЛюбое другое число — подсказка, которая поможет уточнить или изменить желание.';
 
   @override
-  String get howItWorksSlide2Line2 => 'Сосредоточься на этом.';
+  String get howItWorksSlide3Title => '32 поля. Твой личный путь';
 
   @override
-  String get howItWorksSlide2Line3 => 'Затем брось кубик.';
+  String get howItWorksSlide3Body =>
+      'Ты пройдёшь через 10 уровней реальности и 22 жизненные стратегии — разные способы думать, чувствовать и действовать.\n\nБрось кубик, ответь на один вопрос, иди дальше. Большинство шагов занимают меньше минуты.';
 
   @override
-  String get howItWorksSlide2Para =>
-      'В Hatchpot путешествие начинается с уточнения намерения, с которым ты хочешь работать сейчас.';
+  String get howItWorksSlide4Title => 'Собери свой код успеха';
 
   @override
-  String get howItWorksSlide3Title => 'Позволь кубику вести тебя';
-
-  @override
-  String get howItWorksSlide3Line1 => 'Если выпадет 1, твоё желание готово.';
-
-  @override
-  String get howItWorksSlide3Line2 => 'Твоё путешествие начинается.';
-
-  @override
-  String get howItWorksSlide3Para1 =>
-      'Если выпадет другое число, ты получишь подсказку, которая поможет уточнить, переформулировать или переосмыслить желание.';
-
-  @override
-  String get howItWorksSlide3Para2 =>
-      'Можно уточнить его или выбрать совсем другое.';
-
-  @override
-  String get howItWorksSlide4Title => 'Затем начинается твоё путешествие';
-
-  @override
-  String get howItWorksSlide4Para1 =>
-      'Выбери, как ты хочешь взаимодействовать с Hatchpot, и начни двигаться по своему уникальному пути.';
-
-  @override
-  String get howItWorksSlide4Line => 'Система состоит из 32 полей:';
-
-  @override
-  String get howItWorksSlide4Line1 => '10 уровней реальности.';
-
-  @override
-  String get howItWorksSlide4Line2 => '22 жизненные стратегии.';
-
-  @override
-  String get howItWorksSlide4Para2 => 'Твой путь через них уникален.';
-
-  @override
-  String get howItWorksSlide5Title => 'Двигайся по своему пути';
-
-  @override
-  String get howItWorksSlide5Line1 => 'Брось кубик.';
-
-  @override
-  String get howItWorksSlide5Line2 => 'Войди в поле.';
-
-  @override
-  String get howItWorksSlide5Line3 =>
-      'Ответь на один вопрос или выполни простое задание.';
-
-  @override
-  String get howItWorksSlide5Para1 =>
-      'Большинство взаимодействий занимает меньше минуты.';
-
-  @override
-  String get howItWorksSlide5Para2 =>
-      'Каждое поле меняет твой фокус и помогает взглянуть на желание с другой точки зрения.';
-
-  @override
-  String get howItWorksSlide6Title => '22 стратегии. Разные способы двигаться.';
-
-  @override
-  String get howItWorksSlide6Para1 =>
-      'Ты проходишь разные жизненные стратегии — способы думать, выбирать, чувствовать и действовать.';
-
-  @override
-  String get howItWorksSlide6Para2 =>
-      'Систему не нужно изучать. Просто следуй своему пути.';
-
-  @override
-  String get howItWorksSlide6RichTextBefore =>
-      'Хочешь понять её устройство? Открой ';
-
-  @override
-  String get howItWorksSlide6RichTextAfter => ' «О системе» в меню.';
-
-  @override
-  String get howItWorksSlide7Title => 'Твой код успеха';
-
-  @override
-  String get howItWorksSlide7Para1 =>
-      'В конце путешествия твои ответы соединяются.';
-
-  @override
-  String get howItWorksSlide7Line1 => 'Твои решения.';
-
-  @override
-  String get howItWorksSlide7Line2 => 'Твои осознания.';
-
-  @override
-  String get howItWorksSlide7Line3 => 'Твоё направление.';
-
-  @override
-  String get howItWorksSlide7Para2 =>
-      'Hatchpot превращает их в твой личный код успеха — карту возвращения к твоему желанию.';
-
-  @override
-  String get howItWorksSlide7Para3 => 'Не универсальный ответ.';
-
-  @override
-  String get howItWorksSlide7Para4 => 'Твой путь, созданный из твоих ответов.';
+  String get howItWorksSlide4Body =>
+      'Каждый ответ становится частью личного кода — карты, которая приведёт тебя обратно к твоему желанию.\n\nНе универсальный ответ. Только твой путь.';
 
   @override
   String get field01Name => 'Свет';

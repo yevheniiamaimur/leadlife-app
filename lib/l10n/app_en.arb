@@ -851,18 +851,6 @@
   "@awakenedEnterFieldOneCta": {
     "description": "CTA button on the awakened screen leading into the game board"
   },
-  "howItWorksStepOfTotal": "Step {step} of {total}",
-  "@howItWorksStepOfTotal": {
-    "description": "Step indicator on the How It Works onboarding slides",
-    "placeholders": {
-      "step": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      }
-    }
-  },
   "howItWorksBeginJourneyCta": "Begin your journey",
   "@howItWorksBeginJourneyCta": {
     "description": "CTA button label on the final How It Works slide"
@@ -871,153 +859,37 @@
   "@howItWorksContinueCta": {
     "description": "CTA button label on non-final How It Works slides"
   },
-  "howItWorksSlide1Title": "What is the Hatchpot journey?",
+  "howItWorksSlide1Title": "A structured path back to yourself",
   "@howItWorksSlide1Title": {
     "description": "Title of slide 1 of the How It Works onboarding"
   },
-  "howItWorksSlide1Para": "A guided journey designed to help you clarify what you truly want, shift your inner state, and find your direction.",
-  "@howItWorksSlide1Para": {
-    "description": "Paragraph on slide 1 of the How It Works onboarding"
+  "howItWorksSlide1Body": "Hatchpot is a self-reflection system that connects you to your inner self through play, symbol, and intuition.",
+  "@howItWorksSlide1Body": {
+    "description": "Body text of slide 1 of the How It Works onboarding"
   },
-  "howItWorksSlide2Title": "Start with one desire",
+  "howItWorksSlide2Title": "The dice reads your unconscious",
   "@howItWorksSlide2Title": {
     "description": "Title of slide 2 of the How It Works onboarding"
   },
-  "howItWorksSlide2Line1": "Write down what you want as if it is already true.",
-  "@howItWorksSlide2Line1": {
-    "description": "First short line on slide 2 of the How It Works onboarding"
+  "howItWorksSlide2Body": "Write your desire and roll the dice.\n\nRoll a 1 — it's ready, and your journey begins.\n\nAny other number is a clue to help you refine or change it.",
+  "@howItWorksSlide2Body": {
+    "description": "Body text of slide 2 of the How It Works onboarding"
   },
-  "howItWorksSlide2Line2": "Focus on it.",
-  "@howItWorksSlide2Line2": {
-    "description": "Second short line on slide 2 of the How It Works onboarding"
-  },
-  "howItWorksSlide2Line3": "Then roll the dice.",
-  "@howItWorksSlide2Line3": {
-    "description": "Third short line on slide 2 of the How It Works onboarding"
-  },
-  "howItWorksSlide2Para": "In Hatchpot, your journey begins by clarifying the intention you are ready to work with right now.",
-  "@howItWorksSlide2Para": {
-    "description": "Paragraph on slide 2 of the How It Works onboarding"
-  },
-  "howItWorksSlide3Title": "Let the dice guide you",
+  "howItWorksSlide3Title": "32 fields. Your own path.",
   "@howItWorksSlide3Title": {
     "description": "Title of slide 3 of the How It Works onboarding"
   },
-  "howItWorksSlide3Line1": "If you roll 1, your desire is ready.",
-  "@howItWorksSlide3Line1": {
-    "description": "First short line on slide 3 of the How It Works onboarding"
+  "howItWorksSlide3Body": "You'll move through 10 levels of reality and 22 life strategies — different ways to think, feel, and act.\n\nRoll, answer one question, move on. Most steps take less than a minute.",
+  "@howItWorksSlide3Body": {
+    "description": "Body text of slide 3 of the How It Works onboarding"
   },
-  "howItWorksSlide3Line2": "Your journey begins.",
-  "@howItWorksSlide3Line2": {
-    "description": "Second short line on slide 3 of the How It Works onboarding"
-  },
-  "howItWorksSlide3Para1": "If another number appears, you'll receive a clue to help you clarify, rewrite, or reconsider your desire.",
-  "@howItWorksSlide3Para1": {
-    "description": "First paragraph on slide 3 of the How It Works onboarding"
-  },
-  "howItWorksSlide3Para2": "You can refine it — or choose a completely different one.",
-  "@howItWorksSlide3Para2": {
-    "description": "Second paragraph on slide 3 of the How It Works onboarding"
-  },
-  "howItWorksSlide4Title": "Then your journey begins",
+  "howItWorksSlide4Title": "Build your success code",
   "@howItWorksSlide4Title": {
     "description": "Title of slide 4 of the How It Works onboarding"
   },
-  "howItWorksSlide4Para1": "Choose how you want to interact with Hatchpot and start moving through your unique path.",
-  "@howItWorksSlide4Para1": {
-    "description": "First paragraph on slide 4 of the How It Works onboarding"
-  },
-  "howItWorksSlide4Line": "The system is built around 32 fields:",
-  "@howItWorksSlide4Line": {
-    "description": "Short line introducing the field breakdown on slide 4 of the How It Works onboarding"
-  },
-  "howItWorksSlide4Line1": "10 levels of reality.",
-  "@howItWorksSlide4Line1": {
-    "description": "First short line of the field breakdown on slide 4 of the How It Works onboarding"
-  },
-  "howItWorksSlide4Line2": "22 life strategies.",
-  "@howItWorksSlide4Line2": {
-    "description": "Second short line of the field breakdown on slide 4 of the How It Works onboarding"
-  },
-  "howItWorksSlide4Para2": "Your path through them is uniquely yours.",
-  "@howItWorksSlide4Para2": {
-    "description": "Second paragraph on slide 4 of the How It Works onboarding"
-  },
-  "howItWorksSlide5Title": "Move through your path",
-  "@howItWorksSlide5Title": {
-    "description": "Title of slide 5 of the How It Works onboarding"
-  },
-  "howItWorksSlide5Line1": "Roll the dice.",
-  "@howItWorksSlide5Line1": {
-    "description": "First short line on slide 5 of the How It Works onboarding"
-  },
-  "howItWorksSlide5Line2": "Enter a field.",
-  "@howItWorksSlide5Line2": {
-    "description": "Second short line on slide 5 of the How It Works onboarding"
-  },
-  "howItWorksSlide5Line3": "Answer one question or complete one simple task.",
-  "@howItWorksSlide5Line3": {
-    "description": "Third short line on slide 5 of the How It Works onboarding"
-  },
-  "howItWorksSlide5Para1": "Most interactions take less than a minute.",
-  "@howItWorksSlide5Para1": {
-    "description": "First paragraph on slide 5 of the How It Works onboarding"
-  },
-  "howItWorksSlide5Para2": "Each field shifts your focus and helps you explore your desire from a different perspective.",
-  "@howItWorksSlide5Para2": {
-    "description": "Second paragraph on slide 5 of the How It Works onboarding"
-  },
-  "howItWorksSlide6Title": "22 strategies. Different ways of moving.",
-  "@howItWorksSlide6Title": {
-    "description": "Title of slide 6 of the How It Works onboarding"
-  },
-  "howItWorksSlide6Para1": "You move through different life strategies — ways of thinking, choosing, feeling and acting.",
-  "@howItWorksSlide6Para1": {
-    "description": "First paragraph on slide 6 of the How It Works onboarding"
-  },
-  "howItWorksSlide6Para2": "You don't need to study the system. Just follow your path.",
-  "@howItWorksSlide6Para2": {
-    "description": "Second paragraph on slide 6 of the How It Works onboarding"
-  },
-  "howItWorksSlide6RichTextBefore": "Want to understand the structure behind it? Explore ",
-  "@howItWorksSlide6RichTextBefore": {
-    "description": "Text before the menu icon in the rich-text sentence on slide 6 of the How It Works onboarding"
-  },
-  "howItWorksSlide6RichTextAfter": " About the system in the menu.",
-  "@howItWorksSlide6RichTextAfter": {
-    "description": "Text after the menu icon in the rich-text sentence on slide 6 of the How It Works onboarding"
-  },
-  "howItWorksSlide7Title": "Your success code",
-  "@howItWorksSlide7Title": {
-    "description": "Title of slide 7 of the How It Works onboarding"
-  },
-  "howItWorksSlide7Para1": "At the end of your journey, your answers come together.",
-  "@howItWorksSlide7Para1": {
-    "description": "First paragraph on slide 7 of the How It Works onboarding"
-  },
-  "howItWorksSlide7Line1": "Your decisions.",
-  "@howItWorksSlide7Line1": {
-    "description": "First short line on slide 7 of the How It Works onboarding"
-  },
-  "howItWorksSlide7Line2": "Your insights.",
-  "@howItWorksSlide7Line2": {
-    "description": "Second short line on slide 7 of the How It Works onboarding"
-  },
-  "howItWorksSlide7Line3": "Your direction.",
-  "@howItWorksSlide7Line3": {
-    "description": "Third short line on slide 7 of the How It Works onboarding"
-  },
-  "howItWorksSlide7Para2": "Hatchpot turns them into your personal success code — a map back to your desire.",
-  "@howItWorksSlide7Para2": {
-    "description": "Second paragraph on slide 7 of the How It Works onboarding"
-  },
-  "howItWorksSlide7Para3": "Not a universal answer.",
-  "@howItWorksSlide7Para3": {
-    "description": "Third paragraph on slide 7 of the How It Works onboarding"
-  },
-  "howItWorksSlide7Para4": "Your path, built from your own answers.",
-  "@howItWorksSlide7Para4": {
-    "description": "Fourth paragraph on slide 7 of the How It Works onboarding"
+  "howItWorksSlide4Body": "Every answer becomes part of a personal code — a map back to your desire.\n\nNot a universal answer. Only your path.",
+  "@howItWorksSlide4Body": {
+    "description": "Body text of slide 4 of the How It Works onboarding"
   },
   "field01Name": "Light",
   "@field01Name": {

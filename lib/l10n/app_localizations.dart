@@ -1286,12 +1286,6 @@ abstract class AppLocalizations {
   /// **'Enter Field 01  →'**
   String get awakenedEnterFieldOneCta;
 
-  /// Step indicator on the How It Works onboarding slides
-  ///
-  /// In en, this message translates to:
-  /// **'Step {step} of {total}'**
-  String howItWorksStepOfTotal(int step, int total);
-
   /// CTA button label on the final How It Works slide
   ///
   /// In en, this message translates to:
@@ -1307,224 +1301,50 @@ abstract class AppLocalizations {
   /// Title of slide 1 of the How It Works onboarding
   ///
   /// In en, this message translates to:
-  /// **'What is the Hatchpot journey?'**
+  /// **'A structured path back to yourself'**
   String get howItWorksSlide1Title;
 
-  /// Paragraph on slide 1 of the How It Works onboarding
+  /// Body text of slide 1 of the How It Works onboarding
   ///
   /// In en, this message translates to:
-  /// **'A guided journey designed to help you clarify what you truly want, shift your inner state, and find your direction.'**
-  String get howItWorksSlide1Para;
+  /// **'Hatchpot is a self-reflection system that connects you to your inner self through play, symbol, and intuition.'**
+  String get howItWorksSlide1Body;
 
   /// Title of slide 2 of the How It Works onboarding
   ///
   /// In en, this message translates to:
-  /// **'Start with one desire'**
+  /// **'The dice reads your unconscious'**
   String get howItWorksSlide2Title;
 
-  /// First short line on slide 2 of the How It Works onboarding
+  /// Body text of slide 2 of the How It Works onboarding
   ///
   /// In en, this message translates to:
-  /// **'Write down what you want as if it is already true.'**
-  String get howItWorksSlide2Line1;
-
-  /// Second short line on slide 2 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Focus on it.'**
-  String get howItWorksSlide2Line2;
-
-  /// Third short line on slide 2 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Then roll the dice.'**
-  String get howItWorksSlide2Line3;
-
-  /// Paragraph on slide 2 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'In Hatchpot, your journey begins by clarifying the intention you are ready to work with right now.'**
-  String get howItWorksSlide2Para;
+  /// **'Write your desire and roll the dice.\n\nRoll a 1 — it\'s ready, and your journey begins.\n\nAny other number is a clue to help you refine or change it.'**
+  String get howItWorksSlide2Body;
 
   /// Title of slide 3 of the How It Works onboarding
   ///
   /// In en, this message translates to:
-  /// **'Let the dice guide you'**
+  /// **'32 fields. Your own path.'**
   String get howItWorksSlide3Title;
 
-  /// First short line on slide 3 of the How It Works onboarding
+  /// Body text of slide 3 of the How It Works onboarding
   ///
   /// In en, this message translates to:
-  /// **'If you roll 1, your desire is ready.'**
-  String get howItWorksSlide3Line1;
-
-  /// Second short line on slide 3 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Your journey begins.'**
-  String get howItWorksSlide3Line2;
-
-  /// First paragraph on slide 3 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'If another number appears, you\'ll receive a clue to help you clarify, rewrite, or reconsider your desire.'**
-  String get howItWorksSlide3Para1;
-
-  /// Second paragraph on slide 3 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'You can refine it — or choose a completely different one.'**
-  String get howItWorksSlide3Para2;
+  /// **'You\'ll move through 10 levels of reality and 22 life strategies — different ways to think, feel, and act.\n\nRoll, answer one question, move on. Most steps take less than a minute.'**
+  String get howItWorksSlide3Body;
 
   /// Title of slide 4 of the How It Works onboarding
   ///
   /// In en, this message translates to:
-  /// **'Then your journey begins'**
+  /// **'Build your success code'**
   String get howItWorksSlide4Title;
 
-  /// First paragraph on slide 4 of the How It Works onboarding
+  /// Body text of slide 4 of the How It Works onboarding
   ///
   /// In en, this message translates to:
-  /// **'Choose how you want to interact with Hatchpot and start moving through your unique path.'**
-  String get howItWorksSlide4Para1;
-
-  /// Short line introducing the field breakdown on slide 4 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'The system is built around 32 fields:'**
-  String get howItWorksSlide4Line;
-
-  /// First short line of the field breakdown on slide 4 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'10 levels of reality.'**
-  String get howItWorksSlide4Line1;
-
-  /// Second short line of the field breakdown on slide 4 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'22 life strategies.'**
-  String get howItWorksSlide4Line2;
-
-  /// Second paragraph on slide 4 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Your path through them is uniquely yours.'**
-  String get howItWorksSlide4Para2;
-
-  /// Title of slide 5 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Move through your path'**
-  String get howItWorksSlide5Title;
-
-  /// First short line on slide 5 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Roll the dice.'**
-  String get howItWorksSlide5Line1;
-
-  /// Second short line on slide 5 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Enter a field.'**
-  String get howItWorksSlide5Line2;
-
-  /// Third short line on slide 5 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Answer one question or complete one simple task.'**
-  String get howItWorksSlide5Line3;
-
-  /// First paragraph on slide 5 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Most interactions take less than a minute.'**
-  String get howItWorksSlide5Para1;
-
-  /// Second paragraph on slide 5 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Each field shifts your focus and helps you explore your desire from a different perspective.'**
-  String get howItWorksSlide5Para2;
-
-  /// Title of slide 6 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'22 strategies. Different ways of moving.'**
-  String get howItWorksSlide6Title;
-
-  /// First paragraph on slide 6 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'You move through different life strategies — ways of thinking, choosing, feeling and acting.'**
-  String get howItWorksSlide6Para1;
-
-  /// Second paragraph on slide 6 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'You don\'t need to study the system. Just follow your path.'**
-  String get howItWorksSlide6Para2;
-
-  /// Text before the menu icon in the rich-text sentence on slide 6 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Want to understand the structure behind it? Explore '**
-  String get howItWorksSlide6RichTextBefore;
-
-  /// Text after the menu icon in the rich-text sentence on slide 6 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **' About the system in the menu.'**
-  String get howItWorksSlide6RichTextAfter;
-
-  /// Title of slide 7 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Your success code'**
-  String get howItWorksSlide7Title;
-
-  /// First paragraph on slide 7 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'At the end of your journey, your answers come together.'**
-  String get howItWorksSlide7Para1;
-
-  /// First short line on slide 7 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Your decisions.'**
-  String get howItWorksSlide7Line1;
-
-  /// Second short line on slide 7 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Your insights.'**
-  String get howItWorksSlide7Line2;
-
-  /// Third short line on slide 7 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Your direction.'**
-  String get howItWorksSlide7Line3;
-
-  /// Second paragraph on slide 7 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Hatchpot turns them into your personal success code — a map back to your desire.'**
-  String get howItWorksSlide7Para2;
-
-  /// Third paragraph on slide 7 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Not a universal answer.'**
-  String get howItWorksSlide7Para3;
-
-  /// Fourth paragraph on slide 7 of the How It Works onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Your path, built from your own answers.'**
-  String get howItWorksSlide7Para4;
+  /// **'Every answer becomes part of a personal code — a map back to your desire.\n\nNot a universal answer. Only your path.'**
+  String get howItWorksSlide4Body;
 
   /// Field 1 (Light) — name text
   ///

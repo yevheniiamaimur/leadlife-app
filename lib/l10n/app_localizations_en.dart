@@ -663,142 +663,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String get awakenedEnterFieldOneCta => 'Enter Field 01  →';
 
   @override
-  String howItWorksStepOfTotal(int step, int total) {
-    return 'Step $step of $total';
-  }
-
-  @override
   String get howItWorksBeginJourneyCta => 'Begin your journey';
 
   @override
   String get howItWorksContinueCta => 'Continue';
 
   @override
-  String get howItWorksSlide1Title => 'What is the Hatchpot journey?';
+  String get howItWorksSlide1Title => 'A structured path back to yourself';
 
   @override
-  String get howItWorksSlide1Para =>
-      'A guided journey designed to help you clarify what you truly want, shift your inner state, and find your direction.';
+  String get howItWorksSlide1Body =>
+      'Hatchpot is a self-reflection system that connects you to your inner self through play, symbol, and intuition.';
 
   @override
-  String get howItWorksSlide2Title => 'Start with one desire';
+  String get howItWorksSlide2Title => 'The dice reads your unconscious';
 
   @override
-  String get howItWorksSlide2Line1 =>
-      'Write down what you want as if it is already true.';
+  String get howItWorksSlide2Body =>
+      'Write your desire and roll the dice.\n\nRoll a 1 — it\'s ready, and your journey begins.\n\nAny other number is a clue to help you refine or change it.';
 
   @override
-  String get howItWorksSlide2Line2 => 'Focus on it.';
+  String get howItWorksSlide3Title => '32 fields. Your own path.';
 
   @override
-  String get howItWorksSlide2Line3 => 'Then roll the dice.';
+  String get howItWorksSlide3Body =>
+      'You\'ll move through 10 levels of reality and 22 life strategies — different ways to think, feel, and act.\n\nRoll, answer one question, move on. Most steps take less than a minute.';
 
   @override
-  String get howItWorksSlide2Para =>
-      'In Hatchpot, your journey begins by clarifying the intention you are ready to work with right now.';
+  String get howItWorksSlide4Title => 'Build your success code';
 
   @override
-  String get howItWorksSlide3Title => 'Let the dice guide you';
-
-  @override
-  String get howItWorksSlide3Line1 => 'If you roll 1, your desire is ready.';
-
-  @override
-  String get howItWorksSlide3Line2 => 'Your journey begins.';
-
-  @override
-  String get howItWorksSlide3Para1 =>
-      'If another number appears, you\'ll receive a clue to help you clarify, rewrite, or reconsider your desire.';
-
-  @override
-  String get howItWorksSlide3Para2 =>
-      'You can refine it — or choose a completely different one.';
-
-  @override
-  String get howItWorksSlide4Title => 'Then your journey begins';
-
-  @override
-  String get howItWorksSlide4Para1 =>
-      'Choose how you want to interact with Hatchpot and start moving through your unique path.';
-
-  @override
-  String get howItWorksSlide4Line => 'The system is built around 32 fields:';
-
-  @override
-  String get howItWorksSlide4Line1 => '10 levels of reality.';
-
-  @override
-  String get howItWorksSlide4Line2 => '22 life strategies.';
-
-  @override
-  String get howItWorksSlide4Para2 =>
-      'Your path through them is uniquely yours.';
-
-  @override
-  String get howItWorksSlide5Title => 'Move through your path';
-
-  @override
-  String get howItWorksSlide5Line1 => 'Roll the dice.';
-
-  @override
-  String get howItWorksSlide5Line2 => 'Enter a field.';
-
-  @override
-  String get howItWorksSlide5Line3 =>
-      'Answer one question or complete one simple task.';
-
-  @override
-  String get howItWorksSlide5Para1 =>
-      'Most interactions take less than a minute.';
-
-  @override
-  String get howItWorksSlide5Para2 =>
-      'Each field shifts your focus and helps you explore your desire from a different perspective.';
-
-  @override
-  String get howItWorksSlide6Title =>
-      '22 strategies. Different ways of moving.';
-
-  @override
-  String get howItWorksSlide6Para1 =>
-      'You move through different life strategies — ways of thinking, choosing, feeling and acting.';
-
-  @override
-  String get howItWorksSlide6Para2 =>
-      'You don\'t need to study the system. Just follow your path.';
-
-  @override
-  String get howItWorksSlide6RichTextBefore =>
-      'Want to understand the structure behind it? Explore ';
-
-  @override
-  String get howItWorksSlide6RichTextAfter => ' About the system in the menu.';
-
-  @override
-  String get howItWorksSlide7Title => 'Your success code';
-
-  @override
-  String get howItWorksSlide7Para1 =>
-      'At the end of your journey, your answers come together.';
-
-  @override
-  String get howItWorksSlide7Line1 => 'Your decisions.';
-
-  @override
-  String get howItWorksSlide7Line2 => 'Your insights.';
-
-  @override
-  String get howItWorksSlide7Line3 => 'Your direction.';
-
-  @override
-  String get howItWorksSlide7Para2 =>
-      'Hatchpot turns them into your personal success code — a map back to your desire.';
-
-  @override
-  String get howItWorksSlide7Para3 => 'Not a universal answer.';
-
-  @override
-  String get howItWorksSlide7Para4 => 'Your path, built from your own answers.';
+  String get howItWorksSlide4Body =>
+      'Every answer becomes part of a personal code — a map back to your desire.\n\nNot a universal answer. Only your path.';
 
   @override
   String get field01Name => 'Light';

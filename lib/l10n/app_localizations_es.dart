@@ -668,143 +668,38 @@ class AppLocalizationsEs extends AppLocalizations {
   String get awakenedEnterFieldOneCta => 'Entrar en el campo 01  →';
 
   @override
-  String howItWorksStepOfTotal(int step, int total) {
-    return 'Paso $step de $total';
-  }
-
-  @override
   String get howItWorksBeginJourneyCta => 'Comenzar tu viaje';
 
   @override
   String get howItWorksContinueCta => 'Continuar';
 
   @override
-  String get howItWorksSlide1Title => '¿Qué es el viaje Hatchpot?';
+  String get howItWorksSlide1Title => 'Un camino estructurado de vuelta a ti';
 
   @override
-  String get howItWorksSlide1Para =>
-      'Un viaje guiado para ayudarte a aclarar lo que realmente quieres, cambiar tu estado interior y encontrar tu dirección.';
+  String get howItWorksSlide1Body =>
+      'Hatchpot es un sistema de autorreflexión que te conecta con tu ser interior a través del juego, el símbolo y la intuición.';
 
   @override
-  String get howItWorksSlide2Title => 'Comienza con un deseo';
+  String get howItWorksSlide2Title => 'El dado escucha tu inconsciente';
 
   @override
-  String get howItWorksSlide2Line1 =>
-      'Escribe lo que quieres como si ya fuera realidad.';
+  String get howItWorksSlide2Body =>
+      'Escribe tu deseo y lanza el dado.\n\nSi sale 1, está listo y tu viaje comienza.\n\nCualquier otro número es una pista para ayudarte a afinarlo o cambiarlo.';
 
   @override
-  String get howItWorksSlide2Line2 => 'Concéntrate en ello.';
+  String get howItWorksSlide3Title => '32 campos. Tu propio camino';
 
   @override
-  String get howItWorksSlide2Line3 => 'Después, lanza el dado.';
+  String get howItWorksSlide3Body =>
+      'Recorrerás 10 niveles de realidad y 22 estrategias de vida — distintas formas de pensar, sentir y actuar.\n\nLanza el dado, responde una pregunta, sigue adelante. La mayoría de los pasos toman menos de un minuto.';
 
   @override
-  String get howItWorksSlide2Para =>
-      'En Hatchpot, tu viaje comienza aclarando la intención con la que estás preparado para trabajar ahora.';
+  String get howItWorksSlide4Title => 'Construye tu código del éxito';
 
   @override
-  String get howItWorksSlide3Title => 'Deja que el dado te guíe';
-
-  @override
-  String get howItWorksSlide3Line1 => 'Si sacas un 1, tu deseo está preparado.';
-
-  @override
-  String get howItWorksSlide3Line2 => 'Tu viaje comienza.';
-
-  @override
-  String get howItWorksSlide3Para1 =>
-      'Si sale otro número, recibirás una pista que te ayudará a aclarar, reformular o reconsiderar tu deseo.';
-
-  @override
-  String get howItWorksSlide3Para2 =>
-      'Puedes precisarlo o elegir uno completamente diferente.';
-
-  @override
-  String get howItWorksSlide4Title => 'Entonces comienza tu viaje';
-
-  @override
-  String get howItWorksSlide4Para1 =>
-      'Elige cómo quieres interactuar con Hatchpot y empieza a avanzar por tu camino único.';
-
-  @override
-  String get howItWorksSlide4Line => 'El sistema se compone de 32 campos:';
-
-  @override
-  String get howItWorksSlide4Line1 => '10 niveles de realidad.';
-
-  @override
-  String get howItWorksSlide4Line2 => '22 estrategias de vida.';
-
-  @override
-  String get howItWorksSlide4Para2 =>
-      'Tu recorrido por ellos es únicamente tuyo.';
-
-  @override
-  String get howItWorksSlide5Title => 'Avanza por tu camino';
-
-  @override
-  String get howItWorksSlide5Line1 => 'Lanza el dado.';
-
-  @override
-  String get howItWorksSlide5Line2 => 'Entra en un campo.';
-
-  @override
-  String get howItWorksSlide5Line3 =>
-      'Responde una pregunta o realiza una tarea sencilla.';
-
-  @override
-  String get howItWorksSlide5Para1 =>
-      'La mayoría de las interacciones duran menos de un minuto.';
-
-  @override
-  String get howItWorksSlide5Para2 =>
-      'Cada campo cambia tu enfoque y te ayuda a explorar tu deseo desde otra perspectiva.';
-
-  @override
-  String get howItWorksSlide6Title =>
-      '22 estrategias. Distintas formas de avanzar.';
-
-  @override
-  String get howItWorksSlide6Para1 =>
-      'Recorres distintas estrategias de vida: formas de pensar, elegir, sentir y actuar.';
-
-  @override
-  String get howItWorksSlide6Para2 =>
-      'No necesitas estudiar el sistema. Solo sigue tu camino.';
-
-  @override
-  String get howItWorksSlide6RichTextBefore =>
-      '¿Quieres comprender su estructura? Consulta ';
-
-  @override
-  String get howItWorksSlide6RichTextAfter => ' Acerca del sistema en el menú.';
-
-  @override
-  String get howItWorksSlide7Title => 'Tu código del éxito';
-
-  @override
-  String get howItWorksSlide7Para1 =>
-      'Al final de tu viaje, tus respuestas se unen.';
-
-  @override
-  String get howItWorksSlide7Line1 => 'Tus decisiones.';
-
-  @override
-  String get howItWorksSlide7Line2 => 'Tus descubrimientos.';
-
-  @override
-  String get howItWorksSlide7Line3 => 'Tu dirección.';
-
-  @override
-  String get howItWorksSlide7Para2 =>
-      'Hatchpot las convierte en tu código personal del éxito: un mapa para volver a tu deseo.';
-
-  @override
-  String get howItWorksSlide7Para3 => 'No es una respuesta universal.';
-
-  @override
-  String get howItWorksSlide7Para4 =>
-      'Es tu camino, creado a partir de tus propias respuestas.';
+  String get howItWorksSlide4Body =>
+      'Cada respuesta se convierte en parte de un código personal — un mapa de regreso a tu deseo.\n\nNo es una respuesta universal. Solo tu camino.';
 
   @override
   String get field01Name => 'Luz';
