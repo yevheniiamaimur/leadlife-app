@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
+import '../services/purchase_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'account_link_screen.dart';
 import 'legal_document_screen.dart';
@@ -12,6 +14,7 @@ class PaywallTariff {
     required this.price,
     this.period,
     required this.features,
+    this.package,
   });
   final String title;
   final String tagline;
@@ -19,6 +22,11 @@ class PaywallTariff {
   // e.g. '/month' for recurring plans — null for one-time purchases.
   final String? period;
   final List<String> features;
+  // The RevenueCat package to purchase when this tariff is chosen. Null
+  // means this tariff isn't wired to a real purchase yet (see the single AI
+  // Journey consumable, not yet implemented) — TariffDetailScreen falls
+  // back to its old skip-straight-through behavior in that case.
+  final Package? package;
 }
 
 PaywallTariff personalizedPass(BuildContext context) {
@@ -26,7 +34,7 @@ PaywallTariff personalizedPass(BuildContext context) {
   return PaywallTariff(
     title: l10n.paywallTariffOneJourneyTitle,
     tagline: l10n.paywallTariffOneJourneyTagline,
-    price: '€2.50',
+    price: '€2.99',
     features: [
       l10n.paywallFeatureQuestionnairesToEndPractices,
       l10n.paywallFeatureFinalDirection,
@@ -35,12 +43,16 @@ PaywallTariff personalizedPass(BuildContext context) {
   );
 }
 
-PaywallTariff leadLifePass(BuildContext context) {
+// [monthlyPackage] is null while the offering is still loading or if it
+// couldn't be fetched — the price/period fall back to the last-known real
+// price as a brief placeholder, not a permanent stand-in.
+PaywallTariff leadLifePass(BuildContext context, {Package? monthlyPackage}) {
   final l10n = AppLocalizations.of(context);
+  final product = monthlyPackage?.storeProduct;
   return PaywallTariff(
     title: l10n.paywallTariffLeadlifePassTitle,
     tagline: l10n.paywallTariffLeadlifePassTagline,
-    price: '€14.90',
+    price: product?.priceString ?? '€14.99',
     period: '/month',
     features: [
       l10n.paywallFeatureUnlimitedJourneys,
@@ -48,18 +60,34 @@ PaywallTariff leadLifePass(BuildContext context) {
       l10n.paywallFeaturePersonalJournal,
       l10n.paywallFeatureNewPractices,
     ],
+    package: monthlyPackage,
   );
 }
 
-class PaywallScreen extends StatelessWidget {
+class PaywallScreen extends StatefulWidget {
   const PaywallScreen({super.key, required this.wish});
   final String wish;
 
   @override
+  State<PaywallScreen> createState() => _PaywallScreenState();
+}
+
+class _PaywallScreenState extends State<PaywallScreen> {
+  Package? _monthlyPackage;
+
+  @override
+  void initState() {
+    super.initState();
+    PurchaseService.instance.getMonthlyPlusPackage().then((package) {
+      if (mounted) setState(() => _monthlyPackage = package);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final personalized = personalizedPass(context);
-    final leadLife = leadLifePass(context);
+    final wish = widget.wish;
+    final leadLife = leadLifePass(context, monthlyPackage: _monthlyPackage);
     return Scaffold(
       backgroundColor: llBg,
       body: Stack(
@@ -98,13 +126,13 @@ class PaywallScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Column(
                       children: [
-                        PaywallTariffCard(
-                          tariff: personalized,
-                          onTap: () => Navigator.of(context).push(_fadeRoute(
-                            TariffDetailScreen(wish: wish, tariff: personalized),
-                          )),
-                        ),
-                        const SizedBox(height: 16),
+                        // The single AI Journey consumable (€2.99) is
+                        // deliberately not shown yet — its purchase flow
+                        // isn't implemented (Phase 2.2/3), and showing it
+                        // here would let someone tap through as if a
+                        // purchase had happened when none did. Re-add its
+                        // PaywallTariffCard once purchasePlus's consumable
+                        // counterpart exists in PurchaseService.
                         PaywallTariffCard(
                           tariff: leadLife,
                           onTap: () => Navigator.of(context).push(_fadeRoute(
@@ -187,13 +215,62 @@ class PaywallTariffCard extends StatelessWidget {
   }
 }
 
-class TariffDetailScreen extends StatelessWidget {
+class TariffDetailScreen extends StatefulWidget {
   const TariffDetailScreen({super.key, required this.wish, required this.tariff});
   final String wish;
   final PaywallTariff tariff;
 
   @override
+  State<TariffDetailScreen> createState() => _TariffDetailScreenState();
+}
+
+class _TariffDetailScreenState extends State<TariffDetailScreen> {
+  bool _busy = false;
+  String? _error;
+  String? _pendingMessage;
+
+  Future<void> _choose() async {
+    final package = widget.tariff.package;
+    if (package == null) {
+      // Not wired to a real purchase yet (the single AI Journey consumable)
+      // — preserve today's exact skip-through behavior.
+      _continue();
+      return;
+    }
+    setState(() {
+      _busy = true;
+      _error = null;
+      _pendingMessage = null;
+    });
+    final outcome = await PurchaseService.instance.purchasePlus(package);
+    if (!mounted) return;
+    switch (outcome) {
+      case PurchaseOutcome.success:
+        setState(() => _busy = false);
+        _continue();
+      case PurchaseOutcome.cancelled:
+        // User backed out deliberately — no error, just let them try again.
+        setState(() => _busy = false);
+      case PurchaseOutcome.pending:
+        setState(() {
+          _busy = false;
+          _pendingMessage = AppLocalizations.of(context).purchasePendingMessage;
+        });
+      case PurchaseOutcome.error:
+        setState(() {
+          _busy = false;
+          _error = AppLocalizations.of(context).purchaseErrorGeneric;
+        });
+    }
+  }
+
+  void _continue() {
+    Navigator.of(context).push(_fadeRoute(AccountLinkScreen(wish: widget.wish)));
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final tariff = widget.tariff;
     return Scaffold(
       backgroundColor: llBg,
       body: Stack(
@@ -260,11 +337,24 @@ class TariffDetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  if (_pendingMessage != null) ...[
+                    Text(
+                      _pendingMessage!,
+                      style: llUi(size: 12.5, color: llMuted),
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                  if (_error != null) ...[
+                    Text(
+                      _error!,
+                      style: llUi(size: 12.5, color: Colors.redAccent),
+                    ),
+                    const SizedBox(height: 10),
+                  ],
                   LLCTA(
                     label: AppLocalizations.of(context).paywallChooseThisPathCta,
-                    onTap: () => Navigator.of(context).push(_fadeRoute(
-                      AccountLinkScreen(wish: wish),
-                    )),
+                    enabled: !_busy,
+                    onTap: _busy ? null : _choose,
                   ),
                   const SizedBox(height: 40),
                 ],

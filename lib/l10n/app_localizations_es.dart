@@ -618,6 +618,26 @@ class AppLocalizationsEs extends AppLocalizations {
   String get accountLinkErrorGeneric => 'Algo salió mal. Inténtalo de nuevo.';
 
   @override
+  String get purchasePendingMessage =>
+      'Tu compra está pendiente de aprobación. Activaremos Hatchpot Plus en cuanto se confirme.';
+
+  @override
+  String get purchaseErrorGeneric =>
+      'Algo salió mal con la compra. Inténtalo de nuevo.';
+
+  @override
+  String get restorePurchasesAction => 'Restaurar compras';
+
+  @override
+  String get restorePurchasesSuccess => 'Tus compras se han restaurado.';
+
+  @override
+  String get hatchpotPlusActiveStatus => 'Hatchpot Plus está activo.';
+
+  @override
+  String get hatchpotPlusInactiveStatus => 'Hatchpot Plus no está activo.';
+
+  @override
   String get paywallTariffOneJourneyTitle => 'Un viaje';
 
   @override

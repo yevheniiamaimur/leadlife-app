@@ -55,6 +55,7 @@ dependencies:
   cloud_functions: ^6.3.5
   firebase_app_check: ^0.4.6
   url_launcher: ^6.3.2
+  purchases_flutter: ^10.11.0
 
 dev_dependencies:
   flutter_test:

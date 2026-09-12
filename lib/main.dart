@@ -17,6 +17,7 @@ import 'services/locale_service.dart';
 import 'services/notification_service.dart';
 import 'services/onboarding_service.dart';
 import 'services/progress_service.dart';
+import 'services/purchase_service.dart';
 import 'services/cloud_sync_service.dart';
 
 void main() async {
@@ -59,6 +60,11 @@ void main() async {
       await CloudSyncService.instance.restoreOrUpload();
     } catch (error, stack) {
       debugPrint('Firebase sign-in failed; continuing locally: $error\n$stack');
+    }
+    try {
+      await PurchaseService.instance.configure();
+    } catch (error, stack) {
+      debugPrint('RevenueCat configuration failed; continuing without it: $error\n$stack');
     }
   }
 

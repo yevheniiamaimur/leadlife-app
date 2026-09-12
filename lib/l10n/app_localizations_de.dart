@@ -620,6 +620,26 @@ class AppLocalizationsDe extends AppLocalizations {
       'Etwas ist schiefgegangen. Bitte versuche es erneut.';
 
   @override
+  String get purchasePendingMessage =>
+      'Dein Kauf wartet auf Bestätigung. Wir schalten Hatchpot Plus frei, sobald er bestätigt ist.';
+
+  @override
+  String get purchaseErrorGeneric =>
+      'Beim Kauf ist etwas schiefgelaufen. Bitte versuche es erneut.';
+
+  @override
+  String get restorePurchasesAction => 'Käufe wiederherstellen';
+
+  @override
+  String get restorePurchasesSuccess => 'Deine Käufe wurden wiederhergestellt.';
+
+  @override
+  String get hatchpotPlusActiveStatus => 'Hatchpot Plus ist aktiv.';
+
+  @override
+  String get hatchpotPlusInactiveStatus => 'Hatchpot Plus ist nicht aktiv.';
+
+  @override
   String get paywallTariffOneJourneyTitle => 'Eine Reise';
 
   @override

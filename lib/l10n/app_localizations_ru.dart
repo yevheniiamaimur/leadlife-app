@@ -617,6 +617,26 @@ class AppLocalizationsRu extends AppLocalizations {
   String get accountLinkErrorGeneric => 'Что-то пошло не так. Попробуй снова.';
 
   @override
+  String get purchasePendingMessage =>
+      'Твоя покупка ожидает подтверждения. Мы откроем доступ к Hatchpot Plus, как только она будет подтверждена.';
+
+  @override
+  String get purchaseErrorGeneric =>
+      'Что-то пошло не так с покупкой. Попробуй снова.';
+
+  @override
+  String get restorePurchasesAction => 'Восстановить покупки';
+
+  @override
+  String get restorePurchasesSuccess => 'Твои покупки восстановлены.';
+
+  @override
+  String get hatchpotPlusActiveStatus => 'Hatchpot Plus активен.';
+
+  @override
+  String get hatchpotPlusInactiveStatus => 'Hatchpot Plus не активен.';
+
+  @override
   String get paywallTariffOneJourneyTitle => 'Одно путешествие';
 
   @override

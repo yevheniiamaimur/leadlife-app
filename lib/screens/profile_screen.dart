@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../services/auth_service.dart';
 import '../services/profile_service.dart';
+import '../services/purchase_service.dart';
 import '../widgets/ll_widgets.dart';
 import 'onboarding_name_screen.dart';
 
@@ -117,6 +119,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
+  Future<void> _restorePurchases() async {
+    setState(() => _busy = true);
+    final outcome = await PurchaseService.instance.restorePurchases();
+    if (!mounted) return;
+    setState(() => _busy = false);
+    if (outcome == PurchaseOutcome.success) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).restorePurchasesSuccess)),
+      );
+    } else {
+      _showError();
+    }
+  }
+
   Future<void> _run(Future<void> Function() action) async {
     setState(() => _busy = true);
     try {
@@ -198,6 +214,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               : l10n.accountConnectedStatus,
                           textAlign: TextAlign.center,
                           style: llUi(size: 13, color: llMuted),
+                        ),
+                        const SizedBox(height: 14),
+                        ValueListenableBuilder<CustomerInfo?>(
+                          valueListenable: PurchaseService.instance.customerInfo,
+                          builder: (context, info, _) {
+                            final isPlusActive = info?.entitlements.active
+                                    .containsKey(PurchaseService.plusEntitlementId) ??
+                                false;
+                            return Text(
+                              isPlusActive
+                                  ? l10n.hatchpotPlusActiveStatus
+                                  : l10n.hatchpotPlusInactiveStatus,
+                              textAlign: TextAlign.center,
+                              style: llUi(size: 13, color: llMuted),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 12),
+                        LLCTA(
+                          label: l10n.restorePurchasesAction,
+                          variant: 'secondary',
+                          onTap: _busy ? null : _restorePurchases,
                         ),
                         const SizedBox(height: 18),
                         if (_hasPassword) ...[

@@ -1190,6 +1190,42 @@ abstract class AppLocalizations {
   /// **'Something went wrong. Please try again.'**
   String get accountLinkErrorGeneric;
 
+  /// Shown when a purchase is in a pending/awaiting-approval state (e.g. Ask to Buy)
+  ///
+  /// In en, this message translates to:
+  /// **'Your purchase is pending approval. We\'ll unlock Hatchpot Plus as soon as it\'s confirmed.'**
+  String get purchasePendingMessage;
+
+  /// Generic error message shown when a purchase fails
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong with the purchase. Please try again.'**
+  String get purchaseErrorGeneric;
+
+  /// Button label to restore previous purchases
+  ///
+  /// In en, this message translates to:
+  /// **'Restore Purchases'**
+  String get restorePurchasesAction;
+
+  /// Shown after Restore Purchases completes successfully
+  ///
+  /// In en, this message translates to:
+  /// **'Your purchases have been restored.'**
+  String get restorePurchasesSuccess;
+
+  /// Shown on the profile screen when the user has an active Hatchpot Plus subscription
+  ///
+  /// In en, this message translates to:
+  /// **'Hatchpot Plus is active.'**
+  String get hatchpotPlusActiveStatus;
+
+  /// Shown on the profile screen when the user does not have an active Hatchpot Plus subscription
+  ///
+  /// In en, this message translates to:
+  /// **'Hatchpot Plus is not active.'**
+  String get hatchpotPlusInactiveStatus;
+
   /// Title of the one-time-purchase tariff on the paywall screen
   ///
   /// In en, this message translates to:

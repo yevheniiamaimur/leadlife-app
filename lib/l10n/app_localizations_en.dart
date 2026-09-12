@@ -613,6 +613,26 @@ class AppLocalizationsEn extends AppLocalizations {
       'Something went wrong. Please try again.';
 
   @override
+  String get purchasePendingMessage =>
+      'Your purchase is pending approval. We\'ll unlock Hatchpot Plus as soon as it\'s confirmed.';
+
+  @override
+  String get purchaseErrorGeneric =>
+      'Something went wrong with the purchase. Please try again.';
+
+  @override
+  String get restorePurchasesAction => 'Restore Purchases';
+
+  @override
+  String get restorePurchasesSuccess => 'Your purchases have been restored.';
+
+  @override
+  String get hatchpotPlusActiveStatus => 'Hatchpot Plus is active.';
+
+  @override
+  String get hatchpotPlusInactiveStatus => 'Hatchpot Plus is not active.';
+
+  @override
   String get paywallTariffOneJourneyTitle => 'One Journey';
 
   @override

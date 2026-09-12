@@ -787,6 +787,30 @@
   "@accountLinkErrorGeneric": {
     "description": "Generic error message shown when account linking fails"
   },
+  "purchasePendingMessage": "Your purchase is pending approval. We'll unlock Hatchpot Plus as soon as it's confirmed.",
+  "@purchasePendingMessage": {
+    "description": "Shown when a purchase is in a pending/awaiting-approval state (e.g. Ask to Buy)"
+  },
+  "purchaseErrorGeneric": "Something went wrong with the purchase. Please try again.",
+  "@purchaseErrorGeneric": {
+    "description": "Generic error message shown when a purchase fails"
+  },
+  "restorePurchasesAction": "Restore Purchases",
+  "@restorePurchasesAction": {
+    "description": "Button label to restore previous purchases"
+  },
+  "restorePurchasesSuccess": "Your purchases have been restored.",
+  "@restorePurchasesSuccess": {
+    "description": "Shown after Restore Purchases completes successfully"
+  },
+  "hatchpotPlusActiveStatus": "Hatchpot Plus is active.",
+  "@hatchpotPlusActiveStatus": {
+    "description": "Shown on the profile screen when the user has an active Hatchpot Plus subscription"
+  },
+  "hatchpotPlusInactiveStatus": "Hatchpot Plus is not active.",
+  "@hatchpotPlusInactiveStatus": {
+    "description": "Shown on the profile screen when the user does not have an active Hatchpot Plus subscription"
+  },
   "paywallTariffOneJourneyTitle": "One Journey",
   "@paywallTariffOneJourneyTitle": {
     "description": "Title of the one-time-purchase tariff on the paywall screen"
